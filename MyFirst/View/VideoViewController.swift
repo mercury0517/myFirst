@@ -60,7 +60,7 @@ class VideoViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.titleLabel.textColor = .black
-        self.titleLabel.font = .systemFont(ofSize: 20.0)
+        self.titleLabel.font = UIFont(name: "Oswald", size: 20.0)
         
         self.collectionView.backgroundColor = .white
     }

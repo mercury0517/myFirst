@@ -82,10 +82,10 @@ class HomeViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.textLabel.textColor = .black
-        self.textLabel.font = .systemFont(ofSize: 20.0)
+        self.textLabel.font = UIFont(name: "Oswald", size: 30.0)
         
         self.newsTitleLabel.textColor = .black
-        self.newsTitleLabel.font = .systemFont(ofSize: 20.0)
+        self.newsTitleLabel.font = UIFont(name: "Oswald", size: 20.0)
         
         self.snsTitleLabel.textColor = .lightGray
         self.snsTitleLabel.font = .systemFont(ofSize: 12.0)

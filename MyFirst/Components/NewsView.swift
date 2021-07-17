@@ -39,7 +39,7 @@ class NewsView: UIView {
         self.backgroundColor = .white
         
         self.updateTimeLabel.textColor = .lightGray
-        self.updateTimeLabel.font = .systemFont(ofSize: 12.0)
+        self.updateTimeLabel.font = UIFont(name: "Oswald", size: 12.0)
         
         self.titleLabel.textColor = .black
         self.titleLabel.font = .systemFont(ofSize: 12.0)

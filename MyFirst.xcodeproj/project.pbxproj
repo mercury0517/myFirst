@@ -21,6 +21,7 @@
 		60D5CCBF258613B600C681DD /* MyFirstUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CCBE258613B600C681DD /* MyFirstUITests.swift */; };
 		60D5E92726A2F77C00803F7E /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5E92626A2F77C00803F7E /* VideoCollectionViewCell.swift */; };
 		60D5E92C26A3056B00803F7E /* VideoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5E92B26A3056B00803F7E /* VideoType.swift */; };
+		60D5E93526A3A25000803F7E /* Oswald-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60D5E93426A3A25000803F7E /* Oswald-VariableFont_wght.ttf */; };
 		C2D43C5036F00A7497C8E312 /* Pods_MyFirstTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A13F73C2D21F8826789404C4 /* Pods_MyFirstTests.framework */; };
 		E0C3893B1B9F09154EEBA89A /* Pods_MyFirst_MyFirstUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4B566FFC89D3666EC5E7E23 /* Pods_MyFirst_MyFirstUITests.framework */; };
 /* End PBXBuildFile section */
@@ -69,6 +70,7 @@
 		60D5CCC0258613B600C681DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60D5E92626A2F77C00803F7E /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		60D5E92B26A3056B00803F7E /* VideoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoType.swift; sourceTree = "<group>"; };
+		60D5E93426A3A25000803F7E /* Oswald-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		A13F73C2D21F8826789404C4 /* Pods_MyFirstTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFirstTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4B566FFC89D3666EC5E7E23 /* Pods_MyFirst_MyFirstUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFirst_MyFirstUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -157,6 +159,7 @@
 		60D5CC9B258613B300C681DD /* MyFirst */ = {
 			isa = PBXGroup;
 			children = (
+				60D5E93326A3A22500803F7E /* fonts */,
 				60D5CC9C258613B300C681DD /* AppDelegate.swift */,
 				60D5CCA5258613B600C681DD /* Assets.xcassets */,
 				60825D81259B109E00B7B242 /* Components */,
@@ -184,6 +187,14 @@
 				60D5CCC0258613B600C681DD /* Info.plist */,
 			);
 			path = MyFirstUITests;
+			sourceTree = "<group>";
+		};
+		60D5E93326A3A22500803F7E /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				60D5E93426A3A25000803F7E /* Oswald-VariableFont_wght.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 		9FD41C5574C8D6F9A2B7E44A /* Pods */ = {
@@ -309,6 +320,7 @@
 			files = (
 				60D5CCA9258613B600C681DD /* LaunchScreen.storyboard in Resources */,
 				60D5CCA6258613B600C681DD /* Assets.xcassets in Resources */,
+				60D5E93526A3A25000803F7E /* Oswald-VariableFont_wght.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
