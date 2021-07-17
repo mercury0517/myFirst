@@ -19,6 +19,8 @@
 		60D5CCA9258613B600C681DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60D5CCA7258613B600C681DD /* LaunchScreen.storyboard */; };
 		60D5CCB4258613B600C681DD /* MyFirstTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CCB3258613B600C681DD /* MyFirstTests.swift */; };
 		60D5CCBF258613B600C681DD /* MyFirstUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CCBE258613B600C681DD /* MyFirstUITests.swift */; };
+		60D5E92726A2F77C00803F7E /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5E92626A2F77C00803F7E /* VideoCollectionViewCell.swift */; };
+		60D5E92C26A3056B00803F7E /* VideoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5E92B26A3056B00803F7E /* VideoType.swift */; };
 		C2D43C5036F00A7497C8E312 /* Pods_MyFirstTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A13F73C2D21F8826789404C4 /* Pods_MyFirstTests.framework */; };
 		E0C3893B1B9F09154EEBA89A /* Pods_MyFirst_MyFirstUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4B566FFC89D3666EC5E7E23 /* Pods_MyFirst_MyFirstUITests.framework */; };
 /* End PBXBuildFile section */
@@ -65,6 +67,8 @@
 		60D5CCBA258613B600C681DD /* MyFirstUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFirstUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D5CCBE258613B600C681DD /* MyFirstUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFirstUITests.swift; sourceTree = "<group>"; };
 		60D5CCC0258613B600C681DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60D5E92626A2F77C00803F7E /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
+		60D5E92B26A3056B00803F7E /* VideoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoType.swift; sourceTree = "<group>"; };
 		A13F73C2D21F8826789404C4 /* Pods_MyFirstTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFirstTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4B566FFC89D3666EC5E7E23 /* Pods_MyFirst_MyFirstUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFirst_MyFirstUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -112,6 +116,8 @@
 			children = (
 				60825D82259B10EF00B7B242 /* MyTabBarController.swift */,
 				60984E7526A1B1B800E957C8 /* NewsView.swift */,
+				60D5E92626A2F77C00803F7E /* VideoCollectionViewCell.swift */,
+				60D5E92B26A3056B00803F7E /* VideoType.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -436,6 +442,8 @@
 				60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */,
 				60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */,
 				60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */,
+				60D5E92726A2F77C00803F7E /* VideoCollectionViewCell.swift in Sources */,
+				60D5E92C26A3056B00803F7E /* VideoType.swift in Sources */,
 				60825D83259B10EF00B7B242 /* MyTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
