@@ -1,0 +1,16 @@
+PODS:
+  - PureLayout (3.1.6)
+
+DEPENDENCIES:
+  - PureLayout
+
+SPEC REPOS:
+  trunk:
+    - PureLayout
+
+SPEC CHECKSUMS:
+  PureLayout: bd3c4ec3a3819ad387c99ebb72c6b129c3ed4d2d
+
+PODFILE CHECKSUM: 4fe1f75f7311ec0c55568e9fe0ca743f263e7e46
+
+COCOAPODS: 1.10.0
