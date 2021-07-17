@@ -37,6 +37,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }
     
     private func configSubViews() {
+        self.titleLabel.numberOfLines = 1
     }
     
     private func applyStyling() {
@@ -51,7 +52,8 @@ class VideoCollectionViewCell: UICollectionViewCell {
         self.imageView.autoPinEdge(toSuperviewEdge: .right)
         
         self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.imageView, withOffset: 10.0)
-        self.titleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+        self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 10.0)
+        self.titleLabel.autoPinEdge(toSuperviewEdge: .right)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
     }
     

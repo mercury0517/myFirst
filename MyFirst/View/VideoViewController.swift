@@ -8,7 +8,7 @@ class VideoViewController: UIViewController {
     init() {
         let flowLayout = UICollectionViewFlowLayout()
         let margin: CGFloat = 16.0
-        flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 48.0) / 2, height: 180.0)
+        flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 48.0) / 2, height: 140.0)
         flowLayout.minimumInteritemSpacing = margin
         flowLayout.minimumLineSpacing = margin
         flowLayout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
@@ -25,7 +25,7 @@ class VideoViewController: UIViewController {
     required init?(coder: NSCoder) {
         let flowLayout = UICollectionViewFlowLayout()
         let margin: CGFloat = 16.0
-        flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 48.0) / 2, height: 180.0)
+        flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 48.0) / 2, height: 140.0)
         flowLayout.minimumInteritemSpacing = margin
         flowLayout.minimumLineSpacing = margin
         flowLayout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
