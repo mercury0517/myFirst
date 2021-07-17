@@ -18,9 +18,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.black.cgColor
-        self.layer.cornerRadius = 15.0
+        self.layer.cornerRadius = 10.0
         self.clipsToBounds = true
         
         self.addSubviews()
@@ -42,6 +40,9 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }
     
     private func applyStyling() {
+        self.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
+        
+        self.titleLabel.font = .systemFont(ofSize: 12.0)
     }
     
     private func addConstraints() {
