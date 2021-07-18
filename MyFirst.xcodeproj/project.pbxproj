@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		50AD4B67F0BF26B984ACBE6A /* Pods_MyFirst.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1511E526DEAECFC133EB54FF /* Pods_MyFirst.framework */; };
-		60825D7D259B102300B7B242 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60825D7C259B102300B7B242 /* ThirdViewController.swift */; };
+		60825D7D259B102300B7B242 /* DiscViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60825D7C259B102300B7B242 /* DiscViewController.swift */; };
 		60825D83259B10EF00B7B242 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60825D82259B10EF00B7B242 /* MyTabBarController.swift */; };
 		60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60984E7526A1B1B800E957C8 /* NewsView.swift */; };
 		60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5AADD259B0AC800A1243E /* VideoViewController.swift */; };
@@ -51,7 +51,7 @@
 		44ECF60BF0E8B75CA51E37B3 /* Pods-MyFirst.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFirst.debug.xcconfig"; path = "Target Support Files/Pods-MyFirst/Pods-MyFirst.debug.xcconfig"; sourceTree = "<group>"; };
 		464F05F55D38240FED411859 /* Pods-MyFirstTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFirstTests.release.xcconfig"; path = "Target Support Files/Pods-MyFirstTests/Pods-MyFirstTests.release.xcconfig"; sourceTree = "<group>"; };
 		56F056609B28AD22053B81D6 /* Pods-MyFirst-MyFirstUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFirst-MyFirstUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyFirst-MyFirstUITests/Pods-MyFirst-MyFirstUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		60825D7C259B102300B7B242 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		60825D7C259B102300B7B242 /* DiscViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscViewController.swift; sourceTree = "<group>"; };
 		60825D82259B10EF00B7B242 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		60984E7526A1B1B800E957C8 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		60D5AADD259B0AC800A1243E /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 			children = (
 				60D5CCA0258613B300C681DD /* HomeViewController.swift */,
 				60D5AADD259B0AC800A1243E /* VideoViewController.swift */,
-				60825D7C259B102300B7B242 /* ThirdViewController.swift */,
+				60825D7C259B102300B7B242 /* DiscViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -450,7 +450,7 @@
 			files = (
 				60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */,
 				60D5CCA1258613B300C681DD /* HomeViewController.swift in Sources */,
-				60825D7D259B102300B7B242 /* ThirdViewController.swift in Sources */,
+				60825D7D259B102300B7B242 /* DiscViewController.swift in Sources */,
 				60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */,
 				60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */,
 				60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */,

@@ -1,8 +1,8 @@
 import UIKit
 import PureLayout
 
-class ThirdViewController: UIViewController{
-    let textLabel = UILabel()
+class DiscViewController: UIViewController{
+    let titleLabel = UILabel()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -22,22 +22,23 @@ class ThirdViewController: UIViewController{
     }
     
     private func addSubviews() {
-        self.view.addSubview(self.textLabel)
+        self.view.addSubview(self.titleLabel)
     }
     
     private func configSubViews() {
-        self.textLabel.text = "3番目の画面だよ"
+        self.titleLabel.text = "DISCOGRAPHY"
     }
     
     private func applyStyling() {
         self.view.backgroundColor = .white
         
-        self.textLabel.textColor = .blue
+        self.titleLabel.textColor = .black
+        self.titleLabel.font = UIFont(name: "Oswald", size: 20.0)
     }
     
     private func addConstraints() {
-        self.textLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 10.0)
-        self.textLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+        self.titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 80.0)
+        self.titleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
     }
 }
 
