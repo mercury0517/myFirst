@@ -22,6 +22,8 @@
 		60D5E92726A2F77C00803F7E /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5E92626A2F77C00803F7E /* VideoCollectionViewCell.swift */; };
 		60D5E92C26A3056B00803F7E /* VideoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5E92B26A3056B00803F7E /* VideoType.swift */; };
 		60D5E93526A3A25000803F7E /* Oswald-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60D5E93426A3A25000803F7E /* Oswald-VariableFont_wght.ttf */; };
+		60D5E93D26A3C4D300803F7E /* DiscCollectionVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5E93C26A3C4D300803F7E /* DiscCollectionVIewCell.swift */; };
+		60D5E94526A3C71600803F7E /* DiscGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5E94426A3C71600803F7E /* DiscGroupView.swift */; };
 		C2D43C5036F00A7497C8E312 /* Pods_MyFirstTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A13F73C2D21F8826789404C4 /* Pods_MyFirstTests.framework */; };
 		E0C3893B1B9F09154EEBA89A /* Pods_MyFirst_MyFirstUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4B566FFC89D3666EC5E7E23 /* Pods_MyFirst_MyFirstUITests.framework */; };
 /* End PBXBuildFile section */
@@ -71,6 +73,8 @@
 		60D5E92626A2F77C00803F7E /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		60D5E92B26A3056B00803F7E /* VideoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoType.swift; sourceTree = "<group>"; };
 		60D5E93426A3A25000803F7E /* Oswald-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		60D5E93C26A3C4D300803F7E /* DiscCollectionVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscCollectionVIewCell.swift; sourceTree = "<group>"; };
+		60D5E94426A3C71600803F7E /* DiscGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscGroupView.swift; sourceTree = "<group>"; };
 		A13F73C2D21F8826789404C4 /* Pods_MyFirstTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFirstTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4B566FFC89D3666EC5E7E23 /* Pods_MyFirst_MyFirstUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFirst_MyFirstUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -116,6 +120,8 @@
 		60825D81259B109E00B7B242 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				60D5E93C26A3C4D300803F7E /* DiscCollectionVIewCell.swift */,
+				60D5E94426A3C71600803F7E /* DiscGroupView.swift */,
 				60825D82259B10EF00B7B242 /* MyTabBarController.swift */,
 				60984E7526A1B1B800E957C8 /* NewsView.swift */,
 				60D5E92626A2F77C00803F7E /* VideoCollectionViewCell.swift */,
@@ -453,6 +459,8 @@
 				60825D7D259B102300B7B242 /* DiscViewController.swift in Sources */,
 				60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */,
 				60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */,
+				60D5E94526A3C71600803F7E /* DiscGroupView.swift in Sources */,
+				60D5E93D26A3C4D300803F7E /* DiscCollectionVIewCell.swift in Sources */,
 				60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */,
 				60D5E92726A2F77C00803F7E /* VideoCollectionViewCell.swift in Sources */,
 				60D5E92C26A3056B00803F7E /* VideoType.swift in Sources */,
