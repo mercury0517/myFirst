@@ -18,9 +18,6 @@ class VideoCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.layer.cornerRadius = 10.0
-        self.clipsToBounds = true
-        
         self.addSubviews()
         self.configSubViews()
         self.applyStyling()
@@ -41,7 +38,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }
     
     private func applyStyling() {
-        self.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
+        self.backgroundColor = .white
         
         self.titleLabel.font = .systemFont(ofSize: 12.0)
         self.titleLabel.textColor = .black

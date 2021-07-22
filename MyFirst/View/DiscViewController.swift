@@ -32,7 +32,7 @@ class DiscViewController: UIViewController{
         
         self.discGroupStackView.alignment = .center
         self.discGroupStackView.axis = .vertical
-        self.discGroupStackView.spacing = 20.0
+        self.discGroupStackView.spacing = 10.0
         
         let discGroupForAlbum = DiscGroupView(discType: .album)
         let discGroupForSingle = DiscGroupView(discType: .single)

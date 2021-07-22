@@ -9,6 +9,8 @@ class HomeViewController: UIViewController {
     let noticeIcon = UIImageView(image: UIImage(named: "notice_icon"))
     let topBannerImage = UIImageView(image: UIImage(named: "top_aurora"))
     
+    let newDiscView = DiscGroupView(discType: .new)
+    
     let newsTitleLabel = UILabel()
     let newsStackView = UIStackView()
     
@@ -54,6 +56,7 @@ class HomeViewController: UIViewController {
         self.scrollView.addSubview(self.textLabel)
         self.scrollView.addSubview(self.noticeIcon)
         self.scrollView.addSubview(self.topBannerImage)
+        self.scrollView.addSubview(self.newDiscView)
         self.scrollView.addSubview(self.newsTitleLabel)
         self.scrollView.addSubview(self.newsStackView)
         self.scrollView.addSubview(self.snsTitleLabel)
@@ -119,7 +122,7 @@ class HomeViewController: UIViewController {
         self.scrollView.autoPinEdgesToSuperviewEdges()
         
         self.logoIcon.autoSetDimensions(to: CGSize(width: 60.0, height: 60.0))
-        self.logoIcon.autoPinEdge(toSuperviewEdge: .top, withInset: 40.0)
+        self.logoIcon.autoPinEdge(toSuperviewEdge: .top)
         self.logoIcon.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         
         self.textLabel.autoAlignAxis(.horizontal, toSameAxisOf: self.logoIcon)
@@ -136,7 +139,11 @@ class HomeViewController: UIViewController {
         self.topBannerImage.autoPinEdge(toSuperviewEdge: .left)
         self.topBannerImage.autoPinEdge(toSuperviewEdge: .right)
         
-        self.newsTitleLabel.autoPinEdge(.top, to: .bottom, of: self.topBannerImage, withOffset: 15.0)
+        self.newDiscView.autoPinEdge(.top, to: .bottom, of: self.topBannerImage, withOffset: 5.0)
+        self.newDiscView.autoPinEdge(toSuperviewEdge: .left)
+        self.newDiscView.autoPinEdge(toSuperviewEdge: .right)
+        
+        self.newsTitleLabel.autoPinEdge(.top, to: .bottom, of: self.newDiscView, withOffset: 15.0)
         self.newsTitleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.newsTitleLabel.autoPinEdge(toSuperviewEdge: .right)
         

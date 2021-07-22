@@ -11,7 +11,7 @@ class DiscGroupView: UIView {
         
         let flowLayout = UICollectionViewFlowLayout()
         let margin: CGFloat = 16.0
-        flowLayout.itemSize = CGSize(width: 150.0, height: 180.0)
+        flowLayout.itemSize = CGSize(width: 150.0, height: 200.0)
         flowLayout.minimumInteritemSpacing = margin
         flowLayout.minimumLineSpacing = margin
         flowLayout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
@@ -42,10 +42,12 @@ class DiscGroupView: UIView {
     
     private func configSubViews() {
         switch self.discType {
+        case .new:
+            break
         case .album:
-            self.titleLabel.text = "アルバム"
+            self.titleLabel.text = "ALBUM"
         case .single:
-            self.titleLabel.text = "シングル"
+            self.titleLabel.text = "SINGLE"
         }
         
         self.collectionView.register(DiscCollectionViewCell.self, forCellWithReuseIdentifier: "DiscCollectionViewCell")
@@ -54,21 +56,21 @@ class DiscGroupView: UIView {
     private func applyStyling() {
         self.backgroundColor = .white
         
-        self.titleLabel.textColor = .red
-        self.titleLabel.font = .boldSystemFont(ofSize: 15.0)
+        self.titleLabel.textColor = .black
+        self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)
         
         self.collectionView.backgroundColor = .white
     }
     
     private func addConstraints() {
-        self.autoSetDimension(.height, toSize: 210.0)
+        self.autoSetDimension(.height, toSize: 230.0)
         
         self.titleLabel.autoSetDimension(.height, toSize: 30.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .top)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .right)
         
-        self.collectionView.autoPinEdge(.top, to: .bottom, of: self.titleLabel)
+        self.collectionView.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 5.0)
         self.collectionView.autoPinEdge(toSuperviewEdge: .left)
         self.collectionView.autoPinEdge(toSuperviewEdge: .right)
         self.collectionView.autoSetDimension(.height, toSize: 180.0)
@@ -82,8 +84,10 @@ extension DiscGroupView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch self.discType {
+        case .new:
+            return NewDisc.allCases.count
         case .album:
-            return 10
+            return AlbumDisc.allCases.count
         case .single:
             return SingleDisc.allCases.count
         }
@@ -93,8 +97,10 @@ extension DiscGroupView: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "DiscCollectionViewCell", for: indexPath) as! DiscCollectionViewCell
         
         switch self.discType {
+        case .new:
+            cell.compactDisc = NewDisc.allCases[indexPath.row].getDisc()
         case .album:
-            cell.compactDisc = CompactDisc(title: "アカシア", artwork: UIImage(named: "single_acacia"))
+            cell.compactDisc = AlbumDisc.allCases[indexPath.row].getDisc()
         case .single:
             cell.compactDisc = SingleDisc.allCases[indexPath.row].getDisc()
         }

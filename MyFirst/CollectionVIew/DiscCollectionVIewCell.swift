@@ -34,7 +34,7 @@ class DiscCollectionViewCell: UICollectionViewCell {
     }
     
     private func configSubViews() {
-        self.titleLabel.numberOfLines = 1
+        self.titleLabel.numberOfLines = 0
     }
     
     private func applyStyling() {
@@ -48,7 +48,7 @@ class DiscCollectionViewCell: UICollectionViewCell {
         self.imageView.autoPinEdge(toSuperviewEdge: .left)
         self.imageView.autoPinEdge(toSuperviewEdge: .right)
         
-        self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.imageView, withOffset: 10.0)
+        self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.imageView, withOffset: 5.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 10.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .right)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
