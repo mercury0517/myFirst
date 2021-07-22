@@ -125,7 +125,6 @@
 				60825D82259B10EF00B7B242 /* MyTabBarController.swift */,
 				60984E7526A1B1B800E957C8 /* NewsView.swift */,
 				60D5E92626A2F77C00803F7E /* VideoCollectionViewCell.swift */,
-				60D5E92B26A3056B00803F7E /* VideoType.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -165,10 +164,11 @@
 		60D5CC9B258613B300C681DD /* MyFirst */ = {
 			isa = PBXGroup;
 			children = (
-				60D5E93326A3A22500803F7E /* fonts */,
 				60D5CC9C258613B300C681DD /* AppDelegate.swift */,
 				60D5CCA5258613B600C681DD /* Assets.xcassets */,
 				60825D81259B109E00B7B242 /* Components */,
+				60F099A526A946FC0045CEB7 /* Enum */,
+				60D5E93326A3A22500803F7E /* fonts */,
 				60D5CCAA258613B600C681DD /* Info.plist */,
 				60D5CCA7258613B600C681DD /* LaunchScreen.storyboard */,
 				60D5CC9E258613B300C681DD /* SceneDelegate.swift */,
@@ -201,6 +201,14 @@
 				60D5E93426A3A25000803F7E /* Oswald-VariableFont_wght.ttf */,
 			);
 			path = fonts;
+			sourceTree = "<group>";
+		};
+		60F099A526A946FC0045CEB7 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				60D5E92B26A3056B00803F7E /* VideoType.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		9FD41C5574C8D6F9A2B7E44A /* Pods */ = {

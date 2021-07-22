@@ -52,7 +52,7 @@ class NewsView: UIView {
         self.updateTimeLabel.autoPinEdge(toSuperviewEdge: .left)
         self.updateTimeLabel.autoPinEdge(toSuperviewEdge: .right)
         
-        self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.updateTimeLabel, withOffset: 10.0)
+        self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.updateTimeLabel, withOffset: 5.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .left)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .right)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .bottom)

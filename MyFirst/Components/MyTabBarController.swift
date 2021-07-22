@@ -48,7 +48,8 @@ class MyTabBarController: UITabBarController {
     }
     
     private func configTabView() {
-        UITabBar.appearance().tintColor = .black
+        UITabBar.appearance().backgroundColor = .white
+        UITabBar.appearance().tintColor = .red
 
         UITabBarItem.appearance().setTitleTextAttributes(
             [.font : UIFont.init(name: "HelveticaNeue-Medium", size: 15.0) ?? "", .foregroundColor : UIColor.black],

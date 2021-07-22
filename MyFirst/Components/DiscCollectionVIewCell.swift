@@ -43,6 +43,7 @@ class DiscCollectionViewCell: UICollectionViewCell {
     }
     
     private func applyStyling() {
+        self.titleLabel.textColor = .black
         self.titleLabel.font = .systemFont(ofSize: 12.0)
     }
     

@@ -2,6 +2,8 @@ import UIKit
 import PureLayout
 
 class HomeViewController: UIViewController {
+    let scrollView = UIScrollView()
+    
     let logoIcon = UIImageView(image: UIImage(named: "bump_logo"))
     let textLabel = UILabel()
     let noticeIcon = UIImageView(image: UIImage(named: "notice_icon"))
@@ -11,6 +13,7 @@ class HomeViewController: UIViewController {
     let newsStackView = UIStackView()
     
     let snsTitleLabel = UILabel()
+    
     let snsContainer = UIView()
     let twitterTapArea = UIControl()
     let twitterIcon = UIImageView(image: UIImage(named: "twitter"))
@@ -41,14 +44,15 @@ class HomeViewController: UIViewController {
     }
     
     private func addSubviews() {
-        self.view.addSubview(self.logoIcon)
-        self.view.addSubview(self.textLabel)
-        self.view.addSubview(self.noticeIcon)
-        self.view.addSubview(self.topBannerImage)
-        self.view.addSubview(self.newsTitleLabel)
-        self.view.addSubview(self.newsStackView)
-        self.view.addSubview(self.snsTitleLabel)
-        self.view.addSubview(self.snsContainer)
+        self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.logoIcon)
+        self.scrollView.addSubview(self.textLabel)
+        self.scrollView.addSubview(self.noticeIcon)
+        self.scrollView.addSubview(self.topBannerImage)
+        self.scrollView.addSubview(self.newsTitleLabel)
+        self.scrollView.addSubview(self.newsStackView)
+        self.scrollView.addSubview(self.snsTitleLabel)
+        self.scrollView.addSubview(self.snsContainer)
         self.snsContainer.addSubview(self.twitterTapArea)
         self.twitterTapArea.addSubview(self.twitterIcon)
         self.snsContainer.addSubview(self.lineTapArea)
@@ -82,7 +86,7 @@ class HomeViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.textLabel.textColor = .black
-        self.textLabel.font = UIFont(name: "Oswald", size: 30.0)
+        self.textLabel.font = UIFont(name: "Oswald", size: 26.0)
         
         self.newsTitleLabel.textColor = .black
         self.newsTitleLabel.font = UIFont(name: "Oswald", size: 20.0)
@@ -92,7 +96,9 @@ class HomeViewController: UIViewController {
     }
     
     private func addConstraints() {
-        self.logoIcon.autoSetDimensions(to: CGSize(width: 100.0, height: 100.0))
+        self.scrollView.autoPinEdgesToSuperviewEdges()
+        
+        self.logoIcon.autoSetDimensions(to: CGSize(width: 60.0, height: 60.0))
         self.logoIcon.autoPinEdge(toSuperviewEdge: .top, withInset: 40.0)
         self.logoIcon.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         
@@ -102,8 +108,10 @@ class HomeViewController: UIViewController {
         
         self.noticeIcon.autoSetDimensions(to: CGSize(width: 50.0, height: 50.0))
         self.noticeIcon.autoAlignAxis(.horizontal, toSameAxisOf: self.logoIcon)
-        self.noticeIcon.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.noticeIcon.autoPinEdge(toSuperviewEdge: .right, withInset: 10.0)
         
+        self.topBannerImage.autoSetDimension(.width, toSize: UIScreen.main.bounds.width)
+        self.topBannerImage.autoSetDimension(.height, toSize: 200.0)
         self.topBannerImage.autoPinEdge(.top, to: .bottom, of: self.logoIcon, withOffset: 5.0)
         self.topBannerImage.autoPinEdge(toSuperviewEdge: .left)
         self.topBannerImage.autoPinEdge(toSuperviewEdge: .right)
@@ -121,6 +129,7 @@ class HomeViewController: UIViewController {
         
         self.snsContainer.autoPinEdge(.top, to: .bottom, of: self.snsTitleLabel, withOffset: 5.0)
         self.snsContainer.autoAlignAxis(toSuperviewAxis: .vertical)
+        self.snsContainer.autoPinEdge(toSuperviewEdge: .bottom, withInset: 60.0)
         
         self.twitterTapArea.autoPinEdge(toSuperviewEdge: .top)
         self.twitterTapArea.autoPinEdge(toSuperviewEdge: .left, withInset: 10.0)

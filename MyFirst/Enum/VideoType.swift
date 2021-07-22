@@ -13,7 +13,13 @@ enum VideoType: CaseIterable {
     case pathfinderStudioCoast
     case kinensatsuei
     case kinensatsueiLyric
-    // あと38個...
+    case ribbon
+    case answer
+    case go
+    case goLive
+    case bfly2016
+    case aria
+    // あと32個...
     
     func getImage() -> UIImage? {
         switch self {
@@ -41,6 +47,18 @@ enum VideoType: CaseIterable {
             return UIImage(named: "video_kinensatsuei")
         case .kinensatsueiLyric:
             return UIImage(named: "video_kinensatsuei_lyric")
+        case .ribbon:
+            return UIImage(named: "video_ribbon")
+        case .answer:
+            return UIImage(named: "video_answer")
+        case .go:
+            return UIImage(named: "video_go")
+        case .goLive:
+            return UIImage(named: "video_go_live")
+        case .bfly2016:
+            return UIImage(named: "video_bfry_2016")
+        case .aria:
+            return UIImage(named: "video_aria")
         }
     }
     
@@ -70,6 +88,18 @@ enum VideoType: CaseIterable {
             return "記念撮影"
         case .kinensatsueiLyric:
             return "記念撮影 リリックビデオ"
+        case .ribbon:
+            return "リボン"
+        case .answer:
+            return "アンサー"
+        case .go:
+            return "GO"
+        case .goLive:
+            return "GO LIVE MUSIC VIDEO"
+        case .bfly2016:
+            return "BUMP OF CHICKEN STADIUM TOUR 2016 \"BFLY\" スポット"
+        case .aria:
+            return "アリア"
         }
     }
 }

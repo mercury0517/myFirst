@@ -44,6 +44,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
         
         self.titleLabel.font = .systemFont(ofSize: 12.0)
+        self.titleLabel.textColor = .black
     }
     
     private func addConstraints() {
