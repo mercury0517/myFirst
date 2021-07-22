@@ -19,7 +19,7 @@ enum VideoType: CaseIterable {
     case goLive
     case bfly2016
     case aria
-    // あと32個...
+    // TODO:あと32個...
     
     func getImage() -> UIImage? {
         switch self {

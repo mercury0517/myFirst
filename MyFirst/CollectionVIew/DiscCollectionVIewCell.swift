@@ -1,14 +1,9 @@
 import UIKit
 
 class DiscCollectionViewCell: UICollectionViewCell {
-    var image: UIImage? {
+    var compactDisc: CompactDisc? {
         didSet {
-            self.configImage()
-        }
-    }
-    var title: String? {
-        didSet {
-            self.configTitle()
+            self.configCompactDisc()
         }
     }
     
@@ -48,6 +43,7 @@ class DiscCollectionViewCell: UICollectionViewCell {
     }
     
     private func addConstraints() {
+        self.imageView.autoSetDimensions(to: CGSize(width: 150.0, height: 150.0))
         self.imageView.autoPinEdge(toSuperviewEdge: .top)
         self.imageView.autoPinEdge(toSuperviewEdge: .left)
         self.imageView.autoPinEdge(toSuperviewEdge: .right)
@@ -58,11 +54,8 @@ class DiscCollectionViewCell: UICollectionViewCell {
         self.titleLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
     }
     
-    private func configImage() {
-        self.imageView.image = self.image
-    }
-    
-    private func configTitle() {
-        self.titleLabel.text = title
+    private func configCompactDisc() {
+        self.titleLabel.text = self.compactDisc?.title
+        self.imageView.image = self.compactDisc?.artwork
     }
 }

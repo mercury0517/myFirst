@@ -24,6 +24,11 @@ class HomeViewController: UIViewController {
     let youtubeTapArea = UIControl()
     let youtubeIcon = UIImageView(image: UIImage(named: "youtube"))
     
+    let copyRightContainer = UIView()
+    let copyRightIcon = UIImageView(image: UIImage(named: "bump_logo2"))
+    let copyRightTitle = UILabel()
+    let copyRightSubTitle = UILabel()
+    
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -61,10 +66,16 @@ class HomeViewController: UIViewController {
         self.instagramTapArea.addSubview(self.instagramIcon)
         self.snsContainer.addSubview(self.youtubeTapArea)
         self.youtubeTapArea.addSubview(self.youtubeIcon)
+        self.scrollView.addSubview(self.copyRightContainer)
+        self.copyRightContainer.addSubview(self.copyRightIcon)
+        self.copyRightContainer.addSubview(self.copyRightTitle)
+        self.copyRightContainer.addSubview(self.copyRightSubTitle)
     }
     
     private func configSubViews() {
         self.textLabel.text = "BUMP OF CHICKEN"
+        
+        // TODO: ベルアイコンタップして、WKWebViewでお知らせページ開く様にする
         
         self.newsTitleLabel.text = "NEWS"
     
@@ -80,6 +91,9 @@ class HomeViewController: UIViewController {
         self.lineTapArea.addTarget(self, action: #selector(self.tappedLine), for: .touchUpInside)
         self.instagramTapArea.addTarget(self, action: #selector(self.tappedInstagram), for: .touchUpInside)
         self.youtubeTapArea.addTarget(self, action: #selector(self.tappedYoutube), for: .touchUpInside)
+        
+        self.copyRightTitle.text = "SINCE 1996"
+        self.copyRightSubTitle.text = "© bumpofchicken.com. All rights Reserved."
     }
     
     private func applyStyling() {
@@ -93,6 +107,12 @@ class HomeViewController: UIViewController {
         
         self.snsTitleLabel.textColor = .lightGray
         self.snsTitleLabel.font = .systemFont(ofSize: 12.0)
+        
+        self.copyRightTitle.textColor = .black
+        self.copyRightTitle.font = UIFont(name: "Oswald", size: 12.0)
+        
+        self.copyRightSubTitle.textColor = .lightGray
+        self.copyRightSubTitle.font = .systemFont(ofSize: 8.0)
     }
     
     private func addConstraints() {
@@ -129,7 +149,6 @@ class HomeViewController: UIViewController {
         
         self.snsContainer.autoPinEdge(.top, to: .bottom, of: self.snsTitleLabel, withOffset: 5.0)
         self.snsContainer.autoAlignAxis(toSuperviewAxis: .vertical)
-        self.snsContainer.autoPinEdge(toSuperviewEdge: .bottom, withInset: 60.0)
         
         self.twitterTapArea.autoPinEdge(toSuperviewEdge: .top)
         self.twitterTapArea.autoPinEdge(toSuperviewEdge: .left, withInset: 10.0)
@@ -159,6 +178,20 @@ class HomeViewController: UIViewController {
         self.youtubeTapArea.autoSetDimensions(to: CGSize(width: 25.0, height: 25.0))
         
         self.youtubeIcon.autoPinEdgesToSuperviewEdges()
+        
+        self.copyRightContainer.autoPinEdge(.top, to: .bottom, of: self.snsContainer, withOffset: 20.0)
+        self.copyRightContainer.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.copyRightContainer.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.copyRightContainer.autoPinEdge(toSuperviewEdge: .bottom, withInset: 60.0)
+        
+        self.copyRightIcon.autoSetDimensions(to: CGSize(width: 70.0, height: 70.0))
+        self.copyRightIcon.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .right)
+        
+        self.copyRightTitle.autoPinEdge(toSuperviewEdge: .top, withInset: 15.0)
+        self.copyRightTitle.autoPinEdge(.left, to: .right, of: self.copyRightIcon, withOffset: 10.0)
+        
+        self.copyRightSubTitle.autoPinEdge(.top, to: .bottom, of: self.copyRightTitle, withOffset: 5.0)
+        self.copyRightSubTitle.autoPinEdge(.left, to: .right, of: self.copyRightIcon, withOffset: 10.0)
     }
     
     private func configNewsStackView() {

@@ -66,7 +66,7 @@ class VideoViewController: UIViewController {
     }
     
     private func addConstraints() {
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 80.0)
+        self.titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 50.0)
         self.titleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
         
         self.collectionView.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 15.0)

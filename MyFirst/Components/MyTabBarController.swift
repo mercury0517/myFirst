@@ -4,7 +4,7 @@ class MyTabBarController: UITabBarController {
     let tabView1 = HomeViewController()
     let tabView2 = VideoViewController()
     let tabView3 = DiscViewController()
-    let tabView4 = DiscViewController()
+    let tabView4 = PhotoViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()

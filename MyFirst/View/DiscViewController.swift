@@ -34,16 +34,16 @@ class DiscViewController: UIViewController{
         self.discGroupStackView.axis = .vertical
         self.discGroupStackView.spacing = 20.0
         
-        let discGroup1 = DiscGroupView()
-        let discGroup2 = DiscGroupView()
+        let discGroupForAlbum = DiscGroupView(discType: .album)
+        let discGroupForSingle = DiscGroupView(discType: .single)
         
-        self.discGroupStackView.addArrangedSubview(discGroup1)
-        discGroup1.autoPinEdge(toSuperviewEdge: .left)
-        discGroup1.autoPinEdge(toSuperviewEdge: .right)
+        self.discGroupStackView.addArrangedSubview(discGroupForAlbum)
+        discGroupForAlbum.autoPinEdge(toSuperviewEdge: .left)
+        discGroupForAlbum.autoPinEdge(toSuperviewEdge: .right)
         
-        self.discGroupStackView.addArrangedSubview(discGroup2)
-        discGroup2.autoPinEdge(toSuperviewEdge: .left)
-        discGroup2.autoPinEdge(toSuperviewEdge: .right)
+        self.discGroupStackView.addArrangedSubview(discGroupForSingle)
+        discGroupForSingle.autoPinEdge(toSuperviewEdge: .left)
+        discGroupForSingle.autoPinEdge(toSuperviewEdge: .right)
     }
     
     private func applyStyling() {
@@ -54,7 +54,7 @@ class DiscViewController: UIViewController{
     }
     
     private func addConstraints() {
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 80.0)
+        self.titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 50.0)
         self.titleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
         
         self.discGroupStackView.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 20.0)

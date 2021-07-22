@@ -24,6 +24,9 @@
 		60D5E93526A3A25000803F7E /* Oswald-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60D5E93426A3A25000803F7E /* Oswald-VariableFont_wght.ttf */; };
 		60D5E93D26A3C4D300803F7E /* DiscCollectionVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5E93C26A3C4D300803F7E /* DiscCollectionVIewCell.swift */; };
 		60D5E94526A3C71600803F7E /* DiscGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5E94426A3C71600803F7E /* DiscGroupView.swift */; };
+		60F099A726A9627A0045CEB7 /* PhotoVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F099A626A9627A0045CEB7 /* PhotoVIewController.swift */; };
+		60F099A926A963A60045CEB7 /* DiscType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F099A826A963A60045CEB7 /* DiscType.swift */; };
+		60F099B126A96E330045CEB7 /* CompactDisc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F099B026A96E330045CEB7 /* CompactDisc.swift */; };
 		C2D43C5036F00A7497C8E312 /* Pods_MyFirstTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A13F73C2D21F8826789404C4 /* Pods_MyFirstTests.framework */; };
 		E0C3893B1B9F09154EEBA89A /* Pods_MyFirst_MyFirstUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4B566FFC89D3666EC5E7E23 /* Pods_MyFirst_MyFirstUITests.framework */; };
 /* End PBXBuildFile section */
@@ -75,6 +78,9 @@
 		60D5E93426A3A25000803F7E /* Oswald-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		60D5E93C26A3C4D300803F7E /* DiscCollectionVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscCollectionVIewCell.swift; sourceTree = "<group>"; };
 		60D5E94426A3C71600803F7E /* DiscGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscGroupView.swift; sourceTree = "<group>"; };
+		60F099A626A9627A0045CEB7 /* PhotoVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVIewController.swift; sourceTree = "<group>"; };
+		60F099A826A963A60045CEB7 /* DiscType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscType.swift; sourceTree = "<group>"; };
+		60F099B026A96E330045CEB7 /* CompactDisc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactDisc.swift; sourceTree = "<group>"; };
 		A13F73C2D21F8826789404C4 /* Pods_MyFirstTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFirstTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4B566FFC89D3666EC5E7E23 /* Pods_MyFirst_MyFirstUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFirst_MyFirstUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -120,11 +126,8 @@
 		60825D81259B109E00B7B242 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				60D5E93C26A3C4D300803F7E /* DiscCollectionVIewCell.swift */,
-				60D5E94426A3C71600803F7E /* DiscGroupView.swift */,
 				60825D82259B10EF00B7B242 /* MyTabBarController.swift */,
 				60984E7526A1B1B800E957C8 /* NewsView.swift */,
-				60D5E92626A2F77C00803F7E /* VideoCollectionViewCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -132,9 +135,10 @@
 		60D5AAE2259B0ADB00A1243E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				60D5CCA0258613B300C681DD /* HomeViewController.swift */,
-				60D5AADD259B0AC800A1243E /* VideoViewController.swift */,
 				60825D7C259B102300B7B242 /* DiscViewController.swift */,
+				60D5CCA0258613B300C681DD /* HomeViewController.swift */,
+				60F099A626A9627A0045CEB7 /* PhotoVIewController.swift */,
+				60D5AADD259B0AC800A1243E /* VideoViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -166,7 +170,9 @@
 			children = (
 				60D5CC9C258613B300C681DD /* AppDelegate.swift */,
 				60D5CCA5258613B600C681DD /* Assets.xcassets */,
+				60F099AB26A965950045CEB7 /* CollectionVIew */,
 				60825D81259B109E00B7B242 /* Components */,
+				60F099AF26A96DFC0045CEB7 /* Entity */,
 				60F099A526A946FC0045CEB7 /* Enum */,
 				60D5E93326A3A22500803F7E /* fonts */,
 				60D5CCAA258613B600C681DD /* Info.plist */,
@@ -206,9 +212,28 @@
 		60F099A526A946FC0045CEB7 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
+				60F099A826A963A60045CEB7 /* DiscType.swift */,
 				60D5E92B26A3056B00803F7E /* VideoType.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		60F099AB26A965950045CEB7 /* CollectionVIew */ = {
+			isa = PBXGroup;
+			children = (
+				60D5E93C26A3C4D300803F7E /* DiscCollectionVIewCell.swift */,
+				60D5E94426A3C71600803F7E /* DiscGroupView.swift */,
+				60D5E92626A2F77C00803F7E /* VideoCollectionViewCell.swift */,
+			);
+			path = CollectionVIew;
+			sourceTree = "<group>";
+		};
+		60F099AF26A96DFC0045CEB7 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				60F099B026A96E330045CEB7 /* CompactDisc.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		9FD41C5574C8D6F9A2B7E44A /* Pods */ = {
@@ -466,7 +491,10 @@
 				60D5CCA1258613B300C681DD /* HomeViewController.swift in Sources */,
 				60825D7D259B102300B7B242 /* DiscViewController.swift in Sources */,
 				60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */,
+				60F099B126A96E330045CEB7 /* CompactDisc.swift in Sources */,
 				60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */,
+				60F099A726A9627A0045CEB7 /* PhotoVIewController.swift in Sources */,
+				60F099A926A963A60045CEB7 /* DiscType.swift in Sources */,
 				60D5E94526A3C71600803F7E /* DiscGroupView.swift in Sources */,
 				60D5E93D26A3C4D300803F7E /* DiscCollectionVIewCell.swift in Sources */,
 				60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */,
@@ -648,6 +676,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.myfirst20201213.MyFirst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -668,6 +697,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.myfirst20201213.MyFirst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
