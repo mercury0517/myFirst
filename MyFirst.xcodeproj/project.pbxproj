@@ -27,6 +27,7 @@
 		60F099A726A9627A0045CEB7 /* PhotoVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F099A626A9627A0045CEB7 /* PhotoVIewController.swift */; };
 		60F099A926A963A60045CEB7 /* DiscType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F099A826A963A60045CEB7 /* DiscType.swift */; };
 		60F099B126A96E330045CEB7 /* CompactDisc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F099B026A96E330045CEB7 /* CompactDisc.swift */; };
+		60F099B426AA5A0A0045CEB7 /* AppleMusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F099B326AA5A0A0045CEB7 /* AppleMusicManager.swift */; };
 		C2D43C5036F00A7497C8E312 /* Pods_MyFirstTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A13F73C2D21F8826789404C4 /* Pods_MyFirstTests.framework */; };
 		E0C3893B1B9F09154EEBA89A /* Pods_MyFirst_MyFirstUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4B566FFC89D3666EC5E7E23 /* Pods_MyFirst_MyFirstUITests.framework */; };
 /* End PBXBuildFile section */
@@ -81,6 +82,7 @@
 		60F099A626A9627A0045CEB7 /* PhotoVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVIewController.swift; sourceTree = "<group>"; };
 		60F099A826A963A60045CEB7 /* DiscType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscType.swift; sourceTree = "<group>"; };
 		60F099B026A96E330045CEB7 /* CompactDisc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactDisc.swift; sourceTree = "<group>"; };
+		60F099B326AA5A0A0045CEB7 /* AppleMusicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicManager.swift; sourceTree = "<group>"; };
 		A13F73C2D21F8826789404C4 /* Pods_MyFirstTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFirstTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4B566FFC89D3666EC5E7E23 /* Pods_MyFirst_MyFirstUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFirst_MyFirstUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -146,6 +148,7 @@
 		60D5CC90258613B300C681DD = {
 			isa = PBXGroup;
 			children = (
+				60F099B226AA59E10045CEB7 /* AppleMusic */,
 				60D5CC9B258613B300C681DD /* MyFirst */,
 				60D5CCB2258613B600C681DD /* MyFirstTests */,
 				60D5CCBD258613B600C681DD /* MyFirstUITests */,
@@ -234,6 +237,14 @@
 				60F099B026A96E330045CEB7 /* CompactDisc.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		60F099B226AA59E10045CEB7 /* AppleMusic */ = {
+			isa = PBXGroup;
+			children = (
+				60F099B326AA5A0A0045CEB7 /* AppleMusicManager.swift */,
+			);
+			path = AppleMusic;
 			sourceTree = "<group>";
 		};
 		9FD41C5574C8D6F9A2B7E44A /* Pods */ = {
@@ -489,6 +500,7 @@
 			files = (
 				60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */,
 				60D5CCA1258613B300C681DD /* HomeViewController.swift in Sources */,
+				60F099B426AA5A0A0045CEB7 /* AppleMusicManager.swift in Sources */,
 				60825D7D259B102300B7B242 /* DiscViewController.swift in Sources */,
 				60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */,
 				60F099B126A96E330045CEB7 /* CompactDisc.swift in Sources */,
@@ -709,7 +721,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3ACE71CA7F8DE1441B712588 /* Pods-MyFirstTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
@@ -732,7 +744,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 464F05F55D38240FED411859 /* Pods-MyFirstTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
@@ -755,7 +767,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 56F056609B28AD22053B81D6 /* Pods-MyFirst-MyFirstUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirstUITests/Info.plist;
@@ -776,7 +788,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1B223E29463043B03486C471 /* Pods-MyFirst-MyFirstUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirstUITests/Info.plist;

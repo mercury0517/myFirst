@@ -7,6 +7,8 @@ platform :ios, '14.2'
 target 'MyFirst' do
   # Pods for MyFirst
   pod 'PureLayout'
+  pod 'Alamofire'
+  pod 'SwiftyJSON', '~> 4.0'
   
   target 'MyFirstTests' do
     inherit! :search_paths

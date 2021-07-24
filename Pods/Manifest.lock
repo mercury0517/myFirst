@@ -1,16 +1,24 @@
 PODS:
-  - PureLayout (3.1.6)
+  - Alamofire (5.4.3)
+  - PureLayout (3.1.8)
+  - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
+  - Alamofire
   - PureLayout
+  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - PureLayout
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
-  PureLayout: bd3c4ec3a3819ad387c99ebb72c6b129c3ed4d2d
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  PureLayout: a4afb3d79dd958564ce33d22c89f407280d8e6a8
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 4fe1f75f7311ec0c55568e9fe0ca743f263e7e46
+PODFILE CHECKSUM: 3a6b5d0a9208e5d1b2d94d0a851ad1da27978948
 
 COCOAPODS: 1.10.0
