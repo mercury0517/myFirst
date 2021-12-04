@@ -19,6 +19,8 @@
 		60878D09275B56EE0052B91C /* FavoriteListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D08275B56EE0052B91C /* FavoriteListPresenter.swift */; };
 		60878D0B275B58450052B91C /* FavoriteListRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D0A275B58450052B91C /* FavoriteListRouterProtocol.swift */; };
 		60878D0D275B585A0052B91C /* FavoriteListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D0C275B585A0052B91C /* FavoriteListRouter.swift */; };
+		60878D14275B64230052B91C /* FavoriteListInteractorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D13275B64230052B91C /* FavoriteListInteractorProtocol.swift */; };
+		60878D16275B642A0052B91C /* FavoriteListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D15275B642A0052B91C /* FavoriteListInteractor.swift */; };
 		60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60984E7526A1B1B800E957C8 /* NewsView.swift */; };
 		60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5AADD259B0AC800A1243E /* VideoViewController.swift */; };
 		60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9C258613B300C681DD /* AppDelegate.swift */; };
@@ -77,6 +79,8 @@
 		60878D08275B56EE0052B91C /* FavoriteListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListPresenter.swift; sourceTree = "<group>"; };
 		60878D0A275B58450052B91C /* FavoriteListRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListRouterProtocol.swift; sourceTree = "<group>"; };
 		60878D0C275B585A0052B91C /* FavoriteListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListRouter.swift; sourceTree = "<group>"; };
+		60878D13275B64230052B91C /* FavoriteListInteractorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListInteractorProtocol.swift; sourceTree = "<group>"; };
+		60878D15275B642A0052B91C /* FavoriteListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListInteractor.swift; sourceTree = "<group>"; };
 		60984E7526A1B1B800E957C8 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		60D5AADD259B0AC800A1243E /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		60D5CC99258613B300C681DD /* MyFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +159,8 @@
 		60878D03275B563A0052B91C /* FavoriteList */ = {
 			isa = PBXGroup;
 			children = (
+				60878D12275B63F00052B91C /* Entity */,
+				60878D11275B63E60052B91C /* Interactor */,
 				60878D10275B58D30052B91C /* Presenter */,
 				60878D0F275B58C70052B91C /* Router */,
 				60878D0E275B58B50052B91C /* View */,
@@ -187,6 +193,23 @@
 				60878D06275B56D20052B91C /* FavoriteListPresenterProtocol .swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		60878D11275B63E60052B91C /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				60878D13275B64230052B91C /* FavoriteListInteractorProtocol.swift */,
+				60878D15275B642A0052B91C /* FavoriteListInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		60878D12275B63F00052B91C /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				60878CFD275B4E9A0052B91C /* MyFavorite.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		60D5AAE2259B0ADB00A1243E /* View */ = {
@@ -293,7 +316,6 @@
 			isa = PBXGroup;
 			children = (
 				60F099B026A96E330045CEB7 /* CompactDisc.swift */,
-				60878CFD275B4E9A0052B91C /* MyFavorite.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -557,6 +579,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60878D16275B642A0052B91C /* FavoriteListInteractor.swift in Sources */,
 				60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */,
 				60D5CCA1258613B300C681DD /* HomeViewController.swift in Sources */,
 				60F099B426AA5A0A0045CEB7 /* AppleMusicManager.swift in Sources */,
@@ -581,6 +604,7 @@
 				60D5E92C26A3056B00803F7E /* VideoType.swift in Sources */,
 				60878D05275B566A0052B91C /* FavoriteListViewProtocol.swift in Sources */,
 				60825D83259B10EF00B7B242 /* MyTabBarController.swift in Sources */,
+				60878D14275B64230052B91C /* FavoriteListInteractorProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

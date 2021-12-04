@@ -10,9 +10,14 @@ import PureLayout
 class FavoriteListViewController: UIViewController, FavoriteListViewProtocol {
     var presenter: FavoriteListPresenterProtocol?
     
+    var alertController = UIAlertController(
+        title: "画像の選択", message: "選択してください", preferredStyle: .actionSheet
+    )
+    
     let scrollView = UIScrollView()
     
     let titleLabel = UILabel()
+    let editTopBannerButton = UIButton()
     let topBanner = UIImageView(image: UIImage(named: "flight_banner"))
     let favoriteGroupStackView = UIStackView()
     
@@ -33,18 +38,36 @@ class FavoriteListViewController: UIViewController, FavoriteListViewProtocol {
         self.addConstraints()
     }
     
+    func present(_ viewController: UIViewController) {
+        self.present(viewController, animated: true, completion: nil)
+    }
+    
     private func addSubviews() {
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.titleLabel)
+        self.scrollView.addSubview(self.editTopBannerButton)
         self.scrollView.addSubview(self.topBanner)
         self.scrollView.addSubview(self.favoriteGroupStackView)
     }
     
     private func configSubViews() {
+        self.customPhotoLibraryAlert()
+        
         self.titleLabel.text = "MY FAVORITE"
+        
+        self.editTopBannerButton.setTitle("EDIT", for: .normal)
+        self.editTopBannerButton.addTarget(self, action: #selector(self.tappedEditTopBannerButton), for: .touchUpInside)
 
         self.topBanner.backgroundColor = .black
         self.topBanner.contentMode = .scaleToFill
+        
+        // キャッシュに保存してあるバナーで上書き
+        if let images = UserDefaults.standard.object(forKey: "bannerImage") as? NSArray {
+            if images.count != 0 {
+                let cachedImage = UIImage(data: images[0] as! Data)
+                self.topBanner.image = cachedImage
+            }
+        }
         
         self.favoriteGroupStackView.alignment = .center
         self.favoriteGroupStackView.axis = .vertical
@@ -73,6 +96,11 @@ class FavoriteListViewController: UIViewController, FavoriteListViewProtocol {
         
         self.titleLabel.textColor = .black
         self.titleLabel.font = UIFont(name: "Oswald", size: 20.0)
+        
+        self.editTopBannerButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
+        self.editTopBannerButton.backgroundColor = .black
+        self.editTopBannerButton.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
+        self.editTopBannerButton.layer.cornerRadius = 5.0
     }
     
     private func addConstraints() {
@@ -80,6 +108,9 @@ class FavoriteListViewController: UIViewController, FavoriteListViewProtocol {
         
         self.titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 40.0)
         self.titleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+        
+        self.editTopBannerButton.autoAlignAxis(.horizontal, toSameAxisOf: self.titleLabel)
+        self.editTopBannerButton.autoPinEdge(toSuperviewEdge: .right, withInset: 10.0)
         
         self.topBanner.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 20.0)
         self.topBanner.autoPinEdge(toSuperviewEdge: .left)
@@ -90,6 +121,42 @@ class FavoriteListViewController: UIViewController, FavoriteListViewProtocol {
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .left)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .right)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 100.0)
+    }
+    
+    private func customPhotoLibraryAlert() {
+        let albumAction = UIAlertAction(title: "フォトライブラリ", style: .default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) == true {
+                let picker = UIImagePickerController()
+                picker.sourceType = .photoLibrary
+                picker.allowsEditing = true
+                picker.delegate = self
+                self.present(picker, animated: true, completion: nil)
+            } else {
+                print("この機種ではフォトライブラリが使用出来ません。")
+            }
+        }
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
+            self.alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        self.alertController.addAction(albumAction)
+        self.alertController.addAction(cancelAction)
+        //self.present(self.alertController, animated: true, completion: nil)
+    }
+    
+    @objc private func tappedEditTopBannerButton() {
+        self.presenter?.editTopBannerButtonDidTap()
+    }
+}
+
+extension FavoriteListViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        self.topBanner.image = selectedImage
+
+        self.presenter?.bannerImageSelected(image: selectedImage)
+        
+        picker.dismiss(animated: true, completion: nil)
     }
 }
 

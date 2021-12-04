@@ -1,8 +1,9 @@
 class AppDependencies {
     static func assmbleFavoriteList() -> FavoriteListViewController {
         let view = FavoriteListViewController()
-        let router = FavoriteListRouter()
-        let presenter = FavoriteListPresenter(view: view, router: router)
+        let router = FavoriteListRouter(view: view)
+        let interactor = FavoriteListInteractor()
+        let presenter = FavoriteListPresenter(view: view, interactor: interactor, router: router)
         
         view.presenter = presenter
         
