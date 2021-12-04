@@ -1,11 +1,19 @@
 import UIKit
 
 class FavoriteGroupView: UIView {
+    let title: String
+    var presenter: FavoriteListPresenterProtocol?
+    
+    var countOfItem: Int = 0
+    
     let titleLabel = UILabel()
     var collectionView: UICollectionView
     
-    init(title: String) {
-        self.titleLabel.text = title
+    init(title: String, presenter: FavoriteListPresenterProtocol?) {
+        self.title = title
+        self.titleLabel.text = self.title
+        
+        self.presenter = presenter
         
         let flowLayout = UICollectionViewFlowLayout()
         let margin: CGFloat = 16.0
@@ -23,6 +31,8 @@ class FavoriteGroupView: UIView {
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         
+        self.loadItemsFromCache()
+        
         self.addSubviews()
         self.configSubViews()
         self.applyStyling()
@@ -31,6 +41,10 @@ class FavoriteGroupView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func loadItemsFromCache() {
+        
     }
     
     private func addSubviews() {
@@ -72,14 +86,32 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return countOfItem == 0 ? 1 : countOfItem
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
         
-        cell.favorite = MyFavorite(title: "藤井風", image: UIImage(named: "kaze"))
+        if countOfItem == 0 {
+            let defaultImage = UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0))
+            cell.favorite = MyFavorite(title: "default", image: defaultImage)
+        } else {
+            cell.favorite = MyFavorite(title: "FUJII KAZE", image: UIImage(named: "kaze"))
+        }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.presenter?.favoriteCellDidTap(title: self.title, index: indexPath.row)
+    }
+}
+
+extension UIColor {
+    func image(size: CGSize) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { rendererContext in
+            self.setFill()
+            rendererContext.fill(.init(origin: .zero, size: size))
+        }
     }
 }

@@ -1,10 +1,10 @@
 import UIKit
 class FavoriteListPresenter: FavoriteListPresenterProtocol {
-    let view: FavoriteListViewProtocol
+    let view: FavoriteListViewControllerProtocol
     let interactor: FavoriteListInteractorProtocol
     let router: FavoriteListRouterProtocol
     
-    init(view: FavoriteListViewProtocol, interactor: FavoriteListInteractorProtocol, router: FavoriteListRouterProtocol) {
+    init(view: FavoriteListViewControllerProtocol, interactor: FavoriteListInteractorProtocol, router: FavoriteListRouterProtocol) {
         self.view = view
         self.interactor = interactor
         self.router = router
@@ -16,5 +16,9 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
     
     func bannerImageSelected(image: UIImage) {
         self.interactor.storeBannerImage(image: image)
+    }
+    
+    func favoriteCellDidTap(title: String, index: Int) {
+        self.router.displayFavoriteRegistrationView(title: title, index: index)
     }
 }

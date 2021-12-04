@@ -14,13 +14,15 @@
 		60878CFE275B4E9A0052B91C /* MyFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878CFD275B4E9A0052B91C /* MyFavorite.swift */; };
 		60878D00275B4F090052B91C /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878CFF275B4F090052B91C /* FavoriteCollectionViewCell.swift */; };
 		60878D02275B55D80052B91C /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D01275B55D80052B91C /* AppDependencies.swift */; };
-		60878D05275B566A0052B91C /* FavoriteListViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D04275B566A0052B91C /* FavoriteListViewProtocol.swift */; };
+		60878D05275B566A0052B91C /* FavoriteListViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D04275B566A0052B91C /* FavoriteListViewControllerProtocol.swift */; };
 		60878D07275B56D20052B91C /* FavoriteListPresenterProtocol .swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D06275B56D20052B91C /* FavoriteListPresenterProtocol .swift */; };
 		60878D09275B56EE0052B91C /* FavoriteListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D08275B56EE0052B91C /* FavoriteListPresenter.swift */; };
 		60878D0B275B58450052B91C /* FavoriteListRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D0A275B58450052B91C /* FavoriteListRouterProtocol.swift */; };
 		60878D0D275B585A0052B91C /* FavoriteListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D0C275B585A0052B91C /* FavoriteListRouter.swift */; };
 		60878D14275B64230052B91C /* FavoriteListInteractorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D13275B64230052B91C /* FavoriteListInteractorProtocol.swift */; };
 		60878D16275B642A0052B91C /* FavoriteListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D15275B642A0052B91C /* FavoriteListInteractor.swift */; };
+		60878D18275B85690052B91C /* FavoriteCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D17275B85690052B91C /* FavoriteCategory.swift */; };
+		60878D1A275B8EA00052B91C /* FavoriteRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D19275B8EA00052B91C /* FavoriteRegistrationViewController.swift */; };
 		60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60984E7526A1B1B800E957C8 /* NewsView.swift */; };
 		60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5AADD259B0AC800A1243E /* VideoViewController.swift */; };
 		60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9C258613B300C681DD /* AppDelegate.swift */; };
@@ -74,13 +76,15 @@
 		60878CFD275B4E9A0052B91C /* MyFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavorite.swift; sourceTree = "<group>"; };
 		60878CFF275B4F090052B91C /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		60878D01275B55D80052B91C /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
-		60878D04275B566A0052B91C /* FavoriteListViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewProtocol.swift; sourceTree = "<group>"; };
+		60878D04275B566A0052B91C /* FavoriteListViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewControllerProtocol.swift; sourceTree = "<group>"; };
 		60878D06275B56D20052B91C /* FavoriteListPresenterProtocol .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteListPresenterProtocol .swift"; sourceTree = "<group>"; };
 		60878D08275B56EE0052B91C /* FavoriteListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListPresenter.swift; sourceTree = "<group>"; };
 		60878D0A275B58450052B91C /* FavoriteListRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListRouterProtocol.swift; sourceTree = "<group>"; };
 		60878D0C275B585A0052B91C /* FavoriteListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListRouter.swift; sourceTree = "<group>"; };
 		60878D13275B64230052B91C /* FavoriteListInteractorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListInteractorProtocol.swift; sourceTree = "<group>"; };
 		60878D15275B642A0052B91C /* FavoriteListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListInteractor.swift; sourceTree = "<group>"; };
+		60878D17275B85690052B91C /* FavoriteCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCategory.swift; sourceTree = "<group>"; };
+		60878D19275B8EA00052B91C /* FavoriteRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRegistrationViewController.swift; sourceTree = "<group>"; };
 		60984E7526A1B1B800E957C8 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		60D5AADD259B0AC800A1243E /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		60D5CC99258613B300C681DD /* MyFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,7 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				60825D7C259B102300B7B242 /* FavoriteListViewController.swift */,
-				60878D04275B566A0052B91C /* FavoriteListViewProtocol.swift */,
+				60878D04275B566A0052B91C /* FavoriteListViewControllerProtocol.swift */,
+				60878D19275B8EA00052B91C /* FavoriteRegistrationViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				60F099A826A963A60045CEB7 /* DiscType.swift */,
+				60878D17275B85690052B91C /* FavoriteCategory.swift */,
 				60D5E92B26A3056B00803F7E /* VideoType.swift */,
 			);
 			path = Enum;
@@ -584,6 +590,7 @@
 				60D5CCA1258613B300C681DD /* HomeViewController.swift in Sources */,
 				60F099B426AA5A0A0045CEB7 /* AppleMusicManager.swift in Sources */,
 				60825D7D259B102300B7B242 /* FavoriteListViewController.swift in Sources */,
+				60878D1A275B8EA00052B91C /* FavoriteRegistrationViewController.swift in Sources */,
 				60878D00275B4F090052B91C /* FavoriteCollectionViewCell.swift in Sources */,
 				60878D02275B55D80052B91C /* AppDependencies.swift in Sources */,
 				60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */,
@@ -599,10 +606,11 @@
 				60878D0D275B585A0052B91C /* FavoriteListRouter.swift in Sources */,
 				60878CFE275B4E9A0052B91C /* MyFavorite.swift in Sources */,
 				60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */,
+				60878D18275B85690052B91C /* FavoriteCategory.swift in Sources */,
 				60D5E92726A2F77C00803F7E /* VideoCollectionViewCell.swift in Sources */,
 				60878D09275B56EE0052B91C /* FavoriteListPresenter.swift in Sources */,
 				60D5E92C26A3056B00803F7E /* VideoType.swift in Sources */,
-				60878D05275B566A0052B91C /* FavoriteListViewProtocol.swift in Sources */,
+				60878D05275B566A0052B91C /* FavoriteListViewControllerProtocol.swift in Sources */,
 				60825D83259B10EF00B7B242 /* MyTabBarController.swift in Sources */,
 				60878D14275B64230052B91C /* FavoriteListInteractorProtocol.swift in Sources */,
 			);

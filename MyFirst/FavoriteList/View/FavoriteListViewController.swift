@@ -7,7 +7,7 @@ import PureLayout
  TODO4: 既存カテゴリを編集できる様にする
  TODO5: 既存カテゴリの右に追加ボタンを置く、ただし1カテゴリ3個までしか登録させない
 */
-class FavoriteListViewController: UIViewController, FavoriteListViewProtocol {
+class FavoriteListViewController: UIViewController, FavoriteListViewControllerProtocol {
     var presenter: FavoriteListPresenterProtocol?
     
     var alertController = UIAlertController(
@@ -36,10 +36,23 @@ class FavoriteListViewController: UIViewController, FavoriteListViewProtocol {
         self.configSubViews()
         self.applyStyling()
         self.addConstraints()
+        
+        self.displayFavoriteGroupList()
     }
     
     func present(_ viewController: UIViewController) {
         self.present(viewController, animated: true, completion: nil)
+    }
+    
+    func displayFavoriteGroupList() {
+        for favoriteCategory in FavoriteCategory.allCases {
+            let favoriteGroupView = FavoriteGroupView(title: favoriteCategory.rawValue, presenter: self.presenter)
+            
+            self.favoriteGroupStackView.addArrangedSubview(favoriteGroupView)
+            
+            favoriteGroupView.autoPinEdge(toSuperviewEdge: .left)
+            favoriteGroupView.autoPinEdge(toSuperviewEdge: .right)
+        }
     }
     
     private func addSubviews() {
@@ -59,9 +72,9 @@ class FavoriteListViewController: UIViewController, FavoriteListViewProtocol {
         self.editTopBannerButton.addTarget(self, action: #selector(self.tappedEditTopBannerButton), for: .touchUpInside)
 
         self.topBanner.backgroundColor = .black
-        self.topBanner.contentMode = .scaleToFill
+        self.topBanner.contentMode = .scaleAspectFill
+        self.topBanner.clipsToBounds = true
         
-        // キャッシュに保存してあるバナーで上書き
         if let images = UserDefaults.standard.object(forKey: "bannerImage") as? NSArray {
             if images.count != 0 {
                 let cachedImage = UIImage(data: images[0] as! Data)
@@ -72,23 +85,6 @@ class FavoriteListViewController: UIViewController, FavoriteListViewProtocol {
         self.favoriteGroupStackView.alignment = .center
         self.favoriteGroupStackView.axis = .vertical
         self.favoriteGroupStackView.spacing = 10.0
-        
-        // custom favorite groups
-        let favoriteGroup1 = FavoriteGroupView(title: "ARTIST")
-        let favoriteGroup2 = FavoriteGroupView(title: "ALBUM")
-        let favoriteGroup3 = FavoriteGroupView(title: "PLACE")
-        
-        self.favoriteGroupStackView.addArrangedSubview(favoriteGroup1)
-        favoriteGroup1.autoPinEdge(toSuperviewEdge: .left)
-        favoriteGroup1.autoPinEdge(toSuperviewEdge: .right)
-        
-        self.favoriteGroupStackView.addArrangedSubview(favoriteGroup2)
-        favoriteGroup2.autoPinEdge(toSuperviewEdge: .left)
-        favoriteGroup2.autoPinEdge(toSuperviewEdge: .right)
-        
-        self.favoriteGroupStackView.addArrangedSubview(favoriteGroup3)
-        favoriteGroup3.autoPinEdge(toSuperviewEdge: .left)
-        favoriteGroup3.autoPinEdge(toSuperviewEdge: .right)
     }
     
     private func applyStyling() {
@@ -141,7 +137,6 @@ class FavoriteListViewController: UIViewController, FavoriteListViewProtocol {
         
         self.alertController.addAction(albumAction)
         self.alertController.addAction(cancelAction)
-        //self.present(self.alertController, animated: true, completion: nil)
     }
     
     @objc private func tappedEditTopBannerButton() {
