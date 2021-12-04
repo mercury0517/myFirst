@@ -71,7 +71,6 @@ enum SingleDisc: CaseIterable {
     case fighter
     case youWereHere
     case nijiWoMatsuHito
-    // TODO: あと28個
     
     func getDisc() -> CompactDisc {
         switch self {

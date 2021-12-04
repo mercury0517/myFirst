@@ -2,13 +2,14 @@ import UIKit
 import PureLayout
 
 /*
- TODO1: VIPER化する
  TODO2: バナー画像の差し替えを差し替えられる様にする
  TODO3: 新規カテゴリを追加できる様にする
  TODO4: 既存カテゴリを編集できる様にする
  TODO5: 既存カテゴリの右に追加ボタンを置く、ただし1カテゴリ3個までしか登録させない
 */
-class FavoriteListViewController: UIViewController{
+class FavoriteListViewController: UIViewController, FavoriteListViewProtocol {
+    var presenter: FavoriteListPresenterProtocol?
+    
     let scrollView = UIScrollView()
     
     let titleLabel = UILabel()
