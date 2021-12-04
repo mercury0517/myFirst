@@ -7,8 +7,8 @@ class PhotoViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         
-        let appleManager = AppleMusicManager()
-        appleManager.fetchAlbumIDList()
+//        let appleManager = AppleMusicManager()
+//        appleManager.fetchAlbumIDList()
     }
 
     required init?(coder: NSCoder) {

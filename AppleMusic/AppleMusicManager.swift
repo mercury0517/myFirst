@@ -3,6 +3,7 @@ import Alamofire
 import SwiftyJSON
 
 class AppleMusicManager {
+    // トークンの使用期限が切れているので、もし使う場合は再度トークンを発行する
     let header: HTTPHeaders = [
         "Authorization" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6Ik0zOThaMlkyOUQifQ.eyJpc3MiOiJCUTlUQTVQR00yIiwiZXhwIjoxNjI3MDk3MTQ0LCJpYXQiOjE2MjcwMTA3NDR9.J4r3_nYZnAyraM5VAUJWK4n6HWseeHaDgluzKMQGIecpyuPGcwzk4_hZBf9htb_ojI8W8vfuY6LTR348youVvg"
     ]

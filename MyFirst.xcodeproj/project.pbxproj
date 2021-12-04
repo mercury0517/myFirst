@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		50AD4B67F0BF26B984ACBE6A /* Pods_MyFirst.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1511E526DEAECFC133EB54FF /* Pods_MyFirst.framework */; };
-		60825D7D259B102300B7B242 /* DiscViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60825D7C259B102300B7B242 /* DiscViewController.swift */; };
+		60825D7D259B102300B7B242 /* FavoriteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60825D7C259B102300B7B242 /* FavoriteListViewController.swift */; };
 		60825D83259B10EF00B7B242 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60825D82259B10EF00B7B242 /* MyTabBarController.swift */; };
+		60878CFC275B4DAF0052B91C /* FavoriteGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878CFB275B4DAF0052B91C /* FavoriteGroupView.swift */; };
+		60878CFE275B4E9A0052B91C /* MyFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878CFD275B4E9A0052B91C /* MyFavorite.swift */; };
+		60878D00275B4F090052B91C /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878CFF275B4F090052B91C /* FavoriteCollectionViewCell.swift */; };
 		60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60984E7526A1B1B800E957C8 /* NewsView.swift */; };
 		60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5AADD259B0AC800A1243E /* VideoViewController.swift */; };
 		60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9C258613B300C681DD /* AppDelegate.swift */; };
@@ -57,8 +60,11 @@
 		44ECF60BF0E8B75CA51E37B3 /* Pods-MyFirst.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFirst.debug.xcconfig"; path = "Target Support Files/Pods-MyFirst/Pods-MyFirst.debug.xcconfig"; sourceTree = "<group>"; };
 		464F05F55D38240FED411859 /* Pods-MyFirstTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFirstTests.release.xcconfig"; path = "Target Support Files/Pods-MyFirstTests/Pods-MyFirstTests.release.xcconfig"; sourceTree = "<group>"; };
 		56F056609B28AD22053B81D6 /* Pods-MyFirst-MyFirstUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFirst-MyFirstUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyFirst-MyFirstUITests/Pods-MyFirst-MyFirstUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		60825D7C259B102300B7B242 /* DiscViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscViewController.swift; sourceTree = "<group>"; };
+		60825D7C259B102300B7B242 /* FavoriteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewController.swift; sourceTree = "<group>"; };
 		60825D82259B10EF00B7B242 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
+		60878CFB275B4DAF0052B91C /* FavoriteGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGroupView.swift; sourceTree = "<group>"; };
+		60878CFD275B4E9A0052B91C /* MyFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavorite.swift; sourceTree = "<group>"; };
+		60878CFF275B4F090052B91C /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		60984E7526A1B1B800E957C8 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		60D5AADD259B0AC800A1243E /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		60D5CC99258613B300C681DD /* MyFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +143,7 @@
 		60D5AAE2259B0ADB00A1243E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				60825D7C259B102300B7B242 /* DiscViewController.swift */,
+				60825D7C259B102300B7B242 /* FavoriteListViewController.swift */,
 				60D5CCA0258613B300C681DD /* HomeViewController.swift */,
 				60F099A626A9627A0045CEB7 /* PhotoVIewController.swift */,
 				60D5AADD259B0AC800A1243E /* VideoViewController.swift */,
@@ -226,6 +232,8 @@
 			children = (
 				60D5E93C26A3C4D300803F7E /* DiscCollectionVIewCell.swift */,
 				60D5E94426A3C71600803F7E /* DiscGroupView.swift */,
+				60878CFF275B4F090052B91C /* FavoriteCollectionViewCell.swift */,
+				60878CFB275B4DAF0052B91C /* FavoriteGroupView.swift */,
 				60D5E92626A2F77C00803F7E /* VideoCollectionViewCell.swift */,
 			);
 			path = CollectionVIew;
@@ -235,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				60F099B026A96E330045CEB7 /* CompactDisc.swift */,
+				60878CFD275B4E9A0052B91C /* MyFavorite.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -501,14 +510,17 @@
 				60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */,
 				60D5CCA1258613B300C681DD /* HomeViewController.swift in Sources */,
 				60F099B426AA5A0A0045CEB7 /* AppleMusicManager.swift in Sources */,
-				60825D7D259B102300B7B242 /* DiscViewController.swift in Sources */,
+				60825D7D259B102300B7B242 /* FavoriteListViewController.swift in Sources */,
+				60878D00275B4F090052B91C /* FavoriteCollectionViewCell.swift in Sources */,
 				60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */,
 				60F099B126A96E330045CEB7 /* CompactDisc.swift in Sources */,
 				60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */,
 				60F099A726A9627A0045CEB7 /* PhotoVIewController.swift in Sources */,
 				60F099A926A963A60045CEB7 /* DiscType.swift in Sources */,
 				60D5E94526A3C71600803F7E /* DiscGroupView.swift in Sources */,
+				60878CFC275B4DAF0052B91C /* FavoriteGroupView.swift in Sources */,
 				60D5E93D26A3C4D300803F7E /* DiscCollectionVIewCell.swift in Sources */,
+				60878CFE275B4E9A0052B91C /* MyFavorite.swift in Sources */,
 				60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */,
 				60D5E92726A2F77C00803F7E /* VideoCollectionViewCell.swift in Sources */,
 				60D5E92C26A3056B00803F7E /* VideoType.swift in Sources */,

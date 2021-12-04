@@ -1,9 +1,9 @@
 import UIKit
 
 class MyTabBarController: UITabBarController {
-    let tabView1 = HomeViewController()
+    let tabView1 = FavoriteListViewController() // TODO: assmbleさせる
     let tabView2 = VideoViewController()
-    let tabView3 = DiscViewController()
+    let tabView3 = HomeViewController()
     let tabView4 = PhotoViewController()
     
     override func viewDidLoad() {
