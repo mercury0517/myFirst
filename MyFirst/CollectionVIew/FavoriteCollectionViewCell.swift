@@ -34,6 +34,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     }
     
     private func configSubViews() {
+        self.imageView.image = UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0))
         self.titleLabel.numberOfLines = 0
     }
     
@@ -56,6 +57,9 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     
     private func configMyFavorite() {
         self.titleLabel.text = self.favorite?.title
-        self.imageView.image = self.favorite?.image
+        
+        if let unwrappedImage = self.favorite?.image {
+            self.imageView.image = unwrappedImage
+        }
     }
 }

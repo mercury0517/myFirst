@@ -86,17 +86,44 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return countOfItem == 0 ? 1 : countOfItem
+        if
+            let data = UserDefaults.standard.object(forKey: self.title) as? Data,
+            let cachedFavoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite]
+        {
+            if cachedFavoriteList.count == 3 {
+                return cachedFavoriteList.count
+            } else {
+                return cachedFavoriteList.count + 1
+            }
+        } else {
+            return 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
         
-        if countOfItem == 0 {
-            let defaultImage = UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0))
-            cell.favorite = MyFavorite(title: "default", image: defaultImage)
+        if
+            let data = UserDefaults.standard.object(forKey: self.title) as? Data,
+            let cachedFavoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite]
+        {
+            // アイテムの上限に達しておらず、表示したいアイテムは出し終えた時
+            if
+                cachedFavoriteList.count < 3 && cachedFavoriteList.count < indexPath.row + 1
+            {
+                cell.favorite = MyFavorite(categoryName: "", index: 0, title: "Let's add an item", image: nil)
+            } else {
+                let targetFavorite = cachedFavoriteList[indexPath.row]
+                
+                cell.favorite = MyFavorite(
+                    categoryName: targetFavorite.categoryName,
+                    index: targetFavorite.index,
+                    title: targetFavorite.title,
+                    image: targetFavorite.image
+                )
+            }
         } else {
-            cell.favorite = MyFavorite(title: "FUJII KAZE", image: UIImage(named: "kaze"))
+            cell.favorite = MyFavorite(categoryName: "", index: 0, title: "Let's add an item", image: nil)
         }
         
         return cell

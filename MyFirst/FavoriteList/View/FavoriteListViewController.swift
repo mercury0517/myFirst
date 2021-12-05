@@ -2,7 +2,6 @@ import UIKit
 import PureLayout
 
 /*
- TODO2: バナー画像の差し替えを差し替えられる様にする
  TODO3: 新規カテゴリを追加できる様にする
  TODO4: 既存カテゴリを編集できる様にする
  TODO5: 既存カテゴリの右に追加ボタンを置く、ただし1カテゴリ3個までしか登録させない
@@ -44,7 +43,24 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.present(viewController, animated: true, completion: nil)
     }
     
+    func updateFavoriteList() {
+        self.favoriteGroupStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        for favoriteCategory in FavoriteCategory.allCases {
+            let favoriteGroupView = FavoriteGroupView(title: favoriteCategory.rawValue, presenter: self.presenter)
+            
+            self.favoriteGroupStackView.addArrangedSubview(favoriteGroupView)
+            
+            favoriteGroupView.autoPinEdge(toSuperviewEdge: .left)
+            favoriteGroupView.autoPinEdge(toSuperviewEdge: .right)
+            
+            favoriteGroupView.collectionView.reloadData()
+        }
+    }
+    
     func displayFavoriteGroupList() {
+        self.favoriteGroupStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
         for favoriteCategory in FavoriteCategory.allCases {
             let favoriteGroupView = FavoriteGroupView(title: favoriteCategory.rawValue, presenter: self.presenter)
             

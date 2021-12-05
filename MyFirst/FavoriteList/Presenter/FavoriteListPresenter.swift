@@ -1,4 +1,5 @@
 import UIKit
+
 class FavoriteListPresenter: FavoriteListPresenterProtocol {
     let view: FavoriteListViewControllerProtocol
     let interactor: FavoriteListInteractorProtocol
@@ -10,6 +11,7 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
         self.router = router
     }
     
+    // MARK: favorite List view
     func editTopBannerButtonDidTap() {
         self.router.displayAlert(self.view.alertController)
     }
@@ -19,6 +21,20 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
     }
     
     func favoriteCellDidTap(title: String, index: Int) {
-        self.router.displayFavoriteRegistrationView(title: title, index: index)
+        self.router.displayFavoriteRegistrationView(title: title, index: index, presenter: self)
+    }
+    
+    // MARK: favorite registeration view
+    func inputImageButtonDidTap(registrationView: FavoriteRegistrationViewController) {
+        
+        self.router.displayAlertForRegistrationView(registrationView.alertController, baseView: registrationView)
+    }
+    
+    func registerFavoriteButtonDidTap(favorite: MyFavorite, registrationView: FavoriteRegistrationViewController) {
+        self.interactor.storeFavorite(favorite)
+        
+        self.view.updateFavoriteList()
+        
+        registrationView.dismiss(animated: true)
     }
 }
