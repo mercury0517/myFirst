@@ -17,7 +17,7 @@ class FavoriteGroupView: UIView {
         
         let flowLayout = UICollectionViewFlowLayout()
         let margin: CGFloat = 16.0
-        flowLayout.itemSize = CGSize(width: 150.0, height: 200.0)
+        flowLayout.itemSize = CGSize(width: 200.0, height: 250.0)
         flowLayout.minimumInteritemSpacing = margin
         flowLayout.minimumLineSpacing = margin
         flowLayout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
@@ -60,13 +60,13 @@ class FavoriteGroupView: UIView {
         self.backgroundColor = .white
         
         self.titleLabel.textColor = .black
-        self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)
+        self.titleLabel.font = UIFont(name: "Oswald", size: 17.0)
         
         self.collectionView.backgroundColor = .white
     }
     
     private func addConstraints() {
-        self.autoSetDimension(.height, toSize: 230.0)
+        self.autoSetDimension(.height, toSize: 280.0)
         
         self.titleLabel.autoSetDimension(.height, toSize: 30.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .top)
@@ -76,7 +76,7 @@ class FavoriteGroupView: UIView {
         self.collectionView.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 5.0)
         self.collectionView.autoPinEdge(toSuperviewEdge: .left)
         self.collectionView.autoPinEdge(toSuperviewEdge: .right)
-        self.collectionView.autoSetDimension(.height, toSize: 180.0)
+        self.collectionView.autoSetDimension(.height, toSize: 230.0)
     }
 }
 
@@ -111,7 +111,7 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
             if
                 cachedFavoriteList.count < 3 && cachedFavoriteList.count < indexPath.row + 1
             {
-                cell.favorite = MyFavorite(categoryName: "", index: 0, title: "Let's add an item", image: nil)
+                cell.favorite = MyFavorite(categoryName: "", index: 0, title: "Let's add an item", image: UIImage(named: "add_icon"))
             } else {
                 let targetFavorite = cachedFavoriteList[indexPath.row]
                 
@@ -123,13 +123,15 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
                 )
             }
         } else {
-            cell.favorite = MyFavorite(categoryName: "", index: 0, title: "Let's add an item", image: nil)
+            cell.favorite = MyFavorite(categoryName: "", index: 0, title: "Let's add an item", image: UIImage(named: "add_icon"))
         }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // TODO: セルを取り出して、アイテムが未設定なら登録画面を開く、そうでなければ編集画面を開く
+        
         self.presenter?.favoriteCellDidTap(title: self.title, index: indexPath.row)
     }
 }

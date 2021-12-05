@@ -11,16 +11,12 @@ class FavoriteRegistrationViewController: UIViewController {
         }
     }
     
-    var alertController = UIAlertController(
-        title: "画像の選択", message: "選択してください", preferredStyle: .actionSheet
-    )
-    
     // TODO: キャッシュがあれば、その画像を表示
     let itemImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
     let inputImageButton = UIButton()
     
     let titleLabel = UILabel()
-    let itemNameTextField = UITextField()
+    let itemNameTextField = CustomTextField()
     let registerButton = UIButton()
     
     init(categoryName: String, itemIndex: Int, presenter: FavoriteListPresenterProtocol) {
@@ -53,8 +49,6 @@ class FavoriteRegistrationViewController: UIViewController {
     }
     
     private func configSubViews() {
-        self.customPhotoLibraryAlert()
-        
         self.itemImageView.contentMode = .scaleAspectFill
         self.itemImageView.clipsToBounds = true
         
@@ -62,6 +56,8 @@ class FavoriteRegistrationViewController: UIViewController {
         self.inputImageButton.addTarget(self, action: #selector(self.tappedInputImageButton), for: .touchUpInside)
         
         self.titleLabel.text = "ITEM TITLE"
+        
+        self.itemNameTextField.placeholder = "input your favorite title"
         
         self.registerButton.setTitle("REGISTER", for: .normal)
         self.registerButton.addTarget(self, action: #selector(self.tappedRegisterButton), for: .touchUpInside)
@@ -77,11 +73,6 @@ class FavoriteRegistrationViewController: UIViewController {
         
         self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)
         self.titleLabel.textColor = .black
-        
-        self.itemNameTextField.backgroundColor = .white
-        self.itemNameTextField.layer.cornerRadius = 5.0
-        self.itemNameTextField.layer.borderWidth = 1.0
-        self.itemNameTextField.layer.borderColor = UIColor.lightGray.cgColor
         
         self.registerButton.backgroundColor = .black
         self.registerButton.layer.cornerRadius = 5.0
@@ -108,29 +99,17 @@ class FavoriteRegistrationViewController: UIViewController {
         self.registerButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.registerButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
     }
-    
-    private func customPhotoLibraryAlert() {
-        let albumAction = UIAlertAction(title: "フォトライブラリ", style: .default) { (action) in
-            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) == true {
-                let picker = UIImagePickerController()
-                picker.sourceType = .photoLibrary
-                picker.allowsEditing = true
-                picker.delegate = self
-                self.present(picker, animated: true, completion: nil)
-            } else {
-                print("この機種ではフォトライブラリが使用出来ません。")
-            }
-        }
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
-            self.alertController.dismiss(animated: true, completion: nil)
-        }
-        
-        self.alertController.addAction(albumAction)
-        self.alertController.addAction(cancelAction)
-    }
-    
+
     @objc private func tappedInputImageButton() {
-        self.presenter.inputImageButtonDidTap(registrationView: self)
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) == true {
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.allowsEditing = true
+            picker.delegate = self
+            self.present(picker, animated: true, completion: nil)
+        } else {
+            print("この機種ではフォトライブラリが使用出来ません。")
+        }
     }
     
     @objc private func tappedRegisterButton() {

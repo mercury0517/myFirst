@@ -21,15 +21,11 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
     }
     
     func favoriteCellDidTap(title: String, index: Int) {
+        // タップしたアイテムが
         self.router.displayFavoriteRegistrationView(title: title, index: index, presenter: self)
     }
     
     // MARK: favorite registeration view
-    func inputImageButtonDidTap(registrationView: FavoriteRegistrationViewController) {
-        
-        self.router.displayAlertForRegistrationView(registrationView.alertController, baseView: registrationView)
-    }
-    
     func registerFavoriteButtonDidTap(favorite: MyFavorite, registrationView: FavoriteRegistrationViewController) {
         self.interactor.storeFavorite(favorite)
         

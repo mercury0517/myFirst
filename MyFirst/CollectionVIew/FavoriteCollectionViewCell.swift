@@ -11,11 +11,6 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     let titleLabel = UILabel()
     
     override init(frame: CGRect) {
-        self.imageView.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
-        self.imageView.layer.shadowColor = UIColor.lightGray.cgColor
-        self.imageView.layer.shadowOpacity = 0.6
-        self.imageView.layer.shadowRadius = 4
-        
         super.init(frame: frame)
         
         self.addSubviews()
@@ -34,7 +29,15 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     }
     
     private func configSubViews() {
-        self.imageView.image = UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0))
+        self.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
+        self.layer.shadowColor = UIColor.lightGray.cgColor
+        self.layer.shadowOpacity = 0.6
+        self.layer.shadowRadius = 4.0
+        
+        self.imageView.image = UIColor.lightGray.image(size: .init(width: 200.0, height: 200.0))
+        self.imageView.contentMode = .scaleAspectFill
+        self.imageView.clipsToBounds = true
+        
         self.titleLabel.numberOfLines = 0
     }
     
@@ -44,7 +47,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     }
     
     private func addConstraints() {
-        self.imageView.autoSetDimensions(to: CGSize(width: 150.0, height: 150.0))
+        self.imageView.autoSetDimensions(to: CGSize(width: 200.0, height: 200.0))
         self.imageView.autoPinEdge(toSuperviewEdge: .top)
         self.imageView.autoPinEdge(toSuperviewEdge: .left)
         self.imageView.autoPinEdge(toSuperviewEdge: .right)
