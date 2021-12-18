@@ -91,6 +91,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.topBanner.contentMode = .scaleAspectFill
         self.topBanner.clipsToBounds = true
         
+        // 設定済みのTOPバナーをキャッシュから復元
         if let images = UserDefaults.standard.object(forKey: "bannerImage") as? NSArray {
             if images.count != 0 {
                 let cachedImage = UIImage(data: images[0] as! Data)

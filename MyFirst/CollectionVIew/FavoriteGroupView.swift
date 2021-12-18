@@ -103,36 +103,51 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
         
+        // キャッシュからそのカテゴリのお気に入りリストを取得する
+        // アイテムの上限に達しておらず、表示したいアイテムは出し終えた時
         if
             let data = UserDefaults.standard.object(forKey: self.title) as? Data,
-            let cachedFavoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite]
-        {
-            // アイテムの上限に達しておらず、表示したいアイテムは出し終えた時
-            if
-                cachedFavoriteList.count < 3 && cachedFavoriteList.count < indexPath.row + 1
-            {
-                cell.favorite = MyFavorite(categoryName: "", index: 0, title: "Let's add an item", image: UIImage(named: "add_icon"))
-            } else {
-                let targetFavorite = cachedFavoriteList[indexPath.row]
+            let cachedFavoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite],
+            cachedFavoriteList.count >= 3 || cachedFavoriteList.count >= indexPath.row + 1
                 
-                cell.favorite = MyFavorite(
-                    categoryName: targetFavorite.categoryName,
-                    index: targetFavorite.index,
-                    title: targetFavorite.title,
-                    image: targetFavorite.image
-                )
-            }
+        {
+            let targetFavorite = cachedFavoriteList[indexPath.row]
+            
+            cell.favorite = MyFavorite(
+                categoryName: targetFavorite.categoryName,
+                index: targetFavorite.index,
+                title: targetFavorite.title,
+                image: targetFavorite.image,
+                isCustomized: true
+            )
         } else {
-            cell.favorite = MyFavorite(categoryName: "", index: 0, title: "Let's add an item", image: UIImage(named: "add_icon"))
+            // 追加セルとして表示
+            cell.favorite = MyFavorite(
+                categoryName: "",
+                index: 0,
+                title: "add new item",
+                image: UIImage(named: "add_icon"),
+                isCustomized: false
+            )
         }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: セルを取り出して、アイテムが未設定なら登録画面を開く、そうでなければ編集画面を開く
+        let cell = collectionView.cellForItem(at: indexPath) as? FavoriteCollectionViewCell
         
-        self.presenter?.favoriteCellDidTap(title: self.title, index: indexPath.row)
+        // アイテムが未設定なら登録画面を開く、そうでなければ編集画面を開く
+        if let favorite = cell?.favorite {
+            if favorite.isCustomized {
+                // 編集画面に遷移させる
+                self.presenter?.favoriteCellDidTapForEdit(category: self.title, index: indexPath.row, favorite: favorite)
+            } else {
+                // 新規追加画面に遷移させる
+                self.presenter?.favoriteCellDidTap(title: self.title, index: indexPath.row)
+            }
+        }
+        
     }
 }
 

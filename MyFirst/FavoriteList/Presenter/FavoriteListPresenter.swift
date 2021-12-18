@@ -21,8 +21,11 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
     }
     
     func favoriteCellDidTap(title: String, index: Int) {
-        // タップしたアイテムが
         self.router.displayFavoriteRegistrationView(title: title, index: index, presenter: self)
+    }
+    
+    func favoriteCellDidTapForEdit(category: String, index: Int, favorite: MyFavorite) {
+        self.router.displayFavoriteDetailView(category: category, index: index, favorite: favorite, presenter: self)
     }
     
     // MARK: favorite registeration view

@@ -116,7 +116,11 @@ class FavoriteRegistrationViewController: UIViewController {
         // TODO: タイトルが空の場合のvalidation
         if let newTitle = self.itemNameTextField.text {
             let newFavorite = MyFavorite(
-                categoryName: self.categoryName, index: self.itemIndex, title: newTitle, image: self.selectedImage
+                categoryName: self.categoryName,
+                index: self.itemIndex,
+                title: newTitle,
+                image: self.selectedImage,
+                isCustomized: true
             )
             
             self.presenter.registerFavoriteButtonDidTap(favorite: newFavorite, registrationView: self)

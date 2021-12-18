@@ -18,6 +18,12 @@ class FavoriteListRouter: FavoriteListRouterProtocol {
         self.view.present(registrationView)
     }
     
+    func displayFavoriteDetailView(category: String, index: Int, favorite: MyFavorite, presenter: FavoriteListPresenterProtocol) {
+        let view = FavoriteDetailViewController(categoryName: category, itemIndex: index, favorite: favorite, presenter: presenter)
+        
+        self.view.present(view)
+    }
+    
     func displayAlertForRegistrationView(_ alertController: UIAlertController, baseView: UIViewController) {
         baseView.present(alertController, animated: true)
     }

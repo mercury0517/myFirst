@@ -5,12 +5,14 @@ class MyFavorite: NSObject, NSCoding {
     let index: Int
     let title: String
     let image: UIImage?
+    var isCustomized: Bool
     
-    init(categoryName: String, index: Int, title: String, image: UIImage?) {
+    init(categoryName: String, index: Int, title: String, image: UIImage?, isCustomized: Bool) {
         self.categoryName = categoryName
         self.index = index
         self.title = title
         self.image = image
+        self.isCustomized = isCustomized
     }
     
     func encode(with coder: NSCoder) {
@@ -18,6 +20,7 @@ class MyFavorite: NSObject, NSCoding {
         coder.encode(self.index, forKey: "index")
         coder.encode(self.title, forKey: "title")
         coder.encode(self.image, forKey: "image")
+        coder.encode(self.isCustomized, forKey: "isCustomized")
     }
     
     required init?(coder: NSCoder) {
@@ -25,5 +28,6 @@ class MyFavorite: NSObject, NSCoding {
         self.index = coder.decodeInteger(forKey: "index")
         self.title = coder.decodeObject(forKey: "title") as! String
         self.image = coder.decodeObject(forKey: "image") as? UIImage
+        self.isCustomized = coder.decodeBool(forKey: "isCustomized")
     }
 }
