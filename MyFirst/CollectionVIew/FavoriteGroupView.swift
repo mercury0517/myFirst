@@ -9,6 +9,8 @@ class FavoriteGroupView: UIView {
     let titleLabel = UILabel()
     var collectionView: UICollectionView
     
+    let itemSize = UIScreen.main.bounds.width * 0.7
+    
     init(title: String, presenter: FavoriteListPresenterProtocol?) {
         self.title = title
         self.titleLabel.text = self.title
@@ -17,7 +19,7 @@ class FavoriteGroupView: UIView {
         
         let flowLayout = UICollectionViewFlowLayout()
         let margin: CGFloat = 16.0
-        flowLayout.itemSize = CGSize(width: 200.0, height: 250.0)
+        flowLayout.itemSize = CGSize(width: self.itemSize, height: self.itemSize + 50.0)
         flowLayout.minimumInteritemSpacing = margin
         flowLayout.minimumLineSpacing = margin
         flowLayout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
@@ -60,13 +62,13 @@ class FavoriteGroupView: UIView {
         self.backgroundColor = .white
         
         self.titleLabel.textColor = .black
-        self.titleLabel.font = UIFont(name: "Oswald", size: 17.0)
+        self.titleLabel.font = UIFont(name: "Oswald", size: 18.0)
         
         self.collectionView.backgroundColor = .white
     }
     
     private func addConstraints() {
-        self.autoSetDimension(.height, toSize: 280.0)
+        self.autoSetDimension(.height, toSize: self.itemSize + 80.0)
         
         self.titleLabel.autoSetDimension(.height, toSize: 30.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .top)
@@ -76,7 +78,7 @@ class FavoriteGroupView: UIView {
         self.collectionView.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 5.0)
         self.collectionView.autoPinEdge(toSuperviewEdge: .left)
         self.collectionView.autoPinEdge(toSuperviewEdge: .right)
-        self.collectionView.autoSetDimension(.height, toSize: 230.0)
+        self.collectionView.autoSetDimension(.height, toSize: self.itemSize + 50.0)
     }
 }
 
@@ -140,8 +142,8 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
         // アイテムが未設定なら登録画面を開く、そうでなければ編集画面を開く
         if let favorite = cell?.favorite {
             if favorite.isCustomized {
-                // 編集画面に遷移させる
-                self.presenter?.favoriteCellDidTapForEdit(category: self.title, index: indexPath.row, favorite: favorite)
+                // 詳細画面に遷移させる
+                self.presenter?.favoriteCellDidTapForDetail(category: self.title, index: indexPath.row, favorite: favorite)
             } else {
                 // 新規追加画面に遷移させる
                 self.presenter?.favoriteCellDidTap(title: self.title, index: indexPath.row)

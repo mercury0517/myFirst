@@ -84,7 +84,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         
         self.titleLabel.text = "MY FAVORITE"
         
-        self.editTopBannerButton.setTitle("EDIT", for: .normal)
+        self.editTopBannerButton.setTitle("EDIT PROFILE", for: .normal)
         self.editTopBannerButton.addTarget(self, action: #selector(self.tappedEditTopBannerButton), for: .touchUpInside)
 
         self.topBanner.backgroundColor = .black

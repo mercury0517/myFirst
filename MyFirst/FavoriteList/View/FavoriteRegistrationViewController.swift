@@ -17,6 +17,8 @@ class FavoriteRegistrationViewController: UIViewController {
     
     let titleLabel = UILabel()
     let itemNameTextField = CustomTextField()
+    let memoLabel = UILabel()
+    let memoTextView = UITextView()
     let registerButton = UIButton()
     
     init(categoryName: String, itemIndex: Int, presenter: FavoriteListPresenterProtocol) {
@@ -45,6 +47,8 @@ class FavoriteRegistrationViewController: UIViewController {
         self.view.addSubview(self.inputImageButton)
         self.view.addSubview(self.titleLabel)
         self.view.addSubview(self.itemNameTextField)
+        self.view.addSubview(self.memoLabel)
+        self.view.addSubview(self.memoTextView)
         self.view.addSubview(self.registerButton)
     }
     
@@ -58,6 +62,8 @@ class FavoriteRegistrationViewController: UIViewController {
         self.titleLabel.text = "ITEM TITLE"
         
         self.itemNameTextField.placeholder = "input your favorite title"
+        
+        self.memoLabel.text = "ITEM DETAIL"
         
         self.registerButton.setTitle("REGISTER", for: .normal)
         self.registerButton.addTarget(self, action: #selector(self.tappedRegisterButton), for: .touchUpInside)
@@ -73,6 +79,15 @@ class FavoriteRegistrationViewController: UIViewController {
         
         self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)
         self.titleLabel.textColor = .black
+        
+        self.memoLabel.font = UIFont(name: "Oswald", size: 15.0)
+        self.memoLabel.textColor = .black
+        
+        self.memoTextView.backgroundColor = .white
+        self.memoTextView.layer.cornerRadius = 5.0
+        self.memoTextView.layer.borderWidth = 1.0
+        self.memoTextView.layer.borderColor = UIColor.lightGray.cgColor
+        self.memoTextView.textColor = .black
         
         self.registerButton.backgroundColor = .black
         self.registerButton.layer.cornerRadius = 5.0
@@ -94,7 +109,15 @@ class FavoriteRegistrationViewController: UIViewController {
         self.itemNameTextField.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.itemNameTextField.autoSetDimension(.height, toSize: 50.0)
         
-        self.registerButton.autoPinEdge(.top, to: .bottom, of: self.itemNameTextField, withOffset: 20.0)
+        self.memoLabel.autoPinEdge(.top, to: .bottom, of: self.itemNameTextField, withOffset: 20.0)
+        self.memoLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        
+        self.memoTextView.autoPinEdge(.top, to: .bottom, of: self.memoLabel, withOffset: 10.0)
+        self.memoTextView.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.memoTextView.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.memoTextView.autoSetDimension(.height, toSize: 100.0)
+        
+        self.registerButton.autoPinEdge(.top, to: .bottom, of: self.memoTextView, withOffset: 20.0)
         self.registerButton.autoSetDimension(.height, toSize: 45.0)
         self.registerButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.registerButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)

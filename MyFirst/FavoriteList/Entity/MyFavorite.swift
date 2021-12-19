@@ -1,5 +1,6 @@
 import UIKit
 
+// TODO: お気に入りにメモを持たせる
 class MyFavorite: NSObject, NSCoding {
     let categoryName: String
     let index: Int

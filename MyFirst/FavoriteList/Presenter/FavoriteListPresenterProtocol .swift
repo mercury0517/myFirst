@@ -5,7 +5,7 @@ protocol FavoriteListPresenterProtocol {
     func editTopBannerButtonDidTap()
     func bannerImageSelected(image: UIImage)
     func favoriteCellDidTap(title: String, index: Int)
-    func favoriteCellDidTapForEdit(category: String, index: Int, favorite: MyFavorite)
+    func favoriteCellDidTapForDetail(category: String, index: Int, favorite: MyFavorite)
     // MARK: favorite registeration view
     func registerFavoriteButtonDidTap(favorite: MyFavorite, registrationView: FavoriteRegistrationViewController)
 }

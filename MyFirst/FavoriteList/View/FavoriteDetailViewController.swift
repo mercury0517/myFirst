@@ -59,7 +59,7 @@ class FavoriteDetailViewController: UIViewController {
     
     private func addConstraints() {
         self.itemImageView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
-        self.itemImageView.autoSetDimension(.height, toSize: 200.0)
+        self.itemImageView.autoSetDimension(.height, toSize: 350.0)
         
         self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.itemImageView, withOffset: 20.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)

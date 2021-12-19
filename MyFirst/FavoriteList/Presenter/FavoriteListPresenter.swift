@@ -24,7 +24,7 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
         self.router.displayFavoriteRegistrationView(title: title, index: index, presenter: self)
     }
     
-    func favoriteCellDidTapForEdit(category: String, index: Int, favorite: MyFavorite) {
+    func favoriteCellDidTapForDetail(category: String, index: Int, favorite: MyFavorite) {
         self.router.displayFavoriteDetailView(category: category, index: index, favorite: favorite, presenter: self)
     }
     
