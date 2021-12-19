@@ -7,8 +7,8 @@ class FavoriteDetailViewController: UIViewController {
     let presenter: FavoriteListPresenterProtocol
     
     let itemImageView = UIImageView()
-    
     let titleLabel = UILabel()
+    let detailLabel = UILabel()
     
     init(
         categoryName: String,
@@ -40,6 +40,7 @@ class FavoriteDetailViewController: UIViewController {
     private func addSubviews() {
         self.view.addSubview(self.itemImageView)
         self.view.addSubview(self.titleLabel)
+        self.view.addSubview(self.detailLabel)
     }
     
     private func configSubViews() {
@@ -48,6 +49,8 @@ class FavoriteDetailViewController: UIViewController {
         self.itemImageView.image = self.favorite.image
         
         self.titleLabel.text = self.favorite.title
+        
+        self.detailLabel.text = self.favorite.memo
     }
     
     private func applyStyling() {
@@ -55,13 +58,20 @@ class FavoriteDetailViewController: UIViewController {
         
         self.titleLabel.font = UIFont(name: "Oswald", size: 25.0)
         self.titleLabel.textColor = .black
+        
+        self.detailLabel.font = .systemFont(ofSize: 15.0)
+        self.detailLabel.textColor = .black
     }
     
     private func addConstraints() {
         self.itemImageView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
-        self.itemImageView.autoSetDimension(.height, toSize: 350.0)
+        self.itemImageView.autoSetDimension(.height, toSize: 300.0)
         
         self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.itemImageView, withOffset: 20.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        
+        self.detailLabel.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 10.0)
+        self.detailLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.detailLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
     }
 }

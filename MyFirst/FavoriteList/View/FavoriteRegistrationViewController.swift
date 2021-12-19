@@ -63,7 +63,7 @@ class FavoriteRegistrationViewController: UIViewController {
         
         self.itemNameTextField.placeholder = "input your favorite title"
         
-        self.memoLabel.text = "ITEM DETAIL"
+        self.memoLabel.text = "OVERVIEW"
         
         self.registerButton.setTitle("REGISTER", for: .normal)
         self.registerButton.addTarget(self, action: #selector(self.tappedRegisterButton), for: .touchUpInside)
@@ -143,10 +143,14 @@ class FavoriteRegistrationViewController: UIViewController {
                 index: self.itemIndex,
                 title: newTitle,
                 image: self.selectedImage,
+                memo: self.memoTextView.text,
                 isCustomized: true
             )
             
             self.presenter.registerFavoriteButtonDidTap(favorite: newFavorite, registrationView: self)
+            
+            // ハプティックフィードバックを入れる
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
         }
     }
 }

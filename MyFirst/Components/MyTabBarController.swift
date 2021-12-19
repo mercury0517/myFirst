@@ -47,10 +47,16 @@ class MyTabBarController: UITabBarController {
         }
     }
     
-    // TODO: タブバーの色を直す
     private func configTabView() {
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().tintColor = .red
+        
+        let appearance = UITabBarAppearance()
+        appearance.backgroundColor =  UIColor.white
+        self.tabBar.standardAppearance = appearance
+        if #available(iOS 15.0, *) {
+            self.tabBar.scrollEdgeAppearance = appearance
+        }
 
         UITabBarItem.appearance().setTitleTextAttributes(
             [.font : UIFont.init(name: "HelveticaNeue-Medium", size: 15.0) ?? "", .foregroundColor : UIColor.black],

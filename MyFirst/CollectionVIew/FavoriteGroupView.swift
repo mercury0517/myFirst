@@ -9,7 +9,7 @@ class FavoriteGroupView: UIView {
     let titleLabel = UILabel()
     var collectionView: UICollectionView
     
-    let itemSize = UIScreen.main.bounds.width * 0.7
+    let itemSize = UIScreen.main.bounds.width * 0.6
     
     init(title: String, presenter: FavoriteListPresenterProtocol?) {
         self.title = title
@@ -120,6 +120,7 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
                 index: targetFavorite.index,
                 title: targetFavorite.title,
                 image: targetFavorite.image,
+                memo: targetFavorite.memo,
                 isCustomized: true
             )
         } else {
@@ -129,6 +130,7 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
                 index: 0,
                 title: "add new item",
                 image: UIImage(named: "add_icon"),
+                memo: nil,
                 isCustomized: false
             )
         }
@@ -137,6 +139,9 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // ハプティックフィードバックを入れる
+        UISelectionFeedbackGenerator().selectionChanged()
+        
         let cell = collectionView.cellForItem(at: indexPath) as? FavoriteCollectionViewCell
         
         // アイテムが未設定なら登録画面を開く、そうでなければ編集画面を開く

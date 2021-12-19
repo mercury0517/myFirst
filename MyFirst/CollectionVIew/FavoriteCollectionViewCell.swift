@@ -10,7 +10,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     let imageView = UIImageView()
     let titleLabel = UILabel()
     
-    let itemSize = UIScreen.main.bounds.width * 0.7
+    let itemSize = UIScreen.main.bounds.width * 0.6
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,7 +46,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     
     private func applyStyling() {
         self.titleLabel.textColor = .black
-        self.titleLabel.font = .systemFont(ofSize: 15.0)
+        self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)
     }
     
     private func addConstraints() {
