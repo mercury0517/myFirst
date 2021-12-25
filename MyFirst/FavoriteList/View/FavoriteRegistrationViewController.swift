@@ -73,7 +73,7 @@ class FavoriteRegistrationViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.inputImageButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
-        self.inputImageButton.backgroundColor = .black
+        self.inputImageButton.backgroundColor = CustomUIColor.turquoise
         self.inputImageButton.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
         self.inputImageButton.layer.cornerRadius = 5.0
         
@@ -89,7 +89,7 @@ class FavoriteRegistrationViewController: UIViewController {
         self.memoTextView.layer.borderColor = UIColor.lightGray.cgColor
         self.memoTextView.textColor = .black
         
-        self.registerButton.backgroundColor = .black
+        self.registerButton.backgroundColor = CustomUIColor.turquoise
         self.registerButton.layer.cornerRadius = 5.0
         self.registerButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
     }

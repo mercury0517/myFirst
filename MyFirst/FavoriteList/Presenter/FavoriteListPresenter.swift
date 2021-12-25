@@ -36,4 +36,14 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
         
         registrationView.dismiss(animated: true)
     }
+    
+    // MARK: favorite registeration view
+    func deleteItemButtonDidTap(
+        categoryName: String, itemIndex: Int, detailView: FavoriteDetailViewController
+    ) {
+        self.interactor.deleteFavorite(categoryName: categoryName, itemIndex: itemIndex) {
+            self.view.updateFavoriteList()
+            detailView.dismiss(animated: true)
+        }
+    }
 }

@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import Alamofire
 
 class FavoriteListInteractor: FavoriteListInteractorProtocol {
     let userDefault = UserDefaults.standard
@@ -51,4 +52,23 @@ class FavoriteListInteractor: FavoriteListInteractorProtocol {
             return []
         }
     }
+    
+    func deleteFavorite(categoryName: String, itemIndex: Int, completion: () -> Void) {
+        let cachedFavoriteList = self.loadFavoriteList(categoryName: categoryName)
+        var newFavoriteList: [MyFavorite] = []
+        
+        // 削除対象のお気に入りのみ、新規リストには追加しない
+        for (index, favorite) in cachedFavoriteList.enumerated() {
+            if index != itemIndex {
+                newFavoriteList.append(favorite)
+            }
+        }
+        
+        // 更新したお気に入りリストをキャッシュに再度登録する
+        let archivedFavoriteList = try! NSKeyedArchiver.archivedData(withRootObject: newFavoriteList, requiringSecureCoding: false)
+        self.userDefault.set(archivedFavoriteList, forKey: categoryName)
+        
+        completion()
+    }
+    
 }

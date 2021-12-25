@@ -111,7 +111,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.titleLabel.font = UIFont(name: "Oswald", size: 20.0)
         
         self.editTopBannerButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
-        self.editTopBannerButton.backgroundColor = .black
+        self.editTopBannerButton.backgroundColor = CustomUIColor.turquoise
         self.editTopBannerButton.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
         self.editTopBannerButton.layer.cornerRadius = 5.0
     }

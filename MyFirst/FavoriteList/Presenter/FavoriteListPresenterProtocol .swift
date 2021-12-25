@@ -8,4 +8,6 @@ protocol FavoriteListPresenterProtocol {
     func favoriteCellDidTapForDetail(category: String, index: Int, favorite: MyFavorite)
     // MARK: favorite registeration view
     func registerFavoriteButtonDidTap(favorite: MyFavorite, registrationView: FavoriteRegistrationViewController)
+    // MARK: favorite registeration view
+    func deleteItemButtonDidTap(categoryName: String, itemIndex: Int, detailView: FavoriteDetailViewController)
 }

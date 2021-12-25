@@ -6,4 +6,7 @@ enum FavoriteCategory: String, CaseIterable {
     case product = "PRODUCT"
     case service = "SERVICE"
     case sports = "SPORTS"
+    case book = "BOOK"
+    case app = "APP"
+    case other = "OTHER"
 }

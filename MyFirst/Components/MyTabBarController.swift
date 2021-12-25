@@ -49,7 +49,7 @@ class MyTabBarController: UITabBarController {
     
     private func configTabView() {
         UITabBar.appearance().backgroundColor = .white
-        UITabBar.appearance().tintColor = .red
+        UITabBar.appearance().tintColor = CustomUIColor.turquoise
         
         let appearance = UITabBarAppearance()
         appearance.backgroundColor =  UIColor.white

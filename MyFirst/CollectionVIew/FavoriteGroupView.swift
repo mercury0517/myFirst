@@ -9,7 +9,7 @@ class FavoriteGroupView: UIView {
     let titleLabel = UILabel()
     var collectionView: UICollectionView
     
-    let itemSize = UIScreen.main.bounds.width * 0.6
+    let itemSize = UIScreen.main.bounds.width * 0.7
     
     init(title: String, presenter: FavoriteListPresenterProtocol?) {
         self.title = title
@@ -139,9 +139,6 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // ハプティックフィードバックを入れる
-        UISelectionFeedbackGenerator().selectionChanged()
-        
         let cell = collectionView.cellForItem(at: indexPath) as? FavoriteCollectionViewCell
         
         // アイテムが未設定なら登録画面を開く、そうでなければ編集画面を開く
