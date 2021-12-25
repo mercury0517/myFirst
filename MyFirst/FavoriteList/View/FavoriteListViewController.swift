@@ -14,12 +14,12 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     let scrollView = UIScrollView()
     
-    let topBanner = UIImageView(image: UIImage(named: "flight_banner"))
+    let topBanner = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
     
     let userIconContainer = UIControl()
-    let userIcon = UIImageView(image: UIImage(named: "flight_banner"))
+    let userIcon = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
     
-    let editTopBannerButton = UIButton()
+    let editProfileButton = UIButton()
     let userNameLabel = UILabel()
     
     let separateLine = UIView()
@@ -57,6 +57,15 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     }
     
     func updateFavoriteList() {
+        if
+            let data = UserDefaults.standard.object(forKey: "userInfo") as? Data,
+            let userInfo = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserInfo
+        {
+            self.topBanner.image = userInfo.topBanner
+            self.userIcon.image = userInfo.icon
+            self.userNameLabel.text = userInfo.name
+        }
+        
         self.favoriteGroupStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         for favoriteCategory in FavoriteCategory.allCases {
@@ -89,19 +98,29 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.scrollView.addSubview(self.topBanner)
         self.scrollView.addSubview(self.userIconContainer)
         self.userIconContainer.addSubview(self.userIcon)
-        self.scrollView.addSubview(self.editTopBannerButton)
+        self.scrollView.addSubview(self.editProfileButton)
         self.scrollView.addSubview(self.userNameLabel)
         self.scrollView.addSubview(self.separateLine)
         self.scrollView.addSubview(self.favoriteGroupStackView)
     }
     
     private func configSubViews() {
+        if
+            let data = UserDefaults.standard.object(forKey: "userInfo") as? Data,
+            let userInfo = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserInfo
+        {
+            self.topBanner.image = userInfo.topBanner
+            self.userIcon.image = userInfo.icon
+            self.userNameLabel.text = userInfo.name
+        } else {
+            self.userNameLabel.text = "AKIHIRO IHARA"
+        }
+        
         self.customPhotoLibraryAlert()
         
-        self.userNameLabel.text = "AKIHIRO IHARA"
         
-        self.editTopBannerButton.setTitle("EDIT PROFILE", for: .normal)
-        self.editTopBannerButton.addTarget(self, action: #selector(self.tappedEditTopBannerButton), for: .touchUpInside)
+        self.editProfileButton.setTitle("EDIT PROFILE", for: .normal)
+        self.editProfileButton.addTarget(self, action: #selector(self.tappedEditProfileButton), for: .touchUpInside)
 
         self.topBanner.backgroundColor = .black
         self.topBanner.contentMode = .scaleAspectFill
@@ -113,14 +132,6 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.userIcon.layer.borderWidth = 3.0
         self.userIcon.layer.borderColor = UIColor.white.cgColor
         
-        // 設定済みのTOPバナーをキャッシュから復元
-        if let images = UserDefaults.standard.object(forKey: "bannerImage") as? NSArray {
-            if images.count != 0 {
-                let cachedImage = UIImage(data: images[0] as! Data)
-                self.topBanner.image = cachedImage
-            }
-        }
-        
         self.favoriteGroupStackView.alignment = .center
         self.favoriteGroupStackView.axis = .vertical
         self.favoriteGroupStackView.spacing = 20.0
@@ -129,10 +140,10 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     private func applyStyling() {
         self.view.backgroundColor = .white
         
-        self.editTopBannerButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
-        self.editTopBannerButton.backgroundColor = CustomUIColor.turquoise
-        self.editTopBannerButton.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
-        self.editTopBannerButton.layer.cornerRadius = 5.0
+        self.editProfileButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
+        self.editProfileButton.backgroundColor = CustomUIColor.turquoise
+        self.editProfileButton.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
+        self.editProfileButton.layer.cornerRadius = 5.0
         
         self.userNameLabel.textColor = .black
         self.userNameLabel.font = UIFont(name: "Oswald", size: 25.0)
@@ -159,8 +170,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.userIcon.autoPinEdgesToSuperviewEdges()
         self.userIcon.autoSetDimensions(to: CGSize(width: 100.0, height: 100.0))
         
-        self.editTopBannerButton.autoPinEdge(.top, to: .bottom, of: self.topBanner, withOffset: 20.0)
-        self.editTopBannerButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.editProfileButton.autoPinEdge(.top, to: .bottom, of: self.topBanner, withOffset: 20.0)
+        self.editProfileButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
         self.userNameLabel.autoPinEdge(.top, to: .bottom, of: self.userIconContainer, withOffset: 10.0)
         self.userNameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
@@ -196,8 +207,10 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.alertController.addAction(cancelAction)
     }
     
-    @objc private func tappedEditTopBannerButton() {
-        self.presenter?.editTopBannerButtonDidTap()
+    @objc private func tappedEditProfileButton() {
+        self.presenter?.editProfileButtonDidTap(
+            userName: self.userNameLabel.text ?? "", userIcon: self.userIcon.image, topBanner: self.topBanner.image
+        )
     }
 }
 

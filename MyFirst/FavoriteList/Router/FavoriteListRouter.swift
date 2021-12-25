@@ -7,8 +7,14 @@ class FavoriteListRouter: FavoriteListRouterProtocol {
         self.view = view
     }
     
-    func displayAlert(_ alertController: UIAlertController) {
-        self.view.present(alertController)
+    func displayEditProfileView(
+        userName: String, userIcon: UIImage?, topBanner: UIImage?, presenter: FavoriteListPresenterProtocol
+    ) {
+        let editProfileView = ProfileEditViewController(
+            userName: userName, userIcon: userIcon, topBanner: topBanner, presenter: presenter
+        )
+        
+        self.view.present(editProfileView)
     }
     
     func displayFavoriteRegistrationView(title: String, index: Int, presenter: FavoriteListPresenterProtocol) {
@@ -22,6 +28,11 @@ class FavoriteListRouter: FavoriteListRouterProtocol {
         let view = FavoriteDetailViewController(categoryName: category, itemIndex: index, favorite: favorite, presenter: presenter)
         
         self.view.present(view)
+    }
+    
+    // MARK: Alert
+    func displayAlert(_ alertController: UIAlertController) {
+        self.view.present(alertController)
     }
     
     func displayAlertForRegistrationView(_ alertController: UIAlertController, baseView: UIViewController) {

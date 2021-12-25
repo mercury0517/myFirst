@@ -5,6 +5,12 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
     let interactor: FavoriteListInteractorProtocol
     let router: FavoriteListRouterProtocol
     
+    private lazy var impactFeedback: Any? = {
+        let generator:UIFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.prepare()
+        return generator
+    }()
+    
     init(view: FavoriteListViewControllerProtocol, interactor: FavoriteListInteractorProtocol, router: FavoriteListRouterProtocol) {
         self.view = view
         self.interactor = interactor
@@ -12,8 +18,10 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
     }
     
     // MARK: favorite List view
-    func editTopBannerButtonDidTap() {
-        self.router.displayAlert(self.view.alertController)
+    func editProfileButtonDidTap(userName: String, userIcon: UIImage?, topBanner: UIImage?) {
+        self.router.displayEditProfileView(
+            userName: userName, userIcon: userIcon, topBanner: topBanner, presenter: self
+        )
     }
     
     func bannerImageSelected(image: UIImage) {
@@ -37,7 +45,7 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
         registrationView.dismiss(animated: true)
     }
     
-    // MARK: favorite registeration view
+    // MARK: favorite detail view
     func deleteItemButtonDidTap(
         categoryName: String, itemIndex: Int, detailView: FavoriteDetailViewController
     ) {
@@ -47,6 +55,18 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
             
             self.view.updateFavoriteList()
             detailView.dismiss(animated: true)
+        }
+    }
+    
+    // MARK: edit profile view
+    func registerNewProfileButtonDidTap(userInfo: UserInfo, editProfileView: ProfileEditViewController) {
+        self.interactor.storeUserInfo(userInfo) {
+            if let generator = self.impactFeedback as? UIImpactFeedbackGenerator {
+                generator.impactOccurred()
+            }
+            
+            self.view.updateFavoriteList()
+            editProfileView.dismiss(animated: true)
         }
     }
 }

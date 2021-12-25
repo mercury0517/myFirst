@@ -5,6 +5,13 @@ import Alamofire
 class FavoriteListInteractor: FavoriteListInteractorProtocol {
     let userDefault = UserDefaults.standard
     
+    func storeUserInfo(_ userInfo: UserInfo, completion: () -> Void) {
+        let archivedUserInfo = try! NSKeyedArchiver.archivedData(withRootObject: userInfo, requiringSecureCoding: false)
+        self.userDefault.set(archivedUserInfo, forKey: "userInfo")
+        
+        completion()
+    }
+    
     func storeBannerImage(image: UIImage) {
         // 画像をuserDefaultに保存する時はNSDate型にする
         var saveArray: Array = [NSData]()

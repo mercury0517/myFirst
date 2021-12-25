@@ -1,7 +1,11 @@
 import UIKit
 protocol FavoriteListRouterProtocol {
-    func displayAlert(_ alertController: UIAlertController)
+    func displayEditProfileView(
+        userName: String, userIcon: UIImage?, topBanner: UIImage?, presenter: FavoriteListPresenterProtocol
+    )
     func displayFavoriteRegistrationView(title: String, index: Int, presenter: FavoriteListPresenterProtocol)
     func displayFavoriteDetailView(category: String, index: Int, favorite: MyFavorite, presenter: FavoriteListPresenterProtocol)
+    // MARK: Alert
+    func displayAlert(_ alertController: UIAlertController)
     func displayAlertForRegistrationView(_ alertController: UIAlertController, baseView: UIViewController)
 }

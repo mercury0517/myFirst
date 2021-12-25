@@ -11,6 +11,12 @@ class FavoriteRegistrationViewController: UIViewController {
         }
     }
     
+    private lazy var impactFeedback: Any? = {
+        let generator:UIFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.prepare()
+        return generator
+    }()
+    
     // TODO: キャッシュがあれば、その画像を表示
     let itemImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
     let inputImageButton = UIButton()
@@ -131,12 +137,11 @@ class FavoriteRegistrationViewController: UIViewController {
             picker.delegate = self
             self.present(picker, animated: true, completion: nil)
         } else {
-            print("この機種ではフォトライブラリが使用出来ません。")
+            print("The photo library is not available on this device")
         }
     }
     
     @objc private func tappedRegisterButton() {
-        // TODO: タイトルが空の場合のvalidation
         if let newTitle = self.itemNameTextField.text {
             let newFavorite = MyFavorite(
                 categoryName: self.categoryName,
@@ -149,8 +154,11 @@ class FavoriteRegistrationViewController: UIViewController {
             
             self.presenter.registerFavoriteButtonDidTap(favorite: newFavorite, registrationView: self)
             
-            // ハプティックフィードバックを入れる
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            if let generator = self.impactFeedback as? UIImpactFeedbackGenerator {
+                generator.impactOccurred()
+            }
+        } else {
+            Toast.show("error: input favorite title", self.view)
         }
     }
 }
