@@ -4,21 +4,25 @@ import PureLayout
 /*
  TODO3: 新規カテゴリを追加できる様にする
  TODO4: 既存カテゴリを編集できる様にする
- TODO5: 既存カテゴリの右に追加ボタンを置く、ただし1カテゴリ3個までしか登録させない
 */
 class FavoriteListViewController: UIViewController, FavoriteListViewControllerProtocol {
     var presenter: FavoriteListPresenterProtocol?
     
     var alertController = UIAlertController(
-        title: "画像の選択", message: "選択してください", preferredStyle: .actionSheet
+        title: "Please select image", message: nil, preferredStyle: .actionSheet
     )
     
     let scrollView = UIScrollView()
     
-    let titleLabel = UILabel()
-    let editTopBannerButton = UIButton()
     let topBanner = UIImageView(image: UIImage(named: "flight_banner"))
+    let userNameLabel = UILabel()
+    let editTopBannerButton = UIButton()
+    
     let favoriteGroupStackView = UIStackView()
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -37,6 +41,9 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.addConstraints()
         
         self.displayFavoriteGroupList()
+        
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     func present(_ viewController: UIViewController) {
@@ -73,16 +80,16 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     private func addSubviews() {
         self.view.addSubview(self.scrollView)
-        self.scrollView.addSubview(self.titleLabel)
-        self.scrollView.addSubview(self.editTopBannerButton)
         self.scrollView.addSubview(self.topBanner)
+        self.scrollView.addSubview(self.userNameLabel)
+        self.scrollView.addSubview(self.editTopBannerButton)
         self.scrollView.addSubview(self.favoriteGroupStackView)
     }
     
     private func configSubViews() {
         self.customPhotoLibraryAlert()
         
-        self.titleLabel.text = "MY FAVORITE"
+        self.userNameLabel.text = "AKIHIRO IHARA"
         
         self.editTopBannerButton.setTitle("EDIT PROFILE", for: .normal)
         self.editTopBannerButton.addTarget(self, action: #selector(self.tappedEditTopBannerButton), for: .touchUpInside)
@@ -101,14 +108,14 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         
         self.favoriteGroupStackView.alignment = .center
         self.favoriteGroupStackView.axis = .vertical
-        self.favoriteGroupStackView.spacing = 10.0
+        self.favoriteGroupStackView.spacing = 20.0
     }
     
     private func applyStyling() {
         self.view.backgroundColor = .white
         
-        self.titleLabel.textColor = .black
-        self.titleLabel.font = UIFont(name: "Oswald", size: 20.0)
+        self.userNameLabel.textColor = .black
+        self.userNameLabel.font = UIFont(name: "Oswald", size: 25.0)
         
         self.editTopBannerButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
         self.editTopBannerButton.backgroundColor = CustomUIColor.turquoise
@@ -119,25 +126,30 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     private func addConstraints() {
         self.scrollView.autoPinEdgesToSuperviewEdges()
         
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 40.0)
-        self.titleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+        // バナーをステータスバーに重ねる為に、画像を上にずらす
+        let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
+        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
+        let topMargin = (statusBarHeight + navigationBarHeight) * -1
         
-        self.editTopBannerButton.autoAlignAxis(.horizontal, toSameAxisOf: self.titleLabel)
-        self.editTopBannerButton.autoPinEdge(toSuperviewEdge: .right, withInset: 10.0)
-        
-        self.topBanner.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 20.0)
+        self.topBanner.autoPinEdge(toSuperviewEdge: .top, withInset: topMargin)
         self.topBanner.autoPinEdge(toSuperviewEdge: .left)
         self.topBanner.autoPinEdge(toSuperviewEdge: .right)
         self.topBanner.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: 250.0))
         
-        self.favoriteGroupStackView.autoPinEdge(.top, to: .bottom, of: self.topBanner, withOffset: 20.0)
+        self.userNameLabel.autoPinEdge(.top, to: .bottom, of: self.topBanner, withOffset: 10.0)
+        self.userNameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        
+        self.editTopBannerButton.autoAlignAxis(.horizontal, toSameAxisOf: self.userNameLabel)
+        self.editTopBannerButton.autoPinEdge(toSuperviewEdge: .right, withInset: 10.0)
+        
+        self.favoriteGroupStackView.autoPinEdge(.top, to: .bottom, of: self.userNameLabel, withOffset: 50.0)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .left)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .right)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 100.0)
     }
     
     private func customPhotoLibraryAlert() {
-        let albumAction = UIAlertAction(title: "フォトライブラリ", style: .default) { (action) in
+        let albumAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) == true {
                 let picker = UIImagePickerController()
                 picker.sourceType = .photoLibrary
@@ -145,7 +157,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
                 picker.delegate = self
                 self.present(picker, animated: true, completion: nil)
             } else {
-                print("この機種ではフォトライブラリが使用出来ません。")
+                print("The photo library is not available on this device")
             }
         }
         let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in

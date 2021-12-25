@@ -42,6 +42,9 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
         categoryName: String, itemIndex: Int, detailView: FavoriteDetailViewController
     ) {
         self.interactor.deleteFavorite(categoryName: categoryName, itemIndex: itemIndex) {
+            // ハプティックフィードバックを入れる
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            
             self.view.updateFavoriteList()
             detailView.dismiss(animated: true)
         }

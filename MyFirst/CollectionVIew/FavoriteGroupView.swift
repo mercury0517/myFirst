@@ -9,7 +9,7 @@ class FavoriteGroupView: UIView {
     let titleLabel = UILabel()
     var collectionView: UICollectionView
     
-    let itemSize = UIScreen.main.bounds.width * 0.7
+    let itemSize = UIScreen.main.bounds.width * 0.6
     
     init(title: String, presenter: FavoriteListPresenterProtocol?) {
         self.title = title

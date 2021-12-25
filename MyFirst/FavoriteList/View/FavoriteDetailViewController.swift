@@ -7,7 +7,7 @@ class FavoriteDetailViewController: UIViewController {
     let presenter: FavoriteListPresenterProtocol
     
     var alertController = UIAlertController(
-        title: "お気に入りを削除しますか？", message: nil, preferredStyle: .alert
+        title: "Delete your favorite", message: nil, preferredStyle: .alert
     )
     
     let scrollView = UIScrollView()
@@ -129,6 +129,8 @@ class FavoriteDetailViewController: UIViewController {
     
     @objc private func tappedCloseButton() {
         self.dismiss(animated: true)
+        
+        UIImpactFeedbackGenerator().impactOccurred()
     }
     
     @objc private func tappedDeleteButton() {

@@ -10,7 +10,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     let imageView = UIImageView()
     let titleLabel = UILabel()
     
-    let itemSize = UIScreen.main.bounds.width * 0.7
+    let itemSize = UIScreen.main.bounds.width * 0.6
     
     override init(frame: CGRect) {
         super.init(frame: frame)
