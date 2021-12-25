@@ -114,12 +114,12 @@ class FavoriteDetailViewController: UIViewController {
     }
     
     private func customDeleteFavoriteAlert() {
-        let albumAction = UIAlertAction(title: "削除する", style: .destructive) { (action) in
+        let albumAction = UIAlertAction(title: "DELETE", style: .destructive) { (action) in
             self.presenter.deleteItemButtonDidTap(
                 categoryName: self.categoryName, itemIndex: self.itemIndex, detailView: self
             )
         }
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
+        let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel) { (action) in
             self.alertController.dismiss(animated: true, completion: nil)
         }
         

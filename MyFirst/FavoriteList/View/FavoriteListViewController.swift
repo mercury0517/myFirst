@@ -15,8 +15,14 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     let scrollView = UIScrollView()
     
     let topBanner = UIImageView(image: UIImage(named: "flight_banner"))
-    let userNameLabel = UILabel()
+    
+    let userIconContainer = UIControl()
+    let userIcon = UIImageView(image: UIImage(named: "flight_banner"))
+    
     let editTopBannerButton = UIButton()
+    let userNameLabel = UILabel()
+    
+    let separateLine = UIView()
     
     let favoriteGroupStackView = UIStackView()
     
@@ -81,8 +87,11 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     private func addSubviews() {
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.topBanner)
-        self.scrollView.addSubview(self.userNameLabel)
+        self.scrollView.addSubview(self.userIconContainer)
+        self.userIconContainer.addSubview(self.userIcon)
         self.scrollView.addSubview(self.editTopBannerButton)
+        self.scrollView.addSubview(self.userNameLabel)
+        self.scrollView.addSubview(self.separateLine)
         self.scrollView.addSubview(self.favoriteGroupStackView)
     }
     
@@ -97,6 +106,12 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.topBanner.backgroundColor = .black
         self.topBanner.contentMode = .scaleAspectFill
         self.topBanner.clipsToBounds = true
+        
+        self.userIcon.layer.cornerRadius = 50.0
+        self.userIcon.contentMode = .scaleAspectFill
+        self.userIcon.clipsToBounds = true
+        self.userIcon.layer.borderWidth = 3.0
+        self.userIcon.layer.borderColor = UIColor.white.cgColor
         
         // 設定済みのTOPバナーをキャッシュから復元
         if let images = UserDefaults.standard.object(forKey: "bannerImage") as? NSArray {
@@ -114,13 +129,15 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     private func applyStyling() {
         self.view.backgroundColor = .white
         
-        self.userNameLabel.textColor = .black
-        self.userNameLabel.font = UIFont(name: "Oswald", size: 25.0)
-        
         self.editTopBannerButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
         self.editTopBannerButton.backgroundColor = CustomUIColor.turquoise
         self.editTopBannerButton.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
         self.editTopBannerButton.layer.cornerRadius = 5.0
+        
+        self.userNameLabel.textColor = .black
+        self.userNameLabel.font = UIFont(name: "Oswald", size: 25.0)
+        
+        self.separateLine.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
     }
     
     private func addConstraints() {
@@ -134,22 +151,33 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.topBanner.autoPinEdge(toSuperviewEdge: .top, withInset: topMargin)
         self.topBanner.autoPinEdge(toSuperviewEdge: .left)
         self.topBanner.autoPinEdge(toSuperviewEdge: .right)
-        self.topBanner.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: 250.0))
+        self.topBanner.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: 200.0))
         
-        self.userNameLabel.autoPinEdge(.top, to: .bottom, of: self.topBanner, withOffset: 10.0)
+        self.userIconContainer.autoPinEdge(.top, to: .bottom, of: self.topBanner, withOffset: -50.0)
+        self.userIconContainer.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        
+        self.userIcon.autoPinEdgesToSuperviewEdges()
+        self.userIcon.autoSetDimensions(to: CGSize(width: 100.0, height: 100.0))
+        
+        self.editTopBannerButton.autoPinEdge(.top, to: .bottom, of: self.topBanner, withOffset: 20.0)
+        self.editTopBannerButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        
+        self.userNameLabel.autoPinEdge(.top, to: .bottom, of: self.userIconContainer, withOffset: 10.0)
         self.userNameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         
-        self.editTopBannerButton.autoAlignAxis(.horizontal, toSameAxisOf: self.userNameLabel)
-        self.editTopBannerButton.autoPinEdge(toSuperviewEdge: .right, withInset: 10.0)
+        self.separateLine.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: 1.0))
+        self.separateLine.autoPinEdge(.top, to: .bottom, of: self.userNameLabel, withOffset: 20.0)
+        self.separateLine.autoPinEdge(toSuperviewEdge: .left)
+        self.separateLine.autoPinEdge(toSuperviewEdge: .right)
         
-        self.favoriteGroupStackView.autoPinEdge(.top, to: .bottom, of: self.userNameLabel, withOffset: 50.0)
+        self.favoriteGroupStackView.autoPinEdge(.top, to: .bottom, of: self.separateLine, withOffset: 20.0)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .left)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .right)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 100.0)
     }
     
     private func customPhotoLibraryAlert() {
-        let albumAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
+        let albumAction = UIAlertAction(title: "PHOTO LIBRARY", style: .default) { (action) in
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) == true {
                 let picker = UIImagePickerController()
                 picker.sourceType = .photoLibrary
@@ -160,7 +188,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
                 print("The photo library is not available on this device")
             }
         }
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
+        let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel) { (action) in
             self.alertController.dismiss(animated: true, completion: nil)
         }
         

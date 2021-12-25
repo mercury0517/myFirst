@@ -46,7 +46,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     
     private func applyStyling() {
         self.titleLabel.textColor = .black
-        self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)
+        self.titleLabel.font = .systemFont(ofSize: 16.0)
     }
     
     private func addConstraints() {
