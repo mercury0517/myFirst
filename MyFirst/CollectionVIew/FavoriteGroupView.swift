@@ -19,21 +19,19 @@ class FavoriteGroupView: UIView {
         
         let flowLayout = UICollectionViewFlowLayout()
         let margin: CGFloat = 16.0
-        flowLayout.itemSize = CGSize(width: self.itemSize, height: self.itemSize + 50.0)
+        flowLayout.itemSize = CGSize(width: self.itemSize, height: self.itemSize + 20.0)
         flowLayout.minimumInteritemSpacing = margin
         flowLayout.minimumLineSpacing = margin
         flowLayout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         flowLayout.scrollDirection = .horizontal
         self.collectionView = UICollectionView(
-            frame: CGRect(x: 0, y: 0, width: 1000.0, height: 300.0), collectionViewLayout: flowLayout
+            frame: CGRect(x: 0, y: 0, width: 1000.0, height: 270.0), collectionViewLayout: flowLayout
         )
         
         super.init(frame: CGRect())
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        
-        self.loadItemsFromCache()
         
         self.addSubviews()
         self.configSubViews()
@@ -44,11 +42,7 @@ class FavoriteGroupView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private func loadItemsFromCache() {
-        
-    }
-    
+
     private func addSubviews() {
         self.addSubview(self.titleLabel)
         self.addSubview(self.collectionView)
@@ -56,6 +50,9 @@ class FavoriteGroupView: UIView {
     
     private func configSubViews() {
         self.collectionView.register(FavoriteCollectionViewCell.self, forCellWithReuseIdentifier: "FavoriteCollectionViewCell")
+        self.collectionView.isPagingEnabled = true
+        self.collectionView.showsHorizontalScrollIndicator = false
+        self.collectionView.showsVerticalScrollIndicator = false
     }
     
     private func applyStyling() {
@@ -68,7 +65,7 @@ class FavoriteGroupView: UIView {
     }
     
     private func addConstraints() {
-        self.autoSetDimension(.height, toSize: self.itemSize + 80.0)
+        self.autoSetDimension(.height, toSize: self.itemSize + 60.0)
         
         self.titleLabel.autoSetDimension(.height, toSize: 30.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .top)
@@ -78,7 +75,7 @@ class FavoriteGroupView: UIView {
         self.collectionView.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 5.0)
         self.collectionView.autoPinEdge(toSuperviewEdge: .left)
         self.collectionView.autoPinEdge(toSuperviewEdge: .right)
-        self.collectionView.autoSetDimension(.height, toSize: self.itemSize + 50.0)
+        self.collectionView.autoSetDimension(.height, toSize: self.itemSize + 20.0)
     }
 }
 
@@ -128,7 +125,7 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
             cell.favorite = MyFavorite(
                 categoryName: "",
                 index: 0,
-                title: "add new item",
+                title: "",
                 image: UIImage(named: "add_icon"),
                 memo: nil,
                 isCustomized: false
@@ -140,6 +137,8 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? FavoriteCollectionViewCell
+        
+//        cell?.animateCard()
         
         // アイテムが未設定なら登録画面を開く、そうでなければ編集画面を開く
         if let favorite = cell?.favorite {

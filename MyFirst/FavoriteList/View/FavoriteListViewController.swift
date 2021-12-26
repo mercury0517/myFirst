@@ -64,6 +64,10 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             self.topBanner.image = userInfo.topBanner
             self.userIcon.image = userInfo.icon
             self.userNameLabel.text = userInfo.name
+        } else {
+            self.topBanner.image = UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0))
+            self.userIcon.image = UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0))
+            self.userNameLabel.text = ""
         }
         
         self.favoriteGroupStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -105,6 +109,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     }
     
     private func configSubViews() {
+        self.scrollView.showsVerticalScrollIndicator = false
+        
         if
             let data = UserDefaults.standard.object(forKey: "userInfo") as? Data,
             let userInfo = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserInfo

@@ -129,8 +129,6 @@ class FavoriteDetailViewController: UIViewController {
     
     @objc private func tappedCloseButton() {
         self.dismiss(animated: true)
-        
-        UIImpactFeedbackGenerator().impactOccurred()
     }
     
     @objc private func tappedDeleteButton() {

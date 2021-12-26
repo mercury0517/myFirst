@@ -1,3 +1,4 @@
+import AudioToolbox
 import UIKit
 
 class FavoriteListPresenter: FavoriteListPresenterProtocol {
@@ -39,9 +40,9 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
     // MARK: favorite registeration view
     func registerFavoriteButtonDidTap(favorite: MyFavorite, registrationView: FavoriteRegistrationViewController) {
         self.interactor.storeFavorite(favorite)
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
         
         self.view.updateFavoriteList()
-        
         registrationView.dismiss(animated: true)
     }
     
@@ -61,9 +62,7 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
     // MARK: edit profile view
     func registerNewProfileButtonDidTap(userInfo: UserInfo, editProfileView: ProfileEditViewController) {
         self.interactor.storeUserInfo(userInfo) {
-            if let generator = self.impactFeedback as? UIImpactFeedbackGenerator {
-                generator.impactOccurred()
-            }
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             
             self.view.updateFavoriteList()
             editProfileView.dismiss(animated: true)

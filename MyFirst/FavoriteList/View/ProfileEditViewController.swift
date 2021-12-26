@@ -175,9 +175,11 @@ class ProfileEditViewController: UIViewController {
     }
     
     @objc private func tappedRegisterButton() {
-        // TODO: タイトルが空の場合のvalidation
-        if let newUserName = self.userNameTextField.text {
-            let userInfo = UserInfo(name: newUserName, topBanner: self.selectedBannerImage, icon: self.selectedUserIcon)
+        if
+            let newUserName = self.userNameTextField.text,
+            !newUserName.isEmpty
+        {
+            let userInfo = UserInfo(name: newUserName, topBanner: self.itemImageView.image, icon: self.userIconView.image)
             
             self.presenter.registerNewProfileButtonDidTap(userInfo: userInfo, editProfileView: self)
         } else {

@@ -24,7 +24,7 @@ class FavoriteRegistrationViewController: UIViewController {
     let titleLabel = UILabel()
     let itemNameTextField = CustomTextField()
     let memoLabel = UILabel()
-    let memoTextView = UITextView()
+    let memoTextView = CustomTextView()
     let registerButton = UIButton()
     
     init(categoryName: String, itemIndex: Int, presenter: FavoriteListPresenterProtocol) {

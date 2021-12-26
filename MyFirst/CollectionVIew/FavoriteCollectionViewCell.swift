@@ -8,6 +8,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     }
     
     let imageView = UIImageView()
+    let titleContainer = UIView()
     let titleLabel = UILabel()
     
     let itemSize = UIScreen.main.bounds.width * 0.6
@@ -25,9 +26,26 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         super.init(coder: aDecoder)
     }
     
+    // タップした感が伝わる様に
+//    func animateCard() {
+//        self.imageView.alpha = 0.6
+//        
+//        DispatchQueue.main.async {
+//            UIImageView.animate(
+//                withDuration: 1.0,
+//                delay: 0.0,
+//                options: [.curveEaseIn],
+//                animations: {
+//                    self.imageView.alpha = 1.0
+//                }
+//            )
+//        }
+//    }
+    
     private func addSubviews() {
         self.addSubview(self.imageView)
-        self.addSubview(self.titleLabel)
+        self.imageView.addSubview(self.titleContainer)
+        self.titleContainer.addSubview(self.titleLabel)
     }
     
     private func configSubViews() {
@@ -41,12 +59,14 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         self.imageView.clipsToBounds = true
         self.imageView.layer.cornerRadius = 15.0
         
-        self.titleLabel.numberOfLines = 0
+        self.titleLabel.numberOfLines = 2
     }
     
     private func applyStyling() {
-        self.titleLabel.textColor = .black
-        self.titleLabel.font = .systemFont(ofSize: 16.0)
+        self.titleContainer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.1)
+        
+        self.titleLabel.textColor = .white
+        self.titleLabel.font = UIFont(name: "Oswald", size: 20.0)
     }
     
     private func addConstraints() {
@@ -55,10 +75,9 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         self.imageView.autoPinEdge(toSuperviewEdge: .left)
         self.imageView.autoPinEdge(toSuperviewEdge: .right)
         
-        self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.imageView, withOffset: 5.0)
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 10.0)
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .right)
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
+        self.titleContainer.autoPinEdgesToSuperviewEdges()
+        
+        self.titleLabel.autoCenterInSuperview()
     }
     
     private func configMyFavorite() {
@@ -67,5 +86,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         if let unwrappedImage = self.favorite?.image {
             self.imageView.image = unwrappedImage
         }
+        
+        self.titleContainer.isHidden = self.titleLabel.text?.isEmpty ?? true
     }
 }
