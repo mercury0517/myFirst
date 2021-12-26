@@ -66,7 +66,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         self.titleContainer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
         
         self.titleLabel.textColor = .white
-        self.titleLabel.font = UIFont(name: "Oswald", size: 16.0)
+        self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)
     }
     
     private func addConstraints() {
@@ -78,11 +78,11 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         self.titleContainer.autoPinEdge(toSuperviewEdge: .left)
         self.titleContainer.autoPinEdge(toSuperviewEdge: .right)
         self.titleContainer.autoPinEdge(toSuperviewEdge: .bottom)
+        self.titleContainer.autoSetDimension(.height, toSize: 65.0)
         
         self.titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 10.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
     }
     
     private func configMyFavorite() {

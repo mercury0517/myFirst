@@ -124,7 +124,7 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
             // 追加セルとして表示
             cell.favorite = MyFavorite(
                 categoryName: "",
-                index: 0,
+                index: indexPath.row,
                 title: "",
                 image: UIImage(named: "add_icon"),
                 memo: nil,

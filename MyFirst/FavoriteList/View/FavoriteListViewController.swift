@@ -56,6 +56,10 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.present(viewController, animated: true, completion: nil)
     }
     
+    func dismissToHome() {
+        self.dismiss(animated: true)
+    }
+    
     func updateFavoriteList() {
         if
             let data = UserDefaults.standard.object(forKey: "userInfo") as? Data,

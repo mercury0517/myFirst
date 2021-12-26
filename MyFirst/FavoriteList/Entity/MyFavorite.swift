@@ -2,7 +2,7 @@ import UIKit
 
 class MyFavorite: NSObject, NSCoding {
     let categoryName: String
-    let index: Int
+    var index: Int
     let title: String
     let image: UIImage?
     let memo: String?

@@ -19,8 +19,10 @@ class FavoriteDetailViewController: UIViewController {
     let titleLabel = UILabel()
     let detailLabel = UILabel()
     
-    let editButton = UIButton()
     let deleteButton = UIButton()
+    
+    let editButton = UIControl()
+    let editIcon = UIImageView(image: UIImage(named: "edit_icon"))
     
     init(
         categoryName: String,
@@ -58,8 +60,9 @@ class FavoriteDetailViewController: UIViewController {
         self.closeButton.addSubview(self.closeIcon)
         self.scrollView.addSubview(self.titleLabel)
         self.scrollView.addSubview(self.detailLabel)
-        self.scrollView.addSubview(self.editButton)
         self.scrollView.addSubview(self.deleteButton)
+        self.view.addSubview(self.editButton)
+        self.editButton.addSubview(self.editIcon)
     }
     
     private func configSubViews() {
@@ -76,8 +79,6 @@ class FavoriteDetailViewController: UIViewController {
         self.detailLabel.text = self.favorite.memo
         self.detailLabel.numberOfLines = 0
         
-        self.editButton.setTitle("EDIT ITEM", for: .normal)
-        
         self.deleteButton.setTitle("DELETE ITEM", for: .normal)
         self.deleteButton.addTarget(self, action: #selector(self.tappedDeleteButton), for: .touchUpInside)
     }
@@ -91,11 +92,12 @@ class FavoriteDetailViewController: UIViewController {
         self.detailLabel.font = .systemFont(ofSize: 15.0)
         self.detailLabel.textColor = .black
         
-        self.editButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
-        self.editButton.setTitleColor(.white, for: .normal)
         self.editButton.backgroundColor = CustomUIColor.turquoise
-        self.editButton.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
-        self.editButton.layer.cornerRadius = 5.0
+        self.editButton.layer.cornerRadius = 25.0
+        self.editButton.clipsToBounds = true
+        self.editButton.addTarget(self, action: #selector(self.tappedEditButton), for: .touchUpInside)
+        
+        self.editIcon.isUserInteractionEnabled = false
         
         self.deleteButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
         self.deleteButton.setTitleColor(.red, for: .normal)
@@ -115,17 +117,21 @@ class FavoriteDetailViewController: UIViewController {
         
         self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.itemImageView, withOffset: 20.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.titleLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
         self.detailLabel.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 10.0)
         self.detailLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.detailLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
-        self.editButton.autoAlignAxis(.horizontal, toSameAxisOf: self.titleLabel)
-        self.editButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-        
         self.deleteButton.autoPinEdge(.top, to: .bottom, of: self.detailLabel, withOffset: 20.0)
         self.deleteButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-        self.deleteButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
+        self.deleteButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 100.0)
+        
+        self.editButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.editButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 30.0)
+        self.editButton.autoSetDimensions(to: CGSize(width: 50.0, height: 50.0))
+        
+        self.editIcon.autoCenterInSuperview()
     }
     
     private func customDeleteFavoriteAlert() {
@@ -148,5 +154,12 @@ class FavoriteDetailViewController: UIViewController {
     
     @objc private func tappedDeleteButton() {
         self.present(self.alertController, animated: true)
+    }
+    
+    @objc private func tappedEditButton() {
+        print("コッコ")
+        print(self.favorite.index)
+        
+        self.presenter.editItemButtonDidTap(favorite: self.favorite)
     }
 }

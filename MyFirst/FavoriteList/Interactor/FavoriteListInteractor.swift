@@ -26,7 +26,6 @@ class FavoriteListInteractor: FavoriteListInteractorProtocol {
     // カテゴリ名をキーにして、お気に入りを配列で保存する
     func storeFavorite(_ favorite: MyFavorite) {
         var newFavoriteList: [MyFavorite] = []
-        
         var cachedFavoriteList = self.loadFavoriteList(categoryName: favorite.categoryName)
         
         if !cachedFavoriteList.isEmpty {
@@ -48,6 +47,22 @@ class FavoriteListInteractor: FavoriteListInteractorProtocol {
         self.userDefault.set(archivedFavoriteList, forKey: favorite.categoryName)
     }
     
+    func updateFavorite(_ favorite: MyFavorite) {
+        var cachedFavoriteList = self.loadFavoriteList(categoryName: favorite.categoryName)
+        
+        print("カウント")
+        print(cachedFavoriteList.count)
+        print(favorite.index)
+        
+        // 該当のindexのお気に入りを更新する
+        if !cachedFavoriteList.isEmpty {
+            cachedFavoriteList[favorite.index] = favorite
+        }
+        
+        let archivedFavoriteList = try! NSKeyedArchiver.archivedData(withRootObject: cachedFavoriteList, requiringSecureCoding: false)
+        self.userDefault.set(archivedFavoriteList, forKey: favorite.categoryName)
+    }
+    
     func loadFavoriteList(categoryName: String) -> [MyFavorite] {
         // そのカテゴリ名でお気に入りを保存していれば、それを配列で返却する
         if
@@ -63,11 +78,15 @@ class FavoriteListInteractor: FavoriteListInteractorProtocol {
     func deleteFavorite(categoryName: String, itemIndex: Int, completion: () -> Void) {
         let cachedFavoriteList = self.loadFavoriteList(categoryName: categoryName)
         var newFavoriteList: [MyFavorite] = []
-        
+        var newFavoriteCount = 0
+
         // 削除対象のお気に入りのみ、新規リストには追加しない
         for (index, favorite) in cachedFavoriteList.enumerated() {
             if index != itemIndex {
+                favorite.index = newFavoriteCount // indexの上書き
+                
                 newFavoriteList.append(favorite)
+                newFavoriteCount += 1
             }
         }
         

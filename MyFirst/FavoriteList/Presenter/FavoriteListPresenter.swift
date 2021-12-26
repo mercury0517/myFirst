@@ -18,7 +18,7 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
         self.router = router
     }
     
-    // MARK: favorite List view
+    // MARK: favorite list view
     func editProfileButtonDidTap(userName: String, userIcon: UIImage?, topBanner: UIImage?) {
         self.router.displayEditProfileView(
             userName: userName, userIcon: userIcon, topBanner: topBanner, presenter: self
@@ -37,13 +37,21 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
         self.router.displayFavoriteDetailView(category: category, index: index, favorite: favorite, presenter: self)
     }
     
-    // MARK: favorite registeration view
-    func registerFavoriteButtonDidTap(favorite: MyFavorite, registrationView: FavoriteRegistrationViewController) {
+    // MARK: favorite input view
+    func registerFavoriteButtonDidTap(favorite: MyFavorite, registrationView: FavoriteInputViewController) {
         self.interactor.storeFavorite(favorite)
-        AudioServicesPlaySystemSound(1011)
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
         
         self.view.updateFavoriteList()
         registrationView.dismiss(animated: true)
+    }
+    
+    func updateFavoriteButtonDidTap(favorite: MyFavorite) {
+        self.interactor.updateFavorite(favorite)
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        
+        self.view.updateFavoriteList()
+        self.view.dismissToHome()
     }
     
     // MARK: favorite detail view
@@ -59,10 +67,14 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
         }
     }
     
+    func editItemButtonDidTap(favorite: MyFavorite) {
+        self.router.displayFavoriteEditView(favorite: favorite, presenter: self)
+    }
+    
     // MARK: edit profile view
     func registerNewProfileButtonDidTap(userInfo: UserInfo, editProfileView: ProfileEditViewController) {
         self.interactor.storeUserInfo(userInfo) {
-            AudioServicesPlaySystemSound(1011)
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             
             self.view.updateFavoriteList()
             editProfileView.dismiss(animated: true)

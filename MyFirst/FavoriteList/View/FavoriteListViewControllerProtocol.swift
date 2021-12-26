@@ -4,5 +4,6 @@ protocol FavoriteListViewControllerProtocol {
     var alertController: UIAlertController { get set }
     
     func present(_ viewController: UIViewController)
+    func dismissToHome()
     func updateFavoriteList()
 }

@@ -1,9 +1,12 @@
 import UIKit
 
-class FavoriteRegistrationViewController: UIViewController {
+class FavoriteInputViewController: UIViewController {
     let categoryName: String
     let itemIndex: Int
     let presenter: FavoriteListPresenterProtocol
+    
+    let isEdit: Bool
+    var favorite: MyFavorite?
     
     var selectedImage: UIImage? {
         didSet {
@@ -17,7 +20,6 @@ class FavoriteRegistrationViewController: UIViewController {
         return generator
     }()
     
-    // TODO: キャッシュがあれば、その画像を表示
     let itemImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
     let inputImageButton = UIButton()
     
@@ -27,10 +29,14 @@ class FavoriteRegistrationViewController: UIViewController {
     let memoTextView = CustomTextView()
     let registerButton = UIButton()
     
-    init(categoryName: String, itemIndex: Int, presenter: FavoriteListPresenterProtocol) {
+    init(categoryName: String, itemIndex: Int, presenter: FavoriteListPresenterProtocol, isEdit: Bool, favorite: MyFavorite? = nil) {
         self.categoryName = categoryName
         self.itemIndex = itemIndex
         self.presenter = presenter
+        
+        // for edit
+        self.isEdit = isEdit
+        self.favorite = favorite
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -73,6 +79,13 @@ class FavoriteRegistrationViewController: UIViewController {
         
         self.registerButton.setTitle("REGISTER", for: .normal)
         self.registerButton.addTarget(self, action: #selector(self.tappedRegisterButton), for: .touchUpInside)
+        
+        // for edit
+        if self.isEdit {
+            self.itemImageView.image = self.favorite?.image
+            self.itemNameTextField.text = self.favorite?.title
+            self.memoTextView.text = self.favorite?.memo
+        }
     }
     
     private func applyStyling() {
@@ -147,15 +160,15 @@ class FavoriteRegistrationViewController: UIViewController {
                 categoryName: self.categoryName,
                 index: self.itemIndex,
                 title: newTitle,
-                image: self.selectedImage,
+                image: self.itemImageView.image,
                 memo: self.memoTextView.text,
                 isCustomized: true
             )
             
-            self.presenter.registerFavoriteButtonDidTap(favorite: newFavorite, registrationView: self)
-            
-            if let generator = self.impactFeedback as? UIImpactFeedbackGenerator {
-                generator.impactOccurred()
+            if self.isEdit {
+                self.presenter.updateFavoriteButtonDidTap(favorite: newFavorite)
+            } else {
+                self.presenter.registerFavoriteButtonDidTap(favorite: newFavorite, registrationView: self)
             }
         } else {
             Toast.show("error: input favorite title", self.view)
@@ -163,7 +176,7 @@ class FavoriteRegistrationViewController: UIViewController {
     }
 }
 
-extension FavoriteRegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension FavoriteInputViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         self.selectedImage = selectedImage

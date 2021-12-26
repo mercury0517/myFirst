@@ -23,7 +23,7 @@
 		60878D14275B64230052B91C /* FavoriteListInteractorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D13275B64230052B91C /* FavoriteListInteractorProtocol.swift */; };
 		60878D16275B642A0052B91C /* FavoriteListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D15275B642A0052B91C /* FavoriteListInteractor.swift */; };
 		60878D18275B85690052B91C /* FavoriteCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D17275B85690052B91C /* FavoriteCategory.swift */; };
-		60878D1A275B8EA00052B91C /* FavoriteRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D19275B8EA00052B91C /* FavoriteRegistrationViewController.swift */; };
+		60878D1A275B8EA00052B91C /* FavoriteInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D19275B8EA00052B91C /* FavoriteInputViewController.swift */; };
 		60878D1C275C9AB30052B91C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878D1B275C9AB20052B91C /* CustomTextField.swift */; };
 		608922A12776F95F00698ABD /* CustomUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608922A02776F95F00698ABD /* CustomUIColor.swift */; };
 		608922A32777438800698ABD /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608922A22777438800698ABD /* ProfileEditViewController.swift */; };
@@ -92,7 +92,7 @@
 		60878D13275B64230052B91C /* FavoriteListInteractorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListInteractorProtocol.swift; sourceTree = "<group>"; };
 		60878D15275B642A0052B91C /* FavoriteListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListInteractor.swift; sourceTree = "<group>"; };
 		60878D17275B85690052B91C /* FavoriteCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCategory.swift; sourceTree = "<group>"; };
-		60878D19275B8EA00052B91C /* FavoriteRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRegistrationViewController.swift; sourceTree = "<group>"; };
+		60878D19275B8EA00052B91C /* FavoriteInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInputViewController.swift; sourceTree = "<group>"; };
 		60878D1B275C9AB20052B91C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		608922A02776F95F00698ABD /* CustomUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIColor.swift; sourceTree = "<group>"; };
 		608922A22777438800698ABD /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 				604FFEE1276DDB280057140E /* FavoriteDetailViewController.swift */,
 				60825D7C259B102300B7B242 /* FavoriteListViewController.swift */,
 				60878D04275B566A0052B91C /* FavoriteListViewControllerProtocol.swift */,
-				60878D19275B8EA00052B91C /* FavoriteRegistrationViewController.swift */,
+				60878D19275B8EA00052B91C /* FavoriteInputViewController.swift */,
 				608922A22777438800698ABD /* ProfileEditViewController.swift */,
 			);
 			path = View;
@@ -614,7 +614,7 @@
 				60878D1C275C9AB30052B91C /* CustomTextField.swift in Sources */,
 				608922A12776F95F00698ABD /* CustomUIColor.swift in Sources */,
 				604FFEE2276DDB280057140E /* FavoriteDetailViewController.swift in Sources */,
-				60878D1A275B8EA00052B91C /* FavoriteRegistrationViewController.swift in Sources */,
+				60878D1A275B8EA00052B91C /* FavoriteInputViewController.swift in Sources */,
 				60878D00275B4F090052B91C /* FavoriteCollectionViewCell.swift in Sources */,
 				60878D02275B55D80052B91C /* AppDependencies.swift in Sources */,
 				608922A9277823FE00698ABD /* CustomTextView.swift in Sources */,
@@ -810,14 +810,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirst/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.myfirst20201213.MyFirst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -832,14 +832,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirst/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.myfirst20201213.MyFirst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
