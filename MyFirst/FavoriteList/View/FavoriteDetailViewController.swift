@@ -7,7 +7,7 @@ class FavoriteDetailViewController: UIViewController {
     let presenter: FavoriteListPresenterProtocol
     
     var alertController = UIAlertController(
-        title: "Delete your favorite", message: nil, preferredStyle: .alert
+        title: "Delete your favorite?", message: nil, preferredStyle: .alert
     )
     
     let scrollView = UIScrollView()
@@ -15,9 +15,11 @@ class FavoriteDetailViewController: UIViewController {
     let itemImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
     let closeButton = UIControl()
     let closeIcon = UIImageView(image: UIImage(named: "close"))
+    
     let titleLabel = UILabel()
     let detailLabel = UILabel()
     
+    let editButton = UIButton()
     let deleteButton = UIButton()
     
     init(
@@ -56,6 +58,7 @@ class FavoriteDetailViewController: UIViewController {
         self.closeButton.addSubview(self.closeIcon)
         self.scrollView.addSubview(self.titleLabel)
         self.scrollView.addSubview(self.detailLabel)
+        self.scrollView.addSubview(self.editButton)
         self.scrollView.addSubview(self.deleteButton)
     }
     
@@ -68,9 +71,12 @@ class FavoriteDetailViewController: UIViewController {
         self.closeIcon.isUserInteractionEnabled = false
         
         self.titleLabel.text = self.favorite.title
+        self.titleLabel.numberOfLines = 2
         
         self.detailLabel.text = self.favorite.memo
         self.detailLabel.numberOfLines = 0
+        
+        self.editButton.setTitle("EDIT ITEM", for: .normal)
         
         self.deleteButton.setTitle("DELETE ITEM", for: .normal)
         self.deleteButton.addTarget(self, action: #selector(self.tappedDeleteButton), for: .touchUpInside)
@@ -84,6 +90,12 @@ class FavoriteDetailViewController: UIViewController {
         
         self.detailLabel.font = .systemFont(ofSize: 15.0)
         self.detailLabel.textColor = .black
+        
+        self.editButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
+        self.editButton.setTitleColor(.white, for: .normal)
+        self.editButton.backgroundColor = CustomUIColor.turquoise
+        self.editButton.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
+        self.editButton.layer.cornerRadius = 5.0
         
         self.deleteButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
         self.deleteButton.setTitleColor(.red, for: .normal)
@@ -107,6 +119,9 @@ class FavoriteDetailViewController: UIViewController {
         self.detailLabel.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 10.0)
         self.detailLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.detailLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        
+        self.editButton.autoAlignAxis(.horizontal, toSameAxisOf: self.titleLabel)
+        self.editButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
         self.deleteButton.autoPinEdge(.top, to: .bottom, of: self.detailLabel, withOffset: 20.0)
         self.deleteButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
