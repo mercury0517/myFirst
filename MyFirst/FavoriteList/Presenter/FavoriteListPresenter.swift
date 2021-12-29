@@ -7,7 +7,7 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
     let router: FavoriteListRouterProtocol
     
     private lazy var impactFeedback: Any? = {
-        let generator:UIFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        let generator: UIFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
         generator.prepare()
         return generator
     }()
@@ -40,7 +40,8 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
     // MARK: favorite input view
     func registerFavoriteButtonDidTap(favorite: MyFavorite, registrationView: FavoriteInputViewController) {
         self.interactor.storeFavorite(favorite)
-        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        // ハプティックフィードバックを入れる
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
         
         self.view.updateFavoriteList()
         registrationView.dismiss(animated: true)
@@ -48,7 +49,8 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
     
     func updateFavoriteButtonDidTap(favorite: MyFavorite) {
         self.interactor.updateFavorite(favorite)
-        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        // ハプティックフィードバックを入れる
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
         
         self.view.updateFavoriteList()
         self.view.dismissToHome()
@@ -74,7 +76,8 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
     // MARK: edit profile view
     func registerNewProfileButtonDidTap(userInfo: UserInfo, editProfileView: ProfileEditViewController) {
         self.interactor.storeUserInfo(userInfo) {
-            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            // ハプティックフィードバックを入れる
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
             
             self.view.updateFavoriteList()
             editProfileView.dismiss(animated: true)

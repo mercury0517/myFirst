@@ -14,13 +14,11 @@ class FavoriteInputViewController: UIViewController {
         }
     }
     
-    private lazy var impactFeedback: Any? = {
-        let generator:UIFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-        generator.prepare()
-        return generator
-    }()
+    let scrollView = UIScrollView()
     
     let itemImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
+    let closeButton = UIControl()
+    let closeIcon = UIImageView(image: UIImage(named: "close"))
     let inputImageButton = UIButton()
     
     let titleLabel = UILabel()
@@ -55,18 +53,23 @@ class FavoriteInputViewController: UIViewController {
     }
     
     private func addSubviews() {
-        self.view.addSubview(self.itemImageView)
-        self.view.addSubview(self.inputImageButton)
-        self.view.addSubview(self.titleLabel)
-        self.view.addSubview(self.itemNameTextField)
-        self.view.addSubview(self.memoLabel)
-        self.view.addSubview(self.memoTextView)
-        self.view.addSubview(self.registerButton)
+        self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.itemImageView)
+        self.scrollView.addSubview(self.closeButton)
+        self.closeButton.addSubview(self.closeIcon)
+        self.scrollView.addSubview(self.inputImageButton)
+        self.scrollView.addSubview(self.titleLabel)
+        self.scrollView.addSubview(self.itemNameTextField)
+        self.scrollView.addSubview(self.memoLabel)
+        self.scrollView.addSubview(self.memoTextView)
+        self.scrollView.addSubview(self.registerButton)
     }
     
     private func configSubViews() {
         self.itemImageView.contentMode = .scaleAspectFill
         self.itemImageView.clipsToBounds = true
+        
+        self.closeButton.addTarget(self, action: #selector(self.tappedCloseButton), for: .touchUpInside)
         
         self.inputImageButton.setTitle("INPUT IMAGE", for: .normal)
         self.inputImageButton.addTarget(self, action: #selector(self.tappedInputImageButton), for: .touchUpInside)
@@ -114,8 +117,16 @@ class FavoriteInputViewController: UIViewController {
     }
     
     private func addConstraints() {
+        self.scrollView.autoPinEdgesToSuperviewEdges()
+        
         self.itemImageView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
-        self.itemImageView.autoSetDimension(.height, toSize: 200.0)
+        self.itemImageView.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: 400.0))
+        
+        self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
+        self.closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+
+        self.closeIcon.autoPinEdgesToSuperviewEdges()
+        self.closeIcon.autoSetDimensions(to: CGSize(width: 30.0, height: 30.0))
         
         self.inputImageButton.autoPinEdge(.top, to: .bottom, of: self.itemImageView, withOffset: 10.0)
         self.inputImageButton.autoPinEdge(toSuperviewEdge: .right, withInset: 10.0)
@@ -140,6 +151,10 @@ class FavoriteInputViewController: UIViewController {
         self.registerButton.autoSetDimension(.height, toSize: 45.0)
         self.registerButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.registerButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+    }
+    
+    @objc private func tappedCloseButton() {
+        self.dismiss(animated: true)
     }
 
     @objc private func tappedInputImageButton() {

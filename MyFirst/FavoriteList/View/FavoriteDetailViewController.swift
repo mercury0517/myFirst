@@ -19,7 +19,8 @@ class FavoriteDetailViewController: UIViewController {
     let titleLabel = UILabel()
     let detailLabel = UILabel()
     
-    let deleteButton = UIButton()
+    let deleteButton = UIControl()
+    let deleteIcon = UIImageView(image: UIImage(named: "delete_icon"))
     
     let editButton = UIControl()
     let editIcon = UIImageView(image: UIImage(named: "edit_icon"))
@@ -60,7 +61,8 @@ class FavoriteDetailViewController: UIViewController {
         self.closeButton.addSubview(self.closeIcon)
         self.scrollView.addSubview(self.titleLabel)
         self.scrollView.addSubview(self.detailLabel)
-        self.scrollView.addSubview(self.deleteButton)
+        self.view.addSubview(self.deleteButton)
+        self.deleteButton.addSubview(self.deleteIcon)
         self.view.addSubview(self.editButton)
         self.editButton.addSubview(self.editIcon)
     }
@@ -79,8 +81,9 @@ class FavoriteDetailViewController: UIViewController {
         self.detailLabel.text = self.favorite.memo
         self.detailLabel.numberOfLines = 0
         
-        self.deleteButton.setTitle("DELETE ITEM", for: .normal)
         self.deleteButton.addTarget(self, action: #selector(self.tappedDeleteButton), for: .touchUpInside)
+        
+        self.editButton.addTarget(self, action: #selector(self.tappedEditButton), for: .touchUpInside)
     }
     
     private func applyStyling() {
@@ -92,22 +95,26 @@ class FavoriteDetailViewController: UIViewController {
         self.detailLabel.font = .systemFont(ofSize: 15.0)
         self.detailLabel.textColor = .black
         
+        self.deleteButton.backgroundColor = .white
+        self.deleteButton.layer.cornerRadius = 25.0
+        self.deleteButton.clipsToBounds = true
+        self.deleteButton.layer.borderColor = UIColor.red.cgColor
+        self.deleteButton.layer.borderWidth = 1.0
+        
+        self.deleteIcon.isUserInteractionEnabled = false
+        
         self.editButton.backgroundColor = CustomUIColor.turquoise
         self.editButton.layer.cornerRadius = 25.0
         self.editButton.clipsToBounds = true
-        self.editButton.addTarget(self, action: #selector(self.tappedEditButton), for: .touchUpInside)
         
         self.editIcon.isUserInteractionEnabled = false
-        
-        self.deleteButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
-        self.deleteButton.setTitleColor(.red, for: .normal)
     }
     
     private func addConstraints() {
         self.scrollView.autoPinEdgesToSuperviewEdges()
         
         self.itemImageView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
-        self.itemImageView.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: 300.0))
+        self.itemImageView.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: 400.0))
         
         self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
         self.closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
@@ -122,10 +129,13 @@ class FavoriteDetailViewController: UIViewController {
         self.detailLabel.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 10.0)
         self.detailLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.detailLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.detailLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 100.0)
         
-        self.deleteButton.autoPinEdge(.top, to: .bottom, of: self.detailLabel, withOffset: 20.0)
-        self.deleteButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-        self.deleteButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 100.0)
+        self.deleteButton.autoPinEdge(.right, to: .left, of: self.editButton, withOffset: -10.0)
+        self.deleteButton.autoAlignAxis(.horizontal, toSameAxisOf: self.editButton)
+        self.deleteButton.autoSetDimensions(to: CGSize(width: 50.0, height: 50.0))
+        
+        self.deleteIcon.autoCenterInSuperview()
         
         self.editButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.editButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 30.0)
@@ -157,9 +167,6 @@ class FavoriteDetailViewController: UIViewController {
     }
     
     @objc private func tappedEditButton() {
-        print("コッコ")
-        print(self.favorite.index)
-        
         self.presenter.editItemButtonDidTap(favorite: self.favorite)
     }
 }

@@ -9,7 +9,7 @@ class FavoriteGroupView: UIView {
     let titleLabel = UILabel()
     var collectionView: UICollectionView
     
-    let itemSize = UIScreen.main.bounds.width * 0.6
+    let itemSize = UIScreen.main.bounds.width * 0.8
     
     init(title: String, presenter: FavoriteListPresenterProtocol?) {
         self.title = title
@@ -50,7 +50,6 @@ class FavoriteGroupView: UIView {
     
     private func configSubViews() {
         self.collectionView.register(FavoriteCollectionViewCell.self, forCellWithReuseIdentifier: "FavoriteCollectionViewCell")
-        self.collectionView.isPagingEnabled = true
         self.collectionView.showsHorizontalScrollIndicator = false
         self.collectionView.showsVerticalScrollIndicator = false
     }

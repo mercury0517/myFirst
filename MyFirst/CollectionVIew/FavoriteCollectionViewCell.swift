@@ -11,7 +11,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     let titleContainer = UIView()
     let titleLabel = UILabel()
     
-    let itemSize = UIScreen.main.bounds.width * 0.6
+    let itemSize = UIScreen.main.bounds.width * 0.8
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -63,7 +63,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     }
     
     private func applyStyling() {
-        self.titleContainer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+        self.titleContainer.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         
         self.titleLabel.textColor = .white
         self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)

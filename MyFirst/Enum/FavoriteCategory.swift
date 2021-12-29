@@ -1,12 +1,12 @@
 enum FavoriteCategory: String, CaseIterable {
-    case artist = "ARTIST"
     case food = "FOOD"
+    case artist = "ARTIST"
+    case book = "BOOK"
     case movie = "MOVIE"
     case place = "PLACE"
+    case sports = "SPORTS"
     case product = "PRODUCT"
     case service = "SERVICE"
-    case sports = "SPORTS"
-    case book = "BOOK"
-    case app = "APP"
+    case person = "PERSON"
     case other = "OTHER"
 }
