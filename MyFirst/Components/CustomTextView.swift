@@ -31,4 +31,12 @@ class CustomTextView: UITextView {
         self.endEditing(true)
         self.resignFirstResponder()
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n") {
+            self.resignFirstResponder()
+            return false
+        }
+        return true
+    }
 }

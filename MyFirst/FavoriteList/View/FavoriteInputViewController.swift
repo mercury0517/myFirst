@@ -5,6 +5,7 @@ class FavoriteInputViewController: UIViewController {
     let itemIndex: Int
     let presenter: FavoriteListPresenterProtocol
     
+    let imageHeight = UIScreen.main.bounds.height * 0.45
     let isEdit: Bool
     var favorite: MyFavorite?
     
@@ -77,6 +78,7 @@ class FavoriteInputViewController: UIViewController {
         self.titleLabel.text = "ITEM TITLE"
         
         self.itemNameTextField.placeholder = "input your favorite title"
+        self.itemNameTextField.delegate = self
         
         self.memoLabel.text = "OVERVIEW"
         
@@ -102,6 +104,8 @@ class FavoriteInputViewController: UIViewController {
         self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)
         self.titleLabel.textColor = .black
         
+        self.itemNameTextField.textColor = .black
+        
         self.memoLabel.font = UIFont(name: "Oswald", size: 15.0)
         self.memoLabel.textColor = .black
         
@@ -120,7 +124,7 @@ class FavoriteInputViewController: UIViewController {
         self.scrollView.autoPinEdgesToSuperviewEdges()
         
         self.itemImageView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
-        self.itemImageView.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: 400.0))
+        self.itemImageView.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: self.imageHeight))
         
         self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
         self.closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
@@ -197,5 +201,12 @@ extension FavoriteInputViewController: UIImagePickerControllerDelegate, UINaviga
         self.selectedImage = selectedImage
         
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension FavoriteInputViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // Returnキーを押したときにキーボードを下げる
+        return true
     }
 }

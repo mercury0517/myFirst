@@ -8,6 +8,8 @@ import PureLayout
 class FavoriteListViewController: UIViewController, FavoriteListViewControllerProtocol {
     var presenter: FavoriteListPresenterProtocol?
     
+    let imageHeight = UIScreen.main.bounds.height * 0.2
+    
     var alertController = UIAlertController(
         title: "Please select image", message: nil, preferredStyle: .actionSheet
     )
@@ -172,7 +174,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.topBanner.autoPinEdge(toSuperviewEdge: .top, withInset: topMargin)
         self.topBanner.autoPinEdge(toSuperviewEdge: .left)
         self.topBanner.autoPinEdge(toSuperviewEdge: .right)
-        self.topBanner.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: 200.0))
+        self.topBanner.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: self.imageHeight))
         
         self.userIconContainer.autoPinEdge(.top, to: .bottom, of: self.topBanner, withOffset: -50.0)
         self.userIconContainer.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)

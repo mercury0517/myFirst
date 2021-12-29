@@ -6,6 +6,8 @@ class FavoriteDetailViewController: UIViewController {
     let favorite: MyFavorite
     let presenter: FavoriteListPresenterProtocol
     
+    let imageHeight = UIScreen.main.bounds.height * 0.45
+    
     var alertController = UIAlertController(
         title: "Delete your favorite?", message: nil, preferredStyle: .alert
     )
@@ -92,7 +94,7 @@ class FavoriteDetailViewController: UIViewController {
         self.titleLabel.font = UIFont(name: "Oswald", size: 25.0)
         self.titleLabel.textColor = .black
         
-        self.detailLabel.font = .systemFont(ofSize: 15.0)
+        self.detailLabel.font = UIFont(name: "Oswald", size: 15.0)
         self.detailLabel.textColor = .black
         
         self.deleteButton.backgroundColor = .white
@@ -114,7 +116,7 @@ class FavoriteDetailViewController: UIViewController {
         self.scrollView.autoPinEdgesToSuperviewEdges()
         
         self.itemImageView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
-        self.itemImageView.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: 400.0))
+        self.itemImageView.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: self.imageHeight))
         
         self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
         self.closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
@@ -122,7 +124,7 @@ class FavoriteDetailViewController: UIViewController {
         self.closeIcon.autoPinEdgesToSuperviewEdges()
         self.closeIcon.autoSetDimensions(to: CGSize(width: 30.0, height: 30.0))
         
-        self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.itemImageView, withOffset: 20.0)
+        self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.itemImageView, withOffset: 10.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         

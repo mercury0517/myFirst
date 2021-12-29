@@ -6,6 +6,8 @@ class ProfileEditViewController: UIViewController {
     let topBanner: UIImage?
     let presenter: FavoriteListPresenterProtocol
     
+    let imageHeight = UIScreen.main.bounds.height * 0.2
+    
     // フォトライブラリからの画像選択が2箇所あり、PickerViewの構造上、どちらの画像が選択しているか管理する必要がある
     var willSelectBannerImage: Bool = true
     
@@ -20,6 +22,8 @@ class ProfileEditViewController: UIViewController {
             self.userIconView.image = self.selectedUserIcon
         }
     }
+    
+    let scrollView = UIScrollView()
 
     let itemImageViewContainer = UIControl()
     let itemImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
@@ -58,15 +62,16 @@ class ProfileEditViewController: UIViewController {
     }
     
     private func addSubviews() {
-        self.view.addSubview(self.itemImageViewContainer)
+        self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.itemImageViewContainer)
         self.itemImageViewContainer.addSubview(self.itemImageView)
-        self.view.addSubview(self.closeButton)
+        self.scrollView.addSubview(self.closeButton)
         self.closeButton.addSubview(self.closeIcon)
-        self.view.addSubview(self.userIconContainer)
+        self.scrollView.addSubview(self.userIconContainer)
         self.userIconContainer.addSubview(self.userIconView)
-        self.view.addSubview(self.userNameTitleLabel)
-        self.view.addSubview(self.userNameTextField)
-        self.view.addSubview(self.registerButton)
+        self.scrollView.addSubview(self.userNameTitleLabel)
+        self.scrollView.addSubview(self.userNameTextField)
+        self.scrollView.addSubview(self.registerButton)
     }
     
     private func configSubViews() {
@@ -92,6 +97,7 @@ class ProfileEditViewController: UIViewController {
 
         self.userNameTextField.placeholder = "input your name"
         self.userNameTextField.text = self.userName
+        self.userNameTextField.delegate = self
         
         self.registerButton.setTitle("REGISTER", for: .normal)
         self.registerButton.addTarget(self, action: #selector(self.tappedRegisterButton), for: .touchUpInside)
@@ -109,8 +115,10 @@ class ProfileEditViewController: UIViewController {
     }
     
     private func addConstraints() {
+        self.scrollView.autoPinEdgesToSuperviewEdges()
+        
         self.itemImageViewContainer.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
-        self.itemImageViewContainer.autoSetDimension(.height, toSize: 200.0)
+        self.itemImageViewContainer.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: self.imageHeight))
         
         self.itemImageView.autoPinEdgesToSuperviewEdges()
         
@@ -138,6 +146,7 @@ class ProfileEditViewController: UIViewController {
         self.registerButton.autoSetDimension(.height, toSize: 45.0)
         self.registerButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.registerButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.registerButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
     }
 
     @objc private func tappedBannerImage() {
@@ -203,3 +212,9 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigati
     }
 }
 
+extension ProfileEditViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
