@@ -123,7 +123,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             self.userIcon.image = userInfo.icon
             self.userNameLabel.text = userInfo.name
         } else {
-            self.userNameLabel.text = "AKIHIRO IHARA"
+            self.userNameLabel.text = "YOUR NAME"
         }
         
         self.customPhotoLibraryAlert()

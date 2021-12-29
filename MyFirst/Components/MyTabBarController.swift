@@ -2,8 +2,8 @@ import UIKit
 
 class MyTabBarController: UITabBarController {
     let tabView1 = AppDependencies.assmbleFavoriteList()
-    let tabView2 = VideoViewController()
-    let tabView3 = HomeViewController()
+    let tabView2 = HomeViewController()
+    let tabView3 = UINavigationController(rootViewController: ExchangeViewController())
     let tabView4 = PhotoViewController()
     
     override func viewDidLoad() {

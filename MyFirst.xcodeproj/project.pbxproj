@@ -30,6 +30,9 @@
 		608922A52777456B00698ABD /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608922A42777456B00698ABD /* Toast.swift */; };
 		608922A727774DAA00698ABD /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608922A627774DAA00698ABD /* UserInfo.swift */; };
 		608922A9277823FE00698ABD /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608922A8277823FE00698ABD /* CustomTextView.swift */; };
+		608922AC277C255800698ABD /* ExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608922AB277C255800698ABD /* ExchangeViewController.swift */; };
+		608922AF277C292A00698ABD /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608922AE277C292A00698ABD /* UserDefaultKeys.swift */; };
+		608922B1277C3E8400698ABD /* FriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608922B0277C3E8400698ABD /* FriendView.swift */; };
 		60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60984E7526A1B1B800E957C8 /* NewsView.swift */; };
 		60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5AADD259B0AC800A1243E /* VideoViewController.swift */; };
 		60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9C258613B300C681DD /* AppDelegate.swift */; };
@@ -99,6 +102,9 @@
 		608922A42777456B00698ABD /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		608922A627774DAA00698ABD /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		608922A8277823FE00698ABD /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
+		608922AB277C255800698ABD /* ExchangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewController.swift; sourceTree = "<group>"; };
+		608922AE277C292A00698ABD /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
+		608922B0277C3E8400698ABD /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
 		60984E7526A1B1B800E957C8 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		60D5AADD259B0AC800A1243E /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		60D5CC99258613B300C681DD /* MyFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -238,6 +244,23 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		608922AA277C24EF00698ABD /* Exchange */ = {
+			isa = PBXGroup;
+			children = (
+				608922AB277C255800698ABD /* ExchangeViewController.swift */,
+				608922B0277C3E8400698ABD /* FriendView.swift */,
+			);
+			path = Exchange;
+			sourceTree = "<group>";
+		};
+		608922AD277C290C00698ABD /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				608922AE277C292A00698ABD /* UserDefaultKeys.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		60D5AAE2259B0ADB00A1243E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,9 +301,11 @@
 				60878D01275B55D80052B91C /* AppDependencies.swift */,
 				60D5CCA5258613B600C681DD /* Assets.xcassets */,
 				60F099AB26A965950045CEB7 /* CollectionVIew */,
+				608922AD277C290C00698ABD /* Common */,
 				60825D81259B109E00B7B242 /* Components */,
 				60F099AF26A96DFC0045CEB7 /* Entity */,
 				60F099A526A946FC0045CEB7 /* Enum */,
+				608922AA277C24EF00698ABD /* Exchange */,
 				60878D03275B563A0052B91C /* FavoriteList */,
 				60D5E93326A3A22500803F7E /* fonts */,
 				60D5CCAA258613B600C681DD /* Info.plist */,
@@ -612,6 +637,7 @@
 				60F099B426AA5A0A0045CEB7 /* AppleMusicManager.swift in Sources */,
 				60825D7D259B102300B7B242 /* FavoriteListViewController.swift in Sources */,
 				60878D1C275C9AB30052B91C /* CustomTextField.swift in Sources */,
+				608922AF277C292A00698ABD /* UserDefaultKeys.swift in Sources */,
 				608922A12776F95F00698ABD /* CustomUIColor.swift in Sources */,
 				604FFEE2276DDB280057140E /* FavoriteDetailViewController.swift in Sources */,
 				60878D1A275B8EA00052B91C /* FavoriteInputViewController.swift in Sources */,
@@ -619,6 +645,7 @@
 				60878D02275B55D80052B91C /* AppDependencies.swift in Sources */,
 				608922A9277823FE00698ABD /* CustomTextView.swift in Sources */,
 				60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */,
+				608922AC277C255800698ABD /* ExchangeViewController.swift in Sources */,
 				60878D0B275B58450052B91C /* FavoriteListRouterProtocol.swift in Sources */,
 				60F099B126A96E330045CEB7 /* CompactDisc.swift in Sources */,
 				60878D07275B56D20052B91C /* FavoriteListPresenterProtocol .swift in Sources */,
@@ -640,6 +667,7 @@
 				60D5E92C26A3056B00803F7E /* VideoType.swift in Sources */,
 				60878D05275B566A0052B91C /* FavoriteListViewControllerProtocol.swift in Sources */,
 				60825D83259B10EF00B7B242 /* MyTabBarController.swift in Sources */,
+				608922B1277C3E8400698ABD /* FriendView.swift in Sources */,
 				60878D14275B64230052B91C /* FavoriteListInteractorProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
