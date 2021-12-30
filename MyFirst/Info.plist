@@ -24,8 +24,8 @@
 	<true/>
 	<key>NSBonjourServices</key>
 	<array>
-		<string>_sample-chat._tcp</string>
-		<string>_sample-chat._udp</string>
+		<string>_favorite._tcp</string>
+		<string>_favorite._udp</string>
 	</array>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>お気に入りを友達と交換する為にローカルネットワークを使用する必要があります。</string>

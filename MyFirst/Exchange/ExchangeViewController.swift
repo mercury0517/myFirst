@@ -3,13 +3,20 @@ import AudioToolbox
 import MultipeerConnectivity // 通信を行う為に必要なモジュール
 
 class ExchangeViewController: UIViewController {
-    // ユーザー識別用のID
+    /*
+     ユーザー識別用のID。
+     画面に表示させることも出来るので、ユーザーネームとかを設定しておくと良い。
+    */
     private let peerID = MCPeerID.init(
         displayName: (
             UserDefaults.standard.object(forKey: "userInfo") as? UserInfo
         )?.name ?? "unknown"
     )
-    // サービス識別用の任意の文字列
+    
+    /*
+     サービス識別用の任意の文字列。
+     info-plistには「_favorite._tcp」「_favorite._udp」を設定する(serviceTypeを記載する)
+    */
     private let serviceType = "favorite"
     
     // 他の端末を探したり、招待を送る為に使用
@@ -22,12 +29,14 @@ class ExchangeViewController: UIViewController {
     private var session: MCSession!
     
     let statusLabel = UILabel()
+    let messageLabel = UILabel()
     let friendStackView = UIStackView()
-    let findFriendButton = UIButton()
+    let findFriendButton = UIButton() // browserで友達を探す
     
     let sendFavoriteButton = UIButton()
     
     init() {
+        // 通信に必要なオブジェクトの初期化
         self.browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: self.serviceType)
         self.advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: self.serviceType)
         self.session = MCSession(peer: self.peerID)
@@ -50,6 +59,10 @@ class ExchangeViewController: UIViewController {
         self.configSubViews()
         self.applyStyling()
         self.addConstraints()
+        
+        // 近くの端末を検索する
+        self.advertiser.startAdvertisingPeer()
+        self.browser.startBrowsingForPeers()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -63,6 +76,7 @@ class ExchangeViewController: UIViewController {
     
     private func addSubviews() {
         self.view.addSubview(self.statusLabel)
+        self.view.addSubview(self.messageLabel)
         self.view.addSubview(self.friendStackView)
         self.view.addSubview(self.findFriendButton)
         self.view.addSubview(self.sendFavoriteButton)
@@ -70,6 +84,7 @@ class ExchangeViewController: UIViewController {
     
     private func configSubViews() {
         self.statusLabel.text = "まだ接続されてないよ"
+        self.messageLabel.text = "メッセージはありません"
         
         self.friendStackView.alignment = .center
         self.friendStackView.axis = .vertical
@@ -87,6 +102,8 @@ class ExchangeViewController: UIViewController {
         
         self.statusLabel.textColor = .black
         
+        self.messageLabel.textColor = .black
+        
         self.findFriendButton.backgroundColor = CustomUIColor.turquoise
         self.findFriendButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
         self.findFriendButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 10.0, bottom: 3.0, right: 10.0)
@@ -100,7 +117,10 @@ class ExchangeViewController: UIViewController {
         self.statusLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 100.0)
         self.statusLabel.autoAlignAxis(toSuperviewAxis: .vertical)
         
-        self.friendStackView.autoPinEdge(.top, to: .bottom, of: self.statusLabel, withOffset: 20.0)
+        self.messageLabel.autoPinEdge(.top, to: .bottom, of: self.statusLabel, withOffset: 10.0)
+        self.messageLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+        
+        self.friendStackView.autoPinEdge(.top, to: .bottom, of: self.messageLabel, withOffset: 20.0)
         self.friendStackView.autoPinEdge(toSuperviewEdge: .left)
         self.friendStackView.autoPinEdge(toSuperviewEdge: .right)
         
@@ -112,9 +132,6 @@ class ExchangeViewController: UIViewController {
     }
     
     @objc private func tappedFindFriendButton() {
-        // 近くの端末を検索する
-        self.browser.startBrowsingForPeers()
-        
         // 2秒くらいボタンの色を薄くして、押した感を出す。連続タップも出来ない様に
         self.findFriendButton.alpha = 0.3
         self.findFriendButton.isEnabled = false
@@ -135,6 +152,15 @@ class ExchangeViewController: UIViewController {
     @objc private func tappedFriendView(_ sender: FriendView) {
         // 相手のIDに対して招待を送信する
         self.browser.invitePeer(sender.peerID, to: self.session, withContext: nil, timeout: 60.0)
+    }
+    
+    @objc private func tappedSendButton() {
+        let message = "\(session.myPeerID.displayName)からのメッセージ"
+        do {
+            try self.session.send(message.data(using: .utf8)!, toPeers: self.session.connectedPeers, with: .reliable)
+        } catch let error {
+            Toast.show("you can't send message: \(error)", self.view)
+        }
     }
 }
 
@@ -177,7 +203,7 @@ extension ExchangeViewController: MCNearbyServiceAdvertiserDelegate {
         // 招待を受信時に振動フィードバックを入れる
         AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
         
-        // trueにすると招待を受けることになる
+        // trueにすると招待を受けることになる(ここはハンドリングしても良い)
         invitationHandler(true, self.session)
         
         // お気に入りを送るボタンを表示させる
@@ -188,6 +214,7 @@ extension ExchangeViewController: MCNearbyServiceAdvertiserDelegate {
 }
 
 extension ExchangeViewController: MCSessionDelegate {
+    // 他のデバイスとの接続状態が変わったときに呼ばれる
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         let message: String
         switch state {
@@ -204,6 +231,7 @@ extension ExchangeViewController: MCSessionDelegate {
             message = "\(peerID.displayName)が想定外の状態です"
         }
         
+        // 最新のステータスをラベルに出してあげる
         DispatchQueue.main.async {
             self.statusLabel.text = message
         }
@@ -214,8 +242,9 @@ extension ExchangeViewController: MCSessionDelegate {
             return
         }
         
+        // 受け取ったメッセージを表示する
         DispatchQueue.main.async {
-            print("やりたい事を書く")
+            self.messageLabel.text = message
         }
     }
 
