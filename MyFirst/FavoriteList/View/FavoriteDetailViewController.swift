@@ -6,7 +6,7 @@ class FavoriteDetailViewController: UIViewController {
     let favorite: MyFavorite
     let presenter: FavoriteListPresenterProtocol
     
-    let imageHeight = UIScreen.main.bounds.height * 0.45
+    let imageHeight = UIScreen.main.bounds.height * 0.40
     
     var alertController = UIAlertController(
         title: "Delete your favorite?", message: nil, preferredStyle: .alert

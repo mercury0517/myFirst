@@ -27,7 +27,7 @@ class CustomTextView: UITextView {
         self.inputAccessoryView = tools
     }
 
-    @objc private func closeButtonTapped(){
+    @objc private func closeButtonTapped() {
         self.endEditing(true)
         self.resignFirstResponder()
     }

@@ -5,7 +5,7 @@ class FavoriteInputViewController: UIViewController {
     let itemIndex: Int
     let presenter: FavoriteListPresenterProtocol
     
-    let imageHeight = UIScreen.main.bounds.height * 0.45
+    let imageHeight = UIScreen.main.bounds.height * 0.40
     let isEdit: Bool
     var favorite: MyFavorite?
     
@@ -53,6 +53,28 @@ class FavoriteInputViewController: UIViewController {
         self.addConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureObserver()
+
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.removeObserver()
+    }
+
+    private func configureObserver() {
+        let notification = NotificationCenter.default
+        notification.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notification.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    private func removeObserver() {
+        let notification = NotificationCenter.default
+        notification.removeObserver(self)
+    }
+    
     private func addSubviews() {
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.itemImageView)
@@ -81,6 +103,8 @@ class FavoriteInputViewController: UIViewController {
         self.itemNameTextField.delegate = self
         
         self.memoLabel.text = "OVERVIEW"
+        
+        self.memoTextView.delegate = self
         
         self.registerButton.setTitle("REGISTER", for: .normal)
         self.registerButton.addTarget(self, action: #selector(self.tappedRegisterButton), for: .touchUpInside)
@@ -204,7 +228,26 @@ extension FavoriteInputViewController: UIImagePickerControllerDelegate, UINaviga
     }
 }
 
-extension FavoriteInputViewController: UITextFieldDelegate {
+extension FavoriteInputViewController: UITextFieldDelegate, UITextViewDelegate {
+    // キーボードが現れた時に、画面全体をずらす。
+    @objc func keyboardWillShow(notification: Notification?) {
+        let rect = (notification?.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
+        let duration: TimeInterval? = notification?.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double
+        
+        UIView.animate(withDuration: duration!, animations: { () in
+            let transform = CGAffineTransform(translationX: 0, y: -(rect?.size.height)!)
+            self.view.transform = transform
+        })
+    }
+
+    // キーボードが消えたときに、画面を戻す
+    @objc func keyboardWillHide(notification: Notification?) {
+        let duration: TimeInterval? = notification?.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? Double
+        UIView.animate(withDuration: duration!, animations: { () in
+            self.view.transform = CGAffineTransform.identity
+        })
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() // Returnキーを押したときにキーボードを下げる
         return true

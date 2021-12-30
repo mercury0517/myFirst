@@ -63,7 +63,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     }
     
     private func applyStyling() {
-        self.titleContainer.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        self.titleContainer.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         
         self.titleLabel.textColor = .white
         self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)
