@@ -18,8 +18,7 @@ class FavoriteInputViewController: UIViewController {
     let scrollView = UIScrollView()
     
     let itemImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
-    let closeButton = UIControl()
-    let closeIcon = UIImageView(image: UIImage(named: "close"))
+    let closeButton = CustomCloseButton()
     let inputImageButton = UIButton()
     
     let titleLabel = UILabel()
@@ -79,7 +78,6 @@ class FavoriteInputViewController: UIViewController {
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.itemImageView)
         self.scrollView.addSubview(self.closeButton)
-        self.closeButton.addSubview(self.closeIcon)
         self.scrollView.addSubview(self.inputImageButton)
         self.scrollView.addSubview(self.titleLabel)
         self.scrollView.addSubview(self.itemNameTextField)
@@ -152,9 +150,6 @@ class FavoriteInputViewController: UIViewController {
         
         self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
         self.closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-
-        self.closeIcon.autoPinEdgesToSuperviewEdges()
-        self.closeIcon.autoSetDimensions(to: CGSize(width: 30.0, height: 30.0))
         
         self.inputImageButton.autoPinEdge(.top, to: .bottom, of: self.itemImageView, withOffset: 10.0)
         self.inputImageButton.autoPinEdge(toSuperviewEdge: .right, withInset: 10.0)

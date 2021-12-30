@@ -28,8 +28,7 @@ class ProfileEditViewController: UIViewController {
     let itemImageViewContainer = UIControl()
     let itemImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
     
-    let closeButton = UIControl()
-    let closeIcon = UIImageView(image: UIImage(named: "close"))
+    let closeButton = CustomCloseButton()
     
     let userIconContainer = UIControl()
     let userIconView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 100.0, height: 100.0)))
@@ -90,7 +89,6 @@ class ProfileEditViewController: UIViewController {
         self.scrollView.addSubview(self.itemImageViewContainer)
         self.itemImageViewContainer.addSubview(self.itemImageView)
         self.scrollView.addSubview(self.closeButton)
-        self.closeButton.addSubview(self.closeIcon)
         self.scrollView.addSubview(self.userIconContainer)
         self.userIconContainer.addSubview(self.userIconView)
         self.scrollView.addSubview(self.userNameTitleLabel)
@@ -106,7 +104,6 @@ class ProfileEditViewController: UIViewController {
         self.itemImageView.image = self.topBanner
         
         self.closeButton.addTarget(self, action: #selector(self.tappedCloseButton), for: .touchUpInside)
-        self.closeIcon.isUserInteractionEnabled = false
         
         self.userIconContainer.addTarget(self, action: #selector(self.tappedUserIcon), for: .touchUpInside)
         
@@ -148,9 +145,6 @@ class ProfileEditViewController: UIViewController {
         
         self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
         self.closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-
-        self.closeIcon.autoPinEdgesToSuperviewEdges()
-        self.closeIcon.autoSetDimensions(to: CGSize(width: 30.0, height: 30.0))
         
         self.userIconContainer.autoPinEdge(.top, to: .bottom, of: self.itemImageViewContainer, withOffset: -50.0)
         self.userIconContainer.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)

@@ -15,8 +15,7 @@ class FavoriteDetailViewController: UIViewController {
     let scrollView = UIScrollView()
     
     let itemImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
-    let closeButton = UIControl()
-    let closeIcon = UIImageView(image: UIImage(named: "close"))
+    let closeButton = CustomCloseButton()
     
     let titleLabel = CustomUILabel()
     let detailLabel = CustomUILabel()
@@ -60,7 +59,6 @@ class FavoriteDetailViewController: UIViewController {
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.itemImageView)
         self.scrollView.addSubview(self.closeButton)
-        self.closeButton.addSubview(self.closeIcon)
         self.scrollView.addSubview(self.titleLabel)
         self.scrollView.addSubview(self.detailLabel)
         self.view.addSubview(self.deleteButton)
@@ -75,7 +73,6 @@ class FavoriteDetailViewController: UIViewController {
         self.itemImageView.image = self.favorite.image
         
         self.closeButton.addTarget(self, action: #selector(self.tappedCloseButton), for: .touchUpInside)
-        self.closeIcon.isUserInteractionEnabled = false
         
         self.titleLabel.text = self.favorite.title
         self.titleLabel.numberOfLines = 2
@@ -120,9 +117,6 @@ class FavoriteDetailViewController: UIViewController {
         
         self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
         self.closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-
-        self.closeIcon.autoPinEdgesToSuperviewEdges()
-        self.closeIcon.autoSetDimensions(to: CGSize(width: 30.0, height: 30.0))
         
         self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.itemImageView, withOffset: 10.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
