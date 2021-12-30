@@ -25,6 +25,8 @@ class ExchangeViewController: UIViewController {
     let friendStackView = UIStackView()
     let findFriendButton = UIButton()
     
+    let sendFavoriteButton = UIButton()
+    
     init() {
         self.browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: self.serviceType)
         self.advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: self.serviceType)
@@ -63,6 +65,7 @@ class ExchangeViewController: UIViewController {
         self.view.addSubview(self.statusLabel)
         self.view.addSubview(self.friendStackView)
         self.view.addSubview(self.findFriendButton)
+        self.view.addSubview(self.sendFavoriteButton)
     }
     
     private func configSubViews() {
@@ -74,14 +77,23 @@ class ExchangeViewController: UIViewController {
         
         self.findFriendButton.setTitle("FIND FRIEND", for: .normal)
         self.findFriendButton.addTarget(self, action: #selector(self.tappedFindFriendButton), for: .touchUpInside)
+        
+        self.sendFavoriteButton.setTitle("SEND FAVORITE", for: .normal)
+        self.sendFavoriteButton.isHidden = true
     }
     
     private func applyStyling() {
         self.view.backgroundColor = .white
         
+        self.statusLabel.textColor = .black
+        
         self.findFriendButton.backgroundColor = CustomUIColor.turquoise
         self.findFriendButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
         self.findFriendButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 10.0, bottom: 3.0, right: 10.0)
+        
+        self.sendFavoriteButton.backgroundColor = .magenta
+        self.sendFavoriteButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
+        self.sendFavoriteButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 10.0, bottom: 3.0, right: 10.0)
     }
     
     private func addConstraints() {
@@ -94,6 +106,9 @@ class ExchangeViewController: UIViewController {
         
         self.findFriendButton.autoPinEdge(.top, to: .bottom, of: self.friendStackView, withOffset: 20.0)
         self.findFriendButton.autoAlignAxis(toSuperviewAxis: .vertical)
+        
+        self.sendFavoriteButton.autoPinEdge(.top, to: .bottom, of: self.findFriendButton, withOffset: 20.0)
+        self.sendFavoriteButton.autoAlignAxis(toSuperviewAxis: .vertical)
     }
     
     @objc private func tappedFindFriendButton() {
@@ -156,11 +171,30 @@ extension ExchangeViewController: MCNearbyServiceBrowserDelegate {
     }
 }
 
+// 他のデバイスからの招待を受信した際の処理を書く
+extension ExchangeViewController: MCNearbyServiceAdvertiserDelegate {
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        // 招待を受信時に振動フィードバックを入れる
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        
+        // trueにすると招待を受けることになる
+        invitationHandler(true, self.session)
+        
+        // お気に入りを送るボタンを表示させる
+        DispatchQueue.main.async {
+            self.sendFavoriteButton.isHidden = false
+        }
+    }
+}
+
 extension ExchangeViewController: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         let message: String
         switch state {
         case .connected:
+            // 接続成功のハプティックフィードバックを入れる
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            
             message = "\(peerID.displayName)が接続されました"
         case .connecting:
             message = "\(peerID.displayName)が接続中です"
@@ -195,13 +229,5 @@ extension ExchangeViewController: MCSessionDelegate {
 
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         assertionFailure("非対応")
-    }
-}
-
-// 他のデバイスに対して招待を送信する際の処理を書く
-extension ExchangeViewController: MCNearbyServiceAdvertiserDelegate {
-
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-//        invitationHandler(true, session)
     }
 }

@@ -179,6 +179,7 @@ class FavoriteInputViewController: UIViewController {
         self.registerButton.autoSetDimension(.height, toSize: 45.0)
         self.registerButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.registerButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.registerButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
     }
     
     @objc private func tappedCloseButton() {

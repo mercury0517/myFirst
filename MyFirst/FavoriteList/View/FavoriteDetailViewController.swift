@@ -18,8 +18,8 @@ class FavoriteDetailViewController: UIViewController {
     let closeButton = UIControl()
     let closeIcon = UIImageView(image: UIImage(named: "close"))
     
-    let titleLabel = UILabel()
-    let detailLabel = UILabel()
+    let titleLabel = CustomUILabel()
+    let detailLabel = CustomUILabel()
     
     let deleteButton = UIControl()
     let deleteIcon = UIImageView(image: UIImage(named: "delete_icon"))
