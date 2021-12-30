@@ -2,3 +2,4 @@ UserInterfaceState.xcuserstate
 
 .DS_Store
 *.swp
+MyFirst.xcworkspace/xcuserdata/ihara.xcuserdatad/UserInterfaceState.xcuserstate
