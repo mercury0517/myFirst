@@ -96,15 +96,16 @@ class ExchangeViewController: UIViewController {
         self.friendStackView.axis = .vertical
         self.friendStackView.spacing = 0.0
         
-        self.hostButton.setTitle("招待を送る", for: .normal)
+        self.hostButton.setTitle("友達に招待を送る", for: .normal)
         self.hostButton.addTarget(self, action: #selector(self.tappedHostButton), for: .touchUpInside)
         
-        self.guestButton.setTitle("招待を受け取る", for: .normal)
+        self.guestButton.setTitle("友達の招待を受け取る", for: .normal)
         self.guestButton.addTarget(self, action: #selector(self.tappedGuestButton), for: .touchUpInside)
         
         self.sendFavoriteButton.setTitle("お気に入りを送る", for: .normal)
         self.sendFavoriteButton.addTarget(self, action: #selector(self.tappedSendFavorite), for: .touchUpInside)
-        self.sendFavoriteButton.isHidden = true // 接続されるまでは隠しておく
+        
+        self.sendFavoriteButton.isEnabled = false
     }
     
     private func applyStyling() {
@@ -116,15 +117,24 @@ class ExchangeViewController: UIViewController {
         
         self.hostButton.backgroundColor = CustomUIColor.turquoise
         self.hostButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
-        self.hostButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 10.0, bottom: 3.0, right: 10.0)
+        self.hostButton.setTitleColor(.white, for: .normal)
+        self.hostButton.layer.cornerRadius = 5.0
+        self.hostButton.layer.borderColor = CustomUIColor.turquoise.cgColor
+        self.hostButton.layer.borderWidth = 1.0
         
-        self.guestButton.backgroundColor = .blue
+        self.guestButton.backgroundColor = CustomUIColor.turquoise
         self.guestButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
-        self.guestButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 10.0, bottom: 3.0, right: 10.0)
+        self.guestButton.setTitleColor(.white, for: .normal)
+        self.guestButton.layer.cornerRadius = 5.0
+        self.guestButton.layer.borderColor = CustomUIColor.turquoise.cgColor
+        self.guestButton.layer.borderWidth = 1.0
         
-        self.sendFavoriteButton.backgroundColor = .blue
+        self.sendFavoriteButton.backgroundColor = .white
         self.sendFavoriteButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
-        self.sendFavoriteButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 10.0, bottom: 3.0, right: 10.0)
+        self.sendFavoriteButton.setTitleColor(CustomUIColor.turquoise, for: .normal)
+        self.sendFavoriteButton.layer.cornerRadius = 5.0
+        self.sendFavoriteButton.layer.borderColor = CustomUIColor.turquoise.cgColor
+        self.sendFavoriteButton.layer.borderWidth = 1.0
     }
     
     private func addConstraints() {
@@ -138,14 +148,20 @@ class ExchangeViewController: UIViewController {
         self.friendStackView.autoPinEdge(toSuperviewEdge: .left)
         self.friendStackView.autoPinEdge(toSuperviewEdge: .right)
         
-        self.hostButton.autoPinEdge(.top, to: .bottom, of: self.friendStackView, withOffset: 20.0)
-        self.hostButton.autoAlignAxis(toSuperviewAxis: .vertical)
+        self.hostButton.autoPinEdge(.top, to: .bottom, of: self.friendStackView, withOffset: 50.0)
+        self.hostButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.hostButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.hostButton.autoSetDimension(.height, toSize: 44.0)
         
         self.guestButton.autoPinEdge(.top, to: .bottom, of: self.hostButton, withOffset: 20.0)
-        self.guestButton.autoAlignAxis(toSuperviewAxis: .vertical)
+        self.guestButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.guestButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.guestButton.autoSetDimension(.height, toSize: 44.0)
         
         self.sendFavoriteButton.autoPinEdge(.top, to: .bottom, of: self.guestButton, withOffset: 20.0)
-        self.sendFavoriteButton.autoAlignAxis(toSuperviewAxis: .vertical)
+        self.sendFavoriteButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.sendFavoriteButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.sendFavoriteButton.autoSetDimension(.height, toSize: 44.0)
     }
     
     @objc private func tappedHostButton() {
@@ -153,7 +169,7 @@ class ExchangeViewController: UIViewController {
         self.browser.startBrowsingForPeers()
         
         // 2秒くらいボタンの色を薄くして、押した感を出す。連続タップも出来ない様に
-        self.hostButton.alpha = 0.3
+        self.hostButton.alpha = 0.6
         self.hostButton.isEnabled = false
 
         DispatchQueue.main.async {
@@ -174,7 +190,7 @@ class ExchangeViewController: UIViewController {
         self.advertiser.startAdvertisingPeer()
         
         // 2秒くらいボタンの色を薄くして、押した感を出す。連続タップも出来ない様に
-        self.guestButton.alpha = 0.3
+        self.guestButton.alpha = 0.6
         self.guestButton.isEnabled = false
 
         DispatchQueue.main.async {
@@ -275,8 +291,8 @@ extension ExchangeViewController: MCNearbyServiceBrowserDelegate {
         DispatchQueue.main.async {
             self.friendStackView.addArrangedSubview(friendView)
 
-            friendView.autoPinEdge(toSuperviewEdge: .left)
-            friendView.autoPinEdge(toSuperviewEdge: .right)
+            friendView.autoPinEdge(toSuperviewEdge: .left ,withInset: 16.0)
+            friendView.autoPinEdge(toSuperviewEdge: .right ,withInset: 16.0)
 
             // タップ時にその友達に対して招待を送る設定をしておく
             friendView.addTarget(self, action: #selector(self.tappedFriendView(_:)), for: .touchUpInside)
@@ -331,7 +347,59 @@ extension ExchangeViewController: MCSessionDelegate {
             
             // 接続されたのでお気に入りを送るボタンを表示する
             DispatchQueue.main.async {
-                self.sendFavoriteButton.isHidden = false
+                for subview in self.friendStackView.arrangedSubviews {
+                    if
+                        let friendView = subview as? FriendView,
+                        friendView.peerID == peerID
+                    {
+                        friendView.inviteLabel.text = "接続中"
+                        friendView.isEnabled = false
+                    } else {
+                        // まだカードがない状態なので、友達のカードを作成する
+                        let friendView = FriendView()
+                        friendView.peerID = peerID
+                        friendView.inviteLabel.text = "接続中"
+                        friendView.isEnabled = false
+                        
+                        self.friendStackView.addArrangedSubview(friendView)
+                        
+                        friendView.autoPinEdge(toSuperviewEdge: .left ,withInset: 16.0)
+                        friendView.autoPinEdge(toSuperviewEdge: .right ,withInset: 16.0)
+                        
+                        // タップ時にその友達に対して招待を送る設定をしておく
+                        friendView.addTarget(self, action: #selector(self.tappedFriendView(_:)), for: .touchUpInside)
+                    }
+                }
+                
+                if self.friendStackView.arrangedSubviews.isEmpty {
+                    DispatchQueue.main.async {
+                        // まだカードがない状態なので、友達のカードを作成する
+                        let friendView = FriendView()
+                        friendView.peerID = peerID
+                        friendView.inviteLabel.text = "接続中"
+                        friendView.isEnabled = false
+                        
+                        self.friendStackView.addArrangedSubview(friendView)
+                        
+                        friendView.autoPinEdge(toSuperviewEdge: .left ,withInset: 16.0)
+                        friendView.autoPinEdge(toSuperviewEdge: .right ,withInset: 16.0)
+                        
+                        // タップ時にその友達に対して招待を送る設定をしておく
+                        friendView.addTarget(self, action: #selector(self.tappedFriendView(_:)), for: .touchUpInside)
+                    }
+                }
+                
+                self.hostButton.isEnabled = false
+                self.hostButton.backgroundColor = .white
+                self.hostButton.setTitleColor(CustomUIColor.turquoise, for: .normal)
+                
+                self.guestButton.isEnabled = false
+                self.guestButton.backgroundColor = .white
+                self.guestButton.setTitleColor(CustomUIColor.turquoise, for: .normal)
+                
+                self.sendFavoriteButton.isEnabled = true
+                self.sendFavoriteButton.backgroundColor = CustomUIColor.turquoise
+                self.sendFavoriteButton.setTitleColor(.white, for: .normal)
             }
         case .connecting:
             message = "\(peerID.displayName)さんと接続中です"
@@ -340,7 +408,27 @@ extension ExchangeViewController: MCSessionDelegate {
             
             // 切断されたのでお気に入りを送るボタンを隠す
             DispatchQueue.main.async {
-                self.sendFavoriteButton.isHidden = true
+                for subview in self.friendStackView.arrangedSubviews {
+                    if
+                        let friendView = subview as? FriendView,
+                        friendView.peerID == peerID
+                    {
+                        friendView.inviteLabel.text = "招待する"
+                        friendView.isEnabled = true
+                    }
+                }
+                
+                self.hostButton.isEnabled = true
+                self.hostButton.backgroundColor = CustomUIColor.turquoise
+                self.hostButton.setTitleColor(.white, for: .normal)
+                
+                self.guestButton.isEnabled = true
+                self.guestButton.backgroundColor = CustomUIColor.turquoise
+                self.guestButton.setTitleColor(.white, for: .normal)
+                
+                self.sendFavoriteButton.isEnabled = false
+                self.sendFavoriteButton.backgroundColor = .white
+                self.sendFavoriteButton.setTitleColor(CustomUIColor.turquoise, for: .normal)
             }
         @unknown default:
             message = "\(peerID.displayName)さんとの通信が想定外の状態です"
