@@ -2,7 +2,7 @@ import UIKit
 
 class MyTabBarController: UITabBarController {
     let tabView1 = AppDependencies.assmbleFavoriteList()
-    let tabView2 = HomeViewController()
+    let tabView2 = UINavigationController(rootViewController: FriendListViewController())
     let tabView3 = UINavigationController(rootViewController: ExchangeViewController())
     let tabView4 = PhotoViewController()
     

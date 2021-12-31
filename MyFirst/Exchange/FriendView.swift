@@ -2,15 +2,17 @@ import UIKit
 import MultipeerConnectivity
 
 class FriendView: UIControl {
-    let peerID: MCPeerID
+    var peerID: MCPeerID? {
+        didSet {
+            self.nameLabel.text = self.peerID?.displayName
+        }
+    }
     
     let nameLabel = UILabel()
-    let inviteLabel = UILabel()
+    let inviteButton = UIButton()
     
-    init(peerID: MCPeerID) {
-        self.peerID = peerID
-        
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         self.addSubviews()
         self.configSubViews()
@@ -24,32 +26,31 @@ class FriendView: UIControl {
      
     private func addSubviews() {
         self.addSubview(self.nameLabel)
-        self.addSubview(self.inviteLabel)
+        self.addSubview(self.inviteButton)
     }
     
     private func configSubViews() {
-        self.nameLabel.text = peerID.displayName
+        self.nameLabel.text = "名前がありません"
         
-        self.inviteLabel.text = "INVITE"
+        self.inviteButton.setTitle("招待する", for: .normal)
     }
     
     private func applyStyling() {
-        self.backgroundColor = .cyan
+        self.backgroundColor = .lightGray
         
         self.nameLabel.textColor = .black
-        self.nameLabel.font = UIFont(name: "Oswald", size: 15.0)
+        self.nameLabel.font = UIFont(name: "Oswald", size: 20.0)
         
-        self.inviteLabel.textColor = CustomUIColor.turquoise
-        self.inviteLabel.font = UIFont(name: "Oswald", size: 15.0)
+        self.inviteButton.setTitleColor(CustomUIColor.turquoise, for: .normal)
+        self.inviteButton.titleLabel?.font = UIFont(name: "Oswald", size: 20.0)
     }
     
     private func addConstraints() {
-        self.autoPinEdgesToSuperviewEdges()
-        
         self.nameLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 10.0)
         self.nameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.nameLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
         
-        self.inviteLabel.autoAlignAxis(.horizontal, toSameAxisOf: self.nameLabel)
-        self.inviteLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.inviteButton.autoAlignAxis(.horizontal, toSameAxisOf: self.nameLabel)
+        self.inviteButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
     }
 }

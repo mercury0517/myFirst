@@ -50,10 +50,6 @@ class FavoriteListInteractor: FavoriteListInteractorProtocol {
     func updateFavorite(_ favorite: MyFavorite) {
         var cachedFavoriteList = self.loadFavoriteList(categoryName: favorite.categoryName)
         
-        print("カウント")
-        print(cachedFavoriteList.count)
-        print(favorite.index)
-        
         // 該当のindexのお気に入りを更新する
         if !cachedFavoriteList.isEmpty {
             cachedFavoriteList[favorite.index] = favorite
