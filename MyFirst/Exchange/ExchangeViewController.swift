@@ -25,13 +25,13 @@ class ExchangeViewController: UIViewController {
     private var session: MCSession!
     
     let statusLabel = UILabel()
-    let messageLabel = UILabel()
-    
+
     let friendStackView = UIStackView()
     
     let hostButton = UIButton() // hostになる
     let guestButton = UIButton() // guestになる
     let sendFavoriteButton = UIButton()
+    let disconnectButton = UIButton()
     
     init() {
         if
@@ -53,6 +53,8 @@ class ExchangeViewController: UIViewController {
         self.browser.delegate = self
         self.advertiser.delegate = self
         self.session.delegate = self
+        
+        self.navigationItem.title = "お気に入り交換"
     }
     
     required init?(coder: NSCoder) {
@@ -70,8 +72,22 @@ class ExchangeViewController: UIViewController {
         self.addConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        DispatchQueue.main.async {
+            self.friendStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            self.statusLabel.text = "近くの友達とお気に入りを交換しましょう！"
+        }
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
+        // 切断する時に全ての友達カードを消す
+        DispatchQueue.main.async {
+            self.friendStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        }
 
         // 他の画面に遷移したタイミングで、通信で使用していたものを全て止める
         self.session.disconnect()
@@ -81,22 +97,22 @@ class ExchangeViewController: UIViewController {
     
     private func addSubviews() {
         self.view.addSubview(self.statusLabel)
-        self.view.addSubview(self.messageLabel)
         self.view.addSubview(self.friendStackView)
         self.view.addSubview(self.hostButton)
         self.view.addSubview(self.guestButton)
         self.view.addSubview(self.sendFavoriteButton)
+        self.view.addSubview(self.disconnectButton)
     }
     
     private func configSubViews() {
-        self.statusLabel.text = "まだ接続されてないよ"
-        self.messageLabel.text = "メッセージはありません"
+        self.statusLabel.text = "近くの友達とお気に入りを交換しましょう！"
+        self.statusLabel.numberOfLines = 2
         
         self.friendStackView.alignment = .center
         self.friendStackView.axis = .vertical
         self.friendStackView.spacing = 0.0
         
-        self.hostButton.setTitle("友達に招待を送る", for: .normal)
+        self.hostButton.setTitle("近くの友達に招待を送る", for: .normal)
         self.hostButton.addTarget(self, action: #selector(self.tappedHostButton), for: .touchUpInside)
         
         self.guestButton.setTitle("友達の招待を受け取る", for: .normal)
@@ -104,16 +120,18 @@ class ExchangeViewController: UIViewController {
         
         self.sendFavoriteButton.setTitle("お気に入りを送る", for: .normal)
         self.sendFavoriteButton.addTarget(self, action: #selector(self.tappedSendFavorite), for: .touchUpInside)
-        
         self.sendFavoriteButton.isEnabled = false
+        
+        self.disconnectButton.setTitle("接続を解除する", for: .normal)
+        self.disconnectButton.addTarget(self, action: #selector(self.tappedDisconnectButton), for: .touchUpInside)
+        
+        self.disconnectButton.isHidden = true
     }
     
     private func applyStyling() {
         self.view.backgroundColor = .white
         
         self.statusLabel.textColor = .black
-        
-        self.messageLabel.textColor = .black
         
         self.hostButton.backgroundColor = CustomUIColor.turquoise
         self.hostButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
@@ -135,20 +153,26 @@ class ExchangeViewController: UIViewController {
         self.sendFavoriteButton.layer.cornerRadius = 5.0
         self.sendFavoriteButton.layer.borderColor = CustomUIColor.turquoise.cgColor
         self.sendFavoriteButton.layer.borderWidth = 1.0
+        
+        self.disconnectButton.backgroundColor = .white
+        self.disconnectButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
+        self.disconnectButton.setTitleColor(.red, for: .normal)
     }
     
     private func addConstraints() {
-        self.statusLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 100.0)
-        self.statusLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+        let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
+        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
+        let topMargin = (statusBarHeight + navigationBarHeight)
         
-        self.messageLabel.autoPinEdge(.top, to: .bottom, of: self.statusLabel, withOffset: 10.0)
-        self.messageLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+        self.statusLabel.autoPinEdge(toSuperviewEdge: .top, withInset: topMargin + 20.0)
+        self.statusLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.statusLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
-        self.friendStackView.autoPinEdge(.top, to: .bottom, of: self.messageLabel, withOffset: 20.0)
+        self.friendStackView.autoPinEdge(.top, to: .bottom, of: self.statusLabel, withOffset: 20.0)
         self.friendStackView.autoPinEdge(toSuperviewEdge: .left)
         self.friendStackView.autoPinEdge(toSuperviewEdge: .right)
         
-        self.hostButton.autoPinEdge(.top, to: .bottom, of: self.friendStackView, withOffset: 50.0)
+        self.hostButton.autoPinEdge(.top, to: .bottom, of: self.friendStackView, withOffset: 20.0)
         self.hostButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.hostButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.hostButton.autoSetDimension(.height, toSize: 44.0)
@@ -162,6 +186,11 @@ class ExchangeViewController: UIViewController {
         self.sendFavoriteButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.sendFavoriteButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.sendFavoriteButton.autoSetDimension(.height, toSize: 44.0)
+        
+        self.disconnectButton.autoPinEdge(.top, to: .bottom, of: self.sendFavoriteButton, withOffset: 20.0)
+        self.disconnectButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.disconnectButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.disconnectButton.autoSetDimension(.height, toSize: 44.0)
     }
     
     @objc private func tappedHostButton() {
@@ -238,6 +267,33 @@ class ExchangeViewController: UIViewController {
                 print("そのカテゴリは空だよ")
             }
         }
+        
+        // 2秒くらいボタンの色を薄くして、押した感を出す。連続タップも出来ない様に
+        self.sendFavoriteButton.alpha = 0.6
+        self.sendFavoriteButton.isEnabled = false
+
+        DispatchQueue.main.async {
+            UIImageView.animate(
+                withDuration: 2.0,
+                delay: 0.0,
+                options: [.curveEaseIn],
+                animations: {
+                    self.sendFavoriteButton.alpha = 1.0
+                    self.sendFavoriteButton.isEnabled = true
+                }
+            )
+        }
+    }
+    
+    @objc private func tappedDisconnectButton() {
+        // 切断する時に全ての友達カードを消す
+        DispatchQueue.main.async {
+            self.friendStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        }
+        
+        self.session.disconnect()
+        self.advertiser.stopAdvertisingPeer()
+        self.browser.stopBrowsingForPeers()
     }
     
     // 現在保持しているお気に入りをカテゴリごとにキャッシュから取得する
@@ -289,13 +345,18 @@ extension ExchangeViewController: MCNearbyServiceBrowserDelegate {
         
         // スタックビューの更新
         DispatchQueue.main.async {
-            self.friendStackView.addArrangedSubview(friendView)
-
-            friendView.autoPinEdge(toSuperviewEdge: .left ,withInset: 16.0)
-            friendView.autoPinEdge(toSuperviewEdge: .right ,withInset: 16.0)
-
-            // タップ時にその友達に対して招待を送る設定をしておく
-            friendView.addTarget(self, action: #selector(self.tappedFriendView(_:)), for: .touchUpInside)
+            // 既にそのカードがなければ新規追加する
+            let matchedFriendViewList = self.friendStackView.arrangedSubviews.filter { ($0 as? FriendView)?.peerID == peerID }
+            
+            if matchedFriendViewList.isEmpty {
+                self.friendStackView.addArrangedSubview(friendView)
+                
+                friendView.autoPinEdge(toSuperviewEdge: .left ,withInset: 16.0)
+                friendView.autoPinEdge(toSuperviewEdge: .right ,withInset: 16.0)
+                
+                // タップ時にその友達に対して招待を送る設定をしておく
+                friendView.addTarget(self, action: #selector(self.tappedFriendView(_:)), for: .touchUpInside)
+            }
         }
     }
 
@@ -313,13 +374,13 @@ extension ExchangeViewController: MCNearbyServiceAdvertiserDelegate {
         AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
         
         let alertController = UIAlertController(
-            title: "\(peerID.displayName)さんから招待が来ています", message: nil, preferredStyle: .alert
+            title: "\(peerID.displayName)さんと接続しますか？", message: nil, preferredStyle: .alert
         )
-        let acceptAction = UIAlertAction(title: "受け入れる", style: .default) { (action) in
+        let acceptAction = UIAlertAction(title: "接続する", style: .default) { (action) in
             // trueにすると招待を受けることになる
             invitationHandler(true, self.session)
         }
-        let deniedAction = UIAlertAction(title: "辞退する", style: .destructive) { (action) in
+        let deniedAction = UIAlertAction(title: "接続しない", style: .destructive) { (action) in
             // trueにすると招待を受けることになる
             invitationHandler(true, self.session)
         }
@@ -347,6 +408,8 @@ extension ExchangeViewController: MCSessionDelegate {
             
             // 接続されたのでお気に入りを送るボタンを表示する
             DispatchQueue.main.async {
+                self.disconnectButton.isHidden = false
+                
                 for subview in self.friendStackView.arrangedSubviews {
                     if
                         let friendView = subview as? FriendView,
@@ -408,6 +471,11 @@ extension ExchangeViewController: MCSessionDelegate {
             
             // 切断されたのでお気に入りを送るボタンを隠す
             DispatchQueue.main.async {
+                // 切断する時に全ての友達カードを消す
+                self.friendStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+                
+                self.disconnectButton.isHidden = true
+                
                 for subview in self.friendStackView.arrangedSubviews {
                     if
                         let friendView = subview as? FriendView,
@@ -450,10 +518,6 @@ extension ExchangeViewController: MCSessionDelegate {
             
             for favorite in favoriteList {
                 print(favorite.title)
-                
-                DispatchQueue.main.async {
-                    self.messageLabel.text = favorite.title
-                }
             }
         } else if let uniqueKey = String(data: data, encoding: .utf8) {
             print("ユニークキーは\(uniqueKey)")

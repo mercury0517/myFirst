@@ -11,7 +11,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     let imageHeight = UIScreen.main.bounds.height * 0.2
     
     var alertController = UIAlertController(
-        title: "Please select image", message: nil, preferredStyle: .actionSheet
+        title: "画像を選択する", message: nil, preferredStyle: .actionSheet
     )
     
     let scrollView = UIScrollView()
@@ -131,7 +131,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.customPhotoLibraryAlert()
         
         
-        self.editProfileButton.setTitle("EDIT PROFILE", for: .normal)
+        self.editProfileButton.setTitle("プロフィール編集", for: .normal)
         self.editProfileButton.addTarget(self, action: #selector(self.tappedEditProfileButton), for: .touchUpInside)
 
         self.topBanner.backgroundColor = .black
@@ -152,9 +152,9 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     private func applyStyling() {
         self.view.backgroundColor = .white
         
-        self.editProfileButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
+        self.editProfileButton.titleLabel?.font = UIFont(name: "Oswald", size: 12.0)
         self.editProfileButton.backgroundColor = CustomUIColor.turquoise
-        self.editProfileButton.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
+        self.editProfileButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 10.0, bottom: 3.0, right: 10.0)
         self.editProfileButton.layer.cornerRadius = 5.0
         
         self.userNameLabel.textColor = .black
@@ -200,7 +200,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     }
     
     private func customPhotoLibraryAlert() {
-        let albumAction = UIAlertAction(title: "PHOTO LIBRARY", style: .default) { (action) in
+        let albumAction = UIAlertAction(title: "フォトライブラリ", style: .default) { (action) in
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) == true {
                 let picker = UIImagePickerController()
                 picker.sourceType = .photoLibrary
@@ -208,7 +208,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
                 picker.delegate = self
                 self.present(picker, animated: true, completion: nil)
             } else {
-                print("The photo library is not available on this device")
+                Toast.show("フォトライブラリは現在利用できません。", self.view)
             }
         }
         let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel) { (action) in

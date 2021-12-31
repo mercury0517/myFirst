@@ -114,13 +114,13 @@ class ProfileEditViewController: UIViewController {
         self.userIconView.layer.borderColor = UIColor.white.cgColor
         self.userIconView.image = self.userIcon
         
-        self.userNameTitleLabel.text = "YOUR NAME"
+        self.userNameTitleLabel.text = "名前"
 
         self.userNameTextField.placeholder = "input your name"
         self.userNameTextField.text = self.userName
         self.userNameTextField.delegate = self
         
-        self.registerButton.setTitle("REGISTER", for: .normal)
+        self.registerButton.setTitle("OK", for: .normal)
         self.registerButton.addTarget(self, action: #selector(self.tappedRegisterButton), for: .touchUpInside)
     }
     

@@ -95,16 +95,16 @@ class FavoriteInputViewController: UIViewController {
         self.inputImageButton.setTitle("INPUT IMAGE", for: .normal)
         self.inputImageButton.addTarget(self, action: #selector(self.tappedInputImageButton), for: .touchUpInside)
         
-        self.titleLabel.text = "ITEM TITLE"
+        self.titleLabel.text = "タイトル"
         
         self.itemNameTextField.placeholder = "input your favorite title"
         self.itemNameTextField.delegate = self
         
-        self.memoLabel.text = "OVERVIEW"
+        self.memoLabel.text = "メモ"
         
         self.memoTextView.delegate = self
         
-        self.registerButton.setTitle("REGISTER", for: .normal)
+        self.registerButton.setTitle("OK", for: .normal)
         self.registerButton.addTarget(self, action: #selector(self.tappedRegisterButton), for: .touchUpInside)
         
         // for edit

@@ -10,7 +10,7 @@ class CustomCloseButton: UIControl {
         self.clipsToBounds = true
         self.autoSetDimensions(to: CGSize(width: 30.0, height: 30.0))
         
-        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffect = UIBlurEffect(style: .light)
         let visualEffectView = UIVisualEffectView(effect: blurEffect)
         self.addSubview(visualEffectView)
         visualEffectView.autoSetDimensions(to: CGSize(width: 30.0, height: 30.0))
