@@ -248,7 +248,7 @@ class ExchangeViewController: UIViewController {
         // 相手側でのキャッシュ管理のため、ユニークキーも送信しておく
         self.sendUniqueKey()
         
-        // お気に入り情報の送信
+        // お気に入り一覧を送る
         for category in FavoriteCategory.allCases {
             let favoriteData = self.getMyFavoriteAsData(category: category)
             
@@ -268,6 +268,8 @@ class ExchangeViewController: UIViewController {
             }
         }
         
+        print("インジケータを止める")
+            
         // 2秒くらいボタンの色を薄くして、押した感を出す。連続タップも出来ない様に
         self.sendFavoriteButton.alpha = 0.6
         self.sendFavoriteButton.isEnabled = false
@@ -285,6 +287,27 @@ class ExchangeViewController: UIViewController {
         }
     }
     
+    // 現在保持しているお気に入りをカテゴリごとにキャッシュから取得する
+    private func getMyFavoriteAsData(category: FavoriteCategory) -> Data? {
+        return UserDefaults.standard.object(forKey: category.rawValue) as? Data
+    }
+    
+    private func getAllFavoriteList() -> [MyFavorite] {
+        var allFavoriteList: [MyFavorite] = []
+        
+        for category in FavoriteCategory.allCases {
+            if
+                let data = UserDefaults.standard.object(forKey: category.rawValue) as? Data,
+                let favoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite]
+            {
+                // お気に入り配列を順番に結合していく
+                allFavoriteList.append(contentsOf: favoriteList)
+            }
+        }
+        
+        return allFavoriteList
+    }
+    
     @objc private func tappedDisconnectButton() {
         // 切断する時に全ての友達カードを消す
         DispatchQueue.main.async {
@@ -296,10 +319,6 @@ class ExchangeViewController: UIViewController {
         self.browser.stopBrowsingForPeers()
     }
     
-    // 現在保持しているお気に入りをカテゴリごとにキャッシュから取得する
-    private func getMyFavoriteAsData(category: FavoriteCategory) -> Data? {
-        return UserDefaults.standard.object(forKey: category.rawValue) as? Data
-    }
     
     // ユニークキーの送信
     private func sendUniqueKey() {
@@ -509,21 +528,28 @@ extension ExchangeViewController: MCSessionDelegate {
     }
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        // TODO: インジケータを表示する
         print("データが届いたよ")
         
         if let favoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite] {
             // TODO: このお気に入りを相手のuuidに紐づいた形でキャッシュに保存する
-            print("お気に入りを取り出せたよ")
+            print("お気に入りの数は\(favoriteList.count)個だよ")
             
-            for favorite in favoriteList {
-                print(favorite.title)
-            }
+            print("インジケータ止めるのここで良さそう")
         } else if let uniqueKey = String(data: data, encoding: .utf8) {
             print("ユニークキーは\(uniqueKey)")
+            // TODO: インジケータを表示する
+            print("インジケータを表示する")
         } else {
             print("想定外のデータだよ")
         }
+        
+        /*
+         先にユニークキーが届く
+         →まずユニークキーをプロパティとして保持する
+         →お気に入り一覧も変数として保持する
+         →そのキーを使ってお気に入りリストをキャッシュに保存する
+         →ユニークキー自身もキャッシュに保存する
+        */
     }
 
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
