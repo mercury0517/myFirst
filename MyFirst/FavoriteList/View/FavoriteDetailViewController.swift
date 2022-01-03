@@ -71,6 +71,7 @@ class FavoriteDetailViewController: UIViewController {
         self.scrollView.showsVerticalScrollIndicator = false
         self.scrollView.alwaysBounceVertical = false
         self.scrollView.alwaysBounceHorizontal = false
+        self.scrollView.bounces = false
         
         self.itemImageView.contentMode = .scaleAspectFill
         self.itemImageView.clipsToBounds = true

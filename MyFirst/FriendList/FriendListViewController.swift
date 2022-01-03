@@ -37,13 +37,16 @@ class FriendListViewController: UIViewController {
         self.friendStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         if let friendList = UserDefaults.standard.object(forKey: UserDefaultKeys.friendList) as? [String : String] {
-            for friendDisplayName in friendList.values {
+            for friendUniqueKey in friendList.keys {
                 let friendCardView = FriendView()
-                friendCardView.displayName = friendDisplayName
+                friendCardView.uniqueKey = friendUniqueKey
+                friendCardView.displayName = friendList[friendUniqueKey]
                 
                 self.friendStackView.addArrangedSubview(friendCardView)
                 friendCardView.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
                 friendCardView.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+                
+                friendCardView.addTarget(self, action: #selector(self.tappedFriendCard(_:)), for: .touchUpInside)
             }
         }
     }
@@ -79,5 +82,13 @@ class FriendListViewController: UIViewController {
         self.friendStackView.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 10.0)
         self.friendStackView.autoSetDimension(.width, toSize: UIScreen.main.bounds.width)
         self.friendStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
+    }
+    
+    @objc private func tappedFriendCard(_ sender: FriendView) {
+        if let unwrappedUniqueKey = sender.uniqueKey {
+            self.present(FriendDetailViewController(uniqueKey: unwrappedUniqueKey), animated: true)
+        } else {
+            Toast.show("現在ご利用できません", self.view)
+        }
     }
 }

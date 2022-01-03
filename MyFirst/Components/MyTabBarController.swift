@@ -23,7 +23,7 @@ class MyTabBarController: UITabBarController {
         self.tabView3.tabBarItem.tag = 3
         
         self.tabView4.tabBarItem.title = "お知らせ"
-        self.tabView4.tabBarItem.image = UIImage(named: "tab_cd")
+        self.tabView4.tabBarItem.image = UIImage(named: "tab_notice")
         self.tabView4.tabBarItem.tag = 4
         
         self.tabView5.tabBarItem.title = "その他"

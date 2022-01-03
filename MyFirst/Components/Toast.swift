@@ -5,16 +5,18 @@ class Toast {
         let label = UILabel()
         let width = parent.frame.size.width
         let height = parent.frame.size.height / 15
-        var bottomPadding = 50.0
+        var bottomPadding = 80.0
+        
         if #available(iOS 13.0, *) {
             let scenes = UIApplication.shared.connectedScenes
             let windowScene = scenes.first as? UIWindowScene
-            if let window = windowScene?.windows.first {
-                bottomPadding = window.safeAreaInsets.bottom
+            if let _ = windowScene?.windows.first {
+                bottomPadding = 80.0
             }
         }
         label.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         label.textColor = UIColor.white
+        label.font = .systemFont(ofSize: 15.0)
         label.textAlignment = .center;
         label.text = text
          

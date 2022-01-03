@@ -118,6 +118,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.scrollView.showsVerticalScrollIndicator = false
         self.scrollView.alwaysBounceVertical = false
         self.scrollView.alwaysBounceHorizontal = false
+        self.scrollView.bounces = false
         
         if
             let data = UserDefaults.standard.object(forKey: "userInfo") as? Data,

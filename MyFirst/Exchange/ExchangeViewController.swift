@@ -24,10 +24,14 @@ class ExchangeViewController: UIViewController {
     // 実際にデータの送受信を行う為に使用
     private var session: MCSession!
     
+    let scrollView = UIScrollView()
+    
     let statusLabel = UILabel()
+    let imageView = UIImageView(image: UIImage(named: "exchange"))
 
     let friendStackView = UIStackView()
     
+    let buttonStackView = UIStackView()
     let hostButton = UIButton() // hostになる
     let guestButton = UIButton() // guestになる
     let sendFavoriteButton = UIButton()
@@ -99,12 +103,15 @@ class ExchangeViewController: UIViewController {
     }
     
     private func addSubviews() {
-        self.view.addSubview(self.statusLabel)
-        self.view.addSubview(self.friendStackView)
-        self.view.addSubview(self.hostButton)
-        self.view.addSubview(self.guestButton)
-        self.view.addSubview(self.sendFavoriteButton)
-        self.view.addSubview(self.disconnectButton)
+        self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.statusLabel)
+        self.scrollView.addSubview(self.imageView)
+        self.scrollView.addSubview(self.friendStackView)
+        self.scrollView.addSubview(self.buttonStackView)
+        self.buttonStackView.addArrangedSubview(self.hostButton)
+        self.buttonStackView.addArrangedSubview(self.guestButton)
+        self.buttonStackView.addArrangedSubview(self.sendFavoriteButton)
+        self.buttonStackView.addArrangedSubview(self.disconnectButton)
     }
     
     private func configSubViews() {
@@ -113,7 +120,11 @@ class ExchangeViewController: UIViewController {
         
         self.friendStackView.alignment = .center
         self.friendStackView.axis = .vertical
-        self.friendStackView.spacing = 0.0
+        self.friendStackView.spacing = 10.0
+        
+        self.buttonStackView.alignment = .center
+        self.buttonStackView.axis = .vertical
+        self.buttonStackView.spacing = 15.0
         
         self.hostButton.setTitle("近くの友達に招待を送る", for: .normal)
         self.hostButton.addTarget(self, action: #selector(self.tappedHostButton), for: .touchUpInside)
@@ -123,11 +134,13 @@ class ExchangeViewController: UIViewController {
         
         self.sendFavoriteButton.setTitle("お気に入りを送る", for: .normal)
         self.sendFavoriteButton.addTarget(self, action: #selector(self.tappedSendFavorite), for: .touchUpInside)
-        self.sendFavoriteButton.isEnabled = false
         
         self.disconnectButton.setTitle("接続を解除する", for: .normal)
         self.disconnectButton.addTarget(self, action: #selector(self.tappedDisconnectButton), for: .touchUpInside)
         
+        self.hostButton.isHidden = false
+        self.guestButton.isHidden = false
+        self.sendFavoriteButton.isHidden = true
         self.disconnectButton.isHidden = true
     }
     
@@ -151,9 +164,9 @@ class ExchangeViewController: UIViewController {
         self.guestButton.layer.borderColor = CustomUIColor.turquoise.cgColor
         self.guestButton.layer.borderWidth = 1.0
         
-        self.sendFavoriteButton.backgroundColor = .white
+        self.sendFavoriteButton.backgroundColor = CustomUIColor.turquoise
         self.sendFavoriteButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
-        self.sendFavoriteButton.setTitleColor(CustomUIColor.turquoise, for: .normal)
+        self.sendFavoriteButton.setTitleColor(.white, for: .normal)
         self.sendFavoriteButton.layer.cornerRadius = 5.0
         self.sendFavoriteButton.layer.borderColor = CustomUIColor.turquoise.cgColor
         self.sendFavoriteButton.layer.borderWidth = 1.0
@@ -164,34 +177,37 @@ class ExchangeViewController: UIViewController {
     }
     
     private func addConstraints() {
-        let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
-        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
-        let topMargin = (statusBarHeight + navigationBarHeight)
+        self.scrollView.autoPinEdgesToSuperviewEdges()
         
-        self.statusLabel.autoPinEdge(toSuperviewEdge: .top, withInset: topMargin + 30.0)
+        self.statusLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 30.0)
         self.statusLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.statusLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
-        self.friendStackView.autoPinEdge(.top, to: .bottom, of: self.statusLabel, withOffset: 20.0)
+        self.imageView.autoPinEdge(.top, to: .bottom, of: self.statusLabel, withOffset: 20.0)
+        self.imageView.autoAlignAxis(toSuperviewAxis: .vertical)
+        
+        self.friendStackView.autoPinEdge(.top, to: .bottom, of: self.imageView, withOffset: 20.0)
         self.friendStackView.autoPinEdge(toSuperviewEdge: .left)
         self.friendStackView.autoPinEdge(toSuperviewEdge: .right)
+        self.friendStackView.autoSetDimension(.width, toSize: UIScreen.main.bounds.width)
         
-        self.hostButton.autoPinEdge(.top, to: .bottom, of: self.friendStackView, withOffset: 20.0)
+        self.buttonStackView.autoPinEdge(.top, to: .bottom, of: self.friendStackView, withOffset: 30.0)
+        self.buttonStackView.autoPinEdge(toSuperviewEdge: .left)
+        self.buttonStackView.autoPinEdge(toSuperviewEdge: .right)
+        self.buttonStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 30.0)
+        
         self.hostButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.hostButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.hostButton.autoSetDimension(.height, toSize: 44.0)
         
-        self.guestButton.autoPinEdge(.top, to: .bottom, of: self.hostButton, withOffset: 20.0)
         self.guestButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.guestButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.guestButton.autoSetDimension(.height, toSize: 44.0)
         
-        self.sendFavoriteButton.autoPinEdge(.top, to: .bottom, of: self.guestButton, withOffset: 20.0)
         self.sendFavoriteButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.sendFavoriteButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.sendFavoriteButton.autoSetDimension(.height, toSize: 44.0)
         
-        self.disconnectButton.autoPinEdge(.top, to: .bottom, of: self.sendFavoriteButton, withOffset: 20.0)
         self.disconnectButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.disconnectButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.disconnectButton.autoSetDimension(.height, toSize: 44.0)
@@ -261,7 +277,7 @@ class ExchangeViewController: UIViewController {
                     
                     print("成功したよ")
                 } catch let error {
-                    Toast.show("you can't send message: \(error)", self.view)
+                    Toast.show("お気に入りの送信に失敗しました: \(error)", self.view)
                     
                     print("失敗したよ")
                 }
@@ -270,12 +286,13 @@ class ExchangeViewController: UIViewController {
             }
         }
         
-            
         // 2秒くらいボタンの色を薄くして、押した感を出す。連続タップも出来ない様に
         self.sendFavoriteButton.alpha = 0.6
         self.sendFavoriteButton.isEnabled = false
 
         DispatchQueue.main.async {
+            Toast.show("お気に入りを送信しました", self.view)
+            
             UIImageView.animate(
                 withDuration: 2.0,
                 delay: 0.0,
@@ -427,6 +444,9 @@ extension ExchangeViewController: MCSessionDelegate {
             
             // 接続されたのでお気に入りを送るボタンを表示する
             DispatchQueue.main.async {
+                self.hostButton.isHidden = true
+                self.guestButton.isHidden = true
+                self.sendFavoriteButton.isHidden = false
                 self.disconnectButton.isHidden = false
                 
                 for subview in self.friendStackView.arrangedSubviews {
@@ -470,18 +490,6 @@ extension ExchangeViewController: MCSessionDelegate {
                         friendView.addTarget(self, action: #selector(self.tappedFriendView(_:)), for: .touchUpInside)
                     }
                 }
-                
-                self.hostButton.isEnabled = false
-                self.hostButton.backgroundColor = .white
-                self.hostButton.setTitleColor(CustomUIColor.turquoise, for: .normal)
-                
-                self.guestButton.isEnabled = false
-                self.guestButton.backgroundColor = .white
-                self.guestButton.setTitleColor(CustomUIColor.turquoise, for: .normal)
-                
-                self.sendFavoriteButton.isEnabled = true
-                self.sendFavoriteButton.backgroundColor = CustomUIColor.turquoise
-                self.sendFavoriteButton.setTitleColor(.white, for: .normal)
             }
         case .connecting:
             message = "\(peerID.displayName)さんと接続中です"
@@ -505,17 +513,10 @@ extension ExchangeViewController: MCSessionDelegate {
                     }
                 }
                 
-                self.hostButton.isEnabled = true
-                self.hostButton.backgroundColor = CustomUIColor.turquoise
-                self.hostButton.setTitleColor(.white, for: .normal)
-                
-                self.guestButton.isEnabled = true
-                self.guestButton.backgroundColor = CustomUIColor.turquoise
-                self.guestButton.setTitleColor(.white, for: .normal)
-                
-                self.sendFavoriteButton.isEnabled = false
-                self.sendFavoriteButton.backgroundColor = .white
-                self.sendFavoriteButton.setTitleColor(CustomUIColor.turquoise, for: .normal)
+                self.hostButton.isHidden = false
+                self.guestButton.isHidden = false
+                self.sendFavoriteButton.isHidden = true
+                self.disconnectButton.isHidden = true
             }
         @unknown default:
             message = "\(peerID.displayName)さんとの通信が想定外の状態です"
@@ -529,6 +530,9 @@ extension ExchangeViewController: MCSessionDelegate {
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print("データが届いたよ")
+        DispatchQueue.main.async {
+            Toast.show("お気に入りを受信しました", self.view)
+        }
         
         if let favoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite] {
             // TODO: このお気に入りを相手のuuidに紐づいた形でキャッシュに保存する
@@ -539,7 +543,8 @@ extension ExchangeViewController: MCSessionDelegate {
             
             // 4.ユニークキーでそのお気に入りを保存する
             if let unwrappedUniqueKey = self.recievedUniqueKey {
-                UserDefaults.standard.set(self.recievedFavoriteList, forKey: unwrappedUniqueKey)
+                let archivedFavoriteList = try! NSKeyedArchiver.archivedData(withRootObject: self.recievedFavoriteList, requiringSecureCoding: false)
+                UserDefaults.standard.set(archivedFavoriteList, forKey: unwrappedUniqueKey)
             }
         } else if let uniqueKey = String(data: data, encoding: .utf8) {
             print("ユニークキーは\(uniqueKey)")

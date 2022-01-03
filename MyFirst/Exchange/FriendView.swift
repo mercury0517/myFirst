@@ -14,6 +14,7 @@ class FriendView: UIControl {
             self.inviteLabel.text = "詳細"
         }
     }
+    var uniqueKey: String?
     
     let nameLabel = UILabel()
     let inviteLabel = UILabel()

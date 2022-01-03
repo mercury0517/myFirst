@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icons8-data-transfer-48.png",
+      "filename" : "icons8-notification-48.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icons8-data-transfer-49.png",
+      "filename" : "icons8-notification-49.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icons8-data-transfer-50.png",
+      "filename" : "icons8-notification-50.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
