@@ -8,6 +8,13 @@ class FriendView: UIControl {
         }
     }
     
+    var displayName: String? {
+        didSet {
+            self.nameLabel.text = displayName
+            self.inviteLabel.text = "詳細"
+        }
+    }
+    
     let nameLabel = UILabel()
     let inviteLabel = UILabel()
     

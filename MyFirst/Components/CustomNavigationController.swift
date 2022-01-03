@@ -15,6 +15,17 @@ class CustomNavigationController: UINavigationController {
         self.navigationBar.barTintColor = CustomUIColor.turquoise
         self.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         self.navigationBar.tintColor = .white
+        
+        if #available(iOS 15.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            // NavigationBarの背景色の設定
+            appearance.backgroundColor = CustomUIColor.turquoise
+            // NavigationBarのタイトルの文字色の設定
+            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            self.navigationBar.standardAppearance = appearance
+            self.navigationBar.scrollEdgeAppearance = appearance
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

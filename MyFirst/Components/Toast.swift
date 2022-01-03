@@ -5,7 +5,7 @@ class Toast {
         let label = UILabel()
         let width = parent.frame.size.width
         let height = parent.frame.size.height / 15
-        var bottomPadding = 0.0
+        var bottomPadding = 50.0
         if #available(iOS 13.0, *) {
             let scenes = UIApplication.shared.connectedScenes
             let windowScene = scenes.first as? UIWindowScene

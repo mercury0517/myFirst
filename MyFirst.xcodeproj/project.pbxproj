@@ -38,6 +38,7 @@
 		60C27B3F277DA85A005BFC79 /* CustomCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B3E277DA85A005BFC79 /* CustomCloseButton.swift */; };
 		60C27B41277DB1A9005BFC79 /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B40277DB1A9005BFC79 /* FriendListViewController.swift */; };
 		60C27B44277EEB42005BFC79 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B43277EEB42005BFC79 /* CustomNavigationController.swift */; };
+		60C27B462782E474005BFC79 /* CustomIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B452782E474005BFC79 /* CustomIndicator.swift */; };
 		60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5AADD259B0AC800A1243E /* VideoViewController.swift */; };
 		60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9C258613B300C681DD /* AppDelegate.swift */; };
 		60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9E258613B300C681DD /* SceneDelegate.swift */; };
@@ -114,6 +115,7 @@
 		60C27B3E277DA85A005BFC79 /* CustomCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCloseButton.swift; sourceTree = "<group>"; };
 		60C27B40277DB1A9005BFC79 /* FriendListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
 		60C27B43277EEB42005BFC79 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		60C27B452782E474005BFC79 /* CustomIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIndicator.swift; sourceTree = "<group>"; };
 		60D5AADD259B0AC800A1243E /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		60D5CC99258613B300C681DD /* MyFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D5CC9C258613B300C681DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				60C27B3E277DA85A005BFC79 /* CustomCloseButton.swift */,
+				60C27B452782E474005BFC79 /* CustomIndicator.swift */,
 				60C27B43277EEB42005BFC79 /* CustomNavigationController.swift */,
 				60878D1B275C9AB20052B91C /* CustomTextField.swift */,
 				608922A8277823FE00698ABD /* CustomTextView.swift */,
@@ -672,6 +675,7 @@
 				60878D0B275B58450052B91C /* FavoriteListRouterProtocol.swift in Sources */,
 				60F099B126A96E330045CEB7 /* CompactDisc.swift in Sources */,
 				60878D07275B56D20052B91C /* FavoriteListPresenterProtocol .swift in Sources */,
+				60C27B462782E474005BFC79 /* CustomIndicator.swift in Sources */,
 				60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */,
 				608922A32777438800698ABD /* ProfileEditViewController.swift in Sources */,
 				60F099A726A9627A0045CEB7 /* PhotoVIewController.swift in Sources */,
@@ -862,7 +866,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirst/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -884,7 +888,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirst/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

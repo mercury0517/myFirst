@@ -68,6 +68,10 @@ class FavoriteDetailViewController: UIViewController {
     }
     
     private func configSubViews() {
+        self.scrollView.showsVerticalScrollIndicator = false
+        self.scrollView.alwaysBounceVertical = false
+        self.scrollView.alwaysBounceHorizontal = false
+        
         self.itemImageView.contentMode = .scaleAspectFill
         self.itemImageView.clipsToBounds = true
         self.itemImageView.image = self.favorite.image

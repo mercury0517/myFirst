@@ -33,6 +33,9 @@ class ExchangeViewController: UIViewController {
     let sendFavoriteButton = UIButton()
     let disconnectButton = UIButton()
     
+    var recievedUniqueKey: String?
+    var recievedFavoriteList: [MyFavorite] = []
+    
     init() {
         if
             let data = UserDefaults.standard.object(forKey: "userInfo") as? Data,
@@ -77,7 +80,7 @@ class ExchangeViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.friendStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-            self.statusLabel.text = "近くの友達とお気に入りを交換しましょう！"
+            self.statusLabel.text = "近くの友達とお気に入りを交換してみましょう"
         }
     }
     
@@ -132,6 +135,7 @@ class ExchangeViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.statusLabel.textColor = .black
+        self.statusLabel.font = .systemFont(ofSize: 15.0)
         
         self.hostButton.backgroundColor = CustomUIColor.turquoise
         self.hostButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
@@ -164,7 +168,7 @@ class ExchangeViewController: UIViewController {
         let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
         let topMargin = (statusBarHeight + navigationBarHeight)
         
-        self.statusLabel.autoPinEdge(toSuperviewEdge: .top, withInset: topMargin + 20.0)
+        self.statusLabel.autoPinEdge(toSuperviewEdge: .top, withInset: topMargin + 30.0)
         self.statusLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.statusLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
@@ -243,8 +247,6 @@ class ExchangeViewController: UIViewController {
     }
     
     @objc private func tappedSendFavorite() {
-        // TODO: インジケータを表示する
-        
         // 相手側でのキャッシュ管理のため、ユニークキーも送信しておく
         self.sendUniqueKey()
         
@@ -268,7 +270,6 @@ class ExchangeViewController: UIViewController {
             }
         }
         
-        print("インジケータを止める")
             
         // 2秒くらいボタンの色を薄くして、押した感を出す。連続タップも出来ない様に
         self.sendFavoriteButton.alpha = 0.6
@@ -342,7 +343,6 @@ class ExchangeViewController: UIViewController {
             } catch let error {
                 print("初めてユニークキー送れなかったよ\(error)")
             }
-            
         }
     }
 }
@@ -534,21 +534,34 @@ extension ExchangeViewController: MCSessionDelegate {
             // TODO: このお気に入りを相手のuuidに紐づいた形でキャッシュに保存する
             print("お気に入りの数は\(favoriteList.count)個だよ")
             
-            print("インジケータ止めるのここで良さそう")
+            // 3.受け取ったお気に入りをプロパティに保持する
+            self.recievedFavoriteList.append(contentsOf: favoriteList)
+            
+            // 4.ユニークキーでそのお気に入りを保存する
+            if let unwrappedUniqueKey = self.recievedUniqueKey {
+                UserDefaults.standard.set(self.recievedFavoriteList, forKey: unwrappedUniqueKey)
+            }
         } else if let uniqueKey = String(data: data, encoding: .utf8) {
             print("ユニークキーは\(uniqueKey)")
-            // TODO: インジケータを表示する
-            print("インジケータを表示する")
+            
+            // 1.ユニークキーをプロパティとして保持する
+            self.recievedUniqueKey = uniqueKey
+            
+            // 2.友達リストに追加する
+            var newFriendList: [String : String] = [:]
+            if let friendList = UserDefaults.standard.object(forKey: UserDefaultKeys.friendList) as? [String : String] {
+                newFriendList = friendList // 既にある場合は取得
+            }
+            
+            // リストを更新・保存する
+            newFriendList[uniqueKey] = peerID.displayName
+            UserDefaults.standard.set(newFriendList, forKey: UserDefaultKeys.friendList)
         } else {
             print("想定外のデータだよ")
         }
         
         /*
-         先にユニークキーが届く
-         →まずユニークキーをプロパティとして保持する
-         →お気に入り一覧も変数として保持する
          →そのキーを使ってお気に入りリストをキャッシュに保存する
-         →ユニークキー自身もキャッシュに保存する
         */
     }
 
