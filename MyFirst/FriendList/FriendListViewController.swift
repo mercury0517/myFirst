@@ -85,8 +85,19 @@ class FriendListViewController: UIViewController {
     }
     
     @objc private func tappedFriendCard(_ sender: FriendView) {
-        if let unwrappedUniqueKey = sender.uniqueKey {
-            self.present(FriendDetailViewController(uniqueKey: unwrappedUniqueKey), animated: true)
+        if
+            let unwrappedUniqueKey = sender.uniqueKey,
+            let unwrappedDisplayName = sender.displayName
+        {
+            self.present(
+                CustomNavigationController(
+                    rootViewController: FriendDetailViewController(
+                        uniqueKey: unwrappedUniqueKey,
+                        displayName: unwrappedDisplayName
+                    )
+                ),
+                animated: true
+            )
         } else {
             Toast.show("現在ご利用できません", self.view)
         }
