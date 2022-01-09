@@ -6,10 +6,10 @@ class FavoriteDetailViewController: UIViewController {
     let favorite: MyFavorite
     let presenter: FavoriteListPresenterProtocol
     
-    let imageHeight = UIScreen.main.bounds.height * 0.40
+    let imageHeight = UIScreen.main.bounds.height * 0.4
     
     var alertController = UIAlertController(
-        title: "Delete your favorite?", message: nil, preferredStyle: .alert
+        title: "お気に入りを削除しますか？", message: nil, preferredStyle: .alert
     )
     
     let scrollView = UIScrollView()
@@ -69,9 +69,6 @@ class FavoriteDetailViewController: UIViewController {
     
     private func configSubViews() {
         self.scrollView.showsVerticalScrollIndicator = false
-        self.scrollView.alwaysBounceVertical = false
-        self.scrollView.alwaysBounceHorizontal = false
-        self.scrollView.bounces = false
         
         self.itemImageView.contentMode = .scaleAspectFill
         self.itemImageView.clipsToBounds = true
@@ -146,12 +143,12 @@ class FavoriteDetailViewController: UIViewController {
     }
     
     private func customDeleteFavoriteAlert() {
-        let albumAction = UIAlertAction(title: "DELETE", style: .destructive) { (action) in
+        let albumAction = UIAlertAction(title: "削除する", style: .destructive) { (action) in
             self.presenter.deleteItemButtonDidTap(
                 categoryName: self.categoryName, itemIndex: self.itemIndex, detailView: self
             )
         }
-        let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel) { (action) in
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
             self.alertController.dismiss(animated: true, completion: nil)
         }
         

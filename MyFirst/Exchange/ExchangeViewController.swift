@@ -37,12 +37,14 @@ class ExchangeViewController: UIViewController {
     let sendFavoriteButton = UIButton()
     let disconnectButton = UIButton()
     
+    var indicator = CustomIndicator()
+    
     var recievedUniqueKey: String?
     var recievedFavoriteList: [MyFavorite] = []
     
     init() {
         if
-            let data = UserDefaults.standard.object(forKey: "userInfo") as? Data,
+            let data = UserDefaults.standard.object(forKey: UserDefaultKeys.userInfo) as? Data,
             let userInfo = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserInfo
         {
             self.peerID = MCPeerID.init(displayName: userInfo.name)
@@ -94,6 +96,7 @@ class ExchangeViewController: UIViewController {
         // 切断する時に全ての友達カードを消す
         DispatchQueue.main.async {
             self.friendStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            self.indicator.stopAnimating()
         }
 
         // 他の画面に遷移したタイミングで、通信で使用していたものを全て止める
@@ -112,6 +115,7 @@ class ExchangeViewController: UIViewController {
         self.buttonStackView.addArrangedSubview(self.guestButton)
         self.buttonStackView.addArrangedSubview(self.sendFavoriteButton)
         self.buttonStackView.addArrangedSubview(self.disconnectButton)
+        self.view.addSubview(self.indicator)
     }
     
     private func configSubViews() {
@@ -211,6 +215,8 @@ class ExchangeViewController: UIViewController {
         self.disconnectButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.disconnectButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.disconnectButton.autoSetDimension(.height, toSize: 44.0)
+        
+        self.indicator.autoCenterInSuperview()
     }
     
     @objc private func tappedHostButton() {
@@ -263,6 +269,10 @@ class ExchangeViewController: UIViewController {
     }
     
     @objc private func tappedSendFavorite() {
+        // インジケータを回す
+        self.indicator.startAnimating()
+        self.sendFavoriteButton.isEnabled = false
+        
         // 相手側でのキャッシュ管理のため、ユニークキーも送信しておく
         self.sendUniqueKey()
         
@@ -273,26 +283,27 @@ class ExchangeViewController: UIViewController {
             // データを相手の端末に送信する
             if let unwrappedFavoriteData = favoriteData {
                 do {
-                    try self.session.send(unwrappedFavoriteData, toPeers: self.session.connectedPeers, with: .reliable)
+                    try self.session.send(
+                        unwrappedFavoriteData, toPeers: self.session.connectedPeers, with: .unreliable
+                    )
                     
                     print("成功したよ")
                 } catch let error {
-                    Toast.show("お気に入りの送信に失敗しました: \(error)", self.view)
-                    
-                    print("失敗したよ")
+                    print("失敗したよ\(error)")
                 }
             } else {
                 print("そのカテゴリは空だよ")
             }
         }
         
+        // プロフィールを送信する
+        self.sendUserInfo()
+        
         // 2秒くらいボタンの色を薄くして、押した感を出す。連続タップも出来ない様に
         self.sendFavoriteButton.alpha = 0.6
         self.sendFavoriteButton.isEnabled = false
 
         DispatchQueue.main.async {
-            Toast.show("お気に入りを送信しました", self.view)
-            
             UIImageView.animate(
                 withDuration: 2.0,
                 delay: 0.0,
@@ -310,20 +321,8 @@ class ExchangeViewController: UIViewController {
         return UserDefaults.standard.object(forKey: category.rawValue) as? Data
     }
     
-    private func getAllFavoriteList() -> [MyFavorite] {
-        var allFavoriteList: [MyFavorite] = []
-        
-        for category in FavoriteCategory.allCases {
-            if
-                let data = UserDefaults.standard.object(forKey: category.rawValue) as? Data,
-                let favoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite]
-            {
-                // お気に入り配列を順番に結合していく
-                allFavoriteList.append(contentsOf: favoriteList)
-            }
-        }
-        
-        return allFavoriteList
+    private func getMyUserInfoAsData() -> Data? {
+        return UserDefaults.standard.object(forKey: UserDefaultKeys.userInfo) as? Data
     }
     
     @objc private func tappedDisconnectButton() {
@@ -360,6 +359,21 @@ class ExchangeViewController: UIViewController {
             } catch let error {
                 print("初めてユニークキー送れなかったよ\(error)")
             }
+        }
+    }
+    
+    // プロフィールを送信する
+    private func sendUserInfo() {
+        if let myUserInfo = self.getMyUserInfoAsData() {
+            do {
+                try self.session.send(myUserInfo, toPeers: self.session.connectedPeers, with: .reliable)
+                
+                print("プロフィールの送信")
+            } catch let error {
+                print("プロフィールの送信失敗\(error)")
+            }
+        } else {
+            print("プロフィールがありません")
         }
     }
 }
@@ -399,7 +413,7 @@ extension ExchangeViewController: MCNearbyServiceBrowserDelegate {
     // 他の端末との接続が切れたら呼ばれる
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         // 「接続が切れたよ」メッセージを出す
-        Toast.show("Connection to other devices has been lost.", self.view)
+        Toast.show("接続が切断されました", self.view)
     }
 }
 
@@ -530,14 +544,8 @@ extension ExchangeViewController: MCSessionDelegate {
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print("データが届いたよ")
-        DispatchQueue.main.async {
-            Toast.show("お気に入りを受信しました", self.view)
-        }
         
         if let favoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite] {
-            // TODO: このお気に入りを相手のuuidに紐づいた形でキャッシュに保存する
-            print("お気に入りの数は\(favoriteList.count)個だよ")
-            
             // 3.受け取ったお気に入りをプロパティに保持する
             self.recievedFavoriteList.append(contentsOf: favoriteList)
             
@@ -546,28 +554,64 @@ extension ExchangeViewController: MCSessionDelegate {
                 let archivedFavoriteList = try! NSKeyedArchiver.archivedData(withRootObject: self.recievedFavoriteList, requiringSecureCoding: false)
                 UserDefaults.standard.set(archivedFavoriteList, forKey: unwrappedUniqueKey)
             }
-        } else if let uniqueKey = String(data: data, encoding: .utf8) {
-            print("ユニークキーは\(uniqueKey)")
-            
-            // 1.ユニークキーをプロパティとして保持する
-            self.recievedUniqueKey = uniqueKey
-            
-            // 2.友達リストに追加する
-            var newFriendList: [String : String] = [:]
-            if let friendList = UserDefaults.standard.object(forKey: UserDefaultKeys.friendList) as? [String : String] {
-                newFriendList = friendList // 既にある場合は取得
+        } else if let messageString = String(data: data, encoding: .utf8) {
+            // 7. 全ての通信が終了したら"finish sending"が相手から飛んでくるので、インジケータを止める
+            if messageString == "finish sending" {
+                DispatchQueue.main.async {
+                    Toast.show("お気に入りを送信しました", self.view)
+                    self.indicator.stopAnimating()
+                    self.sendFavoriteButton.isEnabled = true
+                }
+            } else {
+                // インジケータ開始
+                DispatchQueue.main.async {
+                    self.indicator.startAnimating()
+                    self.sendFavoriteButton.isEnabled = false
+                }
+                
+                print("ユニークキーは\(messageString)")
+                
+                // 1.ユニークキーをプロパティとして保持する
+                self.recievedUniqueKey = messageString
+                
+                // 2.友達リストに追加する
+                var newFriendList: [String : String] = [:]
+                if let friendList = UserDefaults.standard.object(forKey: UserDefaultKeys.friendList) as? [String : String] {
+                    newFriendList = friendList // 既にある場合は取得
+                }
+                
+                // リストを更新・保存する
+                newFriendList[messageString] = peerID.displayName
+                UserDefaults.standard.set(newFriendList, forKey: UserDefaultKeys.friendList)
+            }
+        } else if let userInfo = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserInfo {
+            // プロフィール受け取ったらインジケータ終了
+            DispatchQueue.main.async {
+                self.indicator.stopAnimating()
+                self.sendFavoriteButton.isEnabled = true
+                Toast.show("お気に入りを受信しました", self.view)
             }
             
-            // リストを更新・保存する
-            newFriendList[uniqueKey] = peerID.displayName
-            UserDefaults.standard.set(newFriendList, forKey: UserDefaultKeys.friendList)
+            // 5.ユニークキーでそのお気に入りを保存する
+            if let unwrappedUniqueKey = self.recievedUniqueKey {
+                let profileKey = unwrappedUniqueKey + "_profile"
+                
+                let archivedUserInfo = try! NSKeyedArchiver.archivedData(withRootObject: userInfo, requiringSecureCoding: false)
+                UserDefaults.standard.set(archivedUserInfo, forKey: profileKey)
+            }
+            
+            // 6. 相手に終わったよメッセージを送る
+            do {
+                let finishMessage = "finish sending"
+                try self.session.send(finishMessage.data(using: .utf8)!, toPeers: self.session.connectedPeers, with: .reliable)
+                
+                print("受信完了メッセージを送るよ")
+            } catch let error {
+                print("終了通知の送信失敗\(error)")
+            }
         } else {
             print("想定外のデータだよ")
         }
-        
-        /*
-         →そのキーを使ってお気に入りリストをキャッシュに保存する
-        */
     }
 
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

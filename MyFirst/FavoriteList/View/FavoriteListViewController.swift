@@ -64,7 +64,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     func updateFavoriteList() {
         if
-            let data = UserDefaults.standard.object(forKey: "userInfo") as? Data,
+            let data = UserDefaults.standard.object(forKey: UserDefaultKeys.userInfo) as? Data,
             let userInfo = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserInfo
         {
             self.topBanner.image = userInfo.topBanner
@@ -116,12 +116,9 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     private func configSubViews() {
         self.scrollView.showsVerticalScrollIndicator = false
-        self.scrollView.alwaysBounceVertical = false
-        self.scrollView.alwaysBounceHorizontal = false
-        self.scrollView.bounces = false
         
         if
-            let data = UserDefaults.standard.object(forKey: "userInfo") as? Data,
+            let data = UserDefaults.standard.object(forKey: UserDefaultKeys.userInfo) as? Data,
             let userInfo = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserInfo
         {
             self.topBanner.image = userInfo.topBanner

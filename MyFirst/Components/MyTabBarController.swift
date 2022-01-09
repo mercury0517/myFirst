@@ -4,8 +4,7 @@ class MyTabBarController: UITabBarController {
     let tabView1 = AppDependencies.assmbleFavoriteList()
     let tabView2 = CustomNavigationController(rootViewController: FriendListViewController())
     let tabView3 = CustomNavigationController(rootViewController: ExchangeViewController())
-    let tabView4 = HomeViewController()
-    let tabView5 = PhotoViewController()
+    let tabView4 = PhotoViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,15 +21,11 @@ class MyTabBarController: UITabBarController {
         self.tabView3.tabBarItem.image = UIImage(named: "tab_cd")
         self.tabView3.tabBarItem.tag = 3
         
-        self.tabView4.tabBarItem.title = "お知らせ"
-        self.tabView4.tabBarItem.image = UIImage(named: "tab_notice")
-        self.tabView4.tabBarItem.tag = 4
+        self.tabView4.tabBarItem.title = "その他"
+        self.tabView4.tabBarItem.image = UIImage(named: "tab_photo")
+        self.tabView4.tabBarItem.tag = 5
         
-        self.tabView5.tabBarItem.title = "その他"
-        self.tabView5.tabBarItem.image = UIImage(named: "tab_photo")
-        self.tabView5.tabBarItem.tag = 5
-        
-        let conList : Array<UIViewController> = [tabView1, tabView2, tabView3, tabView4, tabView5]
+        let conList : Array<UIViewController> = [tabView1, tabView2, tabView3, tabView4]
         self.setViewControllers(conList, animated: false)
         
         self.configTabView()
@@ -46,8 +41,6 @@ class MyTabBarController: UITabBarController {
         case 3:
             break
         case 4:
-            break
-        case 5:
             break
         default:
             break

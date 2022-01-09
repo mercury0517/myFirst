@@ -7,7 +7,7 @@ class FavoriteListInteractor: FavoriteListInteractorProtocol {
     
     func storeUserInfo(_ userInfo: UserInfo, completion: () -> Void) {
         let archivedUserInfo = try! NSKeyedArchiver.archivedData(withRootObject: userInfo, requiringSecureCoding: false)
-        self.userDefault.set(archivedUserInfo, forKey: "userInfo")
+        self.userDefault.set(archivedUserInfo, forKey: UserDefaultKeys.userInfo)
         
         completion()
     }
