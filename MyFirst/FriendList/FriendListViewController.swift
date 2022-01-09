@@ -38,9 +38,18 @@ class FriendListViewController: UIViewController {
         
         if let friendList = UserDefaults.standard.object(forKey: UserDefaultKeys.friendList) as? [String : String] {
             for friendUniqueKey in friendList.keys {
-                let friendCardView = FriendView()
+                let friendCardView = FriendCardView()
                 friendCardView.uniqueKey = friendUniqueKey
                 friendCardView.displayName = friendList[friendUniqueKey]
+                
+                let profileKey = friendUniqueKey + "_profile"
+                
+                if
+                    let archivedUserInfo = UserDefaults.standard.object(forKey: profileKey) as? Data,
+                    let userInfo = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(archivedUserInfo) as? UserInfo
+                {
+                    friendCardView.userInfo = userInfo
+                }
                 
                 self.friendStackView.addArrangedSubview(friendCardView)
                 friendCardView.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
@@ -58,16 +67,16 @@ class FriendListViewController: UIViewController {
     }
     
     private func configSubViews() {
-        self.titleLabel.text = "お気に入りを交換した友達"
+        self.titleLabel.text = "FRIEND"
         
         self.friendStackView.alignment = .center
         self.friendStackView.axis = .vertical
-        self.friendStackView.spacing = 10.0
+        self.friendStackView.spacing = 20.0
     }
     
     private func applyStyling() {
         self.titleLabel.textColor = .black
-        self.titleLabel.font = .systemFont(ofSize: 15.0)
+        self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)
         
         self.view.backgroundColor = .white
     }
@@ -84,17 +93,15 @@ class FriendListViewController: UIViewController {
         self.friendStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
     }
     
-    @objc private func tappedFriendCard(_ sender: FriendView) {
+    @objc private func tappedFriendCard(_ sender: FriendCardView) {
         if
             let unwrappedUniqueKey = sender.uniqueKey,
             let unwrappedDisplayName = sender.displayName
         {
             self.present(
-                CustomNavigationController(
-                    rootViewController: FriendDetailViewController(
-                        uniqueKey: unwrappedUniqueKey,
-                        displayName: unwrappedDisplayName
-                    )
+                FriendDetailViewController(
+                    uniqueKey: unwrappedUniqueKey,
+                    displayName: unwrappedDisplayName
                 ),
                 animated: true
             )

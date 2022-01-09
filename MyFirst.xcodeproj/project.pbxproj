@@ -42,6 +42,7 @@
 		60C27B4827831CC9005BFC79 /* FriendDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B4727831CC9005BFC79 /* FriendDetailViewController.swift */; };
 		60C27B4A2789BA01005BFC79 /* FriendFovoriteGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B492789BA01005BFC79 /* FriendFovoriteGroupView.swift */; };
 		60C27B4C2789C0E3005BFC79 /* FriendFavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B4B2789C0E3005BFC79 /* FriendFavoriteCollectionViewCell.swift */; };
+		60C27B4E278AC8F8005BFC79 /* FriendCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B4D278AC8F8005BFC79 /* FriendCardView.swift */; };
 		60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5AADD259B0AC800A1243E /* VideoViewController.swift */; };
 		60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9C258613B300C681DD /* AppDelegate.swift */; };
 		60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9E258613B300C681DD /* SceneDelegate.swift */; };
@@ -122,6 +123,7 @@
 		60C27B4727831CC9005BFC79 /* FriendDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailViewController.swift; sourceTree = "<group>"; };
 		60C27B492789BA01005BFC79 /* FriendFovoriteGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFovoriteGroupView.swift; sourceTree = "<group>"; };
 		60C27B4B2789C0E3005BFC79 /* FriendFavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
+		60C27B4D278AC8F8005BFC79 /* FriendCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCardView.swift; sourceTree = "<group>"; };
 		60D5AADD259B0AC800A1243E /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		60D5CC99258613B300C681DD /* MyFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D5CC9C258613B300C681DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				60878D04275B566A0052B91C /* FavoriteListViewControllerProtocol.swift */,
 				60878D19275B8EA00052B91C /* FavoriteInputViewController.swift */,
 				608922A22777438800698ABD /* ProfileEditViewController.swift */,
+				60C27B4D278AC8F8005BFC79 /* FriendCardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				60878D07275B56D20052B91C /* FavoriteListPresenterProtocol .swift in Sources */,
 				60C27B462782E474005BFC79 /* CustomIndicator.swift in Sources */,
 				60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */,
+				60C27B4E278AC8F8005BFC79 /* FriendCardView.swift in Sources */,
 				608922A32777438800698ABD /* ProfileEditViewController.swift in Sources */,
 				60F099A726A9627A0045CEB7 /* PhotoVIewController.swift in Sources */,
 				60F099A926A963A60045CEB7 /* DiscType.swift in Sources */,
