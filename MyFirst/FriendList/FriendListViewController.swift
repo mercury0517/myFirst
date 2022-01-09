@@ -101,7 +101,8 @@ class FriendListViewController: UIViewController {
             self.present(
                 FriendDetailViewController(
                     uniqueKey: unwrappedUniqueKey,
-                    displayName: unwrappedDisplayName
+                    displayName: unwrappedDisplayName,
+                    userInfo: sender.userInfo
                 ),
                 animated: true
             )

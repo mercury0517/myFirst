@@ -40,8 +40,6 @@ class FriendCardView: UIControl {
     
     private func applyStyling() {
         self.backgroundColor = .white
-        self.layer.borderColor = UIColor.lightGray.cgColor
-        self.layer.borderWidth = 1.0
         self.layer.cornerRadius = 10.0
         
         self.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)

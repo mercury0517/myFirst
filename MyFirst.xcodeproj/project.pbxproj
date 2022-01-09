@@ -43,6 +43,7 @@
 		60C27B4A2789BA01005BFC79 /* FriendFovoriteGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B492789BA01005BFC79 /* FriendFovoriteGroupView.swift */; };
 		60C27B4C2789C0E3005BFC79 /* FriendFavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B4B2789C0E3005BFC79 /* FriendFavoriteCollectionViewCell.swift */; };
 		60C27B4E278AC8F8005BFC79 /* FriendCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B4D278AC8F8005BFC79 /* FriendCardView.swift */; };
+		60C27B50278AD686005BFC79 /* FriendItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B4F278AD686005BFC79 /* FriendItemDetailViewController.swift */; };
 		60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5AADD259B0AC800A1243E /* VideoViewController.swift */; };
 		60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9C258613B300C681DD /* AppDelegate.swift */; };
 		60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9E258613B300C681DD /* SceneDelegate.swift */; };
@@ -124,6 +125,7 @@
 		60C27B492789BA01005BFC79 /* FriendFovoriteGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFovoriteGroupView.swift; sourceTree = "<group>"; };
 		60C27B4B2789C0E3005BFC79 /* FriendFavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		60C27B4D278AC8F8005BFC79 /* FriendCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCardView.swift; sourceTree = "<group>"; };
+		60C27B4F278AD686005BFC79 /* FriendItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendItemDetailViewController.swift; sourceTree = "<group>"; };
 		60D5AADD259B0AC800A1243E /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		60D5CC99258613B300C681DD /* MyFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D5CC9C258613B300C681DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				60C27B4B2789C0E3005BFC79 /* FriendFavoriteCollectionViewCell.swift */,
 				60C27B492789BA01005BFC79 /* FriendFovoriteGroupView.swift */,
 				60C27B40277DB1A9005BFC79 /* FriendListViewController.swift */,
+				60C27B4F278AD686005BFC79 /* FriendItemDetailViewController.swift */,
 			);
 			path = FriendList;
 			sourceTree = "<group>";
@@ -674,6 +677,7 @@
 				60825D7D259B102300B7B242 /* FavoriteListViewController.swift in Sources */,
 				60878D1C275C9AB30052B91C /* CustomTextField.swift in Sources */,
 				60C27B44277EEB42005BFC79 /* CustomNavigationController.swift in Sources */,
+				60C27B50278AD686005BFC79 /* FriendItemDetailViewController.swift in Sources */,
 				608922AF277C292A00698ABD /* UserDefaultKeys.swift in Sources */,
 				60C27B3D277D81E2005BFC79 /* CustomUILabel.swift in Sources */,
 				608922A12776F95F00698ABD /* CustomUIColor.swift in Sources */,

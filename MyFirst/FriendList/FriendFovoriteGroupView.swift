@@ -1,6 +1,7 @@
 import UIKit
 
 class FriendFavoriteGroupView: UIView {
+    let view: FriendDetailViewController
     let title: String
     let favoriteList: [MyFavorite]
     
@@ -9,9 +10,10 @@ class FriendFavoriteGroupView: UIView {
     
     let itemSize = UIScreen.main.bounds.width * 0.5
     
-    init(title: String, favoriteList: [MyFavorite]) {
+    init(title: String, favoriteList: [MyFavorite], view: FriendDetailViewController) {
         self.title = title
         self.favoriteList = favoriteList
+        self.view = view
         
         self.titleLabel.text = self.title
         
@@ -118,7 +120,7 @@ extension FriendFavoriteGroupView: UICollectionViewDelegate, UICollectionViewDat
         let cell = collectionView.cellForItem(at: indexPath) as? FriendFavoriteCollectionViewCell
         
         if let favorite = cell?.favorite {
-            // そのお気に入りの詳細画面を開く
+            self.view.displayItemDetailView(favorite: favorite)
         }
     }
 }
