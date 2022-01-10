@@ -16,7 +16,7 @@ class CustomIndicator: UIActivityIndicatorView {
         self.textLabel.textColor = .black
         self.textLabel.font = .systemFont(ofSize: 15.0)
         
-        self.autoSetDimension(.height, toSize: 160.0)
+        self.autoSetDimensions(to: CGSize(width: 200.0, height: 200.0))
         self.layer.cornerRadius = 10.0
         
         self.textLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
