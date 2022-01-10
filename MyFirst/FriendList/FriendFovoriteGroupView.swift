@@ -19,13 +19,15 @@ class FriendFavoriteGroupView: UIView {
         
         let flowLayout = UICollectionViewFlowLayout()
         let margin: CGFloat = 16.0
-        flowLayout.itemSize = CGSize(width: self.itemSize, height: self.itemSize + 20.0)
+        flowLayout.itemSize = CGSize(width: self.itemSize, height: self.itemSize)
         flowLayout.minimumInteritemSpacing = margin
         flowLayout.minimumLineSpacing = margin
         flowLayout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         flowLayout.scrollDirection = .horizontal
         self.collectionView = UICollectionView(
-            frame: CGRect(x: 0, y: 0, width: 1000.0, height: 270.0), collectionViewLayout: flowLayout
+            frame: CGRect(
+                x: 0, y: 0, width: 1000.0, height: self.itemSize)
+            , collectionViewLayout: flowLayout
         )
         
         super.init(frame: CGRect())

@@ -103,6 +103,9 @@ class ExchangeViewController: UIViewController {
         self.session.disconnect()
         self.advertiser.stopAdvertisingPeer()
         self.browser.stopBrowsingForPeers()
+        
+        self.recievedUniqueKey = ""
+        self.recievedFavoriteList = []
     }
     
     private func addSubviews() {
@@ -597,6 +600,13 @@ extension ExchangeViewController: MCSessionDelegate {
         if let favoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite] {
             // 3.受け取ったお気に入りをプロパティに保持する
             self.recievedFavoriteList.append(contentsOf: favoriteList)
+            
+            // 画像をimageに戻す
+            for favorite in favoriteList {
+                if let unwrappedImageData = favorite.imageData {
+                    favorite.image = ImageConverter.dataToImage(nsData: unwrappedImageData)
+                }
+            }
             
             // 4.ユニークキーでそのお気に入りを保存する
             if let unwrappedUniqueKey = self.recievedUniqueKey {

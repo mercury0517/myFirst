@@ -8,7 +8,7 @@ class CustomIndicator: UIActivityIndicatorView {
         
         self.addSubview(self.textLabel)
         
-        self.textLabel.text = "お気に入り送受信中"
+        self.textLabel.text = "お気に入り送受信中\n※この処理には数分かかる事があります"
         self.textLabel.numberOfLines = 2
         
         self.color = .gray
@@ -16,11 +16,12 @@ class CustomIndicator: UIActivityIndicatorView {
         self.textLabel.textColor = .black
         self.textLabel.font = .systemFont(ofSize: 15.0)
         
-        self.autoSetDimensions(to: CGSize(width: 200.0, height: 150.0))
+        self.autoSetDimension(.height, toSize: 160.0)
         self.layer.cornerRadius = 10.0
         
         self.textLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
-        self.textLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+        self.textLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 10.0)
+        self.textLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 10.0)
     }
     
     required init(coder: NSCoder) {
