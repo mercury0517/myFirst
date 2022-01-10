@@ -11,7 +11,8 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     let titleContainer = UIView()
     let titleLabel = UILabel()
     
-    let itemSize = UIScreen.main.bounds.width * 0.7
+    let itemSize = UIScreen.main.bounds.width - 32.0
+    let itemHeight = UIScreen.main.bounds.width - 32.0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,22 +27,6 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         super.init(coder: aDecoder)
     }
     
-    // タップした感が伝わる様に
-    func animateCard() {
-        self.imageView.alpha = 0.6
-        
-        DispatchQueue.main.async {
-            UIImageView.animate(
-                withDuration: 1.0,
-                delay: 0.0,
-                options: [.curveEaseIn],
-                animations: {
-                    self.imageView.alpha = 1.0
-                }
-            )
-        }
-    }
-    
     private func addSubviews() {
         self.addSubview(self.imageView)
         self.imageView.addSubview(self.titleContainer)
@@ -54,10 +39,10 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         self.layer.shadowOpacity = 0.6
         self.layer.shadowRadius = 4.0
         
-        self.imageView.image = UIColor.lightGray.image(size: .init(width: self.itemSize, height: self.itemSize))
+        self.imageView.image = UIColor.lightGray.image(size: .init(width: self.itemSize, height: self.itemHeight))
         self.imageView.contentMode = .scaleAspectFill
         self.imageView.clipsToBounds = true
-        self.imageView.layer.cornerRadius = 15.0
+        self.imageView.layer.cornerRadius = 20.0
         
         self.titleLabel.numberOfLines = 0
     }
@@ -70,7 +55,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     }
     
     private func addConstraints() {
-        self.imageView.autoSetDimensions(to: CGSize(width: self.itemSize, height: self.itemSize))
+        self.imageView.autoSetDimensions(to: CGSize(width: self.itemSize, height: self.itemHeight))
         self.imageView.autoPinEdge(toSuperviewEdge: .top)
         self.imageView.autoPinEdge(toSuperviewEdge: .left)
         self.imageView.autoPinEdge(toSuperviewEdge: .right)

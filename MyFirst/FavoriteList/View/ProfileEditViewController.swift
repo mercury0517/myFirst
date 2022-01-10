@@ -208,7 +208,7 @@ class ProfileEditViewController: UIViewController {
             
             self.presenter.registerNewProfileButtonDidTap(userInfo: userInfo, editProfileView: self)
         } else {
-            Toast.show("error: input user name", self.view)
+            Toast.show("名前を入れてください", self.view)
         }
     }
 }

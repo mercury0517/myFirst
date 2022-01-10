@@ -207,9 +207,7 @@ class FriendDetailViewController: UIViewController {
     private func configSubViews() {
         self.itemImageView.contentMode = .scaleAspectFill
         self.itemImageView.clipsToBounds = true
-        if let topBannerData = self.userInfo?.topBannerData {
-            self.itemImageView.image = ImageConverter.dataToImage(nsData: topBannerData)
-        }
+        self.itemImageView.image = self.userInfo?.topBanner
         
         self.closeButton.addTarget(self, action: #selector(self.tappedCloseButton), for: .touchUpInside)
         
@@ -218,9 +216,7 @@ class FriendDetailViewController: UIViewController {
         self.userIconView.clipsToBounds = true
         self.userIconView.layer.borderWidth = 3.0
         self.userIconView.layer.borderColor = UIColor.white.cgColor
-        if let iconData = self.userInfo?.iconData {
-            self.userIconView.image = ImageConverter.dataToImage(nsData: iconData)
-        }
+        self.userIconView.image = self.userInfo?.icon
         
         self.userNameLabel.text = self.userInfo?.name
         

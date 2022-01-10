@@ -4,14 +4,13 @@ class FriendCardView: UIControl {
     var uniqueKey: String?
     var displayName: String? {
         didSet {
-            self.nameLabel.text = displayName
+            self.nameLabel.text = self.displayName
         }
     }
     var userInfo: UserInfo? {
         didSet {
-            if let iconData = self.userInfo?.iconData {
-                self.iconImageView.image = ImageConverter.dataToImage(nsData: iconData)
-            }
+            self.iconImageView.image = self.userInfo?.icon
+            self.nameLabel.text = self.userInfo?.name
         }
     }
     

@@ -5,7 +5,6 @@ class MyFavorite: NSObject, NSCoding {
     var index: Int
     let title: String
     var image: UIImage?
-    var imageData: NSData?
     let memo: String?
     var isCustomized: Bool
     
@@ -30,7 +29,6 @@ class MyFavorite: NSObject, NSCoding {
         coder.encode(self.index, forKey: "index")
         coder.encode(self.title, forKey: "title")
         coder.encode(self.image, forKey: "image")
-        coder.encode(self.imageData, forKey: "imageData")
         coder.encode(self.memo, forKey: "memo")
         coder.encode(self.isCustomized, forKey: "isCustomized")
     }
@@ -40,7 +38,6 @@ class MyFavorite: NSObject, NSCoding {
         self.index = coder.decodeInteger(forKey: "index")
         self.title = coder.decodeObject(forKey: "title") as! String
         self.image = coder.decodeObject(forKey: "image") as? UIImage
-        self.imageData = coder.decodeObject(forKey: "imageData") as? NSData
         self.memo = coder.decodeObject(forKey: "memo") as? String
         self.isCustomized = coder.decodeBool(forKey: "isCustomized")
     }

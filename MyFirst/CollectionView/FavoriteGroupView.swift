@@ -9,7 +9,9 @@ class FavoriteGroupView: UIView {
     let titleLabel = UILabel()
     var collectionView: UICollectionView
     
-    let itemSize = UIScreen.main.bounds.width * 0.7
+    let itemSize = UIScreen.main.bounds.width - 32.0
+//    let itemHeight = (UIScreen.main.bounds.width - 32.0) * 1.5
+    let itemHeight = UIScreen.main.bounds.width - 32.0
     
     init(title: String, presenter: FavoriteListPresenterProtocol?) {
         self.title = title
@@ -19,13 +21,16 @@ class FavoriteGroupView: UIView {
         
         let flowLayout = UICollectionViewFlowLayout()
         let margin: CGFloat = 16.0
-        flowLayout.itemSize = CGSize(width: self.itemSize, height: self.itemSize + 20.0)
+        flowLayout.itemSize = CGSize(width: self.itemSize, height: self.itemHeight)
         flowLayout.minimumInteritemSpacing = margin
         flowLayout.minimumLineSpacing = margin
         flowLayout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         flowLayout.scrollDirection = .horizontal
         self.collectionView = UICollectionView(
-            frame: CGRect(x: 0, y: 0, width: 1000.0, height: 270.0), collectionViewLayout: flowLayout
+            frame: CGRect(
+                x: 0, y: 0, width: UIScreen.main.bounds.width, height: self.itemHeight
+            ),
+            collectionViewLayout: flowLayout
         )
         
         super.init(frame: CGRect())
@@ -84,29 +89,16 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if
-            let data = UserDefaults.standard.object(forKey: self.title) as? Data,
-            let cachedFavoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite]
-        {
-            if cachedFavoriteList.count == 3 {
-                return cachedFavoriteList.count
-            } else {
-                return cachedFavoriteList.count + 1
-            }
-        } else {
-            return 1
-        }
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
         
-        // キャッシュからそのカテゴリのお気に入りリストを取得する
-        // アイテムの上限に達しておらず、表示したいアイテムは出し終えた時
+        // キャッシュからそのカテゴリのお気に入りを取得する
         if
             let data = UserDefaults.standard.object(forKey: self.title) as? Data,
-            let cachedFavoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite],
-            cachedFavoriteList.count >= 3 || cachedFavoriteList.count >= indexPath.row + 1
+            let cachedFavoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite]
                 
         {
             let targetFavorite = cachedFavoriteList[indexPath.row]
@@ -136,8 +128,6 @@ extension FavoriteGroupView: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? FavoriteCollectionViewCell
-        
-//        cell?.animateCard()
         
         // アイテムが未設定なら登録画面を開く、そうでなければ編集画面を開く
         if let favorite = cell?.favorite {

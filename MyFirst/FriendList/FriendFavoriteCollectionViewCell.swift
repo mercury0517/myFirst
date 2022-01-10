@@ -11,7 +11,7 @@ class FriendFavoriteCollectionViewCell: UICollectionViewCell {
     let titleContainer = UIView()
     let titleLabel = UILabel()
     
-    let itemSize = UIScreen.main.bounds.width * 0.5
+    let itemSize = UIScreen.main.bounds.width - 32.0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,7 +41,7 @@ class FriendFavoriteCollectionViewCell: UICollectionViewCell {
         self.imageView.image = UIColor.lightGray.image(size: .init(width: self.itemSize, height: self.itemSize))
         self.imageView.contentMode = .scaleAspectFill
         self.imageView.clipsToBounds = true
-        self.imageView.layer.cornerRadius = 15.0
+        self.imageView.layer.cornerRadius = 20.0
         
         self.titleLabel.numberOfLines = 0
     }

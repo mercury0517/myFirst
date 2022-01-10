@@ -8,7 +8,7 @@ class FriendFavoriteGroupView: UIView {
     let titleLabel = UILabel()
     var collectionView: UICollectionView
     
-    let itemSize = UIScreen.main.bounds.width * 0.5
+    let itemSize = UIScreen.main.bounds.width - 32.0
     
     init(title: String, favoriteList: [MyFavorite], view: FriendDetailViewController) {
         self.title = title
@@ -26,8 +26,9 @@ class FriendFavoriteGroupView: UIView {
         flowLayout.scrollDirection = .horizontal
         self.collectionView = UICollectionView(
             frame: CGRect(
-                x: 0, y: 0, width: 1000.0, height: self.itemSize)
-            , collectionViewLayout: flowLayout
+                x: 0, y: 0, width: UIScreen.main.bounds.width, height: self.itemSize
+            ),
+            collectionViewLayout: flowLayout
         )
         
         super.init(frame: CGRect())
@@ -86,7 +87,7 @@ extension FriendFavoriteGroupView: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.favoriteList.count
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{

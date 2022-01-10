@@ -49,7 +49,7 @@ class ExchangeViewController: UIViewController {
         {
             self.peerID = MCPeerID.init(displayName: userInfo.name)
         } else {
-            self.peerID = MCPeerID.init(displayName: "unknown")
+            self.peerID = MCPeerID.init(displayName: "YOUR FRIEND")
         }
         
         // 通信に必要なオブジェクトの初期化
@@ -321,60 +321,11 @@ class ExchangeViewController: UIViewController {
     
     // 現在保持しているお気に入りをカテゴリごとにキャッシュから取得する
     private func getMyFavoriteAsData(category: FavoriteCategory) -> Data? {
-        var compressedFavoriteList: [MyFavorite] = []
-        
-        if
-            let data = UserDefaults.standard.object(forKey: category.rawValue) as? Data,
-            let favoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite]
-        {
-            for favorite in favoriteList {
-                // 画像を圧縮したデータ型にして入れ直す
-                if let unwrappedImage = favorite.image {
-                    favorite.imageData = ImageConverter.imageToData(image: unwrappedImage)
-                    favorite.image = nil
-                    
-                    compressedFavoriteList.append(favorite)
-                }
-            }
-            
-            // 圧縮したデータをアーカイブしてデータ型にする
-            return try! NSKeyedArchiver.archivedData(withRootObject: compressedFavoriteList, requiringSecureCoding: false)
-        }
-        
-        return nil
+        return UserDefaults.standard.object(forKey: category.rawValue) as? Data
     }
     
     private func getMyUserInfoAsData() -> Data? {
-        var compressedUserInfo: UserInfo?
-        
-        if
-            let data = UserDefaults.standard.object(forKey: UserDefaultKeys.userInfo) as? Data,
-            let userInfo = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserInfo
-        {
-            // 画像を圧縮したデータ型にして入れ直す
-            if
-                let unwrappedTopBanner = userInfo.topBanner,
-                let unwrappedIcon = userInfo.icon
-            {
-                userInfo.topBannerData = ImageConverter.imageToData(image: unwrappedTopBanner)
-                userInfo.iconData = ImageConverter.imageToData(image: unwrappedIcon)
-                userInfo.topBanner = nil
-                userInfo.icon = nil
-                    
-                compressedUserInfo = userInfo
-            }
-            
-            // 圧縮したデータをアーカイブしてデータ型にする
-            if let unwrappedUserInfo = compressedUserInfo {
-                let archivedUserInfo = try! NSKeyedArchiver.archivedData(withRootObject: unwrappedUserInfo, requiringSecureCoding: false)
-                
-                return archivedUserInfo
-            } else {
-                return nil
-            }
-        } else {
-            return nil
-        }
+        return UserDefaults.standard.object(forKey: UserDefaultKeys.userInfo) as? Data
     }
     
     @objc private func tappedDisconnectButton() {
@@ -601,21 +552,11 @@ extension ExchangeViewController: MCSessionDelegate {
             // 3.受け取ったお気に入りをプロパティに保持する
             self.recievedFavoriteList.append(contentsOf: favoriteList)
             
-            // 画像をimageに戻す
-            for favorite in favoriteList {
-                if let unwrappedImageData = favorite.imageData {
-                    favorite.image = ImageConverter.dataToImage(nsData: unwrappedImageData)
-                }
-            }
-            
             // 4.ユニークキーでそのお気に入りを保存する
             if let unwrappedUniqueKey = self.recievedUniqueKey {
                 let archivedFavoriteList = try! NSKeyedArchiver.archivedData(withRootObject: self.recievedFavoriteList, requiringSecureCoding: false)
                 UserDefaults.standard.set(archivedFavoriteList, forKey: unwrappedUniqueKey)
             }
-            
-            // 終わったら空にしておく
-            self.recievedFavoriteList = []
         } else if let messageString = String(data: data, encoding: .utf8) {
             // 7. 全ての通信が終了したら"finish sending"が相手から飛んでくるので、インジケータを止める
             if messageString == "finish sending" {
@@ -651,6 +592,7 @@ extension ExchangeViewController: MCSessionDelegate {
             DispatchQueue.main.async {
                 self.indicator.stopAnimating()
                 self.sendFavoriteButton.isEnabled = true
+
                 Toast.show("お気に入りを受信しました", self.view)
             }
             
@@ -662,10 +604,11 @@ extension ExchangeViewController: MCSessionDelegate {
                 UserDefaults.standard.set(archivedUserInfo, forKey: profileKey)
             }
             
-            // 終わったら空にしておく
+            // 6. 終わったら空にしておく
             self.recievedUniqueKey = ""
+            self.recievedFavoriteList = []
             
-            // 6. 相手に終わったよメッセージを送る
+            // 7. 相手に終わったよメッセージを送る
             do {
                 let finishMessage = "finish sending"
                 try self.session.send(finishMessage.data(using: .utf8)!, toPeers: self.session.connectedPeers, with: .reliable)
