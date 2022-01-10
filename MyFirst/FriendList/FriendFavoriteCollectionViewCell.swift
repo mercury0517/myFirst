@@ -72,8 +72,8 @@ class FriendFavoriteCollectionViewCell: UICollectionViewCell {
     private func configMyFavorite() {
         self.titleLabel.text = self.favorite?.title
         
-        if let unwrappedImage = self.favorite?.image {
-            self.imageView.image = unwrappedImage
+        if let unwrappedImageData = self.favorite?.imageData {
+            self.imageView.image = ImageConverter.dataToImage(nsData: unwrappedImageData)
         }
         
         self.titleContainer.isHidden = self.titleLabel.text?.isEmpty ?? true

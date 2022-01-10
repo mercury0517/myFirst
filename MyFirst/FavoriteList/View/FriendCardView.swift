@@ -9,7 +9,9 @@ class FriendCardView: UIControl {
     }
     var userInfo: UserInfo? {
         didSet {
-            self.iconImageView.image = self.userInfo?.icon
+            if let iconData = self.userInfo?.iconData {
+                self.iconImageView.image = ImageConverter.dataToImage(nsData: iconData)
+            }
         }
     }
     

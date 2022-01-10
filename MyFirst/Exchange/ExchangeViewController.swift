@@ -318,11 +318,60 @@ class ExchangeViewController: UIViewController {
     
     // 現在保持しているお気に入りをカテゴリごとにキャッシュから取得する
     private func getMyFavoriteAsData(category: FavoriteCategory) -> Data? {
-        return UserDefaults.standard.object(forKey: category.rawValue) as? Data
+        var compressedFavoriteList: [MyFavorite] = []
+        
+        if
+            let data = UserDefaults.standard.object(forKey: category.rawValue) as? Data,
+            let favoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [MyFavorite]
+        {
+            for favorite in favoriteList {
+                // 画像を圧縮したデータ型にして入れ直す
+                if let unwrappedImage = favorite.image {
+                    favorite.imageData = ImageConverter.imageToData(image: unwrappedImage)
+                    favorite.image = nil
+                    
+                    compressedFavoriteList.append(favorite)
+                }
+            }
+            
+            // 圧縮したデータをアーカイブしてデータ型にする
+            return try! NSKeyedArchiver.archivedData(withRootObject: compressedFavoriteList, requiringSecureCoding: false)
+        }
+        
+        return nil
     }
     
     private func getMyUserInfoAsData() -> Data? {
-        return UserDefaults.standard.object(forKey: UserDefaultKeys.userInfo) as? Data
+        var compressedUserInfo: UserInfo?
+        
+        if
+            let data = UserDefaults.standard.object(forKey: UserDefaultKeys.userInfo) as? Data,
+            let userInfo = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserInfo
+        {
+            // 画像を圧縮したデータ型にして入れ直す
+            if
+                let unwrappedTopBanner = userInfo.topBanner,
+                let unwrappedIcon = userInfo.icon
+            {
+                userInfo.topBannerData = ImageConverter.imageToData(image: unwrappedTopBanner)
+                userInfo.iconData = ImageConverter.imageToData(image: unwrappedIcon)
+                userInfo.topBanner = nil
+                userInfo.icon = nil
+                    
+                compressedUserInfo = userInfo
+            }
+            
+            // 圧縮したデータをアーカイブしてデータ型にする
+            if let unwrappedUserInfo = compressedUserInfo {
+                let archivedUserInfo = try! NSKeyedArchiver.archivedData(withRootObject: unwrappedUserInfo, requiringSecureCoding: false)
+                
+                return archivedUserInfo
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
     }
     
     @objc private func tappedDisconnectButton() {
@@ -554,6 +603,9 @@ extension ExchangeViewController: MCSessionDelegate {
                 let archivedFavoriteList = try! NSKeyedArchiver.archivedData(withRootObject: self.recievedFavoriteList, requiringSecureCoding: false)
                 UserDefaults.standard.set(archivedFavoriteList, forKey: unwrappedUniqueKey)
             }
+            
+            // 終わったら空にしておく
+            self.recievedFavoriteList = []
         } else if let messageString = String(data: data, encoding: .utf8) {
             // 7. 全ての通信が終了したら"finish sending"が相手から飛んでくるので、インジケータを止める
             if messageString == "finish sending" {
@@ -599,6 +651,9 @@ extension ExchangeViewController: MCSessionDelegate {
                 let archivedUserInfo = try! NSKeyedArchiver.archivedData(withRootObject: userInfo, requiringSecureCoding: false)
                 UserDefaults.standard.set(archivedUserInfo, forKey: profileKey)
             }
+            
+            // 終わったら空にしておく
+            self.recievedUniqueKey = ""
             
             // 6. 相手に終わったよメッセージを送る
             do {

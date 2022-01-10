@@ -93,14 +93,7 @@ extension FriendFavoriteGroupView: UICollectionViewDelegate, UICollectionViewDat
         if !self.favoriteList.isEmpty {
             let targetFavorite = self.favoriteList[indexPath.row]
             
-            cell.favorite = MyFavorite(
-                categoryName: targetFavorite.categoryName,
-                index: targetFavorite.index,
-                title: targetFavorite.title,
-                image: targetFavorite.image,
-                memo: targetFavorite.memo,
-                isCustomized: true
-            )
+            cell.favorite = targetFavorite
         } else {
             // グレーの画像を表示しておく
             cell.favorite = MyFavorite(

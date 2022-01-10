@@ -44,6 +44,7 @@
 		60C27B4C2789C0E3005BFC79 /* FriendFavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B4B2789C0E3005BFC79 /* FriendFavoriteCollectionViewCell.swift */; };
 		60C27B4E278AC8F8005BFC79 /* FriendCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B4D278AC8F8005BFC79 /* FriendCardView.swift */; };
 		60C27B50278AD686005BFC79 /* FriendItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B4F278AD686005BFC79 /* FriendItemDetailViewController.swift */; };
+		60C27B52278BF540005BFC79 /* ImageConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B51278BF540005BFC79 /* ImageConverter.swift */; };
 		60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5AADD259B0AC800A1243E /* VideoViewController.swift */; };
 		60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9C258613B300C681DD /* AppDelegate.swift */; };
 		60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9E258613B300C681DD /* SceneDelegate.swift */; };
@@ -126,6 +127,7 @@
 		60C27B4B2789C0E3005BFC79 /* FriendFavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		60C27B4D278AC8F8005BFC79 /* FriendCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCardView.swift; sourceTree = "<group>"; };
 		60C27B4F278AD686005BFC79 /* FriendItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendItemDetailViewController.swift; sourceTree = "<group>"; };
+		60C27B51278BF540005BFC79 /* ImageConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConverter.swift; sourceTree = "<group>"; };
 		60D5AADD259B0AC800A1243E /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		60D5CC99258613B300C681DD /* MyFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D5CC9C258613B300C681DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				608922AE277C292A00698ABD /* UserDefaultKeys.swift */,
+				60C27B51278BF540005BFC79 /* ImageConverter.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -670,6 +673,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60878D16275B642A0052B91C /* FavoriteListInteractor.swift in Sources */,
+				60C27B52278BF540005BFC79 /* ImageConverter.swift in Sources */,
 				60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */,
 				60C27B4827831CC9005BFC79 /* FriendDetailViewController.swift in Sources */,
 				60D5CCA1258613B300C681DD /* HomeViewController.swift in Sources */,
@@ -886,7 +890,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirst/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -908,7 +912,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirst/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
