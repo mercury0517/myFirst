@@ -4,7 +4,24 @@ class FriendListViewController: UIViewController {
     let scrollView = UIScrollView()
     
     let titleLabel = UILabel()
+    let editButton = UIButton()
     let friendStackView = UIStackView()
+    
+    var isEditMode: Bool = false {
+        didSet {
+            if self.isEditMode {
+                DispatchQueue.main.async {
+                    self.editButton.setTitle("戻る", for: .normal)
+                    self.editButton.backgroundColor = .red
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.editButton.setTitle("編集", for: .normal)
+                    self.editButton.backgroundColor = CustomUIColor.turquoise
+                }
+            }
+        }
+    }
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -42,6 +59,27 @@ class FriendListViewController: UIViewController {
                 friendCardView.uniqueKey = friendUniqueKey
                 friendCardView.displayName = friendList[friendUniqueKey]
                 
+                // 削除ポップアップ処理をクロージャで渡しておく
+                friendCardView.deleteAlertAcrion = {
+                    DispatchQueue.main.async {
+                        self.present(friendCardView.alertController, animated: true)
+                    }
+                }
+                
+                // 削除処理をクロージャで渡しておく
+                friendCardView.deleteAction = {
+                    for arrangedSubviews in self.friendStackView.arrangedSubviews {
+                        if
+                            let friendCard = arrangedSubviews as? FriendCardView,
+                            friendCard.uniqueKey == friendUniqueKey
+                        {
+                            DispatchQueue.main.async {
+                                friendCard.removeFromSuperview()
+                            }
+                        }
+                    }
+                }
+                
                 let profileKey = friendUniqueKey + "_profile"
                 
                 if
@@ -63,11 +101,15 @@ class FriendListViewController: UIViewController {
     private func addSubviews() {
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.titleLabel)
+        self.scrollView.addSubview(self.editButton)
         self.scrollView.addSubview(self.friendStackView)
     }
     
     private func configSubViews() {
-        self.titleLabel.text = "FRIEND"
+        self.titleLabel.text = "お気に入りを交換した友達"
+        
+        self.editButton.setTitle("編集", for: .normal)
+        self.editButton.addTarget(self, action: #selector(self.tappedEditButton), for: .touchUpInside)
         
         self.friendStackView.alignment = .center
         self.friendStackView.axis = .vertical
@@ -76,7 +118,12 @@ class FriendListViewController: UIViewController {
     
     private func applyStyling() {
         self.titleLabel.textColor = .black
-        self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)
+        self.titleLabel.font = .systemFont(ofSize: 15.0)
+        
+        self.editButton.titleLabel?.font = UIFont(name: "Oswald", size: 12.0)
+        self.editButton.backgroundColor = CustomUIColor.turquoise
+        self.editButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 10.0, bottom: 3.0, right: 10.0)
+        self.editButton.layer.cornerRadius = 5.0
         
         self.view.backgroundColor = .white
     }
@@ -86,7 +133,10 @@ class FriendListViewController: UIViewController {
         
         self.titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 30.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        
+        self.editButton.autoAlignAxis(.horizontal, toSameAxisOf: self.titleLabel)
+        self.editButton.autoPinEdge(.left, to: .right, of: self.titleLabel, withOffset: 16.0)
+        self.editButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
         self.friendStackView.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 10.0)
         self.friendStackView.autoSetDimension(.width, toSize: UIScreen.main.bounds.width)
@@ -109,5 +159,15 @@ class FriendListViewController: UIViewController {
         } else {
             Toast.show("現在ご利用できません", self.view)
         }
+    }
+    
+    @objc private func tappedEditButton() {
+        for arrangedSubviews in self.friendStackView.arrangedSubviews {
+            if let friendCard = arrangedSubviews as? FriendCardView {
+                friendCard.isHideDeleteButton = self.isEditMode
+            }
+        }
+        
+        self.isEditMode.toggle()
     }
 }

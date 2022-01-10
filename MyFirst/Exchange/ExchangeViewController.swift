@@ -596,7 +596,7 @@ extension ExchangeViewController: MCSessionDelegate {
                 Toast.show("お気に入りを受信しました", self.view)
             }
             
-            // 5.ユニークキーでそのお気に入りを保存する
+            // 5.ユニークキーでそのプロフィールを保存する
             if let unwrappedUniqueKey = self.recievedUniqueKey {
                 let profileKey = unwrappedUniqueKey + "_profile"
                 

@@ -20,8 +20,8 @@ class CustomIndicator: UIActivityIndicatorView {
         self.layer.cornerRadius = 10.0
         
         self.textLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
-        self.textLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 10.0)
-        self.textLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 10.0)
+        self.textLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 20.0)
+        self.textLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 20.0)
     }
     
     required init(coder: NSCoder) {
