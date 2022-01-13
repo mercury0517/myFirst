@@ -45,13 +45,13 @@ class FriendView: UIControl {
     
     private func applyStyling() {
         self.backgroundColor = .white
-        self.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         self.layer.shadowColor = UIColor.lightGray.cgColor
         self.layer.shadowOpacity = 0.6
         self.layer.shadowRadius = 4.0
         
         self.nameLabel.textColor = .black
-        self.nameLabel.font = UIFont(name: "Oswald", size: 20.0)
+        self.nameLabel.font = UIFont(name: "Oswald", size: 18.0)
         
         self.inviteLabel.textColor = CustomUIColor.turquoise
         self.inviteLabel.font = UIFont(name: "Oswald", size: 15.0)

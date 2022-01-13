@@ -67,7 +67,7 @@ class FriendCardView: UIControl {
         self.backgroundColor = .white
         self.layer.cornerRadius = 10.0
         
-        self.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         self.layer.shadowColor = UIColor.lightGray.cgColor
         self.layer.shadowOpacity = 0.6
         self.layer.shadowRadius = 4.0
@@ -115,6 +115,9 @@ class FriendCardView: UIControl {
                     // キャッシュの更新
                     UserDefaults.standard.set(newFriendList, forKey: UserDefaultKeys.friendList)
                 }
+                
+                // 削除が完了したら、ハプティックフィードバックを入れる
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
             }
         }
         let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
