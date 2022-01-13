@@ -54,6 +54,18 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
+    // タブをタップした時に一番上に戻る
+    func scrollToTop() {
+        let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
+        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
+        let margin = statusBarHeight + navigationBarHeight
+        
+        self.scrollView.setContentOffset(
+            CGPoint(x: 0, y: 0 - self.scrollView.contentInset.top - margin),
+            animated: true
+        )
+    }
+    
     func present(_ viewController: UIViewController) {
         self.present(viewController, animated: true, completion: nil)
     }

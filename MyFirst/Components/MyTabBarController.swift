@@ -1,10 +1,12 @@
 import UIKit
 
-class MyTabBarController: UITabBarController {
+class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
     let tabView1 = AppDependencies.assmbleFavoriteList()
     let tabView2 = CustomNavigationController(rootViewController: FriendListViewController())
     let tabView3 = CustomNavigationController(rootViewController: ExchangeViewController())
     let tabView4 = PhotoViewController()
+    
+    var shouldScroll = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,10 +33,18 @@ class MyTabBarController: UITabBarController {
         self.configTabView()
     }
     
+    var lastSelectedIndex = 0
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         // tabタップしたらやりたいこと
         switch item.tag {
         case 1:
+            if
+                let navigationController = tabView1 as? UINavigationController,
+                let favoriteListView = navigationController.viewControllers.first as? FavoriteListViewController,
+                item.tag == self.lastSelectedIndex // homeタブを2連続でタップしていたら
+            {
+                favoriteListView.scrollToTop()
+            }
             break
         case 2:
             break
@@ -45,6 +55,8 @@ class MyTabBarController: UITabBarController {
         default:
             break
         }
+        
+        self.lastSelectedIndex = item.tag
     }
     
     private func configTabView() {
