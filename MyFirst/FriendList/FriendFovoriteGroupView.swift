@@ -103,7 +103,7 @@ extension FriendFavoriteGroupView: UICollectionViewDelegate, UICollectionViewDat
                 categoryName: "",
                 index: indexPath.row,
                 title: "",
-                image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)),
+                image: UIImage(named: "sky"),
                 memo: nil,
                 isCustomized: false
             )

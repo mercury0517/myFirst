@@ -29,7 +29,7 @@ class FriendCardView: UIControl {
     var deleteAlertAcrion: (() -> Void)?
     var deleteAction: (() -> Void)?
     
-    let iconImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
+    let iconImageView = UIImageView(image: UIImage(named: "sky"))
     let nameLabel = UILabel()
     let deleteButton = UIButton()
     

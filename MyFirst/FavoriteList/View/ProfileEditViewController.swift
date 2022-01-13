@@ -26,12 +26,12 @@ class ProfileEditViewController: UIViewController {
     let scrollView = UIScrollView()
 
     let itemImageViewContainer = UIControl()
-    let itemImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
+    let itemImageView = UIImageView(image: UIImage(named: "sky"))
     
     let closeButton = CustomCloseButton()
     
     let userIconContainer = UIControl()
-    let userIconView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 100.0, height: 100.0)))
+    let userIconView = UIImageView(image: UIImage(named: "sky"))
     
     let userNameTitleLabel = UILabel()
     let userNameTextField = CustomTextField()

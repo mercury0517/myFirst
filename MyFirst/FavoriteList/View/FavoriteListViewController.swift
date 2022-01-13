@@ -16,10 +16,10 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     let scrollView = UIScrollView()
     
-    let topBanner = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
+    let topBanner = UIImageView(image: UIImage(named: "sky"))
     
     let userIconContainer = UIControl()
-    let userIcon = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
+    let userIcon = UIImageView(image: UIImage(named: "sky"))
     
     let editProfileButton = UIButton()
     let userNameLabel = UILabel()
@@ -83,8 +83,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             self.userIcon.image = userInfo.icon
             self.userNameLabel.text = userInfo.name
         } else {
-            self.topBanner.image = UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0))
-            self.userIcon.image = UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0))
+            self.topBanner.image = UIImage(named: "sky")
+            self.userIcon.image = UIImage(named: "sky")
             self.userNameLabel.text = ""
         }
         
@@ -137,7 +137,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             self.userIcon.image = userInfo.icon
             self.userNameLabel.text = userInfo.name
         } else {
-            self.userNameLabel.text = "YOUR NAME"
+            self.userNameLabel.text = ""
         }
         
         self.customPhotoLibraryAlert()

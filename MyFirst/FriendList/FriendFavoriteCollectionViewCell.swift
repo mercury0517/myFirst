@@ -38,7 +38,7 @@ class FriendFavoriteCollectionViewCell: UICollectionViewCell {
         self.layer.shadowOpacity = 0.6
         self.layer.shadowRadius = 4.0
         
-        self.imageView.image = UIColor.lightGray.image(size: .init(width: self.itemSize, height: self.itemSize))
+        self.imageView.image = UIImage(named: "sky")
         self.imageView.contentMode = .scaleAspectFill
         self.imageView.clipsToBounds = true
         self.imageView.layer.cornerRadius = 20.0

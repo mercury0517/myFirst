@@ -17,7 +17,7 @@ class FavoriteInputViewController: UIViewController {
     
     let scrollView = UIScrollView()
     
-    let itemImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
+    let itemImageView = UIImageView(image: UIImage(named: "sky"))
     let closeButton = CustomCloseButton()
     let inputImageButton = UIButton()
     
@@ -92,12 +92,12 @@ class FavoriteInputViewController: UIViewController {
         
         self.closeButton.addTarget(self, action: #selector(self.tappedCloseButton), for: .touchUpInside)
         
-        self.inputImageButton.setTitle("INPUT IMAGE", for: .normal)
+        self.inputImageButton.setTitle("画像を選択", for: .normal)
         self.inputImageButton.addTarget(self, action: #selector(self.tappedInputImageButton), for: .touchUpInside)
         
         self.titleLabel.text = "タイトル"
         
-        self.itemNameTextField.placeholder = "input your favorite title"
+        self.itemNameTextField.placeholder = "お気に入りタイトル"
         self.itemNameTextField.delegate = self
         
         self.memoLabel.text = "メモ"
@@ -118,9 +118,9 @@ class FavoriteInputViewController: UIViewController {
     private func applyStyling() {
         self.view.backgroundColor = .white
         
-        self.inputImageButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
+        self.inputImageButton.titleLabel?.font = UIFont(name: "Oswald", size: 12.0)
         self.inputImageButton.backgroundColor = CustomUIColor.turquoise
-        self.inputImageButton.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
+        self.inputImageButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 10.0, bottom: 3.0, right: 10.0)
         self.inputImageButton.layer.cornerRadius = 5.0
         
         self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)

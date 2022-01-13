@@ -9,10 +9,10 @@ class FriendDetailViewController: UIViewController {
     
     let scrollView = UIScrollView()
     
-    let itemImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
+    let itemImageView = UIImageView(image: UIImage(named: "sky"))
     let closeButton = CustomCloseButton()
     
-    let userIconView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 100.0, height: 100.0)))
+    let userIconView = UIImageView(image: UIImage(named: "sky"))
     
     let userNameLabel = UILabel()
     let separateLine = UIView()

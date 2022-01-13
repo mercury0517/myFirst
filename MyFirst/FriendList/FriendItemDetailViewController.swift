@@ -8,7 +8,7 @@ class FriendItemDetailViewController: UIViewController {
     
     let scrollView = UIScrollView()
     
-    let itemImageView = UIImageView(image: UIColor.lightGray.image(size: .init(width: 150.0, height: 150.0)))
+    let itemImageView = UIImageView(image: UIImage(named: "sky"))
     let closeButton = CustomCloseButton()
     
     let titleLabel = CustomUILabel()
