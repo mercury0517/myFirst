@@ -37,6 +37,9 @@ class ExchangeViewController: UIViewController {
     let sendFavoriteButton = UIButton()
     let disconnectButton = UIButton()
     
+    let wifiDescriptionLabel = UILabel()
+    let loadingDescriptionLabel = UILabel()
+    
     var indicator = CustomIndicator()
     
     var recievedUniqueKey: String?
@@ -118,6 +121,8 @@ class ExchangeViewController: UIViewController {
         self.buttonStackView.addArrangedSubview(self.guestButton)
         self.buttonStackView.addArrangedSubview(self.sendFavoriteButton)
         self.buttonStackView.addArrangedSubview(self.disconnectButton)
+        self.scrollView.addSubview(self.wifiDescriptionLabel)
+        self.scrollView.addSubview(self.loadingDescriptionLabel)
         self.view.addSubview(self.indicator)
     }
     
@@ -149,13 +154,19 @@ class ExchangeViewController: UIViewController {
         self.guestButton.isHidden = false
         self.sendFavoriteButton.isHidden = true
         self.disconnectButton.isHidden = true
+        
+        self.wifiDescriptionLabel.text = "※端末のWiFiとBluetoothをONにしてください。"
+        self.wifiDescriptionLabel.numberOfLines = 2
+        
+        self.loadingDescriptionLabel.text = "※お気に入りの交換には数分かかる事があります。"
+        self.loadingDescriptionLabel.numberOfLines = 2
     }
     
     private func applyStyling() {
         self.view.backgroundColor = .white
         
         self.statusLabel.textColor = .black
-        self.statusLabel.font = .systemFont(ofSize: 15.0)
+        self.statusLabel.font = .boldSystemFont(ofSize: 15.0)
         
         self.hostButton.backgroundColor = CustomUIColor.turquoise
         self.hostButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
@@ -181,6 +192,12 @@ class ExchangeViewController: UIViewController {
         self.disconnectButton.backgroundColor = .white
         self.disconnectButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
         self.disconnectButton.setTitleColor(.red, for: .normal)
+        
+        self.wifiDescriptionLabel.textColor = .black
+        self.wifiDescriptionLabel.font = .systemFont(ofSize: 12.0)
+        
+        self.loadingDescriptionLabel.textColor = .black
+        self.loadingDescriptionLabel.font = .systemFont(ofSize: 12.0)
     }
     
     private func addConstraints() {
@@ -201,7 +218,6 @@ class ExchangeViewController: UIViewController {
         self.buttonStackView.autoPinEdge(.top, to: .bottom, of: self.friendStackView, withOffset: 30.0)
         self.buttonStackView.autoPinEdge(toSuperviewEdge: .left)
         self.buttonStackView.autoPinEdge(toSuperviewEdge: .right)
-        self.buttonStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 30.0)
         
         self.hostButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.hostButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
@@ -218,6 +234,15 @@ class ExchangeViewController: UIViewController {
         self.disconnectButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.disconnectButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.disconnectButton.autoSetDimension(.height, toSize: 44.0)
+        
+        self.wifiDescriptionLabel.autoPinEdge(.top, to: .bottom, of: self.buttonStackView, withOffset: 30.0)
+        self.wifiDescriptionLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.wifiDescriptionLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        
+        self.loadingDescriptionLabel.autoPinEdge(.top, to: .bottom, of: self.wifiDescriptionLabel, withOffset: 5.0)
+        self.loadingDescriptionLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.loadingDescriptionLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.loadingDescriptionLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 30.0)
         
         self.indicator.autoCenterInSuperview()
     }
@@ -564,6 +589,8 @@ extension ExchangeViewController: MCSessionDelegate {
                     Toast.show("お気に入りを送信しました", self.view)
                     self.indicator.stopAnimating()
                     self.sendFavoriteButton.isEnabled = true
+                    
+                    self.statusLabel.text = "お気に入りを送信しました。"
                 }
             } else {
                 // インジケータ開始
@@ -594,6 +621,8 @@ extension ExchangeViewController: MCSessionDelegate {
                 self.sendFavoriteButton.isEnabled = true
 
                 Toast.show("お気に入りを受信しました", self.view)
+                
+                self.statusLabel.text = "お気に入りを受信しました。「友達」タブを見てみましょう！"
             }
             
             // 5.ユニークキーでそのプロフィールを保存する

@@ -73,6 +73,7 @@ class FriendCardView: UIControl {
         self.layer.shadowRadius = 4.0
         
         self.iconImageView.layer.cornerRadius = 30.0
+        self.iconImageView.contentMode = .scaleAspectFill
         self.iconImageView.clipsToBounds = true
         
         self.nameLabel.textColor = .black
