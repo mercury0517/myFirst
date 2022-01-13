@@ -34,7 +34,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     }
     
     private func configSubViews() {
-        self.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         self.layer.shadowColor = UIColor.lightGray.cgColor
         self.layer.shadowOpacity = 0.6
         self.layer.shadowRadius = 4.0
@@ -44,14 +44,14 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         self.imageView.clipsToBounds = true
         self.imageView.layer.cornerRadius = 20.0
         
-        self.titleLabel.numberOfLines = 0
+        self.titleLabel.numberOfLines = 2
     }
     
     private func applyStyling() {
-        self.titleContainer.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        self.titleContainer.backgroundColor = .white
         
-        self.titleLabel.textColor = .white
-        self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)
+        self.titleLabel.textColor = .black
+        self.titleLabel.font = UIFont(name: "Oswald", size: 16.0)
     }
     
     private func addConstraints() {
@@ -63,11 +63,12 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         self.titleContainer.autoPinEdge(toSuperviewEdge: .left)
         self.titleContainer.autoPinEdge(toSuperviewEdge: .right)
         self.titleContainer.autoPinEdge(toSuperviewEdge: .bottom)
-        self.titleContainer.autoSetDimension(.height, toSize: 65.0)
+        self.titleContainer.autoSetDimension(.height, toSize: 70.0)
         
         self.titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 10.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.titleLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
     }
     
     private func configMyFavorite() {
