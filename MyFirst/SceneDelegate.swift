@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  MyFirst
-//
-//  Created by 伊原明宏 on 2020/12/13.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -19,7 +12,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         self.window = window
-        window.rootViewController = MyTabBarController()
+        
+        let baseRouter = BaseRouter(window: self.window)
+        let splashViewController = SplashViewController(router: baseRouter)
+        
+        window.rootViewController = splashViewController
         window.makeKeyAndVisible()
     }
 

@@ -31,6 +31,9 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
         self.setViewControllers(conList, animated: false)
         
         self.configTabView()
+        
+        // シングルトンに高さを保存
+        TabBarHeightManager.shared.height = self.tabBar.frame.size.height
     }
     
     var lastSelectedIndex = 0
@@ -74,5 +77,14 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
             [.font : UIFont.init(name: "HelveticaNeue-Medium", size: 15.0) ?? "", .foregroundColor : UIColor.black],
             for: .selected
         )
+    }
+}
+
+class TabBarHeightManager {
+    var height: CGFloat = 0
+
+    static let shared = TabBarHeightManager()
+    
+    private init() {
     }
 }

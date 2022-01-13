@@ -45,6 +45,8 @@
 		60C27B4E278AC8F8005BFC79 /* FriendCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B4D278AC8F8005BFC79 /* FriendCardView.swift */; };
 		60C27B50278AD686005BFC79 /* FriendItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B4F278AD686005BFC79 /* FriendItemDetailViewController.swift */; };
 		60C27B52278BF540005BFC79 /* ImageConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B51278BF540005BFC79 /* ImageConverter.swift */; };
+		60C27B54278FCDE1005BFC79 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B53278FCDE1005BFC79 /* SplashViewController.swift */; };
+		60C27B56278FF4D9005BFC79 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B55278FF4D9005BFC79 /* BaseRouter.swift */; };
 		60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5AADD259B0AC800A1243E /* VideoViewController.swift */; };
 		60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9C258613B300C681DD /* AppDelegate.swift */; };
 		60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9E258613B300C681DD /* SceneDelegate.swift */; };
@@ -128,6 +130,8 @@
 		60C27B4D278AC8F8005BFC79 /* FriendCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCardView.swift; sourceTree = "<group>"; };
 		60C27B4F278AD686005BFC79 /* FriendItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendItemDetailViewController.swift; sourceTree = "<group>"; };
 		60C27B51278BF540005BFC79 /* ImageConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConverter.swift; sourceTree = "<group>"; };
+		60C27B53278FCDE1005BFC79 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		60C27B55278FF4D9005BFC79 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		60D5AADD259B0AC800A1243E /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		60D5CC99258613B300C681DD /* MyFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D5CC9C258613B300C681DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -340,6 +344,7 @@
 				60D5CC9C258613B300C681DD /* AppDelegate.swift */,
 				60878D01275B55D80052B91C /* AppDependencies.swift */,
 				60D5CCA5258613B600C681DD /* Assets.xcassets */,
+				60C27B55278FF4D9005BFC79 /* BaseRouter.swift */,
 				60F099AB26A965950045CEB7 /* CollectionView */,
 				608922AD277C290C00698ABD /* Common */,
 				60825D81259B109E00B7B242 /* Components */,
@@ -352,6 +357,7 @@
 				60D5CCAA258613B600C681DD /* Info.plist */,
 				60D5CCA7258613B600C681DD /* LaunchScreen.storyboard */,
 				60D5CC9E258613B300C681DD /* SceneDelegate.swift */,
+				60C27B53278FCDE1005BFC79 /* SplashViewController.swift */,
 				60D5AAE2259B0ADB00A1243E /* View */,
 			);
 			path = MyFirst;
@@ -681,6 +687,7 @@
 				60825D7D259B102300B7B242 /* FavoriteListViewController.swift in Sources */,
 				60878D1C275C9AB30052B91C /* CustomTextField.swift in Sources */,
 				60C27B44277EEB42005BFC79 /* CustomNavigationController.swift in Sources */,
+				60C27B54278FCDE1005BFC79 /* SplashViewController.swift in Sources */,
 				60C27B50278AD686005BFC79 /* FriendItemDetailViewController.swift in Sources */,
 				608922AF277C292A00698ABD /* UserDefaultKeys.swift in Sources */,
 				60C27B3D277D81E2005BFC79 /* CustomUILabel.swift in Sources */,
@@ -714,6 +721,7 @@
 				60878CFE275B4E9A0052B91C /* MyFavorite.swift in Sources */,
 				60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */,
 				60878D18275B85690052B91C /* FavoriteCategory.swift in Sources */,
+				60C27B56278FF4D9005BFC79 /* BaseRouter.swift in Sources */,
 				60D5E92726A2F77C00803F7E /* VideoCollectionViewCell.swift in Sources */,
 				60878D09275B56EE0052B91C /* FavoriteListPresenter.swift in Sources */,
 				60D5E92C26A3056B00803F7E /* VideoType.swift in Sources */,
@@ -818,7 +826,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -873,7 +881,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -890,7 +898,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirst/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -901,7 +909,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.myfirst20201213.MyFirst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -912,7 +920,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirst/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -923,7 +931,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.myfirst20201213.MyFirst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

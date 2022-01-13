@@ -25,37 +25,46 @@ class FavoriteListInteractor: FavoriteListInteractorProtocol {
     
     // カテゴリ名をキーにして、お気に入りを配列で保存する
     func storeFavorite(_ favorite: MyFavorite) {
-        var newFavoriteList: [MyFavorite] = []
-        var cachedFavoriteList = self.loadFavoriteList(categoryName: favorite.categoryName)
+        // お気に入りを各カテゴリ1つしか持たなくなった為、上書きして保存するだけで良くなった。
+        // 今後アイテムを複数持たせる場合は復活させる
         
-        if !cachedFavoriteList.isEmpty {
-            // 3つまでしか登録できないので、3つに達していない場合のみ、要素を追加する
-            if cachedFavoriteList.count < 3 {
-                cachedFavoriteList.append(favorite)
-            } else {
-                // 既に3つ登録してある場合は、該当のindexの要素を差し替える
-                cachedFavoriteList[favorite.index] = favorite
-            }
-            
-            newFavoriteList = cachedFavoriteList
-        } else {
-            // キャッシュがない場合は、初めてのお気に入りとして保存する
-            newFavoriteList.append(favorite)
-        }
+//        var newFavoriteList: [MyFavorite] = []
+//        var cachedFavoriteList = self.loadFavoriteList(categoryName: favorite.categoryName)
+//
+//        if !cachedFavoriteList.isEmpty {
+//            // 3つまでしか登録できないので、3つに達していない場合のみ、要素を追加する
+//            if cachedFavoriteList.count < 3 {
+//                cachedFavoriteList.append(favorite)
+//            } else {
+//                // 既に3つ登録してある場合は、該当のindexの要素を差し替える
+//                cachedFavoriteList[favorite.index] = favorite
+//            }
+//
+//            newFavoriteList = cachedFavoriteList
+//        } else {
+//            // キャッシュがない場合は、初めてのお気に入りとして保存する
+//            newFavoriteList.append(favorite)
+//        }
         
-        let archivedFavoriteList = try! NSKeyedArchiver.archivedData(withRootObject: newFavoriteList, requiringSecureCoding: false)
+        let archivedFavoriteList = try! NSKeyedArchiver.archivedData(withRootObject: [favorite], requiringSecureCoding: false)
         self.userDefault.set(archivedFavoriteList, forKey: favorite.categoryName)
     }
     
     func updateFavorite(_ favorite: MyFavorite) {
-        var cachedFavoriteList = self.loadFavoriteList(categoryName: favorite.categoryName)
+        // お気に入りを各カテゴリ1つしか持たなくなった為、上書きして保存するだけで良くなった。
+        // 今後アイテムを複数持たせる場合は復活させる
         
-        // 該当のindexのお気に入りを更新する
-        if !cachedFavoriteList.isEmpty {
-            cachedFavoriteList[favorite.index] = favorite
-        }
+//        var cachedFavoriteList = self.loadFavoriteList(categoryName: favorite.categoryName)
+//
+//        // 該当のindexのお気に入りを更新する
+//        if !cachedFavoriteList.isEmpty {
+//            cachedFavoriteList[favorite.index] = favorite
+//        }
+//
+//        let archivedFavoriteList = try! NSKeyedArchiver.archivedData(withRootObject: cachedFavoriteList, requiringSecureCoding: false)
+//        self.userDefault.set(archivedFavoriteList, forKey: favorite.categoryName)
         
-        let archivedFavoriteList = try! NSKeyedArchiver.archivedData(withRootObject: cachedFavoriteList, requiringSecureCoding: false)
+        let archivedFavoriteList = try! NSKeyedArchiver.archivedData(withRootObject: [favorite], requiringSecureCoding: false)
         self.userDefault.set(archivedFavoriteList, forKey: favorite.categoryName)
     }
     
@@ -72,23 +81,28 @@ class FavoriteListInteractor: FavoriteListInteractorProtocol {
     }
     
     func deleteFavorite(categoryName: String, itemIndex: Int, completion: () -> Void) {
-        let cachedFavoriteList = self.loadFavoriteList(categoryName: categoryName)
-        var newFavoriteList: [MyFavorite] = []
-        var newFavoriteCount = 0
-
-        // 削除対象のお気に入りのみ、新規リストには追加しない
-        for (index, favorite) in cachedFavoriteList.enumerated() {
-            if index != itemIndex {
-                favorite.index = newFavoriteCount // indexの上書き
-                
-                newFavoriteList.append(favorite)
-                newFavoriteCount += 1
-            }
-        }
+        // お気に入りを各カテゴリ1つしか持たなくなった為、キーの削除だけで良くなった。
+        // 今後アイテムを複数持たせる場合は復活させる
         
-        // 更新したお気に入りリストをキャッシュに再度登録する
-        let archivedFavoriteList = try! NSKeyedArchiver.archivedData(withRootObject: newFavoriteList, requiringSecureCoding: false)
-        self.userDefault.set(archivedFavoriteList, forKey: categoryName)
+//        let cachedFavoriteList = self.loadFavoriteList(categoryName: categoryName)
+//        var newFavoriteList: [MyFavorite] = []
+//        var newFavoriteCount = 0
+//
+//        // 削除対象のお気に入りのみ、新規リストには追加しない
+//        for (index, favorite) in cachedFavoriteList.enumerated() {
+//            if index != itemIndex {
+//                favorite.index = newFavoriteCount // indexの上書き
+//
+//                newFavoriteList.append(favorite)
+//                newFavoriteCount += 1
+//            }
+//        }
+//
+//        // 更新したお気に入りリストをキャッシュに再度登録する
+//        let archivedFavoriteList = try! NSKeyedArchiver.archivedData(withRootObject: newFavoriteList, requiringSecureCoding: false)
+//        self.userDefault.set(archivedFavoriteList, forKey: categoryName)
+        
+        self.userDefault.removeObject(forKey: categoryName)
         
         completion()
     }
