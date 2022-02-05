@@ -47,6 +47,7 @@
 		60C27B52278BF540005BFC79 /* ImageConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B51278BF540005BFC79 /* ImageConverter.swift */; };
 		60C27B54278FCDE1005BFC79 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B53278FCDE1005BFC79 /* SplashViewController.swift */; };
 		60C27B56278FF4D9005BFC79 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B55278FF4D9005BFC79 /* BaseRouter.swift */; };
+		60C27B5827AE6772005BFC79 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B5727AE6772005BFC79 /* PrivacyPolicyViewController.swift */; };
 		60D5AADE259B0AC800A1243E /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5AADD259B0AC800A1243E /* VideoViewController.swift */; };
 		60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9C258613B300C681DD /* AppDelegate.swift */; };
 		60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5CC9E258613B300C681DD /* SceneDelegate.swift */; };
@@ -60,7 +61,7 @@
 		60D5E93526A3A25000803F7E /* Oswald-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60D5E93426A3A25000803F7E /* Oswald-VariableFont_wght.ttf */; };
 		60D5E93D26A3C4D300803F7E /* DiscCollectionVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5E93C26A3C4D300803F7E /* DiscCollectionVIewCell.swift */; };
 		60D5E94526A3C71600803F7E /* DiscGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D5E94426A3C71600803F7E /* DiscGroupView.swift */; };
-		60F099A726A9627A0045CEB7 /* PhotoVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F099A626A9627A0045CEB7 /* PhotoVIewController.swift */; };
+		60F099A726A9627A0045CEB7 /* MoreInformationVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F099A626A9627A0045CEB7 /* MoreInformationVIewController.swift */; };
 		60F099A926A963A60045CEB7 /* DiscType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F099A826A963A60045CEB7 /* DiscType.swift */; };
 		60F099B126A96E330045CEB7 /* CompactDisc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F099B026A96E330045CEB7 /* CompactDisc.swift */; };
 		60F099B426AA5A0A0045CEB7 /* AppleMusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F099B326AA5A0A0045CEB7 /* AppleMusicManager.swift */; };
@@ -132,6 +133,7 @@
 		60C27B51278BF540005BFC79 /* ImageConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConverter.swift; sourceTree = "<group>"; };
 		60C27B53278FCDE1005BFC79 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		60C27B55278FF4D9005BFC79 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		60C27B5727AE6772005BFC79 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		60D5AADD259B0AC800A1243E /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		60D5CC99258613B300C681DD /* MyFirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D5CC9C258613B300C681DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -151,7 +153,7 @@
 		60D5E93426A3A25000803F7E /* Oswald-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		60D5E93C26A3C4D300803F7E /* DiscCollectionVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscCollectionVIewCell.swift; sourceTree = "<group>"; };
 		60D5E94426A3C71600803F7E /* DiscGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscGroupView.swift; sourceTree = "<group>"; };
-		60F099A626A9627A0045CEB7 /* PhotoVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVIewController.swift; sourceTree = "<group>"; };
+		60F099A626A9627A0045CEB7 /* MoreInformationVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInformationVIewController.swift; sourceTree = "<group>"; };
 		60F099A826A963A60045CEB7 /* DiscType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscType.swift; sourceTree = "<group>"; };
 		60F099B026A96E330045CEB7 /* CompactDisc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactDisc.swift; sourceTree = "<group>"; };
 		60F099B326AA5A0A0045CEB7 /* AppleMusicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicManager.swift; sourceTree = "<group>"; };
@@ -305,14 +307,15 @@
 			path = FriendList;
 			sourceTree = "<group>";
 		};
-		60D5AAE2259B0ADB00A1243E /* View */ = {
+		60D5AAE2259B0ADB00A1243E /* More */ = {
 			isa = PBXGroup;
 			children = (
 				60D5CCA0258613B300C681DD /* HomeViewController.swift */,
-				60F099A626A9627A0045CEB7 /* PhotoVIewController.swift */,
+				60F099A626A9627A0045CEB7 /* MoreInformationVIewController.swift */,
+				60C27B5727AE6772005BFC79 /* PrivacyPolicyViewController.swift */,
 				60D5AADD259B0AC800A1243E /* VideoViewController.swift */,
 			);
-			path = View;
+			path = More;
 			sourceTree = "<group>";
 		};
 		60D5CC90258613B300C681DD = {
@@ -358,7 +361,7 @@
 				60D5CCA7258613B600C681DD /* LaunchScreen.storyboard */,
 				60D5CC9E258613B300C681DD /* SceneDelegate.swift */,
 				60C27B53278FCDE1005BFC79 /* SplashViewController.swift */,
-				60D5AAE2259B0ADB00A1243E /* View */,
+				60D5AAE2259B0ADB00A1243E /* More */,
 			);
 			path = MyFirst;
 			sourceTree = "<group>";
@@ -709,7 +712,7 @@
 				60D5CC9D258613B300C681DD /* AppDelegate.swift in Sources */,
 				60C27B4E278AC8F8005BFC79 /* FriendCardView.swift in Sources */,
 				608922A32777438800698ABD /* ProfileEditViewController.swift in Sources */,
-				60F099A726A9627A0045CEB7 /* PhotoVIewController.swift in Sources */,
+				60F099A726A9627A0045CEB7 /* MoreInformationVIewController.swift in Sources */,
 				60F099A926A963A60045CEB7 /* DiscType.swift in Sources */,
 				60C27B3F277DA85A005BFC79 /* CustomCloseButton.swift in Sources */,
 				608922A52777456B00698ABD /* Toast.swift in Sources */,
@@ -721,6 +724,7 @@
 				60878CFE275B4E9A0052B91C /* MyFavorite.swift in Sources */,
 				60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */,
 				60878D18275B85690052B91C /* FavoriteCategory.swift in Sources */,
+				60C27B5827AE6772005BFC79 /* PrivacyPolicyViewController.swift in Sources */,
 				60C27B56278FF4D9005BFC79 /* BaseRouter.swift in Sources */,
 				60D5E92726A2F77C00803F7E /* VideoCollectionViewCell.swift in Sources */,
 				60878D09275B56EE0052B91C /* FavoriteListPresenter.swift in Sources */,
@@ -898,7 +902,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirst/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -920,7 +924,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirst/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -22,9 +22,7 @@ class FriendCardView: UIControl {
         }
     }
     
-    var alertController = UIAlertController(
-        title: "この友達のお気に入りを削除しますか？", message: nil, preferredStyle: .alert
-    )
+    var alertController = UIAlertController(title: "この友達を一覧から削除しますか？", message: nil, preferredStyle: .alert)
     
     var deleteAlertAcrion: (() -> Void)?
     var deleteAction: (() -> Void)?

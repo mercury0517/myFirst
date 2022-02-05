@@ -4,7 +4,7 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
     let tabView1 = AppDependencies.assmbleFavoriteList()
     let tabView2 = CustomNavigationController(rootViewController: FriendListViewController())
     let tabView3 = CustomNavigationController(rootViewController: ExchangeViewController())
-    let tabView4 = PhotoViewController()
+    let tabView4 = CustomNavigationController(rootViewController: MoreInformationViewController())
     
     var shouldScroll = false
     
@@ -40,6 +40,7 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         // tabタップしたらやりたいこと
         switch item.tag {
+        // タブを2連続タップした時にスクロールトップしたい
         case 1:
             if
                 let navigationController = tabView1 as? UINavigationController,

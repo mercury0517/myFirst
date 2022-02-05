@@ -194,7 +194,7 @@ class FavoriteInputViewController: UIViewController {
     }
     
     @objc private func tappedRegisterButton() {
-        if let newTitle = self.itemNameTextField.text {
+        if let newTitle = self.itemNameTextField.text, !newTitle.isEmpty {
             let newFavorite = MyFavorite(
                 categoryName: self.categoryName,
                 index: self.itemIndex,
@@ -210,7 +210,7 @@ class FavoriteInputViewController: UIViewController {
                 self.presenter.registerFavoriteButtonDidTap(favorite: newFavorite, registrationView: self)
             }
         } else {
-            Toast.show("error: input favorite title", self.view)
+            Toast.show("タイトルを入力してください", self.view)
         }
     }
 }

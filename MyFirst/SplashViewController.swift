@@ -30,6 +30,7 @@ class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         
         // Splash画面を表示し終わったら、アプリのTop画面に切り替える
+        sleep(1)
         self.router?.displayTabBarController()
     }
 

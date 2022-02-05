@@ -147,8 +147,6 @@ class FriendListViewController: UIViewController {
         self.friendStackView.autoSetDimension(.width, toSize: UIScreen.main.bounds.width)
         self.friendStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
         
-        print("これだよ\(TabBarHeightManager.shared.height)")
-        
         self.editButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.editButton.autoPinEdge(
             toSuperviewEdge: .bottom, withInset: TabBarHeightManager.shared.height + 50.0
@@ -178,7 +176,7 @@ class FriendListViewController: UIViewController {
     
     @objc private func tappedEditButton() {
         // ハプティックフィードバックを入れる
-        UINotificationFeedbackGenerator().notificationOccurred(.success)
+//        UINotificationFeedbackGenerator().notificationOccurred(.success)
         
         for arrangedSubviews in self.friendStackView.arrangedSubviews {
             if let friendCard = arrangedSubviews as? FriendCardView {

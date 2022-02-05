@@ -1,10 +1,6 @@
 import UIKit
 import PureLayout
 
-/*
- TODO3: 新規カテゴリを追加できる様にする
- TODO4: 既存カテゴリを編集できる様にする
-*/
 class FavoriteListViewController: UIViewController, FavoriteListViewControllerProtocol {
     var presenter: FavoriteListPresenterProtocol?
     
