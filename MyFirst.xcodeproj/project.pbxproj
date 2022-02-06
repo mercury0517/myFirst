@@ -38,6 +38,8 @@
 		60A86CD027AF727900AC1444 /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CCF27AF727900AC1444 /* InquiryViewController.swift */; };
 		60A86CD227AF740B00AC1444 /* FirstRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CD127AF740B00AC1444 /* FirstRegisterViewController.swift */; };
 		60A86CD427AF892A00AC1444 /* ExchangeTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CD327AF892A00AC1444 /* ExchangeTutorialViewController.swift */; };
+		60A86CD727AFBDCB00AC1444 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A86CD527AFBDBC00AC1444 /* MessageUI.framework */; };
+		60A86CDB27AFC20200AC1444 /* FavoriteTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CDA27AFC20200AC1444 /* FavoriteTutorialViewController.swift */; };
 		60C27B3D277D81E2005BFC79 /* CustomUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B3C277D81E2005BFC79 /* CustomUILabel.swift */; };
 		60C27B3F277DA85A005BFC79 /* CustomCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B3E277DA85A005BFC79 /* CustomCloseButton.swift */; };
 		60C27B41277DB1A9005BFC79 /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B40277DB1A9005BFC79 /* FriendListViewController.swift */; };
@@ -128,6 +130,8 @@
 		60A86CCF27AF727900AC1444 /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
 		60A86CD127AF740B00AC1444 /* FirstRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRegisterViewController.swift; sourceTree = "<group>"; };
 		60A86CD327AF892A00AC1444 /* ExchangeTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTutorialViewController.swift; sourceTree = "<group>"; };
+		60A86CD527AFBDBC00AC1444 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		60A86CDA27AFC20200AC1444 /* FavoriteTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTutorialViewController.swift; sourceTree = "<group>"; };
 		60C27B3C277D81E2005BFC79 /* CustomUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUILabel.swift; sourceTree = "<group>"; };
 		60C27B3E277DA85A005BFC79 /* CustomCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCloseButton.swift; sourceTree = "<group>"; };
 		60C27B40277DB1A9005BFC79 /* FriendListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60A86CD727AFBDCB00AC1444 /* MessageUI.framework in Frameworks */,
 				50AD4B67F0BF26B984ACBE6A /* Pods_MyFirst.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,6 +205,7 @@
 		44AA898175A06B37FC9C5080 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				60A86CD527AFBDBC00AC1444 /* MessageUI.framework */,
 				1511E526DEAECFC133EB54FF /* Pods_MyFirst.framework */,
 				C4B566FFC89D3666EC5E7E23 /* Pods_MyFirst_MyFirstUITests.framework */,
 				A13F73C2D21F8826789404C4 /* Pods_MyFirstTests.framework */,
@@ -245,6 +251,7 @@
 				60878D19275B8EA00052B91C /* FavoriteInputViewController.swift */,
 				608922A22777438800698ABD /* ProfileEditViewController.swift */,
 				60C27B4D278AC8F8005BFC79 /* FriendCardView.swift */,
+				60A86CDA27AFC20200AC1444 /* FavoriteTutorialViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -693,6 +700,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60A86CDB27AFC20200AC1444 /* FavoriteTutorialViewController.swift in Sources */,
 				60A86CD027AF727900AC1444 /* InquiryViewController.swift in Sources */,
 				60878D16275B642A0052B91C /* FavoriteListInteractor.swift in Sources */,
 				60C27B52278BF540005BFC79 /* ImageConverter.swift in Sources */,
@@ -918,7 +926,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirst/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -940,7 +948,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 27;
 				DEVELOPMENT_TEAM = BQ9TA5PGM2;
 				INFOPLIST_FILE = MyFirst/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

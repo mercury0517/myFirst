@@ -5,6 +5,8 @@ class InquiryViewController: UIViewController, MFMailComposeViewControllerDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = .white
     }
 
     override func didReceiveMemoryWarning() {

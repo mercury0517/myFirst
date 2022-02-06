@@ -22,6 +22,9 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     let separateLine = UIView()
     
+    let hintButton = UIControl()
+    let hintIcon = UIImageView(image: UIImage(named: "help"))
+    
     let favoriteGroupStackView = UIStackView()
     
     override var prefersStatusBarHidden: Bool {
@@ -38,6 +41,17 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 初回だけチュートリアルを出す
+        if !UserDefaults.standard.bool(forKey: UserDefaultKeys.isAlredayDisplayTutorial) {
+            let tutorialView = FavoriteTutorialViewController()
+            tutorialView.modalPresentationStyle = .overFullScreen
+            
+            self.present(tutorialView, animated: true)
+            
+            UserDefaults.standard.set(true, forKey: UserDefaultKeys.isAlredayDisplayTutorial)
+        }
+        
         
         self.addSubviews()
         self.configSubViews()
@@ -119,6 +133,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.scrollView.addSubview(self.editProfileButton)
         self.scrollView.addSubview(self.userNameLabel)
         self.scrollView.addSubview(self.separateLine)
+        self.scrollView.addSubview(self.hintButton)
+        self.hintButton.addSubview(self.hintIcon)
         self.scrollView.addSubview(self.favoriteGroupStackView)
     }
     
@@ -152,6 +168,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.userIcon.layer.borderWidth = 3.0
         self.userIcon.layer.borderColor = UIColor.white.cgColor
         
+        self.hintButton.addTarget(self, action: #selector(self.tappedHintButton), for: .touchUpInside)
+        
         self.favoriteGroupStackView.alignment = .center
         self.favoriteGroupStackView.axis = .vertical
         self.favoriteGroupStackView.spacing = 20.0
@@ -169,6 +187,11 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.userNameLabel.font = UIFont(name: "Oswald", size: 25.0)
         
         self.separateLine.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
+        
+        self.hintButton.layer.cornerRadius = 10.0
+        self.hintButton.clipsToBounds = true
+        
+        self.hintIcon.isUserInteractionEnabled = false
     }
     
     private func addConstraints() {
@@ -201,7 +224,13 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.separateLine.autoPinEdge(toSuperviewEdge: .left)
         self.separateLine.autoPinEdge(toSuperviewEdge: .right)
         
-        self.favoriteGroupStackView.autoPinEdge(.top, to: .bottom, of: self.separateLine, withOffset: 20.0)
+        self.hintButton.autoPinEdge(.top, to: .bottom, of: self.separateLine, withOffset: 10.0)
+        self.hintButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.hintButton.autoSetDimensions(to: CGSize(width: 20.0, height: 20.0))
+        
+        self.hintIcon.autoPinEdgesToSuperviewEdges()
+        
+        self.favoriteGroupStackView.autoPinEdge(.top, to: .bottom, of: self.hintButton, withOffset: 5.0)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .left)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .right)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 100.0)
@@ -231,6 +260,13 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.presenter?.editProfileButtonDidTap(
             userName: self.userNameLabel.text ?? "", userIcon: self.userIcon.image, topBanner: self.topBanner.image
         )
+    }
+    
+    @objc private func tappedHintButton() {
+        let tutorialView = FavoriteTutorialViewController()
+        tutorialView.modalPresentationStyle = .overFullScreen
+        
+        self.present(tutorialView, animated: true)
     }
 }
 

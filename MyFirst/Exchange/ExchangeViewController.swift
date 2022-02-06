@@ -267,9 +267,9 @@ class ExchangeViewController: UIViewController {
     }
     
     @objc private func tappedHintButton() {
-        let termOfUseView = CustomNavigationController(rootViewController: ExchangeTutorialViewController())
+        let tutorialView = CustomNavigationController(rootViewController: ExchangeTutorialViewController())
         
-        self.present(termOfUseView, animated: true)
+        self.present(tutorialView, animated: true)
     }
     
     @objc private func tappedHostButton() {

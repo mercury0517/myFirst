@@ -86,6 +86,5 @@ class TabBarHeightManager {
 
     static let shared = TabBarHeightManager()
     
-    private init() {
-    }
+    private init() {}
 }

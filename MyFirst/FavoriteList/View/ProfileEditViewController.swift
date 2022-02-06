@@ -101,7 +101,7 @@ class ProfileEditViewController: UIViewController {
         
         self.itemImageView.contentMode = .scaleAspectFill
         self.itemImageView.clipsToBounds = true
-        self.itemImageView.image = self.topBanner
+        self.itemImageView.image = self.topBanner ?? UIImage(named: "sky")
         
         self.closeButton.addTarget(self, action: #selector(self.tappedCloseButton), for: .touchUpInside)
         
@@ -112,9 +112,9 @@ class ProfileEditViewController: UIViewController {
         self.userIconView.clipsToBounds = true
         self.userIconView.layer.borderWidth = 3.0
         self.userIconView.layer.borderColor = UIColor.white.cgColor
-        self.userIconView.image = self.userIcon
+        self.userIconView.image = self.userIcon ?? UIImage(named: "sky")
         
-        self.userNameTitleLabel.text = "名前"
+        self.userNameTitleLabel.text = "YOUR NAME"
 
         self.userNameTextField.placeholder = "input your name"
         self.userNameTextField.text = self.userName
