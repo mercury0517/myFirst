@@ -17,6 +17,9 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     let userIconContainer = UIControl()
     let userIcon = UIImageView(image: UIImage(named: "sky"))
     
+    let cameraButton = UIControl()
+    let cameraIcon = UIImageView(image: UIImage(named: "camera"))
+    
     let editProfileButton = UIButton()
     let userNameLabel = UILabel()
     
@@ -51,7 +54,6 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             
             UserDefaults.standard.set(true, forKey: UserDefaultKeys.isAlredayDisplayTutorial)
         }
-        
         
         self.addSubviews()
         self.configSubViews()
@@ -131,6 +133,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.scrollView.addSubview(self.userIconContainer)
         self.userIconContainer.addSubview(self.userIcon)
         self.scrollView.addSubview(self.editProfileButton)
+        self.scrollView.addSubview(self.cameraButton)
+        self.cameraButton.addSubview(self.cameraIcon)
         self.scrollView.addSubview(self.userNameLabel)
         self.scrollView.addSubview(self.separateLine)
         self.scrollView.addSubview(self.hintButton)
@@ -154,9 +158,11 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         
         self.customPhotoLibraryAlert()
         
-        
-        self.editProfileButton.setTitle("EDIT", for: .normal)
+        self.editProfileButton.setTitle("EDIT PROFILE", for: .normal)
         self.editProfileButton.addTarget(self, action: #selector(self.tappedEditProfileButton), for: .touchUpInside)
+        
+        // target
+        self.cameraIcon.isUserInteractionEnabled = false
 
         self.topBanner.backgroundColor = .black
         self.topBanner.contentMode = .scaleAspectFill
@@ -182,6 +188,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.editProfileButton.backgroundColor = CustomUIColor.turquoise
         self.editProfileButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 10.0, bottom: 3.0, right: 10.0)
         self.editProfileButton.layer.cornerRadius = 5.0
+        
+        self.cameraButton.backgroundColor = .white
         
         self.userNameLabel.textColor = .black
         self.userNameLabel.font = UIFont(name: "Oswald", size: 25.0)
@@ -215,6 +223,12 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         
         self.editProfileButton.autoPinEdge(.top, to: .bottom, of: self.topBanner, withOffset: 20.0)
         self.editProfileButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        
+        self.cameraButton.autoAlignAxis(.horizontal, toSameAxisOf: self.editProfileButton)
+        self.cameraButton.autoPinEdge(.right, to: .left, of: self.editProfileButton, withOffset: -20.0)
+        self.cameraButton.autoSetDimensions(to: CGSize(width: 30.0, height: 30.0))
+        
+        self.cameraIcon.autoPinEdgesToSuperviewEdges()
         
         self.userNameLabel.autoPinEdge(.top, to: .bottom, of: self.userIconContainer, withOffset: 10.0)
         self.userNameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
