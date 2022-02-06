@@ -7,7 +7,7 @@ class FavoriteTutorialViewController: UIViewController {
     
     let closeButton = CustomCloseButton()
     let descriptionLabel = UILabel()
-    let descriptionImage = UIImageView(image: UIImage(named: "step1"))
+    let descriptionImage = UIImageView(image: UIImage(named: "tutorial"))
     let okButton = UIButton()
     
     init() {
@@ -43,7 +43,7 @@ class FavoriteTutorialViewController: UIViewController {
         
         self.closeButton.addTarget(self, action: #selector(self.tappedCloseButton), for: .touchUpInside)
         
-        self.descriptionLabel.text = "あなたのお気に入りを追加してみましょう！\n\nお気に入りは「FOOD」や「PRODUCT」など、カテゴリ毎に10個登録できます。"
+        self.descriptionLabel.text = "あなたのお気に入りを追加してみましょう！\n\nお気に入りは「FOOD」や「PRODUCT」など、カテゴリ毎に10個まで登録できます。"
         self.descriptionLabel.numberOfLines = 0
         
         self.descriptionImage.contentMode = .scaleAspectFit
