@@ -37,6 +37,7 @@
 		60A86CCE27AF5FAD00AC1444 /* MoreTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CCD27AF5FAD00AC1444 /* MoreTableViewHeader.swift */; };
 		60A86CD027AF727900AC1444 /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CCF27AF727900AC1444 /* InquiryViewController.swift */; };
 		60A86CD227AF740B00AC1444 /* FirstRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CD127AF740B00AC1444 /* FirstRegisterViewController.swift */; };
+		60A86CD427AF892A00AC1444 /* ExchangeTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CD327AF892A00AC1444 /* ExchangeTutorialViewController.swift */; };
 		60C27B3D277D81E2005BFC79 /* CustomUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B3C277D81E2005BFC79 /* CustomUILabel.swift */; };
 		60C27B3F277DA85A005BFC79 /* CustomCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B3E277DA85A005BFC79 /* CustomCloseButton.swift */; };
 		60C27B41277DB1A9005BFC79 /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B40277DB1A9005BFC79 /* FriendListViewController.swift */; };
@@ -126,6 +127,7 @@
 		60A86CCD27AF5FAD00AC1444 /* MoreTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewHeader.swift; sourceTree = "<group>"; };
 		60A86CCF27AF727900AC1444 /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
 		60A86CD127AF740B00AC1444 /* FirstRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRegisterViewController.swift; sourceTree = "<group>"; };
+		60A86CD327AF892A00AC1444 /* ExchangeTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTutorialViewController.swift; sourceTree = "<group>"; };
 		60C27B3C277D81E2005BFC79 /* CustomUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUILabel.swift; sourceTree = "<group>"; };
 		60C27B3E277DA85A005BFC79 /* CustomCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCloseButton.swift; sourceTree = "<group>"; };
 		60C27B40277DB1A9005BFC79 /* FriendListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 		608922AA277C24EF00698ABD /* Exchange */ = {
 			isa = PBXGroup;
 			children = (
+				60A86CD327AF892A00AC1444 /* ExchangeTutorialViewController.swift */,
 				608922AB277C255800698ABD /* ExchangeViewController.swift */,
 				608922B0277C3E8400698ABD /* FriendView.swift */,
 			);
@@ -735,6 +738,7 @@
 				60878D0D275B585A0052B91C /* FavoriteListRouter.swift in Sources */,
 				60878CFE275B4E9A0052B91C /* MyFavorite.swift in Sources */,
 				60D5CC9F258613B300C681DD /* SceneDelegate.swift in Sources */,
+				60A86CD427AF892A00AC1444 /* ExchangeTutorialViewController.swift in Sources */,
 				60878D18275B85690052B91C /* FavoriteCategory.swift in Sources */,
 				60C27B5827AE6772005BFC79 /* PrivacyPolicyViewController.swift in Sources */,
 				60C27B56278FF4D9005BFC79 /* BaseRouter.swift in Sources */,

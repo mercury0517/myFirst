@@ -27,6 +27,10 @@ class ExchangeViewController: UIViewController {
     let scrollView = UIScrollView()
     
     let statusLabel = UILabel()
+    
+    let hintButton = UIControl()
+    let hintIcon = UIImageView(image: UIImage(named: "help"))
+    
     let imageView = UIImageView(image: UIImage(named: "exchange"))
 
     let friendStackView = UIStackView()
@@ -114,6 +118,8 @@ class ExchangeViewController: UIViewController {
     private func addSubviews() {
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.statusLabel)
+        self.scrollView.addSubview(self.hintButton)
+        self.hintButton.addSubview(self.hintIcon)
         self.scrollView.addSubview(self.imageView)
         self.scrollView.addSubview(self.friendStackView)
         self.scrollView.addSubview(self.buttonStackView)
@@ -129,6 +135,8 @@ class ExchangeViewController: UIViewController {
     private func configSubViews() {
         self.statusLabel.text = "近くの友達とお気に入りを交換しましょう！"
         self.statusLabel.numberOfLines = 2
+        
+        self.hintButton.addTarget(self, action: #selector(self.tappedHintButton), for: .touchUpInside)
         
         self.friendStackView.alignment = .center
         self.friendStackView.axis = .vertical
@@ -167,6 +175,11 @@ class ExchangeViewController: UIViewController {
         
         self.statusLabel.textColor = .black
         self.statusLabel.font = .boldSystemFont(ofSize: 15.0)
+        
+        self.hintButton.layer.cornerRadius = 10.0
+        self.hintButton.clipsToBounds = true
+        
+        self.hintIcon.isUserInteractionEnabled = false
         
         self.hostButton.backgroundColor = CustomUIColor.turquoise
         self.hostButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
@@ -207,6 +220,12 @@ class ExchangeViewController: UIViewController {
         self.statusLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.statusLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
+        self.hintButton.autoAlignAxis(.horizontal, toSameAxisOf: self.statusLabel)
+        self.hintButton.autoPinEdge(toSuperviewEdge: .right, withInset: 10.0)
+        self.hintButton.autoSetDimensions(to: CGSize(width: 20.0, height: 20.0))
+        
+        self.hintIcon.autoPinEdgesToSuperviewEdges()
+        
         self.imageView.autoPinEdge(.top, to: .bottom, of: self.statusLabel, withOffset: 20.0)
         self.imageView.autoAlignAxis(toSuperviewAxis: .vertical)
         
@@ -245,6 +264,12 @@ class ExchangeViewController: UIViewController {
         self.loadingDescriptionLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 30.0)
         
         self.indicator.autoCenterInSuperview()
+    }
+    
+    @objc private func tappedHintButton() {
+        let termOfUseView = CustomNavigationController(rootViewController: ExchangeTutorialViewController())
+        
+        self.present(termOfUseView, animated: true)
     }
     
     @objc private func tappedHostButton() {

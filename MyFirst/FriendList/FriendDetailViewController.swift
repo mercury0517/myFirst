@@ -209,7 +209,7 @@ class FriendDetailViewController: UIViewController {
         
         self.itemImageView.contentMode = .scaleAspectFill
         self.itemImageView.clipsToBounds = true
-        self.itemImageView.image = self.userInfo?.topBanner
+        self.itemImageView.image = self.userInfo?.topBanner ?? UIImage(named: "sky")
         
         self.closeButton.addTarget(self, action: #selector(self.tappedCloseButton), for: .touchUpInside)
         
@@ -218,9 +218,9 @@ class FriendDetailViewController: UIViewController {
         self.userIconView.clipsToBounds = true
         self.userIconView.layer.borderWidth = 3.0
         self.userIconView.layer.borderColor = UIColor.white.cgColor
-        self.userIconView.image = self.userInfo?.icon
+        self.userIconView.image = self.userInfo?.icon ?? UIImage(named: "sky")
         
-        self.userNameLabel.text = self.userInfo?.name
+        self.userNameLabel.text = self.userInfo?.name ?? "名称未設定"
         
         self.favoriteGroupStackView.axis = .vertical
         self.favoriteGroupStackView.spacing = 0.0
