@@ -8,6 +8,14 @@ class BaseRouter {
     }
     
     func displayTabBarController() {
-        self.window?.rootViewController = MyTabBarController()
+        if UserDefaults.standard.bool(forKey: UserDefaultKeys.isAlredayLaunch) {
+            self.window?.rootViewController = MyTabBarController()
+        } else {
+            // 初回起動時はこちらに遷移して、名前を登録させる
+            self.window?.rootViewController = CustomNavigationController(
+                rootViewController: FirstRegisterViewController(window: self.window)
+            )
+        }
+
     }
 }

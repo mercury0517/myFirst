@@ -205,6 +205,8 @@ class FriendDetailViewController: UIViewController {
     }
     
     private func configSubViews() {
+        self.scrollView.showsVerticalScrollIndicator = false
+        
         self.itemImageView.contentMode = .scaleAspectFill
         self.itemImageView.clipsToBounds = true
         self.itemImageView.image = self.userInfo?.topBanner

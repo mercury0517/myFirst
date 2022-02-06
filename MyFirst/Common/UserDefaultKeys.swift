@@ -6,4 +6,5 @@ class UserDefaultKeys {
     static let uniqueKey = "uniqueKey"
     static let friendList = "friendList"
     static let userInfo = "userInfo"
+    static let isAlredayLaunch = "isAlredayLaunch"
 }

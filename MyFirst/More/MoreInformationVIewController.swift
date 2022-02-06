@@ -29,6 +29,7 @@ class MoreInformationViewController: UIViewController {
         self.navigationItem.title = "その他"
         
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.register(MoreTableViewHeader.self, forHeaderFooterViewReuseIdentifier: "header")
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
@@ -38,7 +39,7 @@ class MoreInformationViewController: UIViewController {
     }
     
     private func addConstraints() {
-        self.tableView.autoPinEdge(toSuperviewEdge: .top)
+        self.tableView.autoPinEdge(toSuperviewEdge: .top, withInset: -25.0)
         self.tableView.autoPinEdge(toSuperviewEdge: .left)
         self.tableView.autoPinEdge(toSuperviewEdge: .right)
         self.tableView.autoPinEdge(toSuperviewEdge: .bottom)
@@ -59,6 +60,7 @@ extension MoreInformationViewController: UITableViewDelegate, UITableViewDataSou
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.textColor = .black
         cell.backgroundColor = .white
+        cell.selectionStyle = .none
         
         switch indexPath.row {
         case 0:
@@ -83,10 +85,20 @@ extension MoreInformationViewController: UITableViewDelegate, UITableViewDataSou
             let view = PrivacyPolicyViewController()
             self.navigationController?.pushViewController(view, animated: true)
         case 2:
-            let view = HomeViewController()
+            let view = InquiryViewController()
             self.navigationController?.pushViewController(view, animated: true)
         default:
             break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = self.tableView.dequeueReusableHeaderFooterView(withIdentifier: "header")
+        
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50.0
     }
 }
