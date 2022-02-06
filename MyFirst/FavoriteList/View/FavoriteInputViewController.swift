@@ -17,9 +17,10 @@ class FavoriteInputViewController: UIViewController {
     
     let scrollView = UIScrollView()
     
+    
+    let itemImageViewContainer = UIControl()
     let itemImageView = UIImageView(image: UIImage(named: "sky"))
     let closeButton = CustomCloseButton()
-    let inputImageButton = UIButton()
     
     let titleLabel = UILabel()
     let itemNameTextField = CustomTextField()
@@ -76,9 +77,9 @@ class FavoriteInputViewController: UIViewController {
     
     private func addSubviews() {
         self.view.addSubview(self.scrollView)
-        self.scrollView.addSubview(self.itemImageView)
+        self.scrollView.addSubview(self.itemImageViewContainer)
+        self.itemImageViewContainer.addSubview(self.itemImageView)
         self.scrollView.addSubview(self.closeButton)
-        self.scrollView.addSubview(self.inputImageButton)
         self.scrollView.addSubview(self.titleLabel)
         self.scrollView.addSubview(self.itemNameTextField)
         self.scrollView.addSubview(self.memoLabel)
@@ -87,20 +88,19 @@ class FavoriteInputViewController: UIViewController {
     }
     
     private func configSubViews() {
+        self.itemImageViewContainer.addTarget(self, action: #selector(self.tappedInputImageButton), for: .touchUpInside)
+        
         self.itemImageView.contentMode = .scaleAspectFill
         self.itemImageView.clipsToBounds = true
         
         self.closeButton.addTarget(self, action: #selector(self.tappedCloseButton), for: .touchUpInside)
         
-        self.inputImageButton.setTitle("画像を選択", for: .normal)
-        self.inputImageButton.addTarget(self, action: #selector(self.tappedInputImageButton), for: .touchUpInside)
-        
-        self.titleLabel.text = "タイトル"
+        self.titleLabel.text = "TITLE"
         
         self.itemNameTextField.placeholder = "お気に入りタイトル"
         self.itemNameTextField.delegate = self
         
-        self.memoLabel.text = "メモ"
+        self.memoLabel.text = "MEMO"
         
         self.memoTextView.delegate = self
         
@@ -117,11 +117,6 @@ class FavoriteInputViewController: UIViewController {
     
     private func applyStyling() {
         self.view.backgroundColor = .white
-        
-        self.inputImageButton.titleLabel?.font = UIFont(name: "Oswald", size: 12.0)
-        self.inputImageButton.backgroundColor = CustomUIColor.turquoise
-        self.inputImageButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 10.0, bottom: 3.0, right: 10.0)
-        self.inputImageButton.layer.cornerRadius = 5.0
         
         self.titleLabel.font = UIFont(name: "Oswald", size: 15.0)
         self.titleLabel.textColor = .black
@@ -145,16 +140,15 @@ class FavoriteInputViewController: UIViewController {
     private func addConstraints() {
         self.scrollView.autoPinEdgesToSuperviewEdges()
         
-        self.itemImageView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
-        self.itemImageView.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: self.imageHeight))
+        self.itemImageViewContainer.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
+        self.itemImageViewContainer.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: self.imageHeight))
+        
+        self.itemImageView.autoPinEdgesToSuperviewEdges()
         
         self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
         self.closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
-        self.inputImageButton.autoPinEdge(.top, to: .bottom, of: self.itemImageView, withOffset: 10.0)
-        self.inputImageButton.autoPinEdge(toSuperviewEdge: .right, withInset: 10.0)
-        
-        self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.inputImageButton, withOffset: 20.0)
+        self.titleLabel.autoPinEdge(.top, to: .bottom, of: self.itemImageViewContainer, withOffset: 20.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         
         self.itemNameTextField.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 10.0)

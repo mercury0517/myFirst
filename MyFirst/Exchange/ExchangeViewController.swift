@@ -491,30 +491,15 @@ extension ExchangeViewController: MCSessionDelegate {
                 self.sendFavoriteButton.isHidden = false
                 self.disconnectButton.isHidden = false
                 
+                // 既存の友達カードを接続中に変更する
                 for subview in self.friendStackView.arrangedSubviews {
-                    if
-                        let friendView = subview as? FriendView,
-                        friendView.peerID == peerID
-                    {
+                    if let friendView = subview as? FriendView, friendView.peerID == peerID {
                         friendView.inviteLabel.text = "接続中"
                         friendView.isEnabled = false
-                    } else {
-                        // まだカードがない状態なので、友達のカードを作成する
-                        let friendView = FriendView()
-                        friendView.peerID = peerID
-                        friendView.inviteLabel.text = "接続中"
-                        friendView.isEnabled = false
-                        
-                        self.friendStackView.addArrangedSubview(friendView)
-                        
-                        friendView.autoPinEdge(toSuperviewEdge: .left ,withInset: 16.0)
-                        friendView.autoPinEdge(toSuperviewEdge: .right ,withInset: 16.0)
-                        
-                        // タップ時にその友達に対して招待を送る設定をしておく
-                        friendView.addTarget(self, action: #selector(self.tappedFriendView(_:)), for: .touchUpInside)
                     }
                 }
                 
+                // まだ友達カードが存在しない場合は新たに追加する
                 if self.friendStackView.arrangedSubviews.isEmpty {
                     DispatchQueue.main.async {
                         // まだカードがない状態なので、友達のカードを作成する

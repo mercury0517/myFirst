@@ -57,6 +57,8 @@ extension MoreInformationViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell")!
         cell.accessoryType = .disclosureIndicator
+        cell.textLabel?.textColor = .black
+        cell.backgroundColor = .white
         
         switch indexPath.row {
         case 0:

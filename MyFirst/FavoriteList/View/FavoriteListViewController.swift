@@ -81,7 +81,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         } else {
             self.topBanner.image = UIImage(named: "sky")
             self.userIcon.image = UIImage(named: "sky")
-            self.userNameLabel.text = ""
+            self.userNameLabel.text = "名称未設定"
         }
         
         self.favoriteGroupStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -139,7 +139,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.customPhotoLibraryAlert()
         
         
-        self.editProfileButton.setTitle("プロフィール編集", for: .normal)
+        self.editProfileButton.setTitle("EDIT", for: .normal)
         self.editProfileButton.addTarget(self, action: #selector(self.tappedEditProfileButton), for: .touchUpInside)
 
         self.topBanner.backgroundColor = .black
@@ -160,7 +160,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     private func applyStyling() {
         self.view.backgroundColor = .white
         
-        self.editProfileButton.titleLabel?.font = UIFont(name: "Oswald", size: 12.0)
+        self.editProfileButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
         self.editProfileButton.backgroundColor = CustomUIColor.turquoise
         self.editProfileButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 10.0, bottom: 3.0, right: 10.0)
         self.editProfileButton.layer.cornerRadius = 5.0

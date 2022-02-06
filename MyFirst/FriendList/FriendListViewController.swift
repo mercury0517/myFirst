@@ -11,13 +11,16 @@ class FriendListViewController: UIViewController {
     
     let friendStackView = UIStackView()
     
+    let emptyImage = UIImageView(image: UIImage(named: "friend_empty"))
+    let emptyLabel = UILabel()
+    
     var isEditMode: Bool = false {
         didSet {
             if self.isEditMode {
                 DispatchQueue.main.async {
                     self.editIcon.image = UIImage(named: "return")
                     self.editButton.backgroundColor = .white
-                    self.editButton.layer.borderColor = UIColor.gray.cgColor
+                    self.editButton.layer.borderColor = CustomUIColor.turquoise.cgColor
                     self.editButton.layer.borderWidth = 1.0
                 }
             } else {
@@ -82,6 +85,8 @@ class FriendListViewController: UIViewController {
                         {
                             DispatchQueue.main.async {
                                 friendCard.removeFromSuperview()
+                                
+                                self.displayEmptyMassageIfNeeded()
                             }
                         }
                     }
@@ -103,6 +108,25 @@ class FriendListViewController: UIViewController {
                 friendCardView.addTarget(self, action: #selector(self.tappedFriendCard(_:)), for: .touchUpInside)
             }
         }
+        
+        self.displayEmptyMassageIfNeeded()
+    }
+    
+    private func displayEmptyMassageIfNeeded() {
+        if self.friendStackView.arrangedSubviews.isEmpty {
+            self.editButton.isHidden = true
+            
+            self.friendStackView.addArrangedSubview(self.emptyImage)
+            self.emptyImage.autoAlignAxis(toSuperviewAxis: .vertical)
+            self.emptyImage.autoSetDimension(.width, toSize: 100.0)
+            self.emptyImage.contentMode = .scaleAspectFit
+            
+            self.friendStackView.addArrangedSubview(self.emptyLabel)
+            self.emptyLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+            self.emptyLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+            
+            self.friendStackView.setCustomSpacing(0.0, after: self.emptyImage)
+        }
     }
 
     private func addSubviews() {
@@ -121,6 +145,9 @@ class FriendListViewController: UIViewController {
         self.friendStackView.alignment = .center
         self.friendStackView.axis = .vertical
         self.friendStackView.spacing = 20.0
+        
+        self.emptyLabel.text = "お気に入りを交換した友達はまだいません。\n近くの友達とお気に入りをシェアしてみましょう！"
+        self.emptyLabel.numberOfLines = 0
     }
     
     private func applyStyling() {
@@ -134,6 +161,9 @@ class FriendListViewController: UIViewController {
         self.editButton.clipsToBounds = true
         
         self.editIcon.isUserInteractionEnabled = false
+        
+        self.emptyLabel.textColor = .black
+        self.emptyLabel.font = .systemFont(ofSize: 15.0)
     }
     
     private func addConstraints() {
@@ -176,7 +206,7 @@ class FriendListViewController: UIViewController {
     
     @objc private func tappedEditButton() {
         // ハプティックフィードバックを入れる
-//        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
         
         for arrangedSubviews in self.friendStackView.arrangedSubviews {
             if let friendCard = arrangedSubviews as? FriendCardView {
