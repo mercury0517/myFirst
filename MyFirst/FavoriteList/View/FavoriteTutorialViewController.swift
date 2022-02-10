@@ -8,7 +8,6 @@ class FavoriteTutorialViewController: UIViewController {
     let closeButton = CustomCloseButton()
     let descriptionLabel = UILabel()
     let descriptionImage = UIImageView(image: UIImage(named: "tutorial"))
-    let okButton = UIButton()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -35,7 +34,6 @@ class FavoriteTutorialViewController: UIViewController {
         self.contentView.addSubview(self.closeButton)
         self.contentView.addSubview(self.descriptionLabel)
         self.contentView.addSubview(self.descriptionImage)
-        self.contentView.addSubview(self.okButton)
     }
     
     private func configSubViews() {
@@ -47,51 +45,40 @@ class FavoriteTutorialViewController: UIViewController {
         self.descriptionLabel.numberOfLines = 0
         
         self.descriptionImage.contentMode = .scaleAspectFit
-        
-        self.okButton.setTitle("OK", for: .normal)
-        self.okButton.addTarget(self, action: #selector(self.tappedCloseButton), for: .touchUpInside)
     }
     
     private func applyStyling() {
         self.view.backgroundColor = .clear
         
-        self.backgroundView.backgroundColor = .black.withAlphaComponent(0.1)
-        
         self.contentView.backgroundColor = .white
         self.contentView.layer.cornerRadius = 10.0
+        self.contentView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
+        self.contentView.layer.borderWidth = 1.0
         
         self.descriptionLabel.font = .boldSystemFont(ofSize: 15.0)
         self.descriptionLabel.textColor = .black
-        
-        self.okButton.titleLabel?.font = .systemFont(ofSize: 15.0)
-        self.okButton.backgroundColor = CustomUIColor.turquoise
-        self.okButton.setTitleColor(.white, for: .normal)
     }
     
     private func addConstraints() {
         self.backgroundView.autoPinEdgesToSuperviewEdges()
         
-        self.contentView.autoPinEdge(toSuperviewEdge: .left, withInset: 60.0)
-        self.contentView.autoPinEdge(toSuperviewEdge: .right, withInset: 60.0)
-        self.contentView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 150.0)
+        self.contentView.autoPinEdge(toSuperviewEdge: .left, withInset: 40.0)
+        self.contentView.autoPinEdge(toSuperviewEdge: .right, withInset: 40.0)
+        self.contentView.autoCenterInSuperview()
         
         self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 16.0)
         self.closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
-        self.descriptionLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 50.0)
+        self.descriptionLabel.autoPinEdge(.top, to: .bottom, of: self.closeButton, withOffset: 10.0)
         self.descriptionLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.descriptionLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
         self.descriptionImage.autoPinEdge(.top, to: .bottom, of: self.descriptionLabel, withOffset: 30.0)
         self.descriptionImage.autoPinEdge(toSuperviewEdge: .left)
         self.descriptionImage.autoPinEdge(toSuperviewEdge: .right)
+        self.descriptionImage.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
         self.descriptionImage.autoAlignAxis(toSuperviewAxis: .vertical)
-        self.descriptionImage.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: 350.0))
-        
-        self.okButton.autoPinEdge(.top, to: .bottom, of: self.descriptionImage, withOffset: 40.0)
-        self.okButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
-        self.okButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-        self.okButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
+        self.descriptionImage.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: 300.0))
     }
     
     @objc private func tappedCloseButton() {

@@ -161,6 +161,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.editProfileButton.setTitle("EDIT PROFILE", for: .normal)
         self.editProfileButton.addTarget(self, action: #selector(self.tappedEditProfileButton), for: .touchUpInside)
         
+        self.cameraButton.isHidden = true
+        
         // target
         self.cameraIcon.isUserInteractionEnabled = false
 
