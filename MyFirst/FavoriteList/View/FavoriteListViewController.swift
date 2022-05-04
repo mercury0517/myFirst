@@ -18,7 +18,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     let scrollView = UIScrollView()
     
     let topBannerContainer = UIControl()
-    let topBanner = UIImageView(image: UIImage(named: "sky"))
+    let topBanner = UIImageView(image: UIImage(named: "scopp"))
     
     let userIconContainer = UIControl()
     let userIcon = UIImageView(image: UIImage(named: "scopp"))
@@ -101,7 +101,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             self.userIcon.image = userInfo.icon
             self.userNameLabel.text = userInfo.name
         } else {
-            self.topBanner.image = UIImage(named: "sky")
+            self.topBanner.image = UIImage(named: "scopp")
             self.userIcon.image = UIImage(named: "scopp")
             self.userNameLabel.text = "名称未設定"
         }
