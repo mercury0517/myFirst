@@ -17,6 +17,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     let scrollView = UIScrollView()
     
+    let topBannerContainer = UIControl()
     let topBanner = UIImageView(image: UIImage(named: "sky"))
     
     let userIconContainer = UIControl()
@@ -134,7 +135,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     private func addSubviews() {
         self.view.addSubview(self.scrollView)
-        self.scrollView.addSubview(self.topBanner)
+        self.scrollView.addSubview(self.topBannerContainer)
+        self.topBannerContainer.addSubview(self.topBanner)
         self.scrollView.addSubview(self.userIconContainer)
         self.userIconContainer.addSubview(self.userIcon)
         self.scrollView.addSubview(self.editProfileButton)
@@ -171,6 +173,9 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         // target
         self.cameraIcon.isUserInteractionEnabled = false
 
+        // バナータップ時
+        self.topBannerContainer.addTarget(self, action: #selector(self.tappedBanner), for: .touchUpInside)
+        
         self.topBanner.backgroundColor = .black
         self.topBanner.contentMode = .scaleAspectFill
         self.topBanner.clipsToBounds = true
@@ -220,10 +225,12 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
         let topMargin = (statusBarHeight + navigationBarHeight) * -1
         
-        self.topBanner.autoPinEdge(toSuperviewEdge: .top, withInset: topMargin)
-        self.topBanner.autoPinEdge(toSuperviewEdge: .left)
-        self.topBanner.autoPinEdge(toSuperviewEdge: .right)
-        self.topBanner.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: self.imageHeight))
+        self.topBannerContainer.autoPinEdge(toSuperviewEdge: .top, withInset: topMargin)
+        self.topBannerContainer.autoPinEdge(toSuperviewEdge: .left)
+        self.topBannerContainer.autoPinEdge(toSuperviewEdge: .right)
+        self.topBannerContainer.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: self.imageHeight))
+        
+        self.topBanner.autoPinEdgesToSuperviewEdges()
         
         self.userIconContainer.autoPinEdge(.top, to: .bottom, of: self.topBanner, withOffset: -50.0)
         self.userIconContainer.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
@@ -284,6 +291,17 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         // バナーの拡大表示
         let configuration = ImageViewerConfiguration { config in
             config.imageView = self.userIcon
+        }
+
+        let imageViewerController = ImageViewerController(configuration: configuration)
+
+        self.present(imageViewerController, animated: true)
+    }
+    
+    @objc private func tappedBanner() {
+        // バナーの拡大表示
+        let configuration = ImageViewerConfiguration { config in
+            config.imageView = self.topBanner
         }
 
         let imageViewerController = ImageViewerController(configuration: configuration)
