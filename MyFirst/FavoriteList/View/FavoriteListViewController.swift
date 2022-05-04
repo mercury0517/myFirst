@@ -1,6 +1,8 @@
 import UIKit
 import PureLayout
 import SimpleImageViewer
+import GoogleMobileAds
+import GoogleUtilities
 
 /*
  ホームのお気に入り画面
@@ -36,6 +38,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     let favoriteGroupStackView = UIStackView()
     
+    var googleBannerView: GADBannerView!
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -50,6 +54,9 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 広告バナーの初期化
+        self.googleBannerView = GADBannerView(adSize: GADAdSizeBanner)
         
         // 初回だけチュートリアルを出す
         if !UserDefaults.standard.bool(forKey: UserDefaultKeys.isAlredayDisplayTutorial) {
@@ -147,6 +154,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.scrollView.addSubview(self.hintButton)
         self.hintButton.addSubview(self.hintIcon)
         self.scrollView.addSubview(self.favoriteGroupStackView)
+        self.view.addSubview(self.googleBannerView)
     }
     
     private func configSubViews() {
@@ -194,6 +202,13 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.favoriteGroupStackView.alignment = .center
         self.favoriteGroupStackView.axis = .vertical
         self.favoriteGroupStackView.spacing = 20.0
+
+        // 広告バナーの表示
+        if let id = adUnitID(key: "banner") {
+            self.googleBannerView.adUnitID = id
+            self.googleBannerView.rootViewController = self
+            self.googleBannerView.load(GADRequest())
+        }
     }
     
     private func applyStyling() {
@@ -265,6 +280,17 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .left)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .right)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 100.0)
+        
+        self.googleBannerView.autoSetDimensions(to: CGSize(width: 320.0, height: 50.0))
+        self.googleBannerView.autoAlignAxis(toSuperviewAxis: .vertical)
+        self.googleBannerView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 100.0)
+    }
+    
+    private func adUnitID(key: String) -> String? {
+        guard let adUnitIDs = Bundle.main.object(forInfoDictionaryKey: "AdUnitIDs") as? [String: String] else {
+            return nil
+        }
+        return adUnitIDs[key]
     }
     
     private func customPhotoLibraryAlert() {

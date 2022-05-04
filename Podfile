@@ -10,6 +10,7 @@ target 'MyFirst' do
   pod 'Alamofire'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SimpleImageViewer', '~> 1.1.1'
+  pod 'Google-Mobile-Ads-SDK'
   
   target 'MyFirstTests' do
     inherit! :search_paths
