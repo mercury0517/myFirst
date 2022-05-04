@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		50AD4B67F0BF26B984ACBE6A /* Pods_MyFirst.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1511E526DEAECFC133EB54FF /* Pods_MyFirst.framework */; };
 		604FFEE2276DDB280057140E /* FavoriteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604FFEE1276DDB280057140E /* FavoriteDetailViewController.swift */; };
+		606A9DAB2822722A00222914 /* Pods_MyFirst.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1511E526DEAECFC133EB54FF /* Pods_MyFirst.framework */; };
+		606A9DAE2822722C00222914 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 606A9DA72822721E00222914 /* AdSupport.framework */; };
+		606A9DB02822723000222914 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 606A9DA92822722700222914 /* AppTrackingTransparency.framework */; };
+		606A9DB22822723500222914 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A86CD527AFBDBC00AC1444 /* MessageUI.framework */; };
 		60825D7D259B102300B7B242 /* FavoriteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60825D7C259B102300B7B242 /* FavoriteListViewController.swift */; };
 		60825D83259B10EF00B7B242 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60825D82259B10EF00B7B242 /* MyTabBarController.swift */; };
 		60878CFC275B4DAF0052B91C /* FavoriteGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60878CFB275B4DAF0052B91C /* FavoriteGroupView.swift */; };
@@ -38,7 +41,6 @@
 		60A86CD027AF727900AC1444 /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CCF27AF727900AC1444 /* InquiryViewController.swift */; };
 		60A86CD227AF740B00AC1444 /* FirstRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CD127AF740B00AC1444 /* FirstRegisterViewController.swift */; };
 		60A86CD427AF892A00AC1444 /* ExchangeTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CD327AF892A00AC1444 /* ExchangeTutorialViewController.swift */; };
-		60A86CD727AFBDCB00AC1444 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A86CD527AFBDBC00AC1444 /* MessageUI.framework */; };
 		60A86CDB27AFC20200AC1444 /* FavoriteTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CDA27AFC20200AC1444 /* FavoriteTutorialViewController.swift */; };
 		60C27B3D277D81E2005BFC79 /* CustomUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B3C277D81E2005BFC79 /* CustomUILabel.swift */; };
 		60C27B3F277DA85A005BFC79 /* CustomCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B3E277DA85A005BFC79 /* CustomCloseButton.swift */; };
@@ -101,6 +103,8 @@
 		464F05F55D38240FED411859 /* Pods-MyFirstTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFirstTests.release.xcconfig"; path = "Target Support Files/Pods-MyFirstTests/Pods-MyFirstTests.release.xcconfig"; sourceTree = "<group>"; };
 		56F056609B28AD22053B81D6 /* Pods-MyFirst-MyFirstUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFirst-MyFirstUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyFirst-MyFirstUITests/Pods-MyFirst-MyFirstUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		604FFEE1276DDB280057140E /* FavoriteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDetailViewController.swift; sourceTree = "<group>"; };
+		606A9DA72822721E00222914 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		606A9DA92822722700222914 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		60825D7C259B102300B7B242 /* FavoriteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewController.swift; sourceTree = "<group>"; };
 		60825D82259B10EF00B7B242 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		60878CFB275B4DAF0052B91C /* FavoriteGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGroupView.swift; sourceTree = "<group>"; };
@@ -178,8 +182,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60A86CD727AFBDCB00AC1444 /* MessageUI.framework in Frameworks */,
-				50AD4B67F0BF26B984ACBE6A /* Pods_MyFirst.framework in Frameworks */,
+				606A9DB02822723000222914 /* AppTrackingTransparency.framework in Frameworks */,
+				606A9DAE2822722C00222914 /* AdSupport.framework in Frameworks */,
+				606A9DB22822723500222914 /* MessageUI.framework in Frameworks */,
+				606A9DAB2822722A00222914 /* Pods_MyFirst.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +211,8 @@
 		44AA898175A06B37FC9C5080 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				606A9DA92822722700222914 /* AppTrackingTransparency.framework */,
+				606A9DA72822721E00222914 /* AdSupport.framework */,
 				60A86CD527AFBDBC00AC1444 /* MessageUI.framework */,
 				1511E526DEAECFC133EB54FF /* Pods_MyFirst.framework */,
 				C4B566FFC89D3666EC5E7E23 /* Pods_MyFirst_MyFirstUITests.framework */,

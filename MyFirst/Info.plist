@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>最適な広告を表示する為に使用されます。</string>
 	<key>AdUnitIDs</key>
 	<dict>
 		<key>interstitial</key>
