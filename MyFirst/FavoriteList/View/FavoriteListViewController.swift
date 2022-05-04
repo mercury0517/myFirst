@@ -1,5 +1,10 @@
 import UIKit
 import PureLayout
+import SimpleImageViewer
+
+/*
+ ホームのお気に入り画面
+*/
 
 class FavoriteListViewController: UIViewController, FavoriteListViewControllerProtocol {
     var presenter: FavoriteListPresenterProtocol?
@@ -15,7 +20,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     let topBanner = UIImageView(image: UIImage(named: "sky"))
     
     let userIconContainer = UIControl()
-    let userIcon = UIImageView(image: UIImage(named: "sky"))
+    let userIcon = UIImageView(image: UIImage(named: "scopp"))
     
     let cameraButton = UIControl()
     let cameraIcon = UIImageView(image: UIImage(named: "camera"))
@@ -96,7 +101,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             self.userNameLabel.text = userInfo.name
         } else {
             self.topBanner.image = UIImage(named: "sky")
-            self.userIcon.image = UIImage(named: "sky")
+            self.userIcon.image = UIImage(named: "scopp")
             self.userNameLabel.text = "名称未設定"
         }
         
@@ -169,6 +174,9 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.topBanner.backgroundColor = .black
         self.topBanner.contentMode = .scaleAspectFill
         self.topBanner.clipsToBounds = true
+        
+        // アイコンタップ時
+        self.userIconContainer.addTarget(self, action: #selector(self.tappedUserIcon), for: .touchUpInside)
         
         self.userIcon.layer.cornerRadius = 50.0
         self.userIcon.contentMode = .scaleAspectFill
@@ -270,6 +278,28 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         
         self.alertController.addAction(albumAction)
         self.alertController.addAction(cancelAction)
+    }
+    
+    @objc private func tappedTopBanner() {
+        // バナーの拡大表示
+        let configuration = ImageViewerConfiguration { config in
+            config.imageView = self.userIcon
+        }
+
+        let imageViewerController = ImageViewerController(configuration: configuration)
+
+        self.present(imageViewerController, animated: true)
+    }
+    
+    @objc private func tappedUserIcon() {
+        // アイコンの拡大表示
+        let configuration = ImageViewerConfiguration { config in
+            config.imageView = self.userIcon
+        }
+
+        let imageViewerController = ImageViewerController(configuration: configuration)
+
+        self.present(imageViewerController, animated: true)
     }
     
     @objc private func tappedEditProfileButton() {

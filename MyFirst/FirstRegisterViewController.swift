@@ -103,6 +103,8 @@ class FirstRegisterViewController: UIViewController {
         self.userNameTitleLabel.font = UIFont(name: "Oswald", size: 15.0)
         self.userNameTitleLabel.textColor = .black
         
+        self.userNameTextField.textColor = .black
+        
         self.termOfUseLabel.font = .systemFont(ofSize: 12.0)
         self.termOfUseLabel.textColor = .black
         
@@ -163,6 +165,9 @@ class FirstRegisterViewController: UIViewController {
         {
             //ユーザー情報をキャッシュに保存する
             let userInfo = UserInfo(name: newUserName, topBanner: UIImage(named: "sky"), icon: UIImage(named: "sky"))
+            
+            // ハプティックフィードバックを入れる
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
             
             // フラグをtrueにして2回目以降は表示されない様にする
             UserDefaults.standard.set(true, forKey: UserDefaultKeys.isAlredayLaunch)

@@ -9,6 +9,7 @@ target 'MyFirst' do
   pod 'PureLayout'
   pod 'Alamofire'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'SimpleImageViewer', '~> 1.1.1'
   
   target 'MyFirstTests' do
     inherit! :search_paths
