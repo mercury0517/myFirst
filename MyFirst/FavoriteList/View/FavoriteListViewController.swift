@@ -224,9 +224,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.editProfileButton.setTitle("EDIT PROFILE", for: .normal)
         self.editProfileButton.addTarget(self, action: #selector(self.tappedEditProfileButton), for: .touchUpInside)
         
-        self.cameraButton.isHidden = true
+        self.cameraButton.addTarget(self, action: #selector(self.tappedScreenShotButton), for: .touchUpInside)
         
-        // target
         self.cameraIcon.isUserInteractionEnabled = false
 
         // バナータップ時
@@ -361,6 +360,26 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.alertController.addAction(cancelAction)
     }
     
+    func snapshot() -> UIImage? {
+        UIGraphicsBeginImageContext(self.scrollView.contentSize)
+
+        let savedContentOffset = self.scrollView.contentOffset
+        let savedFrame = self.scrollView.frame
+
+        self.scrollView.contentOffset = CGPoint.zero
+        self.scrollView.frame = CGRect(x: 0, y: 0, width: self.scrollView.contentSize.width, height: self.scrollView.contentSize.height)
+
+        self.scrollView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+
+        self.scrollView.contentOffset = savedContentOffset
+        self.scrollView.frame = savedFrame
+
+        UIGraphicsEndImageContext()
+
+        return image
+    }
+    
     @objc private func tappedTopBanner() {
         // バナーの拡大表示
         let configuration = ImageViewerConfiguration { config in
@@ -394,6 +413,10 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.present(imageViewerController, animated: true)
     }
     
+    @objc private func tappedScreenShotButton() {
+        //
+    }
+    
     @objc private func tappedEditProfileButton() {
         self.presenter?.editProfileButtonDidTap(
             userName: self.userNameLabel.text ?? "", userIcon: self.userIcon.image, topBanner: self.topBanner.image
@@ -419,3 +442,39 @@ extension FavoriteListViewController: UIImagePickerControllerDelegate, UINavigat
     }
 }
 
+// UIScrollViewのスクリーンショット撮影用のUIImage作成
+//extension UIImage {
+//    convenience init(view: UIView) {
+//        let image = UIGraphicsImageRenderer(bounds: view.bounds).image { context in
+//            view.layer.render(in: context.cgContext)
+//        }
+//
+//        guard let cgImage = image.cgImage else {
+//            self.init()
+//            return
+//        }
+//
+//        self.init(cgImage: cgImage)
+//    }
+//
+//    convenience init(scrollView: UIScrollView) {
+//        let savedFrame = scrollView.frame
+//        let savedContentOffset = scrollView.contentOffset
+//        let savedHorizontalScroll = scrollView.showsHorizontalScrollIndicator
+//        let savedVerticalScroll = scrollView.showsVerticalScrollIndicator
+//
+//        defer {
+//            scrollView.frame = savedFrame
+//            scrollView.contentOffset = savedContentOffset
+//            scrollView.showsHorizontalScrollIndicator = savedHorizontalScroll
+//            scrollView.showsVerticalScrollIndicator = savedVerticalScroll
+//        }
+//
+//        scrollView.showsHorizontalScrollIndicator = false
+//        scrollView.showsVerticalScrollIndicator = false
+//        scrollView.contentOffset = .zero
+//        scrollView.frame = CGRect(origin: .zero, size: scrollView.contentSize)
+//
+//        self.init(view: scrollView)
+//    }
+//}
