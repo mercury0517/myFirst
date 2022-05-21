@@ -416,13 +416,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             // スクショ撮れたよトーストか画面を出す
             DispatchQueue.main.async {
-                let shareBottomSheet = CustomFloatingViewController()
-                
-                // TODO: 透過するとシートが大きくなってしまうので、詳しく調べる
-//                let blurEffect = UIBlurEffect(style: .regular)
-//                let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//                blurEffectView.frame = shareBottomSheet.view.frame
-//                shareBottomSheet.view.addSubview(blurEffectView)
+                let shareBottomSheet = CustomFloatingViewController(image: image)
                 
                 self.present(shareBottomSheet)
             }
