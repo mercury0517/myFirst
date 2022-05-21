@@ -21,6 +21,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     let scrollView = UIScrollView()
     
+    let scrollInnerView = UIView() // キャプチャ用にインナーを用意する
+    
     let topBannerContainer = UIControl()
     let topBanner = UIImageView(image: UIImage(named: "scopp"))
     
@@ -190,18 +192,19 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     private func addSubviews() {
         self.view.addSubview(self.scrollView)
-        self.scrollView.addSubview(self.topBannerContainer)
+        self.scrollView.addSubview(self.scrollInnerView)
+        self.scrollInnerView.addSubview(self.topBannerContainer)
         self.topBannerContainer.addSubview(self.topBanner)
-        self.scrollView.addSubview(self.userIconContainer)
+        self.scrollInnerView.addSubview(self.userIconContainer)
         self.userIconContainer.addSubview(self.userIcon)
-        self.scrollView.addSubview(self.editProfileButton)
-        self.scrollView.addSubview(self.cameraButton)
+        self.scrollInnerView.addSubview(self.editProfileButton)
+        self.scrollInnerView.addSubview(self.cameraButton)
         self.cameraButton.addSubview(self.cameraIcon)
-        self.scrollView.addSubview(self.userNameLabel)
-        self.scrollView.addSubview(self.separateLine)
-        self.scrollView.addSubview(self.hintButton)
+        self.scrollInnerView.addSubview(self.userNameLabel)
+        self.scrollInnerView.addSubview(self.separateLine)
+        self.scrollInnerView.addSubview(self.hintButton)
         self.hintButton.addSubview(self.hintIcon)
-        self.scrollView.addSubview(self.favoriteGroupStackView)
+        self.scrollInnerView.addSubview(self.favoriteGroupStackView)
         self.view.addSubview(self.googleBannerView)
     }
     
@@ -282,6 +285,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     private func addConstraints() {
         self.scrollView.autoPinEdgesToSuperviewEdges()
         
+        self.scrollInnerView.autoPinEdgesToSuperviewEdges()
+        
         // バナーをステータスバーに重ねる為に、画像を上にずらす
         let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
         let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
@@ -360,21 +365,11 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.alertController.addAction(cancelAction)
     }
     
-    func snapshot() -> UIImage? {
-        UIGraphicsBeginImageContext(self.scrollView.contentSize)
+    private func snapshot() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(self.scrollInnerView.frame.size, false, 0.0)
 
-        let savedContentOffset = self.scrollView.contentOffset
-        let savedFrame = self.scrollView.frame
-
-        self.scrollView.contentOffset = CGPoint.zero
-        self.scrollView.frame = CGRect(x: 0, y: 0, width: self.scrollView.contentSize.width, height: self.scrollView.contentSize.height)
-
-        self.scrollView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        self.scrollInnerView.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
-
-        self.scrollView.contentOffset = savedContentOffset
-        self.scrollView.frame = savedFrame
-
         UIGraphicsEndImageContext()
 
         return image
@@ -414,7 +409,14 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     }
     
     @objc private func tappedScreenShotButton() {
-        //
+        // 連続タップを防ぐ
+        self.cameraButton.isEnabled = false
+        
+        if let image = self.snapshot() {            
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            // スクショ撮れたよトーストか画面を出す
+            self.cameraButton.isEnabled = true
+        }
     }
     
     @objc private func tappedEditProfileButton() {
@@ -441,40 +443,3 @@ extension FavoriteListViewController: UIImagePickerControllerDelegate, UINavigat
         picker.dismiss(animated: true, completion: nil)
     }
 }
-
-// UIScrollViewのスクリーンショット撮影用のUIImage作成
-//extension UIImage {
-//    convenience init(view: UIView) {
-//        let image = UIGraphicsImageRenderer(bounds: view.bounds).image { context in
-//            view.layer.render(in: context.cgContext)
-//        }
-//
-//        guard let cgImage = image.cgImage else {
-//            self.init()
-//            return
-//        }
-//
-//        self.init(cgImage: cgImage)
-//    }
-//
-//    convenience init(scrollView: UIScrollView) {
-//        let savedFrame = scrollView.frame
-//        let savedContentOffset = scrollView.contentOffset
-//        let savedHorizontalScroll = scrollView.showsHorizontalScrollIndicator
-//        let savedVerticalScroll = scrollView.showsVerticalScrollIndicator
-//
-//        defer {
-//            scrollView.frame = savedFrame
-//            scrollView.contentOffset = savedContentOffset
-//            scrollView.showsHorizontalScrollIndicator = savedHorizontalScroll
-//            scrollView.showsVerticalScrollIndicator = savedVerticalScroll
-//        }
-//
-//        scrollView.showsHorizontalScrollIndicator = false
-//        scrollView.showsVerticalScrollIndicator = false
-//        scrollView.contentOffset = .zero
-//        scrollView.frame = CGRect(origin: .zero, size: scrollView.contentSize)
-//
-//        self.init(view: scrollView)
-//    }
-//}
