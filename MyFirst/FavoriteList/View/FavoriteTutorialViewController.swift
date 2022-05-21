@@ -5,6 +5,8 @@ class FavoriteTutorialViewController: UIViewController {
     
     let contentView = UIView()
     
+    let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    
     let closeButton = CustomCloseButton()
     let descriptionLabel = UILabel()
     let descriptionImage = UIImageView(image: UIImage(named: "tutorial"))
@@ -31,9 +33,10 @@ class FavoriteTutorialViewController: UIViewController {
     private func addSubviews() {
         self.view.addSubview(self.backgroundView)
         self.backgroundView.addSubview(self.contentView)
-        self.contentView.addSubview(self.closeButton)
-        self.contentView.addSubview(self.descriptionLabel)
-        self.contentView.addSubview(self.descriptionImage)
+        self.contentView.addSubview(self.blurEffectView)
+        self.blurEffectView.contentView.addSubview(self.closeButton)
+        self.blurEffectView.contentView.addSubview(self.descriptionLabel)
+        self.blurEffectView.contentView.addSubview(self.descriptionImage)
     }
     
     private func configSubViews() {
@@ -63,6 +66,8 @@ class FavoriteTutorialViewController: UIViewController {
         self.contentView.autoPinEdge(toSuperviewEdge: .left, withInset: 40.0)
         self.contentView.autoPinEdge(toSuperviewEdge: .right, withInset: 40.0)
         self.contentView.autoCenterInSuperview()
+        
+        self.blurEffectView.autoPinEdgesToSuperviewEdges()
         
         self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 16.0)
         self.closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
