@@ -17,7 +17,9 @@ class HalfModalViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.image = UIImage()
+        
+        super.init(nibName: nil, bundle: nil)
     }
     
     override func viewDidLoad() {
@@ -43,6 +45,7 @@ class HalfModalViewController: UIViewController {
         self.titleLabel.numberOfLines = 0
         
         self.shareLineButton.setTitle("Share with LINE", for: .normal)
+        self.shareLineButton.addTarget(self, action: #selector(self.tappedLineButton), for: .touchUpInside)
         
         self.shareTwitterButton.setTitle("Share with Twitter", for: .normal)
         
@@ -82,6 +85,24 @@ class HalfModalViewController: UIViewController {
         self.shareTwitterButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
     }
     
+    
+    // MARK: share with LINE
+    @objc private func tappedLineButton() {
+        let pasteBoard = UIPasteboard.general
+        pasteBoard.image = self.image
+     
+        let lineSchemeImage: String = "line://msg/image/%@"
+        let scheme = String(format: lineSchemeImage, pasteBoard.name as CVarArg)
+        let messageURL: URL! = URL(string: scheme)
+        
+        if UIApplication.shared.canOpenURL(messageURL) {
+            UIApplication.shared.open(messageURL, options: [:], completionHandler: nil)
+        } else {
+            print("failed to open..")
+        }
+    }
+    
+    // MARK: close button
     @objc private func tappedCloseButton() {
         self.dismiss(animated: true)
     }
@@ -93,11 +114,13 @@ class CustomFloatingViewController: UIViewController, FloatingPanelControllerDel
     init(image: UIImage) {
         self.image = image
         
-        super.init()
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.image = UIImage()
+        
+        super.init(nibName: nil, bundle: nil)
     }
     
     var floatPanelController: FloatingPanelController!
