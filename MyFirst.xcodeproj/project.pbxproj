@@ -37,6 +37,7 @@
 		608922AF277C292A00698ABD /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608922AE277C292A00698ABD /* UserDefaultKeys.swift */; };
 		608922B1277C3E8400698ABD /* FriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608922B0277C3E8400698ABD /* FriendView.swift */; };
 		60984E7626A1B1B800E957C8 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60984E7526A1B1B800E957C8 /* NewsView.swift */; };
+		609DD2C928388F3400E53696 /* CustomFloatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609DD2C828388F3400E53696 /* CustomFloatingViewController.swift */; };
 		60A86CCE27AF5FAD00AC1444 /* MoreTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CCD27AF5FAD00AC1444 /* MoreTableViewHeader.swift */; };
 		60A86CD027AF727900AC1444 /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CCF27AF727900AC1444 /* InquiryViewController.swift */; };
 		60A86CD227AF740B00AC1444 /* FirstRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CD127AF740B00AC1444 /* FirstRegisterViewController.swift */; };
@@ -130,6 +131,7 @@
 		608922AE277C292A00698ABD /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		608922B0277C3E8400698ABD /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
 		60984E7526A1B1B800E957C8 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
+		609DD2C828388F3400E53696 /* CustomFloatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFloatingViewController.swift; sourceTree = "<group>"; };
 		60A86CCD27AF5FAD00AC1444 /* MoreTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewHeader.swift; sourceTree = "<group>"; };
 		60A86CCF27AF727900AC1444 /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
 		60A86CD127AF740B00AC1444 /* FirstRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRegisterViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				60C27B3E277DA85A005BFC79 /* CustomCloseButton.swift */,
+				609DD2C828388F3400E53696 /* CustomFloatingViewController.swift */,
 				60C27B452782E474005BFC79 /* CustomIndicator.swift */,
 				60C27B43277EEB42005BFC79 /* CustomNavigationController.swift */,
 				60878D1B275C9AB20052B91C /* CustomTextField.swift */,
@@ -745,6 +748,7 @@
 				608922A32777438800698ABD /* ProfileEditViewController.swift in Sources */,
 				60F099A726A9627A0045CEB7 /* MoreInformationVIewController.swift in Sources */,
 				60F099A926A963A60045CEB7 /* DiscType.swift in Sources */,
+				609DD2C928388F3400E53696 /* CustomFloatingViewController.swift in Sources */,
 				60C27B3F277DA85A005BFC79 /* CustomCloseButton.swift in Sources */,
 				608922A52777456B00698ABD /* Toast.swift in Sources */,
 				60D5E94526A3C71600803F7E /* DiscGroupView.swift in Sources */,

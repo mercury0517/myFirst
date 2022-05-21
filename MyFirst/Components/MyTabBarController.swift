@@ -11,19 +11,19 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tabView1.tabBarItem.title = "お気に入り"
+        self.tabView1.tabBarItem.title = "FAVORITE"
         self.tabView1.tabBarItem.image = UIImage(named: "tab_home")
         self.tabView1.tabBarItem.tag = 1
         
-        self.tabView2.tabBarItem.title = "友達"
+        self.tabView2.tabBarItem.title = "FRIEND"
         self.tabView2.tabBarItem.image = UIImage(named: "tab_video")
         self.tabView2.tabBarItem.tag = 2
         
-        self.tabView3.tabBarItem.title = "交換"
+        self.tabView3.tabBarItem.title = "EXCHANGE"
         self.tabView3.tabBarItem.image = UIImage(named: "tab_cd")
         self.tabView3.tabBarItem.tag = 3
         
-        self.tabView4.tabBarItem.title = "その他"
+        self.tabView4.tabBarItem.title = "OTHER"
         self.tabView4.tabBarItem.image = UIImage(named: "tab_photo")
         self.tabView4.tabBarItem.tag = 5
         

@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.4.3)
+  - FloatingPanel (2.5.2)
   - Google-Mobile-Ads-SDK (9.4.0):
     - GoogleAppMeasurement (< 10.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
@@ -53,6 +54,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - FloatingPanel
   - Google-Mobile-Ads-SDK
   - PureLayout
   - SimpleImageViewer (~> 1.1.1)
@@ -61,6 +63,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - FloatingPanel
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleUserMessagingPlatform
@@ -73,6 +76,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  FloatingPanel: 935712d7a8076630135fbbd47f717700913efef9
   Google-Mobile-Ads-SDK: 5a1d44987c82e441811ecaa5ae824e100ea819d7
   GoogleAppMeasurement: 4c19f031220c72464d460c9daa1fb5d1acce958e
   GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
@@ -83,6 +87,6 @@ SPEC CHECKSUMS:
   SimpleImageViewer: 34c3a2cde2d9ac022146772cefc27fca14b0c8b1
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 5fd3dcd1f10e32e52e4eb9667cc4d6e4768db565
+PODFILE CHECKSUM: 7bf348ebcdeee1a7da9d701683706b53938e136c
 
 COCOAPODS: 1.11.3

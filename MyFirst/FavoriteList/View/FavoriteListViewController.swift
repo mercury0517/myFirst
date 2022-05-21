@@ -415,6 +415,18 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         if let image = self.snapshot() {            
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             // スクショ撮れたよトーストか画面を出す
+            DispatchQueue.main.async {
+                let shareBottomSheet = CustomFloatingViewController()
+                
+                // TODO: 透過するとシートが大きくなってしまうので、詳しく調べる
+//                let blurEffect = UIBlurEffect(style: .regular)
+//                let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//                blurEffectView.frame = shareBottomSheet.view.frame
+//                shareBottomSheet.view.addSubview(blurEffectView)
+                
+                self.present(shareBottomSheet)
+            }
+            
             self.cameraButton.isEnabled = true
         }
     }

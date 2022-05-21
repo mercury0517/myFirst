@@ -11,6 +11,7 @@ target 'MyFirst' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SimpleImageViewer', '~> 1.1.1'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'FloatingPanel'
   
   target 'MyFirstTests' do
     inherit! :search_paths
