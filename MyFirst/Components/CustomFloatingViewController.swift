@@ -134,7 +134,9 @@ class HalfModalViewController: UIViewController {
     
     // MARK: open Photo Library
     @objc private func tappedOpenPhotoLibraryButton() {
-        
+        if let url = URL(string: "photos-redirect:") {
+            UIApplication.shared.open(url)
+        }
     }
     
     // MARK: close button
