@@ -63,7 +63,7 @@ class FavoriteGroupView: UIView {
         self.backgroundColor = .white
         
         self.titleLabel.textColor = .black
-        self.titleLabel.font = UIFont(name: "Oswald", size: 18.0)
+        self.titleLabel.font = UIFont(name: "Oswald", size: 20.0)
         
         self.collectionView.backgroundColor = .white
     }
