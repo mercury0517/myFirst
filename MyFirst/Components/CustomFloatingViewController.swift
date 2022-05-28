@@ -118,8 +118,8 @@ class HalfModalViewController: UIViewController {
     
     // MARK: share with Twitter
     @objc private func tappedTwitterButton() {
-        let text = "キャプチャを写真ライブラリから選択してください"
-        let hashTag = "#DIG IT #ディグイット"
+        let text = "(写真ライブラリからキャプチャを選択してください)"
+        let hashTag = "#DIGIT #ディグイット"
         let completedText = text + "\n" + hashTag
 
         //作成したテキストをエンコード
