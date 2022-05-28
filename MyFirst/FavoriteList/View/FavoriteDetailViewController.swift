@@ -101,8 +101,6 @@ class FavoriteDetailViewController: UIViewController {
         self.detailLabel.font = UIFont(name: "Oswald", size: 15.0)
         self.detailLabel.textColor = .black
         
-        self.twiiterButton.backgroundColor = .yellow
-        
         self.deleteButton.backgroundColor = .white
         self.deleteButton.layer.cornerRadius = 25.0
         self.deleteButton.clipsToBounds = true
