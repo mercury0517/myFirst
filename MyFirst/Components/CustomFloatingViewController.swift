@@ -43,7 +43,7 @@ class HalfModalViewController: UIViewController {
     }
     
     private func configSubViews() {
-        self.titleLabel.text = "Share your screenshots"
+        self.titleLabel.text = "Your favorites have saved in Photo Library"
         self.titleLabel.numberOfLines = 0
         
         self.shareLineButton.setTitle("Share with LINE", for: .normal)
@@ -119,7 +119,7 @@ class HalfModalViewController: UIViewController {
     // MARK: share with Twitter
     @objc private func tappedTwitterButton() {
         let text = "(写真ライブラリからキャプチャを選択してください)"
-        let hashTag = "#DIGIT #ディグイット"
+        let hashTag = "#私のお気に入り #DIGIT #ディグイット"
         let completedText = text + "\n" + hashTag
 
         //作成したテキストをエンコード

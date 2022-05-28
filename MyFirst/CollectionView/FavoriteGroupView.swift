@@ -6,16 +6,15 @@ class FavoriteGroupView: UIView {
     
     var countOfItem: Int = 0
     
-    let titleLabel = UILabel()
+//    let titleLabel = UILabel()
     var collectionView: UICollectionView
     
     let itemSize = UIScreen.main.bounds.width - 32.0
-//    let itemHeight = (UIScreen.main.bounds.width - 32.0) * 1.5
     let itemHeight = UIScreen.main.bounds.width - 32.0
     
     init(title: String, presenter: FavoriteListPresenterProtocol?) {
         self.title = title
-        self.titleLabel.text = self.title
+//        self.titleLabel.text = self.title
         
         self.presenter = presenter
         
@@ -49,7 +48,7 @@ class FavoriteGroupView: UIView {
     }
 
     private func addSubviews() {
-        self.addSubview(self.titleLabel)
+//        self.addSubview(self.titleLabel)
         self.addSubview(self.collectionView)
     }
     
@@ -62,8 +61,8 @@ class FavoriteGroupView: UIView {
     private func applyStyling() {
         self.backgroundColor = .white
         
-        self.titleLabel.textColor = .black
-        self.titleLabel.font = UIFont(name: "Oswald", size: 20.0)
+//        self.titleLabel.textColor = .black
+//        self.titleLabel.font = UIFont(name: "Oswald", size: 20.0)
         
         self.collectionView.backgroundColor = .white
     }
@@ -71,12 +70,12 @@ class FavoriteGroupView: UIView {
     private func addConstraints() {
         self.autoSetDimension(.height, toSize: self.itemSize + 60.0)
         
-        self.titleLabel.autoSetDimension(.height, toSize: 30.0)
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .top)
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .right)
+//        self.titleLabel.autoSetDimension(.height, toSize: 30.0)
+//        self.titleLabel.autoPinEdge(toSuperviewEdge: .top)
+//        self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+//        self.titleLabel.autoPinEdge(toSuperviewEdge: .right)
         
-        self.collectionView.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 5.0)
+        self.collectionView.autoPinEdge(toSuperviewEdge: .top)
         self.collectionView.autoPinEdge(toSuperviewEdge: .left)
         self.collectionView.autoPinEdge(toSuperviewEdge: .right)
         self.collectionView.autoSetDimension(.height, toSize: self.itemSize + 20.0)

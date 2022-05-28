@@ -19,6 +19,7 @@ class FavoriteDetailViewController: UIViewController {
     
     let titleLabel = CustomUILabel()
     let detailLabel = CustomUILabel()
+    let twiiterButton = UIButton()
     
     let deleteButton = UIControl()
     let deleteIcon = UIImageView(image: UIImage(named: "delete_icon"))
@@ -61,6 +62,7 @@ class FavoriteDetailViewController: UIViewController {
         self.scrollView.addSubview(self.closeButton)
         self.scrollView.addSubview(self.titleLabel)
         self.scrollView.addSubview(self.detailLabel)
+        self.scrollView.addSubview(self.twiiterButton)
         self.view.addSubview(self.deleteButton)
         self.deleteButton.addSubview(self.deleteIcon)
         self.view.addSubview(self.editButton)
@@ -82,6 +84,9 @@ class FavoriteDetailViewController: UIViewController {
         self.detailLabel.text = self.favorite.memo
         self.detailLabel.numberOfLines = 0
         
+        self.twiiterButton.setImage(UIImage(named: "twitter"), for: .normal)
+        self.twiiterButton.addTarget(self, action: #selector(self.tappedTwitterButton), for: .touchUpInside)
+        
         self.deleteButton.addTarget(self, action: #selector(self.tappedDeleteButton), for: .touchUpInside)
         
         self.editButton.addTarget(self, action: #selector(self.tappedEditButton), for: .touchUpInside)
@@ -95,6 +100,8 @@ class FavoriteDetailViewController: UIViewController {
         
         self.detailLabel.font = UIFont(name: "Oswald", size: 15.0)
         self.detailLabel.textColor = .black
+        
+        self.twiiterButton.backgroundColor = .yellow
         
         self.deleteButton.backgroundColor = .white
         self.deleteButton.layer.cornerRadius = 25.0
@@ -129,6 +136,10 @@ class FavoriteDetailViewController: UIViewController {
         self.detailLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.detailLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 100.0)
         
+        self.twiiterButton.autoSetDimensions(to: CGSize(width: 30.0, height: 30.0))
+        self.twiiterButton.autoAlignAxis(.horizontal, toSameAxisOf: self.titleLabel)
+        self.twiiterButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        
         self.deleteButton.autoPinEdge(.right, to: .left, of: self.editButton, withOffset: -10.0)
         self.deleteButton.autoAlignAxis(.horizontal, toSameAxisOf: self.editButton)
         self.deleteButton.autoSetDimensions(to: CGSize(width: 50.0, height: 50.0))
@@ -158,6 +169,27 @@ class FavoriteDetailViewController: UIViewController {
     
     @objc private func tappedCloseButton() {
         self.dismiss(animated: true)
+    }
+    
+    // MARK: share with Twitter
+    @objc private func tappedTwitterButton() {
+        if
+            let titleText = self.titleLabel.text,
+            let detailText = self.detailLabel.text
+        {
+            let text = titleText + "\n" +  detailText
+            let hashTag = "#私のお気に入り #DIGIT #ディグイット"
+            let completedText = text + "\n" + hashTag
+            
+            //作成したテキストをエンコード
+            let encodedText = completedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            
+            //エンコードしたテキストをURLに繋げ、URLを開いてツイート画面を表示させる
+            if let encodedText = encodedText,
+               let url = URL(string: "https://twitter.com/intent/tweet?text=\(encodedText)") {
+                UIApplication.shared.open(url)
+            }
+        }
     }
     
     @objc private func tappedDeleteButton() {
