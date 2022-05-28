@@ -1,6 +1,6 @@
 UserInterfaceState.xcuserstate
 
-.DS_Store
 *.DS_Store
 *.swp
 MyFirst.xcworkspace/xcuserdata/ihara.xcuserdatad/UserInterfaceState.xcuserstate
+MyFirst.xcodeproj/xcuserdata/ihara.xcuserdatad/xcschemes/xcschememanagement.plist
