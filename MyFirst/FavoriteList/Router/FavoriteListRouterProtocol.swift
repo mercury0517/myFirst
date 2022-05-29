@@ -1,7 +1,7 @@
 import UIKit
 protocol FavoriteListRouterProtocol {
     func displayEditProfileView(
-        userName: String, userIcon: UIImage?, topBanner: UIImage?, presenter: FavoriteListPresenterProtocol
+        userName: String, userIcon: UIImage?, topBanner: UIImage?, favoriteDescription: String?, presenter: FavoriteListPresenterProtocol
     )
     func displayFavoriteRegistrationView(title: String, index: Int, presenter: FavoriteListPresenterProtocol)
     func displayFavoriteDetailView(category: String, index: Int, favorite: MyFavorite, presenter: FavoriteListPresenterProtocol)

@@ -8,10 +8,10 @@ class FavoriteListRouter: FavoriteListRouterProtocol {
     }
     
     func displayEditProfileView(
-        userName: String, userIcon: UIImage?, topBanner: UIImage?, presenter: FavoriteListPresenterProtocol
+        userName: String, userIcon: UIImage?, topBanner: UIImage?, favoriteDescription: String?, presenter: FavoriteListPresenterProtocol
     ) {
         let editProfileView = ProfileEditViewController(
-            userName: userName, userIcon: userIcon, topBanner: topBanner, presenter: presenter
+            userName: userName, userIcon: userIcon, topBanner: topBanner, favoriteDescription: favoriteDescription, presenter: presenter
         )
         
         self.view.present(editProfileView)

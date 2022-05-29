@@ -35,6 +35,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     let editProfileButton = UIButton()
     let userNameLabel = UILabel()
     
+    let favoriteDescriptionLabel = UILabel()
+    
     let separateLine = UIView()
     
     let hintButton = UIControl()
@@ -157,10 +159,12 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             self.topBanner.image = userInfo.topBanner
             self.userIcon.image = userInfo.icon
             self.userNameLabel.text = userInfo.name
+            self.favoriteDescriptionLabel.text = userInfo.favoriteDescription ?? "まだお気に入りの説明はありません。"
         } else {
             self.topBanner.image = UIImage(named: "scopp")
             self.userIcon.image = UIImage(named: "scopp")
             self.userNameLabel.text = "名称未設定"
+            self.favoriteDescriptionLabel.text = "まだお気に入りの説明はありません。"
         }
         
         self.displayFavoriteGroupList(isUpadate: true)
@@ -193,6 +197,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.scrollInnerView.addSubview(self.cameraButton)
         self.cameraButton.addSubview(self.cameraIcon)
         self.scrollInnerView.addSubview(self.userNameLabel)
+        self.scrollInnerView.addSubview(self.favoriteDescriptionLabel)
         self.scrollInnerView.addSubview(self.separateLine)
         self.scrollInnerView.addSubview(self.hintButton)
         self.hintButton.addSubview(self.hintIcon)
@@ -210,6 +215,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             self.topBanner.image = userInfo.topBanner
             self.userIcon.image = userInfo.icon
             self.userNameLabel.text = userInfo.name
+            self.favoriteDescriptionLabel.text = userInfo.favoriteDescription ?? "まだお気に入りの説明はありません。"
         } else {
             self.userNameLabel.text = ""
         }
@@ -239,6 +245,8 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.userIcon.layer.borderWidth = 3.0
         self.userIcon.layer.borderColor = UIColor.white.cgColor
         
+        self.favoriteDescriptionLabel.numberOfLines = 0
+        
         self.hintButton.addTarget(self, action: #selector(self.tappedHintButton), for: .touchUpInside)
         
         self.favoriteGroupStackView.alignment = .center
@@ -265,6 +273,9 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         
         self.userNameLabel.textColor = .black
         self.userNameLabel.font = UIFont(name: "Oswald", size: 25.0)
+        
+        self.favoriteDescriptionLabel.textColor = .black
+        self.favoriteDescriptionLabel.font = UIFont(name: "Oswald", size: 15.0)
         
         self.separateLine.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
         
@@ -309,8 +320,12 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         self.userNameLabel.autoPinEdge(.top, to: .bottom, of: self.userIconContainer, withOffset: 10.0)
         self.userNameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         
+        self.favoriteDescriptionLabel.autoPinEdge(.top, to: .bottom, of: self.userNameLabel, withOffset: 10.0)
+        self.favoriteDescriptionLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.favoriteDescriptionLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        
         self.separateLine.autoSetDimensions(to: CGSize(width: UIScreen.main.bounds.width, height: 1.0))
-        self.separateLine.autoPinEdge(.top, to: .bottom, of: self.userNameLabel, withOffset: 20.0)
+        self.separateLine.autoPinEdge(.top, to: .bottom, of: self.favoriteDescriptionLabel, withOffset: 20.0)
         self.separateLine.autoPinEdge(toSuperviewEdge: .left)
         self.separateLine.autoPinEdge(toSuperviewEdge: .right)
         
@@ -419,7 +434,10 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     
     @objc private func tappedEditProfileButton() {
         self.presenter?.editProfileButtonDidTap(
-            userName: self.userNameLabel.text ?? "", userIcon: self.userIcon.image, topBanner: self.topBanner.image
+            userName: self.userNameLabel.text ?? "",
+            userIcon: self.userIcon.image,
+            topBanner: self.topBanner.image,
+            favoriteDescription: self.favoriteDescriptionLabel.text ?? ""
         )
     }
     

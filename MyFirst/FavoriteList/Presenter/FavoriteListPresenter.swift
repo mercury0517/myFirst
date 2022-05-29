@@ -19,9 +19,9 @@ class FavoriteListPresenter: FavoriteListPresenterProtocol {
     }
     
     // MARK: favorite list view
-    func editProfileButtonDidTap(userName: String, userIcon: UIImage?, topBanner: UIImage?) {
+    func editProfileButtonDidTap(userName: String, userIcon: UIImage?, topBanner: UIImage?, favoriteDescription: String?) {
         self.router.displayEditProfileView(
-            userName: userName, userIcon: userIcon, topBanner: topBanner, presenter: self
+            userName: userName, userIcon: userIcon, topBanner: topBanner, favoriteDescription: favoriteDescription, presenter: self
         )
     }
     

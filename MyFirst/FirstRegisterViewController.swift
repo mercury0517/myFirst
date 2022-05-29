@@ -164,7 +164,7 @@ class FirstRegisterViewController: UIViewController {
             !newUserName.isEmpty
         {
             //ユーザー情報をキャッシュに保存する
-            let userInfo = UserInfo(name: newUserName, topBanner: UIImage(named: "sky"), icon: UIImage(named: "sky"))
+            let userInfo = UserInfo(name: newUserName, topBanner: UIImage(named: "sky"), icon: UIImage(named: "sky"), favoriteDescription: "")
             
             // ハプティックフィードバックを入れる
             UINotificationFeedbackGenerator().notificationOccurred(.success)

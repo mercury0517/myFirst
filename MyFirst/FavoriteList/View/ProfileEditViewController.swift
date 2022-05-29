@@ -2,6 +2,7 @@ import UIKit
 
 class ProfileEditViewController: UIViewController {
     let userName: String
+    let userFavoriteDescription: String?
     let userIcon: UIImage?
     let topBanner: UIImage?
     let presenter: FavoriteListPresenterProtocol
@@ -36,10 +37,14 @@ class ProfileEditViewController: UIViewController {
     let userNameTitleLabel = UILabel()
     let userNameTextField = CustomTextField()
     
+    let favoriteDescriptionLabel = UILabel()
+    let favoriteDescriptionTextField = CustomTextField()
+    
     let registerButton = UIButton()
     
-    init(userName: String, userIcon: UIImage?, topBanner: UIImage?, presenter: FavoriteListPresenterProtocol) {
+    init(userName: String, userIcon: UIImage?, topBanner: UIImage?, favoriteDescription: String?, presenter: FavoriteListPresenterProtocol) {
         self.userName = userName
+        self.userFavoriteDescription = favoriteDescription
         self.userIcon = userIcon
         self.topBanner = topBanner
         self.presenter = presenter
@@ -93,6 +98,8 @@ class ProfileEditViewController: UIViewController {
         self.userIconContainer.addSubview(self.userIconView)
         self.scrollView.addSubview(self.userNameTitleLabel)
         self.scrollView.addSubview(self.userNameTextField)
+        self.scrollView.addSubview(self.favoriteDescriptionLabel)
+        self.scrollView.addSubview(self.favoriteDescriptionTextField)
         self.scrollView.addSubview(self.registerButton)
     }
     
@@ -119,6 +126,14 @@ class ProfileEditViewController: UIViewController {
         self.userNameTextField.placeholder = "input your name"
         self.userNameTextField.text = self.userName
         self.userNameTextField.delegate = self
+        self.userNameTextField.textColor = .black
+        
+        self.favoriteDescriptionLabel.text = "ABOUT YOUR FAVORITE"
+
+        self.favoriteDescriptionTextField.placeholder = "input about your favorite"
+        self.favoriteDescriptionTextField.text = self.userFavoriteDescription
+        self.favoriteDescriptionTextField.delegate = self
+        self.favoriteDescriptionTextField.textColor = .black
         
         self.registerButton.setTitle("OK", for: .normal)
         self.registerButton.addTarget(self, action: #selector(self.tappedRegisterButton), for: .touchUpInside)
@@ -129,6 +144,9 @@ class ProfileEditViewController: UIViewController {
         
         self.userNameTitleLabel.font = UIFont(name: "Oswald", size: 15.0)
         self.userNameTitleLabel.textColor = .black
+        
+        self.favoriteDescriptionLabel.font = UIFont(name: "Oswald", size: 15.0)
+        self.favoriteDescriptionLabel.textColor = .black
         
         self.registerButton.backgroundColor = CustomUIColor.turquoise
         self.registerButton.layer.cornerRadius = 5.0
@@ -160,7 +178,15 @@ class ProfileEditViewController: UIViewController {
         self.userNameTextField.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.userNameTextField.autoSetDimension(.height, toSize: 50.0)
         
-        self.registerButton.autoPinEdge(.top, to: .bottom, of: self.userNameTextField, withOffset: 20.0)
+        self.favoriteDescriptionLabel.autoPinEdge(.top, to: .bottom, of: self.userNameTextField, withOffset: 20.0)
+        self.favoriteDescriptionLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        
+        self.favoriteDescriptionTextField.autoPinEdge(.top, to: .bottom, of: self.favoriteDescriptionLabel, withOffset: 10.0)
+        self.favoriteDescriptionTextField.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.favoriteDescriptionTextField.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.favoriteDescriptionTextField.autoSetDimension(.height, toSize: 50.0)
+        
+        self.registerButton.autoPinEdge(.top, to: .bottom, of: self.favoriteDescriptionTextField, withOffset: 20.0)
         self.registerButton.autoSetDimension(.height, toSize: 45.0)
         self.registerButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.registerButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
@@ -204,7 +230,13 @@ class ProfileEditViewController: UIViewController {
             let newUserName = self.userNameTextField.text,
             !newUserName.isEmpty
         {
-            let userInfo = UserInfo(name: newUserName, topBanner: self.itemImageView.image, icon: self.userIconView.image)
+            // 編集できるように変える
+            let userInfo = UserInfo(
+                name: newUserName,
+                topBanner: self.itemImageView.image,
+                icon: self.userIconView.image,
+                favoriteDescription: self.favoriteDescriptionTextField.text
+            )
             
             self.presenter.registerNewProfileButtonDidTap(userInfo: userInfo, editProfileView: self)
         } else {
