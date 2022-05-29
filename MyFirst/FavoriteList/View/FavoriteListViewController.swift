@@ -163,21 +163,10 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             self.userNameLabel.text = "名称未設定"
         }
         
-        self.favoriteGroupStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        
-        for favoriteCategory in FavoriteCategory.allCases {
-            let favoriteGroupView = FavoriteGroupView(title: favoriteCategory.rawValue, presenter: self.presenter)
-            
-            self.favoriteGroupStackView.addArrangedSubview(favoriteGroupView)
-            
-            favoriteGroupView.autoPinEdge(toSuperviewEdge: .left)
-            favoriteGroupView.autoPinEdge(toSuperviewEdge: .right)
-            
-            favoriteGroupView.collectionView.reloadData()
-        }
+        self.displayFavoriteGroupList(isUpadate: true)
     }
     
-    func displayFavoriteGroupList() {
+    private func displayFavoriteGroupList(isUpadate: Bool = false) {
         self.favoriteGroupStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         for favoriteCategory in FavoriteCategory.allCases {
@@ -187,6 +176,9 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             
             favoriteGroupView.autoPinEdge(toSuperviewEdge: .left)
             favoriteGroupView.autoPinEdge(toSuperviewEdge: .right)
+            
+            // 更新時はリロードも行う
+            if isUpadate { favoriteGroupView.collectionView.reloadData() }
         }
     }
     
