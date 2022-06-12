@@ -19,7 +19,7 @@ class FavoriteDetailViewController: UIViewController {
     
     let titleLabel = CustomUILabel()
     let detailLabel = CustomUILabel()
-    let twiiterButton = UIButton()
+    let shareButton = UIButton()
     
     let deleteButton = UIControl()
     let deleteIcon = UIImageView(image: UIImage(named: "delete_icon"))
@@ -62,7 +62,7 @@ class FavoriteDetailViewController: UIViewController {
         self.scrollView.addSubview(self.closeButton)
         self.scrollView.addSubview(self.titleLabel)
         self.scrollView.addSubview(self.detailLabel)
-        self.scrollView.addSubview(self.twiiterButton)
+        self.scrollView.addSubview(self.shareButton)
         self.view.addSubview(self.deleteButton)
         self.deleteButton.addSubview(self.deleteIcon)
         self.view.addSubview(self.editButton)
@@ -84,8 +84,8 @@ class FavoriteDetailViewController: UIViewController {
         self.detailLabel.text = self.favorite.memo
         self.detailLabel.numberOfLines = 0
         
-        self.twiiterButton.setImage(UIImage(named: "twitter"), for: .normal)
-        self.twiiterButton.addTarget(self, action: #selector(self.tappedTwitterButton), for: .touchUpInside)
+        self.shareButton.setImage(UIImage(named: "twitter"), for: .normal)
+        self.shareButton.addTarget(self, action: #selector(self.tappedShareButton), for: .touchUpInside)
         
         self.deleteButton.addTarget(self, action: #selector(self.tappedDeleteButton), for: .touchUpInside)
         
@@ -134,9 +134,9 @@ class FavoriteDetailViewController: UIViewController {
         self.detailLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         self.detailLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 100.0)
         
-        self.twiiterButton.autoSetDimensions(to: CGSize(width: 30.0, height: 30.0))
-        self.twiiterButton.autoAlignAxis(.horizontal, toSameAxisOf: self.titleLabel)
-        self.twiiterButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        self.shareButton.autoSetDimensions(to: CGSize(width: 30.0, height: 30.0))
+        self.shareButton.autoAlignAxis(.horizontal, toSameAxisOf: self.titleLabel)
+        self.shareButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
         self.deleteButton.autoPinEdge(.right, to: .left, of: self.editButton, withOffset: -10.0)
         self.deleteButton.autoAlignAxis(.horizontal, toSameAxisOf: self.editButton)
@@ -170,23 +170,19 @@ class FavoriteDetailViewController: UIViewController {
     }
     
     // MARK: share with Twitter
-    @objc private func tappedTwitterButton() {
+    @objc private func tappedShareButton() {
         if
             let titleText = self.titleLabel.text,
-            let detailText = self.detailLabel.text
+            let detailText = self.detailLabel.text,
+            let favoriteImage = self.favorite.image
         {
             let text = titleText + "\n" +  detailText
             let hashTag = "#私のお気に入り #DIGIT #ディグイット"
             let completedText = text + "\n" + hashTag
             
-            //作成したテキストをエンコード
-            let encodedText = completedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            let activityVc = UIActivityViewController(activityItems: [completedText, favoriteImage], applicationActivities: nil)
             
-            //エンコードしたテキストをURLに繋げ、URLを開いてツイート画面を表示させる
-            if let encodedText = encodedText,
-               let url = URL(string: "https://twitter.com/intent/tweet?text=\(encodedText)") {
-                UIApplication.shared.open(url)
-            }
+            self.present(activityVc, animated: true)
         }
     }
     

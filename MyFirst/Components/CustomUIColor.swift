@@ -1,7 +1,7 @@
 import UIKit
 
 class CustomUIColor {
-    static let turquoise = UIColor.rgba(red: 0, green: 183, blue: 206, alpha: 1)
+    static let turquoise = UIColor.rgba(red: 0, green: 183, blue: 206, alpha: 1) // #00b7ce
     static let background = UIColor.rgba(red: 179, green: 246, blue: 255, alpha: 1)
 }
 
