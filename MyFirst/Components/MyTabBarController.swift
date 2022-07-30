@@ -1,4 +1,5 @@
 import UIKit
+import AudioToolbox
 
 class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
     let tabView1 = AppDependencies.assmbleFavoriteList()
@@ -18,8 +19,8 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
         self.tabView2.tabBarItem.image = UIImage(named: "tab_gallery")
         self.tabView2.tabBarItem.tag = 2
         
-        self.tabView3.tabBarItem.title = "EXCHANGE"
-        self.tabView3.tabBarItem.image = UIImage(named: "tab_cd")
+        self.tabView3.tabBarItem.title = ""
+        self.tabView3.tabBarItem.image = UIImage(named: "center_scopp")?.withRenderingMode(.alwaysOriginal)
         self.tabView3.tabBarItem.tag = 3
         
         self.tabView4.tabBarItem.title = "FRIEND"
@@ -58,6 +59,7 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
         case 2:
             break
         case 3:
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             break
         case 4:
             break
