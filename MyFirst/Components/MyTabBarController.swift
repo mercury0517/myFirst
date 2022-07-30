@@ -2,11 +2,10 @@ import UIKit
 
 class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
     let tabView1 = AppDependencies.assmbleFavoriteList()
-    let tabView2 = CustomNavigationController(rootViewController: FriendListViewController())
+    let tabView2 = CustomNavigationController(rootViewController: GalleryViewController())
     let tabView3 = CustomNavigationController(rootViewController: ExchangeViewController())
-    let tabView4 = CustomNavigationController(rootViewController: MoreInformationViewController())
-    
-    var shouldScroll = false
+    let tabView4 = CustomNavigationController(rootViewController: FriendListViewController())
+    let tabView5 = CustomNavigationController(rootViewController: MoreInformationViewController())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,20 +14,26 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
         self.tabView1.tabBarItem.image = UIImage(named: "tab_home")
         self.tabView1.tabBarItem.tag = 1
         
-        self.tabView2.tabBarItem.title = "FRIEND"
-        self.tabView2.tabBarItem.image = UIImage(named: "tab_video")
+        self.tabView2.tabBarItem.title = "GALLERY"
+        self.tabView2.tabBarItem.image = UIImage(named: "tab_gallery")
         self.tabView2.tabBarItem.tag = 2
         
         self.tabView3.tabBarItem.title = "EXCHANGE"
         self.tabView3.tabBarItem.image = UIImage(named: "tab_cd")
         self.tabView3.tabBarItem.tag = 3
         
-        self.tabView4.tabBarItem.title = "OTHER"
-        self.tabView4.tabBarItem.image = UIImage(named: "tab_photo")
-        self.tabView4.tabBarItem.tag = 5
+        self.tabView4.tabBarItem.title = "FRIEND"
+        self.tabView4.tabBarItem.image = UIImage(named: "tab_video")
+        self.tabView4.tabBarItem.tag = 4
         
-        let conList : Array<UIViewController> = [tabView1, tabView2, tabView3, tabView4]
-        self.setViewControllers(conList, animated: false)
+        self.tabView5.tabBarItem.title = "OTHER"
+        self.tabView5.tabBarItem.image = UIImage(named: "tab_photo")
+        self.tabView5.tabBarItem.tag = 5
+        
+        let contentsList : Array<UIViewController> = [
+            self.tabView1, self.tabView2, self.tabView3, self.tabView4, self.tabView5
+        ]
+        self.setViewControllers(contentsList, animated: false)
         
         self.configTabView()
         
@@ -55,6 +60,8 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
         case 3:
             break
         case 4:
+            break
+        case 5:
             break
         default:
             break

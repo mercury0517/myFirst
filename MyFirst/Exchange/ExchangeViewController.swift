@@ -70,7 +70,7 @@ class ExchangeViewController: UIViewController {
         self.advertiser.delegate = self
         self.session.delegate = self
         
-        self.navigationItem.title = "お気に入り交換"
+        self.navigationItem.title = "Exchange"
     }
     
     required init?(coder: NSCoder) {

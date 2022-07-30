@@ -43,6 +43,7 @@
 		60A86CD227AF740B00AC1444 /* FirstRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CD127AF740B00AC1444 /* FirstRegisterViewController.swift */; };
 		60A86CD427AF892A00AC1444 /* ExchangeTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CD327AF892A00AC1444 /* ExchangeTutorialViewController.swift */; };
 		60A86CDB27AFC20200AC1444 /* FavoriteTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A86CDA27AFC20200AC1444 /* FavoriteTutorialViewController.swift */; };
+		60B8BFCB2894CA230070191E /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B8BFCA2894CA230070191E /* GalleryViewController.swift */; };
 		60C27B3D277D81E2005BFC79 /* CustomUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B3C277D81E2005BFC79 /* CustomUILabel.swift */; };
 		60C27B3F277DA85A005BFC79 /* CustomCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B3E277DA85A005BFC79 /* CustomCloseButton.swift */; };
 		60C27B41277DB1A9005BFC79 /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C27B40277DB1A9005BFC79 /* FriendListViewController.swift */; };
@@ -138,6 +139,7 @@
 		60A86CD327AF892A00AC1444 /* ExchangeTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTutorialViewController.swift; sourceTree = "<group>"; };
 		60A86CD527AFBDBC00AC1444 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		60A86CDA27AFC20200AC1444 /* FavoriteTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTutorialViewController.swift; sourceTree = "<group>"; };
+		60B8BFCA2894CA230070191E /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		60C27B3C277D81E2005BFC79 /* CustomUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUILabel.swift; sourceTree = "<group>"; };
 		60C27B3E277DA85A005BFC79 /* CustomCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCloseButton.swift; sourceTree = "<group>"; };
 		60C27B40277DB1A9005BFC79 /* FriendListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
@@ -322,6 +324,14 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		60B8BFC92894C9D00070191E /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				60B8BFCA2894CA230070191E /* GalleryViewController.swift */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
 		60C27B42277DB1C3005BFC79 /* FriendList */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,6 +397,7 @@
 				60A86CD127AF740B00AC1444 /* FirstRegisterViewController.swift */,
 				60D5E93326A3A22500803F7E /* fonts */,
 				60C27B42277DB1C3005BFC79 /* FriendList */,
+				60B8BFC92894C9D00070191E /* Gallery */,
 				60D5CCAA258613B600C681DD /* Info.plist */,
 				60D5CCA7258613B600C681DD /* LaunchScreen.storyboard */,
 				60D5AAE2259B0ADB00A1243E /* More */,
@@ -748,6 +759,7 @@
 				608922A32777438800698ABD /* ProfileEditViewController.swift in Sources */,
 				60F099A726A9627A0045CEB7 /* MoreInformationVIewController.swift in Sources */,
 				60F099A926A963A60045CEB7 /* DiscType.swift in Sources */,
+				60B8BFCB2894CA230070191E /* GalleryViewController.swift in Sources */,
 				609DD2C928388F3400E53696 /* CustomFloatingViewController.swift in Sources */,
 				60C27B3F277DA85A005BFC79 /* CustomCloseButton.swift in Sources */,
 				608922A52777456B00698ABD /* Toast.swift in Sources */,

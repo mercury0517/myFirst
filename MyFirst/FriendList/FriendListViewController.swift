@@ -36,7 +36,7 @@ class FriendListViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         
-        self.navigationItem.title = "友達"
+        self.navigationItem.title = "Friend"
     }
     
     required init?(coder: NSCoder) {
