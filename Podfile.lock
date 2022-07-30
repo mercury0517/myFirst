@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.4.3)
+  - ESTabBarController-swift (2.8.0)
   - FloatingPanel (2.5.2)
   - Google-Mobile-Ads-SDK (9.4.0):
     - GoogleAppMeasurement (< 10.0, >= 7.0)
@@ -54,6 +55,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - ESTabBarController-swift
   - FloatingPanel
   - Google-Mobile-Ads-SDK
   - PureLayout
@@ -63,6 +65,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - ESTabBarController-swift
     - FloatingPanel
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
@@ -76,6 +79,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   FloatingPanel: 935712d7a8076630135fbbd47f717700913efef9
   Google-Mobile-Ads-SDK: 5a1d44987c82e441811ecaa5ae824e100ea819d7
   GoogleAppMeasurement: 4c19f031220c72464d460c9daa1fb5d1acce958e
@@ -87,6 +91,6 @@ SPEC CHECKSUMS:
   SimpleImageViewer: 34c3a2cde2d9ac022146772cefc27fca14b0c8b1
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 7bf348ebcdeee1a7da9d701683706b53938e136c
+PODFILE CHECKSUM: 9f1f15758a47868c1407027488ed9792a6b85714
 
 COCOAPODS: 1.11.3

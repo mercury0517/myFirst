@@ -12,6 +12,7 @@ target 'MyFirst' do
   pod 'SimpleImageViewer', '~> 1.1.1'
   pod 'Google-Mobile-Ads-SDK'
   pod 'FloatingPanel'
+  pod 'ESTabBarController-swift'
   
   target 'MyFirstTests' do
     inherit! :search_paths
