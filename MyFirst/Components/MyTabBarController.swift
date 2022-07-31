@@ -59,7 +59,8 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
         case 2:
             break
         case 3:
-            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            // ハプティックフィードバックを入れる
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
             break
         case 4:
             break

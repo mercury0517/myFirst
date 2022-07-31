@@ -13,7 +13,7 @@ import AppTrackingTransparency
 class FavoriteListViewController: UIViewController, FavoriteListViewControllerProtocol {
     var presenter: FavoriteListPresenterProtocol?
     
-    let imageHeight = UIScreen.main.bounds.height * 0.2
+    let imageHeight = UIScreen.main.bounds.height * 0.15
     
     var alertController = UIAlertController(
         title: "画像を選択する", message: nil, preferredStyle: .actionSheet
