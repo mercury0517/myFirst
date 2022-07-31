@@ -2,6 +2,8 @@ import UIKit
 
 class GalleryViewController: UIViewController {
     let scrollView = UIScrollView()
+    let comingSoonLabel = UILabel()
+    let comingSoonImageView = UIImageView(image: UIImage(named: "coming_soon"))
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -22,23 +24,32 @@ class GalleryViewController: UIViewController {
         self.addConstraints()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
-    
     private func addSubviews() {
         self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.comingSoonLabel)
+        self.scrollView.addSubview(self.comingSoonImageView)
     }
     
     private func configSubViews() {
+        self.comingSoonLabel.text = "Coming Soon...🐧"
     }
     
     private func applyStyling() {
-        self.view.backgroundColor = .green
+        self.view.backgroundColor = .white
+        
+        self.comingSoonLabel.textColor = .black
+        self.comingSoonLabel.font = UIFont(name: "Oswald", size: 25.0)
     }
     
     private func addConstraints() {
         self.scrollView.autoPinEdgesToSuperviewEdges()
+        
+        self.comingSoonLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
+        self.comingSoonLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        
+        self.comingSoonImageView.autoPinEdge(.top, to: .bottom, of: self.comingSoonLabel, withOffset: 40.0)
+//        self.comingSoonImageView.autoPinEdge(toSuperviewEdge: .left)
+//        self.comingSoonImageView.autoPinEdge(toSuperviewEdge: .right)
+        self.comingSoonImageView.autoAlignAxis(toSuperviewAxis: .vertical)
     }
 }

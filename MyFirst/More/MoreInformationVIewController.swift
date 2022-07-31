@@ -26,7 +26,7 @@ class MoreInformationViewController: UIViewController {
     }
     
     private func configSubViews() {
-        self.navigationItem.title = "その他"
+        self.navigationItem.title = "Other"
         
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView.register(MoreTableViewHeader.self, forHeaderFooterViewReuseIdentifier: "header")
