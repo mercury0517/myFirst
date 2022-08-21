@@ -173,17 +173,16 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     private func displayFavoriteGroupList(isUpadate: Bool = false) {
         self.favoriteGroupStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        for favoriteCategory in FavoriteCategory.allCases {
-            let favoriteGroupView = FavoriteGroupView(title: favoriteCategory.rawValue, presenter: self.presenter)
-            
-            self.favoriteGroupStackView.addArrangedSubview(favoriteGroupView)
-            
-            favoriteGroupView.autoPinEdge(toSuperviewEdge: .left)
-            favoriteGroupView.autoPinEdge(toSuperviewEdge: .right)
-            
-            // 更新時はリロードも行う
-            if isUpadate { favoriteGroupView.collectionView.reloadData() }
-        }
+        let favoriteGroupView = FavoriteGroupView(presenter: self.presenter)
+        
+        self.favoriteGroupStackView.addArrangedSubview(favoriteGroupView)
+        
+//        favoriteGroupView.autoPinEdge(toSuperviewEdge: .left)
+//        favoriteGroupView.autoPinEdge(toSuperviewEdge: .right)
+        favoriteGroupView.autoPinEdgesToSuperviewEdges()
+        
+        // 更新時はリロードも行う
+        if isUpadate { favoriteGroupView.collectionView.reloadData() }
     }
     
     private func addSubviews() {
@@ -335,10 +334,10 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         
         self.hintIcon.autoPinEdgesToSuperviewEdges()
         
-        self.favoriteGroupStackView.autoPinEdge(.top, to: .bottom, of: self.hintButton, withOffset: 5.0)
+        self.favoriteGroupStackView.autoPinEdge(.top, to: .bottom, of: self.hintButton, withOffset: 20.0)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .left)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .right)
-        self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 100.0)
+        self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 40.0)
         
 //        self.googleBannerView.autoSetDimensions(to: CGSize(width: 320.0, height: 50.0))
 //        self.googleBannerView.autoAlignAxis(toSuperviewAxis: .vertical)
