@@ -84,6 +84,6 @@ class FavoriteTutorialViewController: UIViewController {
     }
     
     @objc private func tappedOKButton() {
-        self.dismiss(animated: true)
+        self.dismiss(animated: false)
     }
 }

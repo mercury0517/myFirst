@@ -69,7 +69,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             let tutorialView = FavoriteTutorialViewController()
             tutorialView.modalPresentationStyle = .overFullScreen
             
-            self.present(tutorialView, animated: true)
+            self.present(tutorialView, animated: false)
             
             UserDefaults.standard.set(true, forKey: UserDefaultKeys.isAlredayDisplayTutorial)
         }
@@ -444,7 +444,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         let tutorialView = FavoriteTutorialViewController()
         tutorialView.modalPresentationStyle = .overFullScreen
         
-        self.present(tutorialView, animated: true)
+        self.present(tutorialView, animated: false)
     }
 }
 
