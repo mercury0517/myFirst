@@ -27,7 +27,7 @@ class ExchangeTutorialViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         
-        self.navigationItem.title = "お気に入りの交換方法"
+        self.navigationItem.title = "How to exchange favorites"
     }
     
     required init?(coder: NSCoder) {
@@ -41,6 +41,20 @@ class ExchangeTutorialViewController: UIViewController {
         self.configSubViews()
         self.applyStyling()
         self.addConstraints()
+        
+        self.navigationItem.setLeftBarButton(
+            UIBarButtonItem(
+                title: "Cancel",
+                style: .plain,
+                target: self,
+                action: #selector(self.tappedCancelButton)
+            ),
+            animated: true
+       )
+    }
+    
+    @objc private func tappedCancelButton() {
+        self.dismiss(animated: true)
     }
     
     private func addSubviews() {
@@ -62,37 +76,37 @@ class ExchangeTutorialViewController: UIViewController {
     }
     
     private func configSubViews() {
-        self.step1Label.text = "1. ユーザーAは「近くの友達に招待を送る」ボタンをタップします。iPhoneのWiFi及びBluetoothをONにしておく必要があります。"
+        self.step1Label.text = "1. User A taps \"Send the invitation\". At this time, it is necessary to turn on WiFi and Bluetooth on the iPhone."
         self.step1Label.numberOfLines = 0
         self.step1ImageView.contentMode = .scaleAspectFit
         
-        self.step2Label.text = "2. ユーザーBは、「友達の招待を受け取る」ボタンをタップします。iPhoneのWiFi及びBluetoothをONにしておく必要があります。"
+        self.step2Label.text = "2. User B taps \"Send the invitation\". iPhone WiFi and Bluetooth must be turned on for this device as well."
         self.step2Label.numberOfLines = 0
         self.step2ImageView.contentMode = .scaleAspectFit
         
-        self.step3Label.text = "3. ユーザーAの画面に、ユーザーBのカードが表示されます。「招待する」をタップしてユーザーBに招待のリクエストを送信してください。"
+        self.step3Label.text = "3. User B will appear on User A's screen. Tap \"Invite\" to send an invitation request to User B."
         self.step3Label.numberOfLines = 0
         self.step3ImageView.contentMode = .scaleAspectFit
         
-        self.step4Label.text = "4. ユーザーBの画面に招待を承諾するか選択するダイアログが表示されるので、「接続する」をタップします。"
+        self.step4Label.text = "4. When the dialog box appears on User B's screen to select whether to accept the invitation, tap \"Connect\"."
         self.step4Label.numberOfLines = 0
         self.step4ImageView.contentMode = .scaleAspectFit
         
-        self.step5Label.text = "5. ユーザー名の右に「接続中」と表示されたら、接続は成功です。接続され、お互いにお気に入りを交換できる状態になりました。"
+        self.step5Label.text = "5. When \"Connecting\" appears to the right of your user name, the connection is successful. You are now connected and can exchange favorites with each other."
         self.step5Label.numberOfLines = 0
         self.step5ImageView.contentMode = .scaleAspectFit
         
-        self.step6Label.text = "6. ユーザーAまたはユーザーBが、「お気に入りを送る」をタップすると、お気に入りの送信が始まります。通信が完了するとダイアログは消えます。これでお気に入りの送信は完了です。(ユーザーA、Bがお互いにお気に入りを交換するには2回の通信が必要です。)"
+        self.step6Label.text = "6. User A or User B taps \"Send Favorites\" to begin sending favorites. When communication is complete, the dialog will disappear. Sending Favorites is now complete."
         self.step6Label.numberOfLines = 0
         self.step6ImageView.contentMode = .scaleAspectFit
         
-        self.step7Label.text = "7. 「友達」タブに移動すると、お気に入りを交換した友達が追加され、お気に入りを確認することが出来ます。"
+        self.step7Label.text = "7. Go to the \"FRIEND\" tab to add friends with whom you have exchanged favorites and to see your favorites."
         self.step7Label.numberOfLines = 0
         self.step7ImageView.contentMode = .scaleAspectFit
     }
     
     private func applyStyling() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = CustomUIColor.lightBackground
         
         self.step1Label.font = .boldSystemFont(ofSize: 15.0)
         self.step1Label.textColor = .black

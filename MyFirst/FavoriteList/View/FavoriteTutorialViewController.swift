@@ -38,7 +38,7 @@ class FavoriteTutorialViewController: UIViewController {
     private func configSubViews() {
         self.backgroundView.addTarget(self, action: #selector(self.tappedOKButton), for: .touchUpInside)
         
-        self.descriptionLabel.text = "Let's add your favorites! You can register up to 10 favorites.\n\nAfter you have registered your favorites, you can share them with your close friends and family from the \"EXCHANGE\" tab."
+        self.descriptionLabel.text = "Let's add your favorites!\nYou can exchange the favorites with your friends."
         self.descriptionLabel.numberOfLines = 0
         
         self.descriptionImage.contentMode = .scaleAspectFit
@@ -57,6 +57,7 @@ class FavoriteTutorialViewController: UIViewController {
         self.descriptionLabel.textColor = .black
         
         self.okButton.backgroundColor = CustomUIColor.turquoise
+        self.okButton.titleLabel?.font = UIFont(name: "Oswald", size: 16.0)
         self.okButton.setTitleColor(.white, for: .normal)
     }
     
@@ -84,6 +85,6 @@ class FavoriteTutorialViewController: UIViewController {
     }
     
     @objc private func tappedOKButton() {
-        self.dismiss(animated: false)
+        self.dismiss(animated: true)
     }
 }

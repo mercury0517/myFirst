@@ -38,18 +38,16 @@ class GalleryViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.comingSoonLabel.textColor = .black
-        self.comingSoonLabel.font = UIFont(name: "Oswald", size: 25.0)
+        self.comingSoonLabel.font = UIFont(name: "Oswald", size: 18.0)
     }
     
     private func addConstraints() {
         self.scrollView.autoPinEdgesToSuperviewEdges()
         
-        self.comingSoonLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
+        self.comingSoonLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 30.0)
         self.comingSoonLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         
-        self.comingSoonImageView.autoPinEdge(.top, to: .bottom, of: self.comingSoonLabel, withOffset: 40.0)
-//        self.comingSoonImageView.autoPinEdge(toSuperviewEdge: .left)
-//        self.comingSoonImageView.autoPinEdge(toSuperviewEdge: .right)
+        self.comingSoonImageView.autoPinEdge(.top, to: .bottom, of: self.comingSoonLabel, withOffset: 30.0)
         self.comingSoonImageView.autoAlignAxis(toSuperviewAxis: .vertical)
     }
 }

@@ -23,7 +23,7 @@ class FirstRegisterViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         
-        self.navigationItem.title = "初回ユーザー登録"
+        self.navigationItem.title = "Getting Started"
     }
     
     required init?(coder: NSCoder) {
@@ -75,7 +75,7 @@ class FirstRegisterViewController: UIViewController {
     }
     
     private func configSubViews() {
-        self.descriptionLabel.text = "サービスをご利用される前に、あなたの名前を登録してください"
+        self.descriptionLabel.text = "Please register your name before using our service"
         self.descriptionLabel.numberOfLines = 0
         
         self.userNameTitleLabel.text = "YOUR NAME"
@@ -84,10 +84,10 @@ class FirstRegisterViewController: UIViewController {
         self.userNameTextField.text = self.userName
         self.userNameTextField.delegate = self
         
-        self.termOfUseLabel.text = "「REGISTER」ボタンを押下した場合は、下記の利用規約に同意したものとみなします。必ずご一読ください。"
+        self.termOfUseLabel.text = "By clicking the \"REGISTER\" button, you agree to the following Terms of Use. Please be sure to read them carefully."
         self.termOfUseLabel.numberOfLines = 0
         
-        self.termOfUseButton.setTitle("利用規約", for: .normal)
+        self.termOfUseButton.setTitle("Terms of Use", for: .normal)
         self.termOfUseButton.addTarget(self, action: #selector(self.tappedTermOfUseButton), for: .touchUpInside)
         
         self.registerButton.setTitle("REGISTER", for: .normal)
@@ -105,15 +105,15 @@ class FirstRegisterViewController: UIViewController {
         
         self.userNameTextField.textColor = .black
         
-        self.termOfUseLabel.font = .systemFont(ofSize: 12.0)
+        self.termOfUseLabel.font = UIFont(name: "Oswald", size: 12.0)
         self.termOfUseLabel.textColor = .black
         
         self.termOfUseButton.setTitleColor(CustomUIColor.turquoise, for: .normal)
-        self.termOfUseButton.titleLabel?.font = .systemFont(ofSize: 15.0)
+        self.termOfUseButton.titleLabel?.font = UIFont(name: "Oswald", size: 14.0)
         
         self.registerButton.backgroundColor = CustomUIColor.turquoise
         self.registerButton.layer.cornerRadius = 5.0
-        self.registerButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
+        self.registerButton.titleLabel?.font = UIFont(name: "Oswald", size: 16.0)
     }
     
     private func addConstraints() {
@@ -180,7 +180,7 @@ class FirstRegisterViewController: UIViewController {
                 self.window?.rootViewController = MyTabBarController()
             }
         } else {
-            Toast.show("名前を入れてください", self.view)
+            Toast.show("Please input your name", self.view)
         }
     }
 }

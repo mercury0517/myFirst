@@ -93,7 +93,7 @@ class ExchangeViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.friendStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-            self.statusLabel.text = "Exchange your favorites with your friends nearby!"
+            self.statusLabel.text = "Let's exchange your favorites with friends!"
         }
     }
     
@@ -133,7 +133,7 @@ class ExchangeViewController: UIViewController {
     }
     
     private func configSubViews() {
-        self.statusLabel.text = "Exchange your favorites with your friends nearby!"
+        self.statusLabel.text = "Let's exchange your favorites with friends!"
         self.statusLabel.numberOfLines = 2
         
         self.hintButton.addTarget(self, action: #selector(self.tappedHintButton), for: .touchUpInside)
@@ -182,14 +182,14 @@ class ExchangeViewController: UIViewController {
         self.hintIcon.isUserInteractionEnabled = false
         
         self.hostButton.backgroundColor = CustomUIColor.turquoise
-        self.hostButton.titleLabel?.font = UIFont(name: "Oswald", size: 18.0)
+        self.hostButton.titleLabel?.font = UIFont(name: "Oswald", size: 16.0)
         self.hostButton.setTitleColor(.white, for: .normal)
         self.hostButton.layer.cornerRadius = 5.0
         self.hostButton.layer.borderColor = CustomUIColor.turquoise.cgColor
         self.hostButton.layer.borderWidth = 1.0
         
         self.guestButton.backgroundColor = CustomUIColor.turquoise
-        self.guestButton.titleLabel?.font = UIFont(name: "Oswald", size: 18.0)
+        self.guestButton.titleLabel?.font = UIFont(name: "Oswald", size: 16.0)
         self.guestButton.setTitleColor(.white, for: .normal)
         self.guestButton.layer.cornerRadius = 5.0
         self.guestButton.layer.borderColor = CustomUIColor.turquoise.cgColor

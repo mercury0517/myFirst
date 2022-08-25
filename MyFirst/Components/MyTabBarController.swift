@@ -74,12 +74,12 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     private func configTabView() {
-        UITabBar.appearance().backgroundColor = .white
+        UITabBar.appearance().backgroundColor = CustomUIColor.lightBackground
         UITabBar.appearance().tintColor = CustomUIColor.turquoise
         self.tabBar.shadowImage = UIImage(named: "sky")
         
         let appearance = UITabBarAppearance()
-        appearance.backgroundColor =  .white
+        appearance.backgroundColor =  CustomUIColor.lightBackground
         self.tabBar.standardAppearance = appearance
         if #available(iOS 15.0, *) {
             self.tabBar.scrollEdgeAppearance = appearance

@@ -138,15 +138,15 @@ class FriendListViewController: UIViewController {
     }
     
     private func configSubViews() {
-        self.titleLabel.text = "お気に入りを交換した友達"
+        self.titleLabel.text = "Your friends"
         
         self.editButton.addTarget(self, action: #selector(self.tappedEditButton), for: .touchUpInside)
         
         self.friendStackView.alignment = .center
         self.friendStackView.axis = .vertical
-        self.friendStackView.spacing = 20.0
+        self.friendStackView.spacing = 15.0
         
-        self.emptyLabel.text = "お気に入りを交換した友達はまだいません。\n近くの友達とお気に入りをシェアしてみましょう！"
+        self.emptyLabel.text = "You haven't exchanged your favorites yet. \nShare your favorites with friends near you!"
         self.emptyLabel.numberOfLines = 0
     }
     
@@ -154,7 +154,7 @@ class FriendListViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.titleLabel.textColor = .black
-        self.titleLabel.font = .boldSystemFont(ofSize: 15.0)
+        self.titleLabel.font = UIFont(name: "Oswald", size: 18.0)
         
         self.editButton.backgroundColor = CustomUIColor.turquoise
         self.editButton.layer.cornerRadius = 25.0
@@ -163,7 +163,7 @@ class FriendListViewController: UIViewController {
         self.editIcon.isUserInteractionEnabled = false
         
         self.emptyLabel.textColor = .black
-        self.emptyLabel.font = .systemFont(ofSize: 15.0)
+        self.emptyLabel.font = UIFont(name: "Oswald", size: 15.0)
     }
     
     private func addConstraints() {
@@ -173,7 +173,7 @@ class FriendListViewController: UIViewController {
         self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.titleLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
-        self.friendStackView.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 30.0)
+        self.friendStackView.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 10.0)
         self.friendStackView.autoSetDimension(.width, toSize: UIScreen.main.bounds.width)
         self.friendStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
         
@@ -200,7 +200,7 @@ class FriendListViewController: UIViewController {
                 animated: true
             )
         } else {
-            Toast.show("現在ご利用できません", self.view)
+            Toast.show("Currently unavailable", self.view)
         }
     }
     

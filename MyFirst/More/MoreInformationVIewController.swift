@@ -64,11 +64,11 @@ extension MoreInformationViewController: UITableViewDelegate, UITableViewDataSou
         
         switch indexPath.row {
         case 0:
-            cell.textLabel?.text = "利用規約"
+            cell.textLabel?.text = "Terms of Use"
         case 1:
-            cell.textLabel?.text = "プライバシーポリシー"
+            cell.textLabel?.text = "Privacy Policy"
         case 2:
-            cell.textLabel?.text = "お問い合わせ"
+            cell.textLabel?.text = "Contact Us"
         default:
             break
         }        
