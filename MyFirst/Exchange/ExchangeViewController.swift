@@ -93,7 +93,7 @@ class ExchangeViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.friendStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-            self.statusLabel.text = "近くの友達とお気に入りを交換してみましょう"
+            self.statusLabel.text = "Exchange your favorites with your friends nearby!"
         }
     }
     
@@ -133,7 +133,7 @@ class ExchangeViewController: UIViewController {
     }
     
     private func configSubViews() {
-        self.statusLabel.text = "近くの友達とお気に入りを交換しましょう！"
+        self.statusLabel.text = "Exchange your favorites with your friends nearby!"
         self.statusLabel.numberOfLines = 2
         
         self.hintButton.addTarget(self, action: #selector(self.tappedHintButton), for: .touchUpInside)
@@ -146,16 +146,16 @@ class ExchangeViewController: UIViewController {
         self.buttonStackView.axis = .vertical
         self.buttonStackView.spacing = 15.0
         
-        self.hostButton.setTitle("近くの友達に招待を送る", for: .normal)
+        self.hostButton.setTitle("Send the invitation", for: .normal)
         self.hostButton.addTarget(self, action: #selector(self.tappedHostButton), for: .touchUpInside)
         
-        self.guestButton.setTitle("友達の招待を受け取る", for: .normal)
+        self.guestButton.setTitle("Receive the invitation", for: .normal)
         self.guestButton.addTarget(self, action: #selector(self.tappedGuestButton), for: .touchUpInside)
         
-        self.sendFavoriteButton.setTitle("お気に入りを送る", for: .normal)
+        self.sendFavoriteButton.setTitle("Send Favorites", for: .normal)
         self.sendFavoriteButton.addTarget(self, action: #selector(self.tappedSendFavorite), for: .touchUpInside)
         
-        self.disconnectButton.setTitle("接続を解除する", for: .normal)
+        self.disconnectButton.setTitle("Disconnect", for: .normal)
         self.disconnectButton.addTarget(self, action: #selector(self.tappedDisconnectButton), for: .touchUpInside)
         
         self.hostButton.isHidden = false
@@ -163,10 +163,10 @@ class ExchangeViewController: UIViewController {
         self.sendFavoriteButton.isHidden = true
         self.disconnectButton.isHidden = true
         
-        self.wifiDescriptionLabel.text = "※端末のWiFiとBluetoothをONにしてください。"
+        self.wifiDescriptionLabel.text = "*Turn on WiFi and Bluetooth on your device."
         self.wifiDescriptionLabel.numberOfLines = 2
         
-        self.loadingDescriptionLabel.text = "※お気に入りの交換には数分かかる事があります。"
+        self.loadingDescriptionLabel.text = "*It may take a few minutes to exchange favorites."
         self.loadingDescriptionLabel.numberOfLines = 2
     }
     
@@ -174,7 +174,7 @@ class ExchangeViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.statusLabel.textColor = .black
-        self.statusLabel.font = .boldSystemFont(ofSize: 15.0)
+        self.statusLabel.font = UIFont(name: "Oswald", size: 18.0)
         
         self.hintButton.layer.cornerRadius = 10.0
         self.hintButton.clipsToBounds = true
@@ -182,14 +182,14 @@ class ExchangeViewController: UIViewController {
         self.hintIcon.isUserInteractionEnabled = false
         
         self.hostButton.backgroundColor = CustomUIColor.turquoise
-        self.hostButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
+        self.hostButton.titleLabel?.font = UIFont(name: "Oswald", size: 18.0)
         self.hostButton.setTitleColor(.white, for: .normal)
         self.hostButton.layer.cornerRadius = 5.0
         self.hostButton.layer.borderColor = CustomUIColor.turquoise.cgColor
         self.hostButton.layer.borderWidth = 1.0
         
         self.guestButton.backgroundColor = CustomUIColor.turquoise
-        self.guestButton.titleLabel?.font = UIFont(name: "Oswald", size: 15.0)
+        self.guestButton.titleLabel?.font = UIFont(name: "Oswald", size: 18.0)
         self.guestButton.setTitleColor(.white, for: .normal)
         self.guestButton.layer.cornerRadius = 5.0
         self.guestButton.layer.borderColor = CustomUIColor.turquoise.cgColor
@@ -207,10 +207,10 @@ class ExchangeViewController: UIViewController {
         self.disconnectButton.setTitleColor(.red, for: .normal)
         
         self.wifiDescriptionLabel.textColor = .black
-        self.wifiDescriptionLabel.font = .systemFont(ofSize: 12.0)
+        self.wifiDescriptionLabel.font = UIFont(name: "Oswald", size: 12.0)
         
         self.loadingDescriptionLabel.textColor = .black
-        self.loadingDescriptionLabel.font = .systemFont(ofSize: 12.0)
+        self.loadingDescriptionLabel.font = UIFont(name: "Oswald", size: 12.0)
     }
     
     private func addConstraints() {
@@ -466,7 +466,7 @@ extension ExchangeViewController: MCNearbyServiceBrowserDelegate {
     // 他の端末との接続が切れたら呼ばれる
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         // 「接続が切れたよ」メッセージを出す
-        Toast.show("接続が切断されました", self.view)
+        Toast.show("Connection has been terminated.", self.view)
     }
 }
 
@@ -477,13 +477,13 @@ extension ExchangeViewController: MCNearbyServiceAdvertiserDelegate {
         AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
         
         let alertController = UIAlertController(
-            title: "\(peerID.displayName)さんと接続しますか？", message: nil, preferredStyle: .alert
+            title: "Do you want to connect with \(peerID.displayName)?", message: nil, preferredStyle: .alert
         )
-        let acceptAction = UIAlertAction(title: "接続する", style: .default) { (action) in
+        let acceptAction = UIAlertAction(title: "Connect", style: .default) { (action) in
             // trueにすると招待を受けることになる
             invitationHandler(true, self.session)
         }
-        let deniedAction = UIAlertAction(title: "接続しない", style: .destructive) { (action) in
+        let deniedAction = UIAlertAction(title: "Cancel", style: .destructive) { (action) in
             // trueにすると招待を受けることになる
             invitationHandler(true, self.session)
         }
@@ -507,7 +507,7 @@ extension ExchangeViewController: MCSessionDelegate {
             // 接続成功のハプティックフィードバックを入れる
             UINotificationFeedbackGenerator().notificationOccurred(.success)
             
-            message = "\(peerID.displayName)さんと接続されました"
+            message = "Connected with \(peerID.displayName)"
             
             // 接続されたのでお気に入りを送るボタンを表示する
             DispatchQueue.main.async {
@@ -519,7 +519,7 @@ extension ExchangeViewController: MCSessionDelegate {
                 // 既存の友達カードを接続中に変更する
                 for subview in self.friendStackView.arrangedSubviews {
                     if let friendView = subview as? FriendView, friendView.peerID == peerID {
-                        friendView.inviteLabel.text = "接続中"
+                        friendView.inviteLabel.text = "Connecting"
                         friendView.isEnabled = false
                     }
                 }
@@ -530,7 +530,7 @@ extension ExchangeViewController: MCSessionDelegate {
                         // まだカードがない状態なので、友達のカードを作成する
                         let friendView = FriendView()
                         friendView.peerID = peerID
-                        friendView.inviteLabel.text = "接続中"
+                        friendView.inviteLabel.text = "Connecting"
                         friendView.isEnabled = false
                         
                         self.friendStackView.addArrangedSubview(friendView)
@@ -544,9 +544,9 @@ extension ExchangeViewController: MCSessionDelegate {
                 }
             }
         case .connecting:
-            message = "\(peerID.displayName)さんと接続中です"
+            message = "Connecting with \(peerID.displayName)"
         case .notConnected:
-            message = "\(peerID.displayName)さんとの通信が切断されました"
+            message = "Communication with \(peerID.displayName) has been disconnected."
             
             // 切断されたのでお気に入りを送るボタンを隠す
             DispatchQueue.main.async {
@@ -560,7 +560,7 @@ extension ExchangeViewController: MCSessionDelegate {
                         let friendView = subview as? FriendView,
                         friendView.peerID == peerID
                     {
-                        friendView.inviteLabel.text = "招待する"
+                        friendView.inviteLabel.text = "Invite"
                         friendView.isEnabled = true
                     }
                 }
@@ -571,7 +571,7 @@ extension ExchangeViewController: MCSessionDelegate {
                 self.disconnectButton.isHidden = true
             }
         @unknown default:
-            message = "\(peerID.displayName)さんとの通信が想定外の状態です"
+            message = "Communication with \(peerID.displayName) is in an unexpected state."
         }
         
         // 最新のステータスをラベルに出してあげる
@@ -596,11 +596,11 @@ extension ExchangeViewController: MCSessionDelegate {
             // 7. 全ての通信が終了したら"finish sending"が相手から飛んでくるので、インジケータを止める
             if messageString == "finish sending" {
                 DispatchQueue.main.async {
-                    Toast.show("お気に入りを送信しました", self.view)
+                    Toast.show("Your favorite has been sent!", self.view)
                     self.indicator.stopAnimating()
                     self.sendFavoriteButton.isEnabled = true
                     
-                    self.statusLabel.text = "お気に入りを送信しました。"
+                    self.statusLabel.text = "Your favorite has been sent!"
                 }
             } else {
                 // インジケータ開始
@@ -630,9 +630,9 @@ extension ExchangeViewController: MCSessionDelegate {
                 self.indicator.stopAnimating()
                 self.sendFavoriteButton.isEnabled = true
 
-                Toast.show("お気に入りを受信しました", self.view)
+                Toast.show("Received the favorites", self.view)
                 
-                self.statusLabel.text = "お気に入りを受信しました。「友達」タブを見てみましょう！"
+                self.statusLabel.text = "You have received the favorites. Let's take a look at the \"Friend\" tab!"
             }
             
             // 5.ユニークキーでそのプロフィールを保存する

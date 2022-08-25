@@ -8,7 +8,7 @@ class CustomIndicator: UIActivityIndicatorView {
         
         self.addSubview(self.textLabel)
         
-        self.textLabel.text = "お気に入り送受信中"
+        self.textLabel.text = "Loading..."
         self.textLabel.numberOfLines = 0
         
         self.color = .white
