@@ -5,9 +5,9 @@ class HalfModalViewController: UIViewController {
     let image: UIImage
     
     let titleLabel = UILabel()
-    let shareLineButton = UIButton()
-    let shareTwitterButton = UIButton()
     let openPhotoLibraryButton = UIButton()
+    let addToGalleryButton = UIButton()
+    let shareButton = UIButton()
     
     let closeButton = CustomCloseButton()
     
@@ -36,8 +36,8 @@ class HalfModalViewController: UIViewController {
     
     private func addSubviews() {
         self.view.addSubview(self.titleLabel)
-        self.view.addSubview(self.shareLineButton)
-        self.view.addSubview(self.shareTwitterButton)
+        self.view.addSubview(self.addToGalleryButton)
+        self.view.addSubview(self.shareButton)
         self.view.addSubview(self.openPhotoLibraryButton)
         self.view.addSubview(self.closeButton)
     }
@@ -46,14 +46,14 @@ class HalfModalViewController: UIViewController {
         self.titleLabel.text = "Your favorites have saved in Photo Library"
         self.titleLabel.numberOfLines = 0
         
-        self.shareLineButton.setTitle("Share with LINE", for: .normal)
-        self.shareLineButton.addTarget(self, action: #selector(self.tappedLineButton), for: .touchUpInside)
-        
-        self.shareTwitterButton.setTitle("Share with Twitter", for: .normal)
-        self.shareTwitterButton.addTarget(self, action: #selector(self.tappedTwitterButton), for: .touchUpInside)
-        
         self.openPhotoLibraryButton.setTitle("Open Photo Library", for: .normal)
         self.openPhotoLibraryButton.addTarget(self, action: #selector(self.tappedOpenPhotoLibraryButton), for: .touchUpInside)
+        
+        self.addToGalleryButton.setTitle("Add To GALLERY", for: .normal)
+        self.addToGalleryButton.addTarget(self, action: #selector(self.tappedLineButton), for: .touchUpInside)
+        
+        self.shareButton.setTitle("Share Your Favorites", for: .normal)
+        self.shareButton.addTarget(self, action: #selector(self.tappedTwitterButton), for: .touchUpInside)
         
         self.closeButton.addTarget(self, action: #selector(self.tappedCloseButton), for: .touchUpInside)
     }
@@ -62,22 +62,22 @@ class HalfModalViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.titleLabel.textColor = .black
-        self.titleLabel.font = UIFont(name: "Oswald", size: 24.0)
-        
-        self.shareLineButton.setTitleColor(.white, for: .normal)
-        self.shareLineButton.titleLabel?.font = UIFont(name: "Oswald", size: 20.0)
-        self.shareLineButton.backgroundColor = UIColor.rgba(red: 0, green: 185, blue: 0, alpha: 1)
-        self.shareLineButton.layer.cornerRadius = 20.0
-        
-        self.shareTwitterButton.setTitleColor(.white, for: .normal)
-        self.shareTwitterButton.titleLabel?.font = UIFont(name: "Oswald", size: 20.0)
-        self.shareTwitterButton.backgroundColor = UIColor.rgba(red: 85, green: 172, blue: 238, alpha: 1)
-        self.shareTwitterButton.layer.cornerRadius = 20.0
+        self.titleLabel.font = UIFont(name: "Oswald", size: 20.0)
         
         self.openPhotoLibraryButton.setTitleColor(.white, for: .normal)
         self.openPhotoLibraryButton.titleLabel?.font = UIFont(name: "Oswald", size: 20.0)
         self.openPhotoLibraryButton.backgroundColor = .black
-        self.openPhotoLibraryButton.layer.cornerRadius = 20.0
+        self.openPhotoLibraryButton.layer.cornerRadius = 10.0
+        
+        self.addToGalleryButton.setTitleColor(.white, for: .normal)
+        self.addToGalleryButton.titleLabel?.font = UIFont(name: "Oswald", size: 20.0)
+        self.addToGalleryButton.backgroundColor = CustomUIColor.customRed
+        self.addToGalleryButton.layer.cornerRadius = 10.0
+        
+        self.shareButton.setTitleColor(.white, for: .normal)
+        self.shareButton.titleLabel?.font = UIFont(name: "Oswald", size: 20.0)
+        self.shareButton.backgroundColor = CustomUIColor.turquoise
+        self.shareButton.layer.cornerRadius = 10.0
     }
     
     private func addConstraints() {
@@ -87,17 +87,17 @@ class HalfModalViewController: UIViewController {
         self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 16.0)
         self.closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
-        self.shareLineButton.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 30.0)
-        self.shareLineButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
-        self.shareLineButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-        
-        self.shareTwitterButton.autoPinEdge(.top, to: .bottom, of: self.shareLineButton, withOffset: 20.0)
-        self.shareTwitterButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
-        self.shareTwitterButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-        
-        self.openPhotoLibraryButton.autoPinEdge(.top, to: .bottom, of: self.shareTwitterButton, withOffset: 20.0)
+        self.openPhotoLibraryButton.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 30.0)
         self.openPhotoLibraryButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.openPhotoLibraryButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        
+        self.addToGalleryButton.autoPinEdge(.top, to: .bottom, of: self.openPhotoLibraryButton, withOffset: 20.0)
+        self.addToGalleryButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.addToGalleryButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        
+        self.shareButton.autoPinEdge(.top, to: .bottom, of: self.addToGalleryButton, withOffset: 20.0)
+        self.shareButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.shareButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
     }
     
     // MARK: share with LINE
