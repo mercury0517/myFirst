@@ -3,6 +3,7 @@ import UIKit
 
 class HalfModalViewController: UIViewController {
     let image: UIImage
+    let favoriteText: String?
     
     let titleLabel = UILabel()
     let openPhotoLibraryButton = UIButton()
@@ -11,14 +12,16 @@ class HalfModalViewController: UIViewController {
     
     let closeButton = CustomCloseButton()
     
-    init(image: UIImage) {
+    init(image: UIImage, favoriteText: String?) {
         self.image = image
+        self.favoriteText = favoriteText
         
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         self.image = UIImage()
+        self.favoriteText = nil
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -50,10 +53,10 @@ class HalfModalViewController: UIViewController {
         self.openPhotoLibraryButton.addTarget(self, action: #selector(self.tappedOpenPhotoLibraryButton), for: .touchUpInside)
         
         self.addToGalleryButton.setTitle("Add To GALLERY", for: .normal)
-        self.addToGalleryButton.addTarget(self, action: #selector(self.tappedLineButton), for: .touchUpInside)
+        self.addToGalleryButton.addTarget(self, action: #selector(self.tappedAddToGalleryButton), for: .touchUpInside)
         
         self.shareButton.setTitle("Share Your Favorites", for: .normal)
-        self.shareButton.addTarget(self, action: #selector(self.tappedTwitterButton), for: .touchUpInside)
+        self.shareButton.addTarget(self, action: #selector(self.tappedShareButton), for: .touchUpInside)
         
         self.closeButton.addTarget(self, action: #selector(self.tappedCloseButton), for: .touchUpInside)
     }
@@ -100,8 +103,15 @@ class HalfModalViewController: UIViewController {
         self.shareButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
     }
     
-    // MARK: share with LINE
-    @objc private func tappedLineButton() {
+    // MARK: open Photo Library
+    @objc private func tappedOpenPhotoLibraryButton() {
+        if let url = URL(string: "photos-redirect:") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    // MARK: add to GALLERY
+    @objc private func tappedAddToGalleryButton() {
         let pasteBoard = UIPasteboard.general
         pasteBoard.image = self.image
      
@@ -116,27 +126,17 @@ class HalfModalViewController: UIViewController {
         }
     }
     
-    // MARK: share with Twitter
-    @objc private func tappedTwitterButton() {
-        let text = "(写真ライブラリからキャプチャを選択してください)"
+    // MARK: share button
+    @objc private func tappedShareButton() {
+        let text = self.favoriteText ?? "私のお気に入り"
         let hashTag = "#私のお気に入り #DIGIT #ディグイット"
         let completedText = text + "\n" + hashTag
 
-        //作成したテキストをエンコード
-        let encodedText = completedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let activityVc = UIActivityViewController(
+            activityItems: [completedText, self.image], applicationActivities: nil
+        )
 
-        //エンコードしたテキストをURLに繋げ、URLを開いてツイート画面を表示させる
-        if let encodedText = encodedText,
-            let url = URL(string: "https://twitter.com/intent/tweet?text=\(encodedText)") {
-            UIApplication.shared.open(url)
-        }
-    }
-    
-    // MARK: open Photo Library
-    @objc private func tappedOpenPhotoLibraryButton() {
-        if let url = URL(string: "photos-redirect:") {
-            UIApplication.shared.open(url)
-        }
+        self.present(activityVc, animated: true)
     }
     
     // MARK: close button
@@ -147,15 +147,18 @@ class HalfModalViewController: UIViewController {
 
 class CustomFloatingViewController: UIViewController, FloatingPanelControllerDelegate {
     let image: UIImage
+    let favoriteText: String?
     
-    init(image: UIImage) {
+    init(image: UIImage, favoriteText: String?) {
         self.image = image
+        self.favoriteText = favoriteText
         
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         self.image = UIImage()
+        self.favoriteText = nil
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -168,7 +171,7 @@ class CustomFloatingViewController: UIViewController, FloatingPanelControllerDel
         self.floatPanelController = FloatingPanelController()
         self.floatPanelController.delegate = self
  
-        let contentVC = HalfModalViewController(image: image)
+        let contentVC = HalfModalViewController(image: self.image, favoriteText: self.favoriteText)
         self.floatPanelController.set(contentViewController: contentVC)
         
         self.floatPanelController.addPanel(toParent: self)

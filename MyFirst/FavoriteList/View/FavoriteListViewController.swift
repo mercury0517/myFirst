@@ -422,7 +422,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             // スクショ撮れたよトーストか画面を出す
             DispatchQueue.main.async {
-                let shareBottomSheet = CustomFloatingViewController(image: image)
+                let shareBottomSheet = CustomFloatingViewController(image: image, favoriteText: self.favoriteDescriptionLabel.text)
                 
                 self.present(shareBottomSheet)
             }
