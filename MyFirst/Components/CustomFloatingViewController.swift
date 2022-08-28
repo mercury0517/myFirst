@@ -112,17 +112,9 @@ class HalfModalViewController: UIViewController {
     
     // MARK: add to GALLERY
     @objc private func tappedAddToGalleryButton() {
-        let pasteBoard = UIPasteboard.general
-        pasteBoard.image = self.image
-     
-        let lineSchemeImage: String = "line://msg/image/%@"
-        let scheme = String(format: lineSchemeImage, pasteBoard.name as CVarArg)
-        let messageURL: URL! = URL(string: scheme)
-        
-        if UIApplication.shared.canOpenURL(messageURL) {
-            UIApplication.shared.open(messageURL, options: [:], completionHandler: nil)
-        } else {
-            print("failed to open..")
+        guard let title = self.favoriteText else {
+            Toast.show("failed to add to GALLERY", self.view)
+            return
         }
     }
     
