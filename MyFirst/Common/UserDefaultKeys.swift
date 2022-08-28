@@ -8,4 +8,5 @@ class UserDefaultKeys {
     static let userInfo = "userInfo"
     static let isAlredayLaunch = "isAlredayLaunch"
     static let isAlredayDisplayTutorial = "isAlredayDisplayTutorial"
+    static let galleryFavoriteKeyList = "galleryFavoriteKeyList"
 }
