@@ -16,7 +16,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     let imageHeight = UIScreen.main.bounds.height * 0.15
     
     var alertController = UIAlertController(
-        title: "画像を選択する", message: nil, preferredStyle: .actionSheet
+        title: "Select an image", message: nil, preferredStyle: .actionSheet
     )
     
     let scrollView = UIScrollView()
@@ -159,12 +159,12 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             self.topBanner.image = userInfo.topBanner
             self.userIcon.image = userInfo.icon
             self.userNameLabel.text = userInfo.name
-            self.favoriteDescriptionLabel.text = userInfo.favoriteDescription ?? "まだお気に入りの説明はありません。"
+            self.favoriteDescriptionLabel.text = userInfo.favoriteDescription ?? ""
         } else {
             self.topBanner.image = UIImage(named: "scopp")
             self.userIcon.image = UIImage(named: "scopp")
             self.userNameLabel.text = "名称未設定"
-            self.favoriteDescriptionLabel.text = "まだお気に入りの説明はありません。"
+            self.favoriteDescriptionLabel.text = ""
         }
         
         self.displayFavoriteGroupList(isUpadate: true)
@@ -214,7 +214,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
             self.topBanner.image = userInfo.topBanner
             self.userIcon.image = userInfo.icon
             self.userNameLabel.text = userInfo.name
-            self.favoriteDescriptionLabel.text = userInfo.favoriteDescription ?? "まだお気に入りの説明はありません。"
+            self.favoriteDescriptionLabel.text = userInfo.favoriteDescription ?? ""
         } else {
             self.userNameLabel.text = ""
         }
@@ -352,7 +352,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
     }
     
     private func customPhotoLibraryAlert() {
-        let albumAction = UIAlertAction(title: "フォトライブラリ", style: .default) { (action) in
+        let albumAction = UIAlertAction(title: "Phoro Library", style: .default) { (action) in
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) == true {
                 let picker = UIImagePickerController()
                 picker.sourceType = .photoLibrary
@@ -360,7 +360,7 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
                 picker.delegate = self
                 self.present(picker, animated: true, completion: nil)
             } else {
-                Toast.show("フォトライブラリは現在利用できません。", self.view)
+                Toast.show("Photo library is currently unavailable", self.view)
             }
         }
         let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel) { (action) in

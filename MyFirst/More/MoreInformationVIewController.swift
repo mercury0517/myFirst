@@ -71,7 +71,8 @@ extension MoreInformationViewController: UITableViewDelegate, UITableViewDataSou
             cell.textLabel?.text = "Contact Us"
         default:
             break
-        }        
+        }
+        cell.textLabel?.font = UIFont(name: "Oswald", size: 16.0)
 
         return cell
     }
