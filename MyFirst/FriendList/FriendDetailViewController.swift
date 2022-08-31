@@ -1,17 +1,19 @@
 import UIKit
+import SimpleImageViewer
 
 class FriendDetailViewController: UIViewController {
     let uniqueKey: String
     let displayName: String
     var userInfo: UserInfo?
     
-    let imageHeight = UIScreen.main.bounds.height * 0.2
+    let imageHeight = UIScreen.main.bounds.height * 0.15
     
     let scrollView = UIScrollView()
     
     let itemImageView = UIImageView(image: UIImage(named: "sky"))
     let closeButton = CustomCloseButton()
     
+    let userIconContainer = UIControl()
     let userIconView = UIImageView(image: UIImage(named: "sky"))
     
     let userNameLabel = UILabel()
@@ -55,142 +57,15 @@ class FriendDetailViewController: UIViewController {
     }
     
     private func displayFavoriteList() {
-        var foodFavoriteList: [MyFavorite] = []
-        var placeFavoriteList: [MyFavorite] = []
-        var productFavoriteList: [MyFavorite] = []
-        var personFavoriteList: [MyFavorite] = []
-        var serviceFavoriteList: [MyFavorite] = []
-        var sportsFavoriteList: [MyFavorite] = []
-        var artistFavoriteList: [MyFavorite] = []
-        var bookFavoriteList: [MyFavorite] = []
-        var movieFavoriteList: [MyFavorite] = []
-        var otherFavoriteList: [MyFavorite] = []
-        
         // キャッシュからお気に入りを取り出して表示する
         if
             let archivedFavoriteList = UserDefaults.standard.object(forKey: self.uniqueKey) as? Data,
             let favoriteList = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(archivedFavoriteList) as? [MyFavorite]
         {
-            for favorite in favoriteList {
-                // カテゴリ毎に配列に振り分ける
-                switch favorite.categoryName {
-                case FavoriteCategory.food.rawValue:
-                    foodFavoriteList.append(favorite)
-                case FavoriteCategory.place.rawValue:
-                    placeFavoriteList.append(favorite)
-                case FavoriteCategory.product.rawValue:
-                    productFavoriteList.append(favorite)
-                case FavoriteCategory.person.rawValue:
-                    personFavoriteList.append(favorite)
-                case FavoriteCategory.service.rawValue:
-                    serviceFavoriteList.append(favorite)
-                case FavoriteCategory.sports.rawValue:
-                    sportsFavoriteList.append(favorite)
-                case FavoriteCategory.artist.rawValue:
-                    artistFavoriteList.append(favorite)
-                case FavoriteCategory.book.rawValue:
-                    bookFavoriteList.append(favorite)
-                case FavoriteCategory.movie.rawValue:
-                    movieFavoriteList.append(favorite)
-                case FavoriteCategory.other.rawValue:
-                    otherFavoriteList.append(favorite)
-                default:
-                    break
-                }
-            }
-        } else {
-            print("取得失敗")
-        }
+            let favoriteGroupView = FriendFavoriteGroupView(favoriteList: favoriteList, view: self)
         
-        // add stack view
-        if !foodFavoriteList.isEmpty {
-            let foodGroupView = FriendFavoriteGroupView(
-                title: FavoriteCategory.food.rawValue, favoriteList: foodFavoriteList, view: self
-            )
-            self.favoriteGroupStackView.addArrangedSubview(foodGroupView)
-            foodGroupView.autoPinEdge(toSuperviewEdge: .left)
-            foodGroupView.autoPinEdge(toSuperviewEdge: .right)
-        }
-        
-        if !placeFavoriteList.isEmpty {
-            let placeGroupView = FriendFavoriteGroupView(
-                title: FavoriteCategory.place.rawValue, favoriteList: placeFavoriteList, view: self
-            )
-            self.favoriteGroupStackView.addArrangedSubview(placeGroupView)
-            placeGroupView.autoPinEdge(toSuperviewEdge: .left)
-            placeGroupView.autoPinEdge(toSuperviewEdge: .right)
-        }
-        
-        if !productFavoriteList.isEmpty {
-            let productGroupView = FriendFavoriteGroupView(
-                title: FavoriteCategory.product.rawValue, favoriteList: productFavoriteList, view: self
-            )
-            self.favoriteGroupStackView.addArrangedSubview(productGroupView)
-            productGroupView.autoPinEdge(toSuperviewEdge: .left)
-            productGroupView.autoPinEdge(toSuperviewEdge: .right)
-        }
-        
-        if !personFavoriteList.isEmpty {
-            let personGroupView = FriendFavoriteGroupView(
-                title: FavoriteCategory.person.rawValue, favoriteList: personFavoriteList, view: self
-            )
-            self.favoriteGroupStackView.addArrangedSubview(personGroupView)
-            personGroupView.autoPinEdge(toSuperviewEdge: .left)
-            personGroupView.autoPinEdge(toSuperviewEdge: .right)
-        }
-        
-        if !serviceFavoriteList.isEmpty {
-            let serviceGroupView = FriendFavoriteGroupView(
-                title: FavoriteCategory.service.rawValue, favoriteList: serviceFavoriteList, view: self
-            )
-            self.favoriteGroupStackView.addArrangedSubview(serviceGroupView)
-            serviceGroupView.autoPinEdge(toSuperviewEdge: .left)
-            serviceGroupView.autoPinEdge(toSuperviewEdge: .right)
-        }
-        
-        if !sportsFavoriteList.isEmpty {
-            let sportsGroupView = FriendFavoriteGroupView(
-                title: FavoriteCategory.sports.rawValue, favoriteList: sportsFavoriteList, view: self
-            )
-            self.favoriteGroupStackView.addArrangedSubview(sportsGroupView)
-            sportsGroupView.autoPinEdge(toSuperviewEdge: .left)
-            sportsGroupView.autoPinEdge(toSuperviewEdge: .right)
-        }
-        
-        if !artistFavoriteList.isEmpty {
-            let artistGroupView = FriendFavoriteGroupView(
-                title: FavoriteCategory.artist.rawValue, favoriteList: artistFavoriteList, view: self
-            )
-            self.favoriteGroupStackView.addArrangedSubview(artistGroupView)
-            artistGroupView.autoPinEdge(toSuperviewEdge: .left)
-            artistGroupView.autoPinEdge(toSuperviewEdge: .right)
-        }
-        
-        if !bookFavoriteList.isEmpty {
-            let bookGroupView = FriendFavoriteGroupView(
-                title: FavoriteCategory.book.rawValue, favoriteList: bookFavoriteList, view: self
-            )
-            self.favoriteGroupStackView.addArrangedSubview(bookGroupView)
-            bookGroupView.autoPinEdge(toSuperviewEdge: .left)
-            bookGroupView.autoPinEdge(toSuperviewEdge: .right)
-        }
-        
-        if !movieFavoriteList.isEmpty {
-            let movieGroupView = FriendFavoriteGroupView(
-                title: FavoriteCategory.movie.rawValue, favoriteList: movieFavoriteList, view: self
-            )
-            self.favoriteGroupStackView.addArrangedSubview(movieGroupView)
-            movieGroupView.autoPinEdge(toSuperviewEdge: .left)
-            movieGroupView.autoPinEdge(toSuperviewEdge: .right)
-        }
-        
-        if !otherFavoriteList.isEmpty {
-            let otherGroupView = FriendFavoriteGroupView(
-                title: FavoriteCategory.other.rawValue, favoriteList: otherFavoriteList, view: self
-            )
-            self.favoriteGroupStackView.addArrangedSubview(otherGroupView)
-            otherGroupView.autoPinEdge(toSuperviewEdge: .left)
-            otherGroupView.autoPinEdge(toSuperviewEdge: .right)
+            self.favoriteGroupStackView.addArrangedSubview(favoriteGroupView)
+            favoriteGroupView.autoPinEdgesToSuperviewEdges()
         }
     }
 
@@ -198,7 +73,8 @@ class FriendDetailViewController: UIViewController {
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.itemImageView)
         self.scrollView.addSubview(self.closeButton)
-        self.scrollView.addSubview(self.userIconView)
+        self.scrollView.addSubview(self.userIconContainer)
+        self.userIconContainer.addSubview(self.userIconView)
         self.scrollView.addSubview(self.userNameLabel)
         self.scrollView.addSubview(self.separateLine)
         self.scrollView.addSubview(self.favoriteGroupStackView)
@@ -225,6 +101,9 @@ class FriendDetailViewController: UIViewController {
         self.favoriteGroupStackView.axis = .vertical
         self.favoriteGroupStackView.spacing = 0.0
         self.favoriteGroupStackView.alignment = .center
+        
+        // アイコンタップ時
+        self.userIconContainer.addTarget(self, action: #selector(self.tappedUserIcon), for: .touchUpInside)
     }
     
     private func applyStyling() {
@@ -245,8 +124,10 @@ class FriendDetailViewController: UIViewController {
         self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
         self.closeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
-        self.userIconView.autoPinEdge(.top, to: .bottom, of: self.itemImageView, withOffset: -50.0)
-        self.userIconView.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.userIconContainer.autoPinEdge(.top, to: .bottom, of: self.itemImageView, withOffset: -50.0)
+        self.userIconContainer.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        
+        self.userIconView.autoPinEdgesToSuperviewEdges()
         self.userIconView.autoSetDimensions(to: CGSize(width: 100.0, height: 100.0))
         
         self.userNameLabel.autoPinEdge(.top, to: .bottom, of: self.userIconView, withOffset: 10.0)
@@ -257,14 +138,24 @@ class FriendDetailViewController: UIViewController {
         self.separateLine.autoPinEdge(toSuperviewEdge: .left)
         self.separateLine.autoPinEdge(toSuperviewEdge: .right)
         
-        self.favoriteGroupStackView.autoPinEdge(.top, to: .bottom, of: self.separateLine, withOffset: 20.0)
+        self.favoriteGroupStackView.autoPinEdge(.top, to: .bottom, of: self.separateLine, withOffset: 40.0)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .left)
         self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .right)
-        self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 100.0)
-        self.favoriteGroupStackView.autoSetDimension(.width, toSize: UIScreen.main.bounds.width)
+        self.favoriteGroupStackView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 40.0)
     }
     
     @objc private func tappedCloseButton() {
         self.dismiss(animated: true)
+    }
+    
+    @objc private func tappedUserIcon() {
+        // アイコンの拡大表示
+        let configuration = ImageViewerConfiguration { config in
+            config.imageView = self.userIconView
+        }
+
+        let imageViewerController = ImageViewerController(configuration: configuration)
+
+        self.present(imageViewerController, animated: true)
     }
 }

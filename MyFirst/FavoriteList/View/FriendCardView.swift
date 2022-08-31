@@ -22,7 +22,7 @@ class FriendCardView: UIControl {
         }
     }
     
-    var alertController = UIAlertController(title: "この友達を一覧から削除しますか？", message: nil, preferredStyle: .alert)
+    var alertController = UIAlertController(title: "Do you want to remove this friend from your list?", message: nil, preferredStyle: .alert)
     
     var deleteAlertAcrion: (() -> Void)?
     var deleteAction: (() -> Void)?
@@ -55,7 +55,7 @@ class FriendCardView: UIControl {
         
         self.nameLabel.text = "YOUR FRIEND"
         
-        self.deleteButton.setTitle("削除", for: .normal)
+        self.deleteButton.setTitle("Delete", for: .normal)
         self.deleteButton.addTarget(self, action: #selector(self.tappedDeleteButton), for: .touchUpInside)
         
         self.deleteButton.isHidden = true
@@ -96,7 +96,7 @@ class FriendCardView: UIControl {
     }
     
     private func customDeleteFavoriteAlert() {
-        let deleteAction = UIAlertAction(title: "削除する", style: .destructive) { (action) in
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
             // execute completion
             if let action = self.deleteAction {
                 // 削除処理
@@ -118,7 +118,7 @@ class FriendCardView: UIControl {
                 UINotificationFeedbackGenerator().notificationOccurred(.success)
             }
         }
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             self.alertController.dismiss(animated: true, completion: nil)
         }
         

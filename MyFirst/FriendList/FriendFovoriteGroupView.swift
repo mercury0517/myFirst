@@ -2,31 +2,28 @@ import UIKit
 
 class FriendFavoriteGroupView: UIView {
     let view: FriendDetailViewController
-    let title: String
     let favoriteList: [MyFavorite]
     
-    let titleLabel = UILabel()
     var collectionView: UICollectionView
     
-    let itemSize = UIScreen.main.bounds.width - 32.0
+    let itemSize = UIScreen.main.bounds.width / 2
+    let itemHeight = UIScreen.main.bounds.width / 2
     
-    init(title: String, favoriteList: [MyFavorite], view: FriendDetailViewController) {
-        self.title = title
+    init(favoriteList: [MyFavorite], view: FriendDetailViewController) {
         self.favoriteList = favoriteList
         self.view = view
         
-        self.titleLabel.text = self.title
-        
         let flowLayout = UICollectionViewFlowLayout()
-        let margin: CGFloat = 16.0
-        flowLayout.itemSize = CGSize(width: self.itemSize, height: self.itemSize)
+        let margin: CGFloat = 0.0
+        flowLayout.itemSize = CGSize(width: self.itemSize, height: self.itemHeight)
         flowLayout.minimumInteritemSpacing = margin
         flowLayout.minimumLineSpacing = margin
         flowLayout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         flowLayout.scrollDirection = .horizontal
+        
         self.collectionView = UICollectionView(
             frame: CGRect(
-                x: 0, y: 0, width: UIScreen.main.bounds.width, height: self.itemSize
+                x: 0, y: 0, width: UIScreen.main.bounds.width, height: self.itemHeight
             ),
             collectionViewLayout: flowLayout
         )
@@ -47,7 +44,6 @@ class FriendFavoriteGroupView: UIView {
     }
 
     private func addSubviews() {
-        self.addSubview(self.titleLabel)
         self.addSubview(self.collectionView)
     }
     
@@ -60,24 +56,17 @@ class FriendFavoriteGroupView: UIView {
     private func applyStyling() {
         self.backgroundColor = .white
         
-        self.titleLabel.textColor = .black
-        self.titleLabel.font = UIFont(name: "Oswald", size: 18.0)
-        
         self.collectionView.backgroundColor = .white
     }
     
     private func addConstraints() {
-        self.autoSetDimension(.height, toSize: self.itemSize + 60.0)
+        self.autoSetDimension(.height, toSize: self.itemSize * 5)
         
-        self.titleLabel.autoSetDimension(.height, toSize: 30.0)
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .top)
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
-        self.titleLabel.autoPinEdge(toSuperviewEdge: .right)
-        
-        self.collectionView.autoPinEdge(.top, to: .bottom, of: self.titleLabel, withOffset: 5.0)
+        self.collectionView.autoPinEdge(toSuperviewEdge: .top)
         self.collectionView.autoPinEdge(toSuperviewEdge: .left)
         self.collectionView.autoPinEdge(toSuperviewEdge: .right)
-        self.collectionView.autoSetDimension(.height, toSize: self.itemSize + 20.0)
+        self.collectionView.autoPinEdge(toSuperviewEdge: .bottom)
+        self.collectionView.autoSetDimension(.height, toSize: self.itemSize * 5)
     }
 }
 
@@ -87,7 +76,7 @@ extension FriendFavoriteGroupView: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return self.favoriteList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{

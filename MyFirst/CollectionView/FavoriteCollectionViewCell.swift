@@ -30,11 +30,6 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     }
     
     private func configSubViews() {
-//        self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
-//        self.layer.shadowColor = UIColor.lightGray.cgColor
-//        self.layer.shadowOpacity = 0.6
-//        self.layer.shadowRadius = 4.0
-        
         self.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.4).cgColor
         self.layer.borderWidth = 1.0
         

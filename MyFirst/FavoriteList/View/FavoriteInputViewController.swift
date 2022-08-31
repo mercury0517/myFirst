@@ -97,7 +97,7 @@ class FavoriteInputViewController: UIViewController {
         
         self.titleLabel.text = "TITLE"
         
-        self.itemNameTextField.placeholder = "お気に入りタイトル"
+        self.itemNameTextField.placeholder = "title"
         self.itemNameTextField.delegate = self
         
         self.memoLabel.text = "MEMO"

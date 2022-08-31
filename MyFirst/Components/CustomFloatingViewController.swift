@@ -54,6 +54,7 @@ class HalfModalViewController: UIViewController {
         
         self.addToGalleryButton.setTitle("Add To GALLERY", for: .normal)
         self.addToGalleryButton.addTarget(self, action: #selector(self.tappedAddToGalleryButton), for: .touchUpInside)
+        self.addToGalleryButton.isHidden = true // TODO: 今後Gallery機能を開発したらこの行を消す
         
         self.shareButton.setTitle("Share Your Favorites", for: .normal)
         self.shareButton.addTarget(self, action: #selector(self.tappedShareButton), for: .touchUpInside)
@@ -94,13 +95,13 @@ class HalfModalViewController: UIViewController {
         self.openPhotoLibraryButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.openPhotoLibraryButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         
-        self.addToGalleryButton.autoPinEdge(.top, to: .bottom, of: self.openPhotoLibraryButton, withOffset: 20.0)
-        self.addToGalleryButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
-        self.addToGalleryButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-        
-        self.shareButton.autoPinEdge(.top, to: .bottom, of: self.addToGalleryButton, withOffset: 20.0)
+        self.shareButton.autoPinEdge(.top, to: .bottom, of: self.openPhotoLibraryButton, withOffset: 20.0)
         self.shareButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         self.shareButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+        
+        self.addToGalleryButton.autoPinEdge(.top, to: .bottom, of: self.shareButton, withOffset: 20.0)
+        self.addToGalleryButton.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        self.addToGalleryButton.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
     }
     
     // MARK: open Photo Library

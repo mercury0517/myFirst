@@ -9,7 +9,7 @@ class FavoriteDetailViewController: UIViewController {
     let imageHeight = UIScreen.main.bounds.height * 0.4
     
     var alertController = UIAlertController(
-        title: "お気に入りを削除しますか？", message: nil, preferredStyle: .alert
+        title: "Do you want to delete this favorite?", message: nil, preferredStyle: .alert
     )
     
     let scrollView = UIScrollView()
@@ -152,12 +152,12 @@ class FavoriteDetailViewController: UIViewController {
     }
     
     private func customDeleteFavoriteAlert() {
-        let albumAction = UIAlertAction(title: "削除する", style: .destructive) { (action) in
+        let albumAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
             self.presenter.deleteItemButtonDidTap(
                 categoryName: self.categoryName, itemIndex: self.itemIndex, detailView: self
             )
         }
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             self.alertController.dismiss(animated: true, completion: nil)
         }
         

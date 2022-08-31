@@ -177,8 +177,6 @@ class FavoriteListViewController: UIViewController, FavoriteListViewControllerPr
         
         self.favoriteGroupStackView.addArrangedSubview(favoriteGroupView)
         
-//        favoriteGroupView.autoPinEdge(toSuperviewEdge: .left)
-//        favoriteGroupView.autoPinEdge(toSuperviewEdge: .right)
         favoriteGroupView.autoPinEdgesToSuperviewEdges()
         
         // 更新時はリロードも行う
