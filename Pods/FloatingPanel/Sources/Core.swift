@@ -66,9 +66,6 @@ class Core: NSObject, UIGestureRecognizerDelegate {
     private var stopScrollDeceleration: Bool = false
     private var scrollBounce = false
     private var scrollIndictorVisible = false
-    private var grabberAreaFrame: CGRect {
-        return surfaceView.grabberAreaFrame
-    }
 
     // MARK: - Interface
 
@@ -76,6 +73,7 @@ class Core: NSObject, UIGestureRecognizerDelegate {
         ownerVC = vc
 
         surfaceView = SurfaceView()
+        surfaceView.position = layout.position
         surfaceView.backgroundColor = .white
 
         backdropView = BackdropView()
@@ -199,8 +197,10 @@ class Core: NSObject, UIGestureRecognizerDelegate {
 
     // MARK: - Layout update
 
-    func activateLayout(forceLayout: Bool = false,
-                        contentInsetAdjustmentBehavior: FloatingPanelController.ContentInsetAdjustmentBehavior) {
+    func activateLayout(
+        forceLayout: Bool = false,
+        contentInsetAdjustmentBehavior: FloatingPanelController.ContentInsetAdjustmentBehavior
+    ) {
         layoutAdapter.prepareLayout()
 
         // preserve the current content offset if contentInsetAdjustmentBehavior is `.always`
@@ -210,7 +210,7 @@ class Core: NSObject, UIGestureRecognizerDelegate {
         }
 
         layoutAdapter.updateStaticConstraint()
-        layoutAdapter.activateLayout(for: state, forceLayout: true)
+        layoutAdapter.activateLayout(for: state, forceLayout: forceLayout)
 
         // Update the backdrop alpha only when called in `Controller.show(animated:completion:)`
         // Because that prevents a backdrop flicking just before presenting a panel(#466).
@@ -277,7 +277,7 @@ class Core: NSObject, UIGestureRecognizerDelegate {
              is UIRotationGestureRecognizer,
              is UIScreenEdgePanGestureRecognizer,
              is UIPinchGestureRecognizer:
-            if grabberAreaFrame.contains(gestureRecognizer.location(in: gestureRecognizer.view)) {
+            if surfaceView.grabberAreaContains(gestureRecognizer.location(in: surfaceView)) {
                 return true
             }
             // all gestures of the tracking scroll view should be recognized in parallel
@@ -308,7 +308,7 @@ class Core: NSObject, UIGestureRecognizerDelegate {
             return true
         }
 
-        if grabberAreaFrame.contains(gestureRecognizer.location(in: gestureRecognizer.view)) {
+        if surfaceView.grabberAreaContains(gestureRecognizer.location(in: surfaceView)) {
             return true
         }
 
@@ -336,7 +336,7 @@ class Core: NSObject, UIGestureRecognizerDelegate {
                 scrollGestureRecognizers.contains(otherGestureRecognizer) {
                 switch otherGestureRecognizer {
                 case scrollView.panGestureRecognizer:
-                    if grabberAreaFrame.contains(gestureRecognizer.location(in: gestureRecognizer.view)) {
+                    if surfaceView.grabberAreaContains(gestureRecognizer.location(in: surfaceView)) {
                         return false
                     }
                     return allowScrollPanGesture(for: scrollView)
@@ -364,7 +364,7 @@ class Core: NSObject, UIGestureRecognizerDelegate {
                 // Should begin the pan gesture without waiting the dismiss gesture of a sheet modal.
                 return false
             }
-            if grabberAreaFrame.contains(gestureRecognizer.location(in: gestureRecognizer.view)) {
+            if surfaceView.grabberAreaContains(gestureRecognizer.location(in: surfaceView)) {
                 return false
             }
             // Do not begin the pan gesture until these gestures fail
@@ -409,7 +409,7 @@ class Core: NSObject, UIGestureRecognizerDelegate {
                         log.debug("settle offset --", value(of: initialScrollOffset))
                         stopScrolling(at: initialScrollOffset)
                     } else {
-                        if grabberAreaFrame.contains(location) {
+                        if surfaceView.grabberAreaContains(location) {
                             // Preserve the current content offset in moving from full.
                             stopScrolling(at: initialScrollOffset)
                         }
@@ -452,7 +452,7 @@ class Core: NSObject, UIGestureRecognizerDelegate {
                     }
                     if state == layoutAdapter.mostExpandedState {
                         // Adjust a small gap of the scroll offset just after swiping down starts in the grabber area.
-                        if grabberAreaFrame.contains(location), grabberAreaFrame.contains(initialLocation) {
+                        if surfaceView.grabberAreaContains(location), surfaceView.grabberAreaContains(initialLocation) {
                             stopScrolling(at: initialScrollOffset)
                         }
                     }
@@ -477,7 +477,7 @@ class Core: NSObject, UIGestureRecognizerDelegate {
                             }
                         }
                         // Adjust a small gap of the scroll offset just before swiping down starts in the grabber area,
-                        if grabberAreaFrame.contains(location), grabberAreaFrame.contains(initialLocation) {
+                        if surfaceView.grabberAreaContains(location), surfaceView.grabberAreaContains(initialLocation) {
                             stopScrolling(at: initialScrollOffset)
                         }
                     }
@@ -524,7 +524,7 @@ class Core: NSObject, UIGestureRecognizerDelegate {
                     // doesn't pass through .changed state after an interruptible animator is interrupted.
                     let diff = translation - .leastNonzeroMagnitude
                     layoutAdapter.updateInteractiveEdgeConstraint(diff: value(of: diff),
-                                                                  overflow: true,
+                                                                  scrollingContent: true,
                                                                   allowsRubberBanding: behaviorAdapter.allowsRubberBanding(for:))
                 }
                 panningEnd(with: translation, velocity: velocity)
@@ -585,19 +585,19 @@ class Core: NSObject, UIGestureRecognizerDelegate {
         }
 
         // When the current point is within grabber area but the initial point is not, do scroll.
-        if grabberAreaFrame.contains(point), !grabberAreaFrame.contains(initialLocation) {
+        if surfaceView.grabberAreaContains(point), !surfaceView.grabberAreaContains(initialLocation) {
             return true
         }
 
         // When the initial point is within grabber area and the current point is out of surface, don't scroll.
-        if grabberAreaFrame.contains(initialLocation), !surfaceView.frame.contains(point) {
+        if surfaceView.grabberAreaContains(initialLocation), !surfaceView.frame.contains(point) {
             return false
         }
 
         let scrollViewFrame = scrollView.convert(scrollView.bounds, to: surfaceView)
         guard
             scrollViewFrame.contains(initialLocation), // When the initial point not in scrollView, don't scroll.
-            !grabberAreaFrame.contains(point)          // When point within grabber area, don't scroll.
+            !surfaceView.grabberAreaContains(point)        // When point within grabber area, don't scroll.
         else {
             return false
         }
@@ -640,7 +640,7 @@ class Core: NSObject, UIGestureRecognizerDelegate {
 
         guard let scrollView = scrollView else { return }
         if state == layoutAdapter.mostExpandedState {
-            if grabberAreaFrame.contains(location) {
+            if surfaceView.grabberAreaContains(location) {
                 initialScrollOffset = scrollView.contentOffset
             }
         } else {
@@ -653,10 +653,9 @@ class Core: NSObject, UIGestureRecognizerDelegate {
         let pre = value(of: layoutAdapter.surfaceLocation)
         let diff = value(of: translation - initialTranslation)
         let next = pre + diff
-        let overflow = shouldOverflow(from: pre, to: next)
 
         layoutAdapter.updateInteractiveEdgeConstraint(diff: diff,
-                                                      overflow: overflow,
+                                                      scrollingContent: shouldScrollingContentInMoving(from: pre, to: next),
                                                       allowsRubberBanding: behaviorAdapter.allowsRubberBanding(for:))
 
         let cur = value(of: layoutAdapter.surfaceLocation)
@@ -670,32 +669,36 @@ class Core: NSObject, UIGestureRecognizerDelegate {
         }
     }
 
-    private func shouldOverflow(from pre: CGFloat, to next: CGFloat) -> Bool {
+    private func shouldScrollingContentInMoving(from pre: CGFloat, to next: CGFloat) -> Bool {
+        // Don't allow scrolling if the initial panning location is in the grabber area.
+        if surfaceView.grabberAreaContains(initialLocation) {
+            return false
+        }
         if let scrollView = scrollView, scrollView.panGestureRecognizer.state == .changed {
             switch layoutAdapter.position {
             case .top:
                 if pre > .zero, pre < next,
                     scrollView.contentSize.height > scrollView.bounds.height || scrollView.alwaysBounceVertical {
-                    return false
+                    return true
                 }
             case .left:
                 if pre > .zero, pre < next,
                     scrollView.contentSize.width > scrollView.bounds.width || scrollView.alwaysBounceHorizontal {
-                    return false
+                    return true
                 }
             case .bottom:
                 if pre > .zero, pre > next,
                     scrollView.contentSize.height > scrollView.bounds.height || scrollView.alwaysBounceVertical {
-                    return false
+                    return true
                 }
             case .right:
                 if pre > .zero, pre > next,
                     scrollView.contentSize.width > scrollView.bounds.width || scrollView.alwaysBounceHorizontal {
-                    return false
+                    return true
                 }
             }
         }
-        return true
+        return false
     }
 
     private func panningEnd(with translation: CGPoint, velocity: CGPoint) {
@@ -798,7 +801,7 @@ class Core: NSObject, UIGestureRecognizerDelegate {
 
         initialSurfaceLocation = layoutAdapter.surfaceLocation
         if state == layoutAdapter.mostExpandedState, let scrollView = scrollView {
-            if grabberAreaFrame.contains(location) {
+            if surfaceView.grabberAreaContains(location) {
                 initialScrollOffset = scrollView.contentOffset
             } else {
                 initialScrollOffset = scrollView.contentOffset

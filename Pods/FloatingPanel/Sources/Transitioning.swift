@@ -104,7 +104,10 @@ class ModalPresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
             fpc?.suspendTransitionAnimator(false)
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
-        return fpc.transitionAnimator!
+        guard let transitionAnimator = fpc.transitionAnimator else {
+            fatalError("The panel state must be `hidden` but it is `\(fpc.state)`")
+        }
+        return transitionAnimator
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
